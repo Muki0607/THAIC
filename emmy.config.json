@@ -1,0 +1,14 @@
+{
+    "source": [
+        {
+            "dir": "./",
+            "exclude": [
+                "mod/Muki_AliceInCradle/_editor_output.lua",
+                "packages/thlib-scripts/AiC/IME/pinyin_data.lua",
+                "mod/Muki_AliceInCradle - 副本/_editor_output.lua",
+                "mod/Untitled/_editor_output.lua",
+                "plugins/IME/THlib/IME/IME_pinyin_data.lua"
+            ]
+        }
+    ]
+}

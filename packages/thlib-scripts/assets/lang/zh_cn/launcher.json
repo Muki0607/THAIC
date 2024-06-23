@@ -1,0 +1,62 @@
+{
+    "launcher.comment.common": "公共部分",
+
+    "launcher.back_icon": "< 返回",
+    "launcher.save_and_return": "保存并返回",
+    "launcher.restore_to_default": "恢复默认",
+
+    "launcher.comment.menu_and_title": "-- 菜单标题 & 主菜单",
+
+    "launcher.menu.start": "开始游戏",
+    "launcher.menu.username": "修改用户名称",
+    "launcher.menu.setting.input.keyboard": "按键设置",
+    "launcher.menu.setting.game": "游戏设置",
+    "launcher.menu.plugin_manager": "插件管理",
+    "launcher.menu.check_new_version": "检查版本更新",
+    "launcher.menu.found_new_version": "发现新版本!",
+    "launcher.menu.exit": "退出游戏",
+
+    "launcher.comment.menu.start": "-- 开始游戏",
+
+    "launcher.menu.start.select": "选择 Mod",
+
+    "launcher.comment.action": "-- 玩家操作",
+
+    "launcher.action.left": "左移",
+    "launcher.action.right": "右移",
+    "launcher.action.up": "上移",
+    "launcher.action.down": "下移",
+    "launcher.action.slow": "低速移动",
+    "launcher.action.shoot": "射击/确认",
+    "launcher.action.spell": "符卡/取消",
+    "launcher.action.special": "特殊功能",
+    "launcher.action.menu": "暂停/返回",
+    "launcher.action.snapshot": "截图",
+    "launcher.action.repfast": "录像播放加速",
+    "launcher.action.repslow": "录像播放减速",
+
+    "launcher.comment.setting.game": "-- 游戏设置",
+
+    "launcher.menu.setting.game.desktop_refresh_rate": "桌面刷新率",
+    "launcher.menu.setting.game.display_mode": "显示模式",
+    "launcher.menu.setting.game.fullscreen": "全屏",
+    "launcher.menu.setting.game.vsync": "垂直同步",
+    "launcher.menu.setting.game.sound_effect": "音效音量",
+    "launcher.menu.setting.game.music": "背景音乐音量",
+
+    "launcher.comment.setting.version": "-- 检查更新",
+
+    "launcher.menu.version.check": "▶ 检查更新",
+    "launcher.menu.version.label_current": "当前版本：",
+    "launcher.menu.version.label_latest": "最新版本：",
+    "launcher.menu.version.fetch_failed": "获取失败",
+    "launcher.menu.version.download_sources": "下载地址（有些链接国内可能无法访问）：",
+    "launcher.menu.version.download_source1": "    1、▶ LuaSTG交流群（主群）：QQ群230927410",
+    "launcher.menu.version.download_source2": "    2、▶ LuaSTG寒流群（二群）：QQ群563868788",
+    "launcher.menu.version.download_source3": "    3、▶ LuaSTG直流群（文件群）：QQ群673067136",
+    "launcher.menu.version.download_source4": "    4、▶ 小律影的网盘（OneDrive）：https://luastg.ritsukage.com",
+    "launcher.menu.version.download_source5": "    5、▶ 璀境石的网盘（OneDrive）：https://files.luastg-sub.com",
+    "launcher.menu.version.download_source6": "    6、▶ LuaSTG Sub（GitHub）：https://home.luastg-sub.com",
+
+    "launcher.comment.end": ""
+}

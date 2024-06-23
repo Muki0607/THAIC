@@ -1,0 +1,8 @@
+对菜单的重新架构 by SSWTLZZ
+为了方便LuaSTGer更加方便地制作简单的标题菜单，遂重写了部分菜单的逻辑
+这个包主要部分为三个脚本：menu，menus，title
+menu是菜单部分的实现，而menus与title都是菜单的应用
+以及，title中加入了一些注释（其实我觉得这个才是最困难的部分（x））
+使用方式：直接将其解压到LuaSTG data中的UI文件夹内
+
+以及以及，使用了大量EmmyLua风格的注释以便使用，所以请务必使用带有lua插件的vscode或者idea

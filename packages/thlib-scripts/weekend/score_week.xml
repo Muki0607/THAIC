@@ -1,0 +1,28 @@
+﻿<f2dTexturedFont>
+  <Measure LineHeight="54" Ascender="54" Descender="0" />
+  <CharList>
+    <Item Char=" " Pos="0,0" Size="10,54" BrushPos="5,49" Advance="9,0" />
+    <Item Char="0" Pos="10,0" Size="34,54" BrushPos="5,49" Advance="25,0" />
+    <Item Char="1" Pos="44,0" Size="25,54" BrushPos="5,49" Advance="16,0" />
+    <Item Char="2" Pos="69,0" Size="33,54" BrushPos="5,49" Advance="24,0" />
+    <Item Char="3" Pos="102,0" Size="33,54" BrushPos="5,49" Advance="24,0" />
+    <Item Char="4" Pos="135,0" Size="35,54" BrushPos="5,49" Advance="26,0" />
+    <Item Char="5" Pos="170,0" Size="34,54" BrushPos="5,49" Advance="25,0" />
+    <Item Char="6" Pos="204,0" Size="33,54" BrushPos="5,49" Advance="24,0" />
+    <Item Char="7" Pos="0,54" Size="32,54" BrushPos="5,49" Advance="23,0" />
+    <Item Char="8" Pos="32,54" Size="35,54" BrushPos="5,49" Advance="26,0" />
+    <Item Char="9" Pos="67,54" Size="33,54" BrushPos="5,49" Advance="24,0" />
+    <Item Char="." Pos="100,54" Size="20,54" BrushPos="5,49" Advance="11,0" />
+    <Item Char="," Pos="120,54" Size="20,54" BrushPos="5,49" Advance="11,0" />
+    <Item Char="%" Pos="140,54" Size="40,54" BrushPos="5,49" Advance="31,0" />
+    <Item Char=":" Pos="180,54" Size="20,54" BrushPos="5,49" Advance="11,0" />
+    <Item Char="F" Pos="200,54" Size="35,54" BrushPos="5,49" Advance="26,0" />
+    <Item Char="P" Pos="0,108" Size="37,54" BrushPos="5,49" Advance="28,0" />
+    <Item Char="S" Pos="37,108" Size="37,54" BrushPos="5,49" Advance="28,0" />
+    <Item Char="h" Pos="74,108" Size="35,54" BrushPos="5,49" Advance="26,0" />
+    <Item Char="m" Pos="109,108" Size="48,54" BrushPos="5,49" Advance="39,0" />
+    <Item Char="s" Pos="157,108" Size="33,54" BrushPos="5,49" Advance="24,0" />
+    <Item Char="-" Pos="190,108" Size="31,54" BrushPos="5,49" Advance="22,0" />
+    <Item Char="/" Pos="221,108" Size="27,54" BrushPos="5,49" Advance="18,0" />
+  </CharList>
+</f2dTexturedFont>
