@@ -17,6 +17,7 @@ The code in `<>` is text effect. To change text effect, see `AiC_text_effect.lua
 --]=]
 
 local lib = aic.l10n.ui
+
 ---音乐室文本
 ---Music room text
 lib.music_room = {
@@ -376,5 +377,37 @@ lib.music_room = {
         "a", "b", "c", "d", "e", "f", "g", "h", "i",
         "j", "k", "l", "m", "n", "o", "p", "q", "r",
         "s", "t", "u", "v", "w", "x", "y", "z",
+    }
+}
+
+---符卡名称
+lib.sc_list = {
+    {
+        "「ステラの弾幕」", "Default Attack「Starry Shooting」", "爆咒「地面炸弹」", "箭咒「纯白之弓」",
+        "引咒「聚能火球」", "防咒「魔法障壁」", "唤咒「使魔召唤」", "仿魔咒「空中回廊」",
+        "仿赤咒「炎舞神乐」", "「不顾一切的圣光爆发！」", "结界「八重护盾结界」", "境符「光与影的限间」",
+        "「繁星若梦」", "「Reality Reverse　—10%—」", "「Reality Reverse　—25%—」",
+        "「Reality Reverse　—50%—」", "「Reality Reverse　—80%—」"
+    },
+    {
+        "「ステラの弾幕」", "Default Attack「Starry Shooting」", "爆咒「地面炸弹」", "箭咒「纯白之弓」",
+        "引咒「聚能火球」", "防咒「魔法障壁」", "唤咒「使魔召唤」", "仿魔咒「空中回廊」",
+        "仿赤咒「炎舞神乐」", "「不顾一切的圣光爆发！」", "结界「八重护盾结界」", "境符「光与影的限间」",
+        "「繁星若梦」", "「Reality Reverse　—10%—」", "「Reality Reverse　—25%—」",
+        "「Reality Reverse　—50%—」", "「Reality Reverse　—80%—」"
+    },
+    {
+        "「ステラの弾幕」", "Default Attack「Starry Shooting」", "爆咒「地面炸弹　速」", "散咒「纯白之弓　散」",
+        "引咒「聚能火球　改」", "护咒「魔法加护」", "唤咒「使魔召唤　御」", "仿星咒「银河铁道」",
+        "仿焱咒「红莲祭仪」", "「拼上性命的圣光爆发！」", "结界「十六重护盾大结界」", "境界「明与灭的樊笼」",
+        "「月华流转」", "「Reality Reverse　—10%—」", "「Reality Reverse　—25%—」",
+        "「Reality Reverse　—50%—」", "「Reality Reverse　—80%—」"
+    },
+    {
+        "「ステラの弾幕」", "Default Attack「Starry Shooting」", "爆咒「地面炸弹　速」", "散咒「纯白之弓　散」",
+        "引咒「聚能火球　改」", "护咒「魔法加护」", "唤咒「使魔召唤　御」", "仿月咒「空明流光」",
+        "仿彗咒「流星祈愿」", "「拼上性命的圣光爆发！」", "结界「十六重护盾大结界」", "境界「明与灭的樊笼」",
+        "「幻梦的摇篮」", "「Reality Reverse　—10%—」", "「Reality Reverse　—25%—」",
+        "「Reality Reverse　—50%—」", "「Reality Reverse　—80%—」"
     }
 }

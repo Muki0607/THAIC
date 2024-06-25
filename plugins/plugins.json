@@ -1,26 +1,26 @@
 [
 	{
-		"name": "PlayerExtensions",
+		"path": "plugins\/PlayerExtensions\/",
 		"directory_mode": true,
 		"enable": true,
-		"path": "plugins\/PlayerExtensions\/"
+		"name": "PlayerExtensions"
 	},
 	{
-		"name": "StageBackgroundExtensions",
+		"path": "plugins\/StageBackgroundExtensions\/",
 		"directory_mode": true,
 		"enable": true,
-		"path": "plugins\/StageBackgroundExtensions\/"
+		"name": "StageBackgroundExtensions"
 	},
 	{
-		"name": "IME",
+		"path": "plugins\/IME\/",
 		"directory_mode": true,
 		"enable": true,
-		"path": "plugins\/IME\/"
+		"name": "IME"
 	},
 	{
-		"name": "localization",
+		"path": "plugins\/localization\/",
 		"directory_mode": true,
 		"enable": true,
-		"path": "plugins\/localization\/"
+		"name": "localization"
 	}
 ]

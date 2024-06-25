@@ -44,10 +44,16 @@ function lib.CheckDiff(diff, equal)
     end
 end
 
----获取当前难度
----@return number @当前难度
+---获取当前难度编号
+---@return number @当前难度编号
 function lib.GetDiff()
     return scoredata.difficulty_select
+end
+
+---获取当前自机编号
+---@return number @当前自机编号
+function lib.GetPlayer()
+    return scoredata.player_select
 end
 
 ---获取当前大版本号（不同大版本间replay不通用）
