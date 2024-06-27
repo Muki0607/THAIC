@@ -321,25 +321,6 @@ _editor_class["a"].render=function(self)
     RenderRect('white',0, screen.width/4,0,screen.height/4)
     SetViewMode('world')
     PopRenderTarget()
-    self.info1=self.dpt.getRawState(1)
-    self.info2=self.dpt.getAxisRange(1)
-    local i1 = self.info1
-    local i2 = self.info2
-    local text = aic.debug.GetAllInfo(i1)
-    local d = aic.input.dinput
-    local lx,ly,rx,ry = d.getLeftThumbX(),d.getLeftThumbY(),d.getRightThumbX(),d.getRightThumbY()
-    if aic.input.GetMouseDirection()>0 then
-        self.y = self.y-25
-    elseif aic.input.GetMouseDirection()<0 then
-        self.y = self.y+25
-    end
-    aic.ui.DrawText("main_font_zh2", text, -192, self.y, 0.7)
-    --
-    aic.ui.DrawText("main_font_zh2", "lx:"..lx, -192, 224, 0.7)
-    aic.ui.DrawText("main_font_zh2", "ly:"..ly, -192, 204, 0.7)
-    aic.ui.DrawText("main_font_zh2", "rx:"..rx, -192, 184, 0.7)
-    aic.ui.DrawText("main_font_zh2", "ry:"..ry, -192, 164, 0.7)
-    --]]
     SetViewMode('ui')
     local x,y = aic.input.GetMousePosition()
     DrawText('main_font_en', 'x: ' .. tostring(x) .. '  y: ' .. tostring(y), x+20,y)
@@ -485,21 +466,11 @@ boss.init(self,512, 512,_editor_class["Boss"].name,cards,New(_editor_class["Muki
             
 end
 table.insert(_editor_class["Boss"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
-_tmp_sc=boss.card.New("通常攻击",0,0,60,200000,{0,0,0},false)
+_tmp_sc=boss.card.New("通常攻击",0,0,60,10,{0,0,0},false)
 function _tmp_sc:before()
+    _drop_item(item_point,20,self.x,self.y)
     last=New(_editor_class["a"],0,0,_)
     last=New(_editor_class["NB_Portrait_AI"],0,0,0.4)
-    lasttask=task.New(self,function()
-        local lib = aic.IME
-        lib.InputMethodOn()
-        for _=1,_infinite do
-            if lib.InputMethodStatus() == 'normal' and aic.input.GetLastClick('left') then
-                lib.NewInputFrame(0,0)
-            else
-            end
-            task._Wait(1)
-        end
-    end)
     lasttask=task.New(self,function()
         for _=1,_infinite do
             lstg.var.dodge = min(600, lstg.var.dodge + 1)

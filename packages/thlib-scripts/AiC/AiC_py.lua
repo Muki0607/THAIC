@@ -181,6 +181,29 @@ end
 function lib.Pass()
 end
 
+---模拟`Python`中的if..elif..Else块
+---判断条件与`Python`中相同，即0、空字符串与空表将视为假值
+function lib.If(If, Elif, Else)
+    local n = #Elif
+    local ifFunc = function(condition)
+        if not condition or condition == 0 then
+            return false
+        elseif type(condition) == 'string' then
+            return not (#condition == 0)
+        elseif type(condition) == 'table' then
+            return not (next(condition))
+        end
+    end
+
+    local code1 = 'if ifFunc(If[1]) then If[2]() '
+    local code2 = ''
+    for i = 1, n do
+        code2 = code2 .. 'elseif ifFunc(Elif[' .. i .. '][1]) then Elif[' .. i .. '][2]() '
+    end
+    local code3 = 'else ifFunc(Else[1]) then Else[2]() end '
+    return aic.func.execute(code1 .. code2 .. code3)
+end
+
 ---模拟`Python`中的`range`迭代器
 ---
 ---使用例：

@@ -99,6 +99,7 @@ function lib.title:frame()
         local lastkey = GetLastKey()
         --高速开始
         if lastkey == KEY.S then
+            if not scoredata.player_select then return end
             New(tasker, function()
                 if setting.newopening then
                     PlaySound('aic_opening_new', 0.5)

@@ -174,6 +174,7 @@ function lib.player_data:frame()
         end
         local key = { setting.keys.shoot, setting.keys.up, setting.keys.down,
             setting.keys.left, setting.keys.right }
+        --有按键输入时进行一次刷新
         if lastkey ~= KEY.NULL and aic.table.Search(key, lastkey) then
             self.GetPlayData()
             if self.lsc then
@@ -226,7 +227,7 @@ function lib.player_data:render()
         end
     end
     if data then
-        if self.lsc then
+        if self.lsc then --符卡数据渲染
             local xos = { -275, -250, -80, -30, 130, 220 }
             for i = 1 + self.l * (self.page - 1), self.l * self.page do
                 local co
@@ -251,7 +252,7 @@ function lib.player_data:render()
                         x + xos[1], y - i * lineh + yos + 25, 0.9, Color(self.alpha, unpack(co)), nil, 'vcenter', align)
                 end
             end
-        else
+        else --游玩数据渲染
             local xos = { -275, -250, -80, -30, 130, 220 }
             --高级循环，小子
             local _beg_r = co1[1]

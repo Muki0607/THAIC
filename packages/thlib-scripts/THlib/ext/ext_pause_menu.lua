@@ -432,7 +432,7 @@ function ext.pausemenu:PauseSound()
             end
             --]]
             --新的处理方法（实验性），只处理正在播放的bgm，不处理暂停的bgm
-            if GetMusicState(v) == "playing" and v ~= 'aic_bgm13' then
+            if GetMusicState(v) == "playing" and v ~= DeathMusic then
                 PauseMusic(v)
                 self.bgmlist[v] = true --标记
             end

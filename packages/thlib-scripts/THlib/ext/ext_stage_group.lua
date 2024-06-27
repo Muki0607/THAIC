@@ -10,7 +10,6 @@ stage.group = {}
 stage.groups = {}
 
 gamecontinueflag = false
-local deathmusic = 'aic_bgm13'--疮痍曲
 local bgmname --疮痍时暂存bgm名
 
 function stage.group.New(title, stages, name, item_init, allow_practice, difficulty)
@@ -89,10 +88,10 @@ function stage.group.frame(self)
             ext.rep_over = true
             lstg.tmpvar.pause_menu_text = { 'Replay Again', 'Return to Title', nil }
         else
-            if not CheckRes('bgm', deathmusic) then
-                LoadMusicRecord(deathmusic)
+            if not CheckRes('bgm', DeathMusic) then
+                LoadMusicRecord(DeathMusic)
             end
-            PlayMusic(deathmusic, 0.8)
+            PlayMusic(DeathMusic, 0.8)
             bgmname = aic.misc.GetCurrentBGM()
             PauseMusic(bgmname)
             ext.pop_pause_menu = true
@@ -111,8 +110,8 @@ function stage.group.frame(self)
         stage.Restart()
     end
     if ext.GetPauseMenuOrder() == 'Give up and Retry' then
-        if CheckRes('bgm', deathmusic) then
-            StopMusic(deathmusic)
+        if CheckRes('bgm', DeathMusic) then
+            StopMusic(DeathMusic)
         end
         lstg.var.timeslow = nil
         if lstg.var.is_practice then
@@ -123,8 +122,8 @@ function stage.group.frame(self)
     end
     if ext.GetPauseMenuOrder() == 'Continue' then
         lstg.var.timeslow = nil
-        if CheckRes('bgm', deathmusic) then
-            StopMusic(deathmusic)
+        if CheckRes('bgm', DeathMusic) then
+            StopMusic(DeathMusic)
         end
         if not Extramode then
             ResumeMusic(bgmname)
@@ -168,8 +167,8 @@ function stage.group.frame(self)
         lstg.var.timeslow = nil
     end
     if ext.GetPauseMenuOrder() == 'Restart' then
-        if CheckRes('bgm', deathmusic) then
-            StopMusic(deathmusic)
+        if CheckRes('bgm', DeathMusic) then
+            StopMusic(DeathMusic)
         end
         if lstg.var.is_practice then
             stage.group.PracticeStart(self.name)
@@ -348,8 +347,8 @@ function stage.group.FinishGroup()
 end
 
 function stage.group.ReturnToTitle(save_rep, finish)
-    if CheckRes('bgm', deathmusic) then
-        StopMusic(deathmusic)
+    if CheckRes('bgm', DeathMusic) then
+        StopMusic(DeathMusic)
     end
     
     local self = stage.current_stage

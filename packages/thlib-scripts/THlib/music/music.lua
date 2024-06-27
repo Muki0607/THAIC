@@ -6,6 +6,9 @@
 --家乡的小曲
 MusicRecord("spellcard", 'THlib/music/spellcard.ogg', 75, 0xc36e80 / 44100 / 4)
 
+--神妈的小曲
+DeathMusic = 'aic_bgm20'
+
 --体验版曲目
 --[[
 local loop = {

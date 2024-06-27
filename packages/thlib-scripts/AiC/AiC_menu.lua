@@ -61,7 +61,7 @@ lib.menu_stack = {}
 
 ---要存储的replay关卡表
 ---@type table
-lib.last_replay = 1
+lib.last_replay = nil
 
 ---要存储的replay是否通关的标志
 lib.last_replay_finish = false
@@ -339,6 +339,51 @@ function lib.InitPlayerData(player_name)
             { '--------', 100000, '----/--/-- --:--:--', 'Stage -', '---%' },
         }, 4)
     }
+end
+
+--[[
+---保存上一局游戏数据
+---@param score table @分数数据表
+function lib.SavePlayerData(score)
+    local player_list = { "reimu_player", "marisa_player", "sakuya_player", "muki_player", "nenyuki_player" }
+    local player, diff = player_list[aic.sys.GetPlayer()], aic.sys.GetDiff()
+    local hscore = scoredata.player_data[player].high_score[diff]
+    --计算本次分数超过了几个记录
+    local n = 0
+    for i = 1, 10 do
+        --Print(i, score[2], hscore[i][2])
+        if score[2] > hscore[i][2] then
+            n = n + 1
+        end
+    end
+    --整理高分榜
+    --我知道你想说table.sort，但那玩意在这里不起作用（因为元表？）
+    if n > 0 then
+        for i = 10, 10 - n + 1, -1 do
+            hscore[i + 1] = hscore[i]
+        end
+        hscore[10 - n + 1] = score
+    end
+end
+--]]
+
+---保存上一局游戏数据
+---@param score table @分数数据表
+function lib.SavePlayerData(score)
+    local player_list = { "reimu_player", "marisa_player", "sakuya_player", "muki_player", "nenyuki_player" }
+    local player, diff = player_list[aic.sys.GetDiff()], aic.sys.GetDiff()
+    local hscore = scoredata.player_data[player].high_score[diff]
+    local function compare(t1, t2)
+        return t1[2] > t2[2]
+    end
+    --以本次得分是否高过高分榜最后一名决定是否更新
+    if compare(score, hscore[10]) then
+        hscore[10] = score
+    else
+        return
+    end
+    --以分数整理高分榜
+    table.sort(hscore, compare)
 end
 
 ------------------------------------------------------------
