@@ -47,7 +47,7 @@ function make_scoredata_table(t)
     setmetatable(t, {
         __newindex = scoredata_mt_newindex,
         __index = scoredata_mt_index,
-        __ipairs = scoredata_mt_ipairs,
+        --__ipairs = scoredata_mt_ipairs,
         --__pairs = scoredata_mt_pairs, --会影响到递归调用
         data = {} })
     for k, v in pairs(t) do

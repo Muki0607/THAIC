@@ -6,7 +6,7 @@ lib.save_replay = Class(object)
 ---@param stages table @关卡表
 ---@param finish number @0为未通关，1为通关
 ---@param name string @机签
-function lib.save_replay:init()
+function lib.save_replay:init(score_pos, data)
     self.num = 12 --菜单编号
     self.group = GROUP_GHOST
     self.layer = LAYER_TOP
@@ -25,7 +25,7 @@ function lib.save_replay:init()
     self.default_x = screen.width * 0.5
     self.default_y = screen.height * 0.5
     self.bound = false
-    self.t = 30
+    self.t = 8
     self.wait = 30
     self.alpha = 0
     self.lname = 8 --REPLAY_USER_NAME_MAX
@@ -34,15 +34,82 @@ function lib.save_replay:init()
     self.stages = lib.last_replay
     self.finish = lib.last_replay_finish
     self.name = scoredata.repsaver
-    self.posX = 1
-    self.posY = 1
+    self.posX = 0
+    self.posY = 0
     self.info_y = screen.height / 2
     --覆盖rep时警告
     self.warn = false
     self.warn_confirm = false
-    
-    function self.DrawInfo()
+    self.score_pos = score_pos
+    self.data = data
+
+    ---渲染主要rep信息
+    function self.DrawRepInfo(i, xos, yos, lineh, x, y, text, pos, timer)
+        local _color = color
+        if i == pos then
+            if i == 0 then
+                text[i][1] = "Last Replay"
+                text[i][2] = ""
+            end
+            local color = {}
+            local k = cos(timer * ui.menu.blink_speed) ^ 2
+            for j = 1, 3 do
+                color[j] = ui.menu.focused_color1[j] * k + ui.menu.focused_color2[j] * (1 - k)
+            end
+            --local xos=ui.menu.shake_range*sin(ui.menu.shake_speed*shake)
+            SetFontState("replay", "", Color(0xFFFFFF30))
+            --RenderTTF(ttfname,text[i],x+xos,x+xos,y-i*ui.menu.sc_pr_line_height+yos,y-i*ui.menu.sc_pr_line_height+yos,Color(alpha*255,unpack(color)),align,"vcenter","noclip")
+            for m = 1, 6 do
+                --[[RenderText("replay", text[i][m], x + xos[m], y - i * ui.menu.rep_line_height + yos,
+                    ui.menu.rep_font_size, "vcenter", "left")]]
+                DrawText("main_font_zh2", text[i][m], x + xos[m], y - max(0, (i - self.l * (self.page - 1))) * lineh + yos, 0.8,
+                    Color(self.alpha, unpack(color)), nil, "vcenter", "left")
+            end
+        else
+            SetFontState("replay", "", Color(0xFF808080))
+            --RenderTTF(ttfname,text[i],x,x,y-i*ui.menu.sc_pr_line_height+yos,y-i*ui.menu.sc_pr_line_height+yos,Color(alpha*255,unpack(ui.menu.unfocused_color)),align,"vcenter","noclip")
+            for m = 1, 6 do
+                --[[RenderText("replay", text[i][m], x + xos[m], y - i * ui.menu.rep_line_height + yos,
+                    ui.menu.rep_font_size, "vcenter", "left")]]
+                DrawText("main_font_zh2", text[i][m], x + xos[m], y - max(0, (i - self.l * (self.page - 1))) * lineh + yos, 0.8,
+                    _color(COLOR_WHITE, self.alpha), nil, "vcenter", "left")
+            end
+        end
     end
+
+    ---更新名称
+    function self.UpdateName()
+        self.data[self.score_pos][1] = self.name
+    end
+    self.UpdateName()
+
+    ---获取键盘
+    ---好暴力的写法
+    ---@return table
+    function self.GetKeyboard()
+        local _keyboard = {}
+        for i = 65, 90 do
+            table.insert(_keyboard, i)
+        end
+        for i = 97, 122 do
+            table.insert(_keyboard, i)
+        end
+        for i = 48, 57 do
+            table.insert(_keyboard, i)
+        end
+        for _, i in ipairs({ 43, 45, 61, 46, 44, 33, 63, 64, 58, 59, 91, 93, 40, 41, 95, 47, 123, 125, 124, 126, 94 }) do
+            table.insert(_keyboard, i)
+        end
+        for i = 35, 38 do
+            table.insert(_keyboard, i)
+        end
+        for _, i in ipairs({ 42, 92, 127, 34 }) do
+            table.insert(_keyboard, i)
+        end
+        return _keyboard
+    end
+    self.keyboard = self.GetKeyboard()
+    
     lib.FetchReplaySlots(self)
     lib.Fly(self, 1, 'left')
 end
@@ -62,7 +129,10 @@ function lib.save_replay:frame()
                     return
                 end
                 self.wait = 114514
+                lib.last_replay = nil
+                lib.ClearMenuStack()
                 lib.PopMenuStack()
+                lib.PushMenuStack(lib.title)
             elseif KeyIsPressed('shoot') then
                 self.wait = 30
                 self.level = 2
@@ -162,38 +232,40 @@ function lib.save_replay:frame()
             elseif KeyIsPressed('shoot') then
                 self.wait = self.t
                 if self.posX == 12 and self.posY == 6 then
-                    --由OLC添加，保存rep时菜单用来记录名称的参数
-                    scoredata.repsaver = self.username
-                    -- 跳转至保存录像菜单
-                    lib.PushMenuStack(lib.save_replay, self.stages, self.finish, self.username)
+                    self.SaveReplay()
+                    lib.ClearMenuStack()
+                    lib.PopMenuStack()
+                    lib.PushMenuStack(lib.title)
                 end
 
-                if #self.username == self.lname then
+                if #self.name == self.lname then
                     self.posX = 12
                     self.posY = 6
                 elseif self.posX == 11 and self.posY == 6 then
-                    if #self.username ~= 0 then
-                        self.username = string.sub(self.username, 1, -2)
+                    if #self.name ~= 0 then
+                        self.name = string.sub(self.name, 1, -2)
+                        self.UpdateName()
                     end
                     PlaySound('cancel00', 0.3)
                 elseif self.posX == 10 and self.posY == 6 then
                     local char = string.char(0x20)
-                    self.username = self.username .. char
+                    self.name = self.name .. char
+                    self.UpdateName()
                     PlaySound('ok00', 0.3)
                 else
                     local char = string.char(self.keyboard[self.posY * 13 + self.posX + 1])
-                    self.username = self.username .. char
+                    self.name = self.name .. char
+                    self.UpdateName()
                     PlaySound('ok00', 0.3)
                 end
-            elseif KeyIsPressed('spell') then
-                if #self.username == 0 then
-                    self.wait = 114514
-                    lib.ClearMenuStack()
-                    lib.PopMenuStack()
-                    lib.PushMenuStack(lib.title)
+            elseif KeyIsPressed("spell") then
+                if #self.name == 0 then
+                    self.wait = self.t
+                    self.level = 1
                 else
                     self.wait = self.t
-                    self.username = string.sub(self.username, 1, -2)
+                    self.name = string.sub(self.name, 1, -2)
+                    self.UpdateName()
                 end
                 PlaySound('cancel00', 0.3)
             end
@@ -202,21 +274,98 @@ function lib.save_replay:frame()
 end
 
 function lib.save_replay:render()
-    ---超级偷懒的写法（
-    if self.level == 1 then
-        lib.replay.render(self)
-    else
-        lib.name_regist.render(self, true)
-        self:DrawInfo()
-    end
     SetViewMode('ui')
+    if self.level == 1 then
+        local _color = color
+        if self.level == 1 then
+            local x, y, text, pos, timer = self.x, self.y, sp.copy(self.text1), self.pos1, self.timer
+            local lineh = 15
+            local xos = { -300, -240, -120, 20, 130, 240 }
+            local yos = (self.l + 1) * lineh * 0.5 + 30
+
+            --自动保存位
+            self.DrawRepInfo(0, xos, yos, lineh, x, y, text, pos, timer)
+            for i = 1 + self.l * (self.page - 1), self.l * self.page do
+                self.DrawRepInfo(i, xos, yos, lineh, x, y, text, pos, timer)
+            end
+            
+            --额外信息渲染
+            local text3, y = self.text3_kt, y - self.l * lineh * 0.5 + 20
+            if text3 then
+                local len = text3('len')
+                for i = 1, len - 1 do
+                    DrawText("main_font_zh2", text3('get', i) .. ": " .. text3[i], x + xos[1], y - i * lineh * 1.25, 0.75,
+                        _color(COLOR_WHITE, self.alpha))
+                end
+                DrawText("main_font_zh2", text3('get', len) .. ": ", x + xos[1], y - len * lineh * 1.25 - 10, 0.75,
+                    _color(COLOR_WHITE, self.alpha))
+                for k, v in ipairs(text3[len]) do
+                    local s = 0.35
+                    if v >= 12 and v ~= 16 then s = s * 2 end
+                    Render('Muki_AiC_menu_enhancer_select' .. v, x + xos[1] + 40 + k * 28, y - len * lineh * 1.25 - 10, 0, s)
+                end
+            end
+        else
+            local x, y, text, pos, alpha = self.x, self.y, self.text2, self.pos2, self.alpha
+            local xos = { -80, 120 }
+            local yos = (#text + 1) * ui.menu.sc_pr_line_height * 0.5
+            for i = 1, #text do
+                if i == pos then
+                    local color = { { 255, 255, 48 }, { 128, 128, 128 } }
+                    --local xos=ui.menu.shake_range*sin(ui.menu.shake_speed*shake)
+                    DrawText('main_font_zh2', text[i][1], x + xos[1], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                        Color(alpha, unpack(color[1])), nil, "vcenter", "noclip")
+                    DrawText('main_font_zh2', text[i][2], x + xos[2], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                        Color(alpha, unpack(color[1])), nil, "vcenter", "noclip")
+                else
+                    DrawText('main_font_zh2', text[i][1], x + xos[1], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                        Color(alpha, unpack(color[2])), nil, "vcenter", "noclip")
+                    DrawText('main_font_zh2', text[i][2], x + xos[2], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                        Color(alpha, unpack(color[2])), nil, "vcenter", "noclip")
+                end
+            end
+        end
+    else
+        -- 绘制键盘
+        -- 未选中按键
+        SetFontState("replay", "", Color(255 * self.alpha, unpack(ui.menu.unfocused_color)))
+        --是谁写的在Lua里还从0开始数啊（恼）
+        --担心哪里会有逻辑出问题就没改了
+        local w, h, _y = 18, 15, self.y - 45
+        local co
+        for x = 0, 12 do
+            for y = 0, 6 do    
+                if x ~= self.posX or y ~= self.posY then
+                    co = color(COLOR_WHITE, 255 * self.alpha)
+                else
+                    co = Color(255 * self.alpha, 32, 208, 255)
+                end
+                if y == 6 then
+                    if x == 12 then
+                        DrawText("main_font_zh2", '终',
+                            self.x + (x - 5.5) * w, _y - (y - 3.5) * h,
+                            0.7, color(COLOR_BLACK, 255 * self.alpha), co, 'centerpoint')
+                    elseif x == 11 then
+                        DrawText("main_font_zh2", 'BS',
+                            self.x + (x - 5.5) * w, _y - (y - 3.5) * h,
+                            0.7, color(COLOR_BLACK, 255 * self.alpha), co, 'centerpoint')
+                    else
+                        DrawText("main_font_zh2", string.char(self.keyboard[y * 13 + x + 1]),
+                            self.x + (x - 5.5) * w, _y - (y - 3.5) * h,
+                            0.75, color(COLOR_BLACK, 255 * self.alpha), co, 'centerpoint')
+                    end
+                else
+                    DrawText("main_font_zh2", string.char(self.keyboard[y * 13 + x + 1]),
+                        self.x + (x - 5.5) * w, _y - (y - 3.5) * h,
+                        0.75, color(COLOR_BLACK, 255 * self.alpha), co, 'centerpoint')
+                end
+            end
+        end
+    end
     --覆盖rep时警告
     if self.warn then
-        local co = { [true] = {}, [false] = { 255, 255, 255 } }
-        local k = cos(self.timer * ui.menu.blink_speed) ^ 2
-        for i = 1, 3 do
-            co[true][i] = ui.menu.focused_color1[i] * k + ui.menu.focused_color2[i] * (1 - k)
-        end
+        local co = { [true] = { 32, 208, 255 }, [false] = { 255, 255, 255 } }
+
         SetImageState("white", '', color(COLOR_BLACK, 150))
         RenderRect("white", screen.width / 4, screen.width * 3 / 4,
             screen.height / 4, screen.height * 3 / 4)

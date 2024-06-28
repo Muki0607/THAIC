@@ -283,8 +283,6 @@ function lib.player_data:render()
                             text = string.format("%9d", tonumber(text))
                         end
                         align = 'right'
-                    elseif j == 3 then
-                        text = string.gsub(text, ' ', '     ')
                     end
                     DrawText("main_font_zh2", text,
                         x + xos[j + 1], y - i * lineh + yos + 25, 0.9, Color(self.alpha, r, g, b), nil, 'vcenter', align)

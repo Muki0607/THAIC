@@ -62,6 +62,7 @@ function ext.replay.SaveReplay(stageNames, slot, playerName, finish)
     finish = finish or 0
     for _, v in ipairs(stageNames) do
         assert(replayStages[v])
+        replayStages[v].score = lstg.var.score
         table.insert(stages, replayStages[v])
     end
 

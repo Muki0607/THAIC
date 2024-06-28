@@ -24,14 +24,12 @@ function lib.name_regist:init()
     self.finish = lib.last_replay_finish
     self.lname = 8
     self.data = nil
-    self.username = setting.username or ''
+    self.name = setting.username or ''
     self._posX = aic.sys.GetPlayer() --由于没有开始新的一局，此时可直接使用上一局选择来判断
     self._posY = aic.sys.GetDiff()
     self.player_list = { "reimu_player", "marisa_player", "sakuya_player", "muki_player", "nenyuki_player" }
     self.diff_list = { "Easy", "Normal", "Hard", "Lunatic", --[["Extra"]] }
     self.l = 10
-
-    lib.FetchReplaySlots(self)
 
     ---获得分数数据，由FetchReplaySlots修改而来
     ---@return table @分数数据表
@@ -66,22 +64,13 @@ function lib.name_regist:init()
         --{ '--------', 1000000, '----/--/-- --:--:--', 'Stage -', '---%' }
     end
     local score = self.GetScore()
-    lib.SavePlayerData(score)
+    self.data, self.score_pos = lib.SavePlayerData(score)
 
-    ---获取玩家数据
-    ---
-    ---由于涉及到scoredata的读取，不能每帧调用，否则会极其卡
-    ---@return table
-    function self.GetData()
-        local data = scoredata.player_data
-        local ret = {}
-        if data then
-            local score = data[self.player_list[self._posX]].high_score[self._posY]
-            ret = sp.copy(score)
-        end
-        self.data = ret
+    ---更新名称
+    function self.UpdateName()
+        self.data[self.score_pos][1] = self.name
     end
-    self.GetData() --由于自机和难度是确定的，只用调用一次就行
+    self.UpdateName()
 
     ---获取键盘
     ---好暴力的写法
@@ -152,30 +141,33 @@ function lib.name_regist:frame()
             self.wait = self.t
             if self.posX == 12 and self.posY == 6 then
                 --由OLC添加，保存rep时菜单用来记录名称的参数
-                scoredata.repsaver = self.username
+                scoredata.repsaver = self.name
                 -- 跳转至保存录像菜单
-                lib.PushMenuStack(lib.save_replay)
+                lib.PushMenuStack(lib.save_replay, self.score_pos, self.data)
             end
 
-            if #self.username == self.lname then
+            if #self.name == self.lname then
                 self.posX = 12
                 self.posY = 6
             elseif self.posX == 11 and self.posY == 6 then
-                if #self.username ~= 0 then
-                    self.username = string.sub(self.username, 1, -2)
+                if #self.name ~= 0 then
+                    self.name = string.sub(self.name, 1, -2)
+                    self.UpdateName()
                 end
                 PlaySound('cancel00', 0.3)
             elseif self.posX == 10 and self.posY == 6 then
                 local char = string.char(0x20)
-                self.username = self.username .. char
+                self.name = self.name .. char
+                self.UpdateName()
                 PlaySound('ok00', 0.3)
             else
                 local char = string.char(self.keyboard[self.posY * 13 + self.posX + 1])
-                self.username = self.username .. char
+                self.name = self.name .. char
+                self.UpdateName()
                 PlaySound('ok00', 0.3)
             end
         elseif KeyIsPressed("spell") then
-            if #self.username == 0 then
+            if #self.name == 0 then
                 self.wait = 114514
                 lib.last_replay = nil
                 lib.ClearMenuStack()
@@ -183,18 +175,17 @@ function lib.name_regist:frame()
                 lib.PushMenuStack(lib.title)
             else
                 self.wait = self.t
-                self.username = string.sub(self.username, 1, -2)
+                self.name = string.sub(self.name, 1, -2)
+                self.UpdateName()
             end
             PlaySound('cancel00', 0.3)
         end
     end
 end
 
-function lib.name_regist:render(IsSaveReplay)
+function lib.name_regist:render()
     SetViewMode('ui')
-    if not IsSaveReplay then
-        lib.DrawSubTitle(self)
-    end
+    lib.DrawSubTitle(self)
 
     -- 绘制键盘
     -- 未选中按键
@@ -266,9 +257,10 @@ function lib.name_regist:render(IsSaveReplay)
         local _end_b = co2[3]
         local _d_b = (_end_b - _beg_b) / (10 - 1)
         for i = 1, 10 do
+            if not data[i] then return end
             for j = 0, 5 do
                 local align = 'left'
-                local text = data[i][j]
+                local text = data[i][j] or 'nil'
                 if j == 0 then
                     text = i
                     align = 'right'
@@ -276,16 +268,20 @@ function lib.name_regist:render(IsSaveReplay)
                     if tonumber(text) then
                         text = string.format("%2d", tonumber(text))
                     end
+                    if i == self.score_pos and #text < 8 then text = text .. '_' end
                 elseif j == 2 then
                     if tonumber(text) and tonumber(text) < 10000000000 then
                         text = string.format("%9d", tonumber(text))
                     end
                     align = 'right'
-                elseif j == 3 then
-                    text = string.gsub(text, ' ', '     ')
                 end
-                DrawText("main_font_zh2", text,
-                    x + xos[j + 1], y - i * lineh + yos + 25, 0.9, Color(self.alpha, r, g, b), nil, 'vcenter', align)
+                if i == self.score_pos then
+                    DrawText("main_font_zh2", text, x + xos[j + 1],
+                        y - i * lineh + yos + 25, 0.9, Color(self.alpha, r, g, b), nil, align)
+                else
+                    DrawText("main_font_zh2", text, x + xos[j + 1],
+                        y - i * lineh + yos + 25, 0.9, Color(self.alpha, r - 100, g - 100, b - 100), nil, align)
+                end
             end
             r = r + _d_r
             g = g + _d_g

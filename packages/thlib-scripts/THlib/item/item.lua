@@ -138,7 +138,7 @@ function item_power:frame()
     if self.attract >= 8 then
         self.collected = true
     end
-    if t then
+    if t and IsValid(t) then
         local a, b = 25, 25
         if t.a ~= 0 then a = t.a end
         if t.b ~= 0 then b = t.b end

@@ -341,50 +341,59 @@ function lib.InitPlayerData(player_name)
     }
 end
 
---[[
----保存上一局游戏数据
+--
+---保存上一局游戏数据，未完成
 ---@param score table @分数数据表
+---@return table, number @整理后的高分榜和本次分数数据位置
 function lib.SavePlayerData(score)
     local player_list = { "reimu_player", "marisa_player", "sakuya_player", "muki_player", "nenyuki_player" }
     local player, diff = player_list[aic.sys.GetPlayer()], aic.sys.GetDiff()
-    local hscore = scoredata.player_data[player].high_score[diff]
-    --计算本次分数超过了几个记录
-    local n = 0
-    for i = 1, 10 do
-        --Print(i, score[2], hscore[i][2])
-        if score[2] > hscore[i][2] then
-            n = n + 1
-        end
+    local hscore = {}
+    for i = 1, 10 do --因为scoredata有元表所以不能直接用ipairs
+        hscore[i] = scoredata.player_data[player].high_score[diff][i]
     end
-    --整理高分榜
-    --我知道你想说table.sort，但那玩意在这里不起作用（因为元表？）
-    if n > 0 then
-        for i = 10, 10 - n + 1, -1 do
-            hscore[i + 1] = hscore[i]
-        end
-        hscore[10 - n + 1] = score
-    end
-end
---]]
-
----保存上一局游戏数据
----@param score table @分数数据表
-function lib.SavePlayerData(score)
-    local player_list = { "reimu_player", "marisa_player", "sakuya_player", "muki_player", "nenyuki_player" }
-    local player, diff = player_list[aic.sys.GetDiff()], aic.sys.GetDiff()
-    local hscore = scoredata.player_data[player].high_score[diff]
     local function compare(t1, t2)
         return t1[2] > t2[2]
     end
     --以本次得分是否高过高分榜最后一名决定是否更新
     if compare(score, hscore[10]) then
         hscore[10] = score
-    else
-        return
     end
     --以分数整理高分榜
     table.sort(hscore, compare)
+    --不要问为什么，总之只有这样写才存得进去
+    local temp = aic.table.Repeat({}, 10)
+    for i = 1, 10 do
+        for j = 1, 5 do
+            temp[i][j] = hscore[i][j]
+        end
+    end
+    local t = {
+        temp[1],
+        temp[2],
+        temp[3],
+        temp[4],
+        temp[5],
+        temp[6],
+        temp[7],
+        temp[8],
+        temp[9],
+        temp[10],
+    }
+    scoredata.player_data[player].high_score[diff] = t
+    local pos
+    --不是，这个新表应该和scoredata没有关系了啊……为什么还是不能用ipairs啊
+    --[[
+    for k, v in ipairs(t) do
+        if v[2] == score[2] then pos = k end
+    end
+    --]]
+    for i = 1, 10 do
+        if t[i][2] == score[2] then pos = i end
+    end
+    return temp, pos
 end
+--]]
 
 ------------------------------------------------------------
 

@@ -326,11 +326,12 @@ lib.bgm_name = Class(object)
 function lib.bgm_name:init(n)
     self.group = GROUP_GHOST
     self.layer = LAYER_TOP
-    self.text = { '梦摇篮', '魔法使的祭典', '森林中的未知际遇', '纯白之花 守护之光', '超越空想的Stella',
-        '即使已然无力回天', '于乐园中仰望繁星 ~ Alice In Gensokyo', '失色的星之梦 ~ Reality or Fantasy?',
-        '森之意志', '宁静的夏夜', 'Above Star', '东方梦摇篮', '梦醒之时' }
+    self.text = aic.l10n.ui.music_room.title
     --保留节目：暴力调参
-    self.offset = { 0, -32, -47, -40, -57, -40, -146, -130, 0, -12, -20, -15, -8 }
+    --由于♪无法被pixel字体渲染，渲染需要分为两部分进行，因此无法使用右对齐，只能手动对齐
+    
+    self.offset = { -58, -75, -26, -20, -111, -50, -16, -110, -32, -47, -3, -3, -53, -42, -164, -146, -3, -13, -19, -8,
+        -85, -49, -53, -126, -40, -40, -60, -35, -45, -55 }
     self.n = n
     self.x = 200
     self.y = -205
@@ -355,7 +356,7 @@ end
 
 function lib.bgm_name:render()
     if _debug.bgm_debug then
-        for i = 1, 13 do
+        for i = 1, #self.text do
             DrawText('main_font_en', '♪', self.x + self.offset[i], self.y - 3 + i * 10,
                 1, color(COLOR_WHITE, self.alpha), nil, 'right')
             DrawText('pixel', self.text[i], self.x + self.offset[i], self.y + i * 10,
