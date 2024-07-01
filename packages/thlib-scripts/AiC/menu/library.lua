@@ -93,6 +93,7 @@ end
 function lib.library:render()
     SetViewMode('ui')
     lib.DrawSubTitle(self)
+    lib.DrawTips(self, { '选择', '返回上一级菜单' })
     local d, x, y, text1, text2 = 75, self.x, self.y - 25, self.text1, self.text2
     for i = 1, self.l do
         if i == self.pos then

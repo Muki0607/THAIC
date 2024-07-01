@@ -189,12 +189,13 @@ end
 --真的是调参地狱，我不想再碰这玩意了
 function lib.player_data:render()
     SetViewMode('ui')
+    lib.DrawSubTitle(self)
+    lib.DrawTips(self, { nil, '返回上一级菜单' }, { '选择难度', '选择机体' })
     local x, y = self.x, self.y - 70
     local lineh = 20
     local yos = (self.l + 1) * lineh * 0.5
     local co1, co2 = { 247, 225, 158 }, { 166, 129, 193 }
     local data, playdata = self.data, self.playdata
-    lib.DrawSubTitle(self)
     if playdata then
         local d = 25
         local player = { "博丽 灵梦", "雾雨 魔理沙", "十六夜 咲夜", "小林 无记", "千幻 念雪" }

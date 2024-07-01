@@ -648,19 +648,19 @@ end
 ---@overload fun(kt:valuetable, func:'ipairs'):fun(tbl: table<number, V>):number, V
 ---@overload fun(kt:valuetable, func:'pairs'):fun(tbl: table<K, V>):K, V
 local function kt_call(kt, func, key, value)
-    if func == 'set' then
+    if func == 'set' then --设置单个值
         getmetatable(kt).data[key] = value
-    elseif func == 'get' then
+    elseif func == 'get' then --获取单个值
         return getmetatable(kt).data[key]
-    elseif func == 'setall' then
+    elseif func == 'setall' then --设置整个表
         getmetatable(kt).data = key
-    elseif func == 'getall' then
+    elseif func == 'getall' then --获取整个表
         return getmetatable(kt).data
-    elseif func == 'len' then
+    elseif func == 'len' then --获取表长度
         return #getmetatable(kt).data
-    elseif func == 'ipairs' then
+    elseif func == 'ipairs' then --使用ipairs迭代表
         return ipairs(getmetatable(kt).data)
-    elseif func == 'pairs' then
+    elseif func == 'pairs' then --使用pairs迭代表
         return pairs(getmetatable(kt).data)
     end
 end

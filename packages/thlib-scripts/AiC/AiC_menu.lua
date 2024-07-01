@@ -199,52 +199,59 @@ function lib.InsertMenuStack(menu, pos)
     table.insert(lib.menu_stack, pos, menu)
 end
 
+---获取rep中的信息
+---@param i number @rep编号
+---@return table @rep信息
+function lib.GetReplayData(i)
+    ext.replay.RefreshReplay()
+    local slot = ext.replay.GetSlot(i)
+    if not slot then
+        return { string.format('No.%02d', i), '--------', '----/--/-- --:--', '--------', '--------', '---', '---%' }
+    end
+    -- 使用第一关的时间作为录像时间
+    local text, date = {}
+    if slot.stages[1] then
+        date = string.sub(aic.sys.GetTime(slot.stages[1].stageDate + setting.timezone * 3600), 1, -4)
+    end
+    -- 统计总分数
+    local totalScore = 0
+    local diff, stage_num = 0, 0
+    local tmp
+    for i, k in ipairs(slot.stages) do
+        totalScore = totalScore + slot.stages[i].score
+        diff = string.match(k.stageName, '^.+@(.+)$')
+        tmp = string.match(k.stageName, '^(.+)@.+$')
+        if string.match(tmp, '%d+') == nil then
+            stage_num = tmp
+        else
+            stage_num = 'St' .. string.match(tmp, '%d+')
+        end
+    end
+    local delay = slot.gameExtendInfo
+    if diff == 'Spell Practice' then
+        diff = 'SpellPr' --符合原作
+    end
+    if tmp == 'Spell Practice' then
+        stage_num = 'SC' --之后要换成符卡编号
+    end
+    if slot.group_finish == 1 then
+        stage_num = 'All' --海猫的力量（无端
+    end
+    if date then 
+        text = { string.format('No.%02d', i), slot.userName, date, slot.stages[1].stagePlayer, diff, stage_num, delay }
+    else
+        text = { string.format('No.%02d', i), '--------', '----/--/-- --:--', '--------', '--------', '---', '---%' }
+    end
+    return text
+end
+
 ---刷新replay
 ---就是把FetchReplaySlots搬过来了
 function lib:FetchReplaySlots()
     local ret = {}
-    ext.replay.RefreshReplay()
 
     for i = 0, ext.replay.GetSlotCount() do
-        local text = {}
-        local slot = ext.replay.GetSlot(i)
-        if slot then
-            -- 使用第一关的时间作为录像时间
-            local date
-            if slot.stages[1] then
-                date = os.date("!%Y/%m/%d", slot.stages[1].stageDate + setting.timezone * 3600)
-            end
-            -- 统计总分数
-            local totalScore = 0
-            local diff, stage_num = 0, 0
-            local tmp
-            for i, k in ipairs(slot.stages) do
-                totalScore = totalScore + slot.stages[i].score
-                diff = string.match(k.stageName, '^.+@(.+)$')
-                tmp = string.match(k.stageName, '^(.+)@.+$')
-                if string.match(tmp, '%d+') == nil then
-                    stage_num = tmp
-                else
-                    stage_num = 'St' .. string.match(tmp, '%d+')
-                end
-            end
-            if diff == 'Spell Practice' then
-                diff = 'SpellCard'
-            end
-            if tmp == 'Spell Practice' then
-                stage_num = 'SC'
-            end
-            if slot.group_finish == 1 then
-                stage_num = 'Clear'
-            end
-            if date then 
-                text = { string.format('No.%02d', i), slot.userName, date, slot.stages[1].stagePlayer, diff, stage_num }
-            else
-                text = { string.format('No.%02d', i), '--------', '----/--/--', '--------', '--------', '---' }
-            end
-        else
-            text = { string.format('No.%02d', i), '--------', '----/--/--', '--------', '--------', '---' }
-        end
+        local text = lib.GetReplayData(i)
         --[[
                     text = string.format(REPLAY_DISPLAY_FORMAT1, i, date, slot.userName, totalScore)
                 else
@@ -288,20 +295,46 @@ function lib:GetExtRepInfo()
 end
 
 ---绘制键位提示
----@param keys table @键位表，按照{shoot, spell, special}的顺序传入
-function lib:DrawTips(keys)
+---@param keys table @键位表，按照{shoot, spell, special, slow, repfast}的顺序传入
+---@param move table @移动键位表，传入时取代原移动键位表，并按表长度决定显示方式
+function lib:DrawTips(keys, move)
     local text = ''
     local key = aic.input.KeyNameList()
     --移动键
-    for _, v in ipairs({ 'up', 'down', 'left', 'right' }) do
-        text = text .. key[setting.keys[v]]
+    if move then
+        if #move == 1 then --只有上下的情况
+            for _, v in ipairs({ 'up', 'down' }) do
+                text = text .. key[setting.keys[v]]
+            end
+            text = text .. move[1] .. ' '
+        elseif #move == 2 then --上下和左右分开的情况
+            for _, v in ipairs({ 'up', 'down' }) do
+                text = text .. key[setting.keys[v]]
+            end
+            text = text .. move[1] .. ' '
+            for _, v in ipairs({ 'left', 'right' }) do
+                text = text .. key[setting.keys[v]]
+            end
+            text = text .. move[2] .. ' '
+        elseif #move == 4 then --上下左右都不同的情况
+            for k, v in ipairs({ 'up', 'down', 'left', 'right' }) do
+                text = text .. key[setting.keys[v]] .. move[k] .. ' '
+            end
+        end
+    else
+        for _, v in ipairs({ 'up', 'down', 'left', 'right' }) do
+            text = text .. key[setting.keys[v]]
+        end
+        text = text .. '移动 '
     end
-    text = text .. '移动'
     --其他操作
-    for k, v in ipairs({ 'shoot', 'spell', 'special' }) do
+    for k, v in ipairs({ 'shoot', 'spell', 'special', 'slow' }) do
         if keys[k] then
             text = text .. key[setting.keys[v]] .. '键 ' .. keys[k] .. ' '
         end
+    end
+    if keys[5] then
+        text = text .. key[setting.keysys.repfast] .. '键 ' .. keys[5]
     end
     DrawText('aic_menu', text,
         screen.width, 10, 0.5, Color(self.alpha, 255, 255, 255), nil, 'right')
@@ -342,7 +375,7 @@ function lib.InitPlayerData(player_name)
 end
 
 --
----保存上一局游戏数据，未完成
+---保存上一局游戏数据
 ---@param score table @分数数据表
 ---@return table, number @整理后的高分榜和本次分数数据位置
 function lib.SavePlayerData(score)
@@ -356,7 +389,7 @@ function lib.SavePlayerData(score)
         return t1[2] > t2[2]
     end
     --以本次得分是否高过高分榜最后一名决定是否更新
-    if compare(score, hscore[10]) then
+    if hscore[10] and compare(score, hscore[10]) then
         hscore[10] = score
     end
     --以分数整理高分榜
@@ -365,7 +398,16 @@ function lib.SavePlayerData(score)
     local temp = aic.table.Repeat({}, 10)
     for i = 1, 10 do
         for j = 1, 5 do
-            temp[i][j] = hscore[i][j]
+            if j == 1 then
+                --去除名称中多余的双引号（虽然我也不知道怎么多出来的）
+                temp[i][j] = aic.string.Filter(hscore[i][j], '\"') 
+            elseif j == 3 then
+                --去除时间中多余的空格（虽然我也不知道怎么多出来的）
+                local s = aic.string.Filter(hscore[i][j], '%s') 
+                temp[i][j] = string.sub(s, 1, 10) .. ' ' .. string.sub(s, 11)
+            else
+                temp[i][j] = hscore[i][j]
+            end
         end
     end
     local t = {
@@ -391,9 +433,19 @@ function lib.SavePlayerData(score)
     for i = 1, 10 do
         if t[i][2] == score[2] then pos = i end
     end
+    pos = pos or 'XX' --打完全关之后分数低于最低分的情况
     return temp, pos
 end
 --]]
+
+---获取当前rep的处理落率
+---@return string 字符串格式的处理落率
+function lib.GetReplayDelay()
+    local sec = (lib.last_replay_frame / 60) --将单位转换为秒
+    local ret = 1 - (sec / lib.last_replay_time) --计算处理落率
+    ret = string.format('%.1f', ret) .. '%' --保留一位小数
+    return ret
+end
 
 ------------------------------------------------------------
 
@@ -459,6 +511,8 @@ for i = 1, 12 do
 end
 SetImageCenter('Muki_AiC_help_menu11', 148, 25)
 SetImageCenter('Muki_AiC_help_menu12', 148, 25)
+--replay菜单的普莉姆拉
+LoadImageFromFile('Muki_AiC_menu_replay_Primula', 'THlib/UI/menu/replay/Muki_AiC_Primula_face_smile.png')
 --副标题
 for _, t in ipairs(subtitle) do
     LoadImageFromFile('Muki_AiC_subtitle_' .. t, 'THlib/UI/menu/subtitle/Muki_AiC_subtitle_' .. t .. '.png')

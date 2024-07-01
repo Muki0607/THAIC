@@ -27,7 +27,7 @@ function lib.replay:init(pos, page)
     self.default_x = screen.width * 0.5
     self.default_y = screen.height * 0.5
     self.bound = false
-    self.t = 30
+    self.t = 8
     self.wait = 30
     self.alpha = 0
     self.lname = 8 --REPLAY_USER_NAME_MAX
@@ -70,11 +70,19 @@ function lib.replay:init(pos, page)
     end
 
     ---切换至第二层菜单
-    function self:changelevel()
+    function self.changelevel()
         if self.slot ~= nil then
-            self.level = 2
             self.text2 = {}
             self.pos2 = 1
+            self.wait = self.t * 2
+            lib.Fly(self, 0, 'down')
+            task.New(self, function()
+                task.Wait(self.t)
+                self.level = 2
+                self.x = self.default_x + 20
+                self.y = self.default_y
+                lib.Fly(self, 1, "left")
+            end)
 
             for _, v in ipairs(self.slot.stages) do
                 local stage = string.match(v.stageName, '^(.+)@.+$')
@@ -97,22 +105,13 @@ function lib.replay:init(pos, page)
             for j = 1, 3 do
                 color[j] = ui.menu.focused_color1[j] * k + ui.menu.focused_color2[j] * (1 - k)
             end
-            --local xos=ui.menu.shake_range*sin(ui.menu.shake_speed*shake)
-            SetFontState("replay", "", Color(0xFFFFFF30))
-            --RenderTTF(ttfname,text[i],x+xos,x+xos,y-i*ui.menu.sc_pr_line_height+yos,y-i*ui.menu.sc_pr_line_height+yos,Color(alpha*255,unpack(color)),align,"vcenter","noclip")
-            for m = 1, 6 do
-                --[[RenderText("replay", text[i][m], x + xos[m], y - i * ui.menu.rep_line_height + yos,
-                    ui.menu.rep_font_size, "vcenter", "left")]]
-                DrawText("main_font_zh2", text[i][m], x + xos[m], y - max(0, (i - self.l * (self.page - 1))) * lineh + yos, 0.8,
+            for m = 1, 7 do
+                DrawText("main_font_zh2", text[i][m] or 'nil', x + xos[m], y - max(0, (i - self.l * (self.page - 1))) * lineh + yos, 0.8,
                     Color(self.alpha, unpack(color)), nil, "vcenter", "left")
             end
         else
-            SetFontState("replay", "", Color(0xFF808080))
-            --RenderTTF(ttfname,text[i],x,x,y-i*ui.menu.sc_pr_line_height+yos,y-i*ui.menu.sc_pr_line_height+yos,Color(alpha*255,unpack(ui.menu.unfocused_color)),align,"vcenter","noclip")
-            for m = 1, 6 do
-                --[[RenderText("replay", text[i][m], x + xos[m], y - i * ui.menu.rep_line_height + yos,
-                    ui.menu.rep_font_size, "vcenter", "left")]]
-                DrawText("main_font_zh2", text[i][m], x + xos[m], y - max(0, (i - self.l * (self.page - 1))) * lineh + yos, 0.8,
+            for m = 1, 7 do
+                DrawText("main_font_zh2", text[i][m] or 'nil', x + xos[m], y - max(0, (i - self.l * (self.page - 1))) * lineh + yos, 0.8,
                     _color(COLOR_WHITE, self.alpha), nil, "vcenter", "left")
             end
         end
@@ -133,9 +132,15 @@ function lib.replay:frame()
         if self.level == 1 then
             if KeyIsPressed('spell') or aic.input.CheckLastKey('menu') then
                 PlaySound('cancel00', 0.5)
-                self.wait = 114514
-                self.quit()
+                if self.warn then
+                    self.wait = self.t
+                    self.warn = false
+                else
+                    self.wait = 114514
+                    self.quit()
+                end
             elseif KeyIsPressed('shoot') and self.slot then
+                --[[
                 self.wait = 114514
                 if setting.newopening then
                     PlaySound('aic_opening_new', 0.5)
@@ -143,24 +148,23 @@ function lib.replay:frame()
                     PlaySound('aic_opening', 0.5)
                 end
                 self.quit(self.slot.path, self.slot.stages[1].stageName)
-                --[[
-                self.wait = 8
-                PlaySound('ok00', 0.3)
-                lib.Fly(self, 0, 'down')
-                task.New(self, function()
-                    task.Wait(self.t)
-                    self:changelevel()
-                    self.x = self.default_x
-                    self.y = self.default_y
-                    for _ = 1, self.t do
-                        task.Wait()
-                        self.alpha = self.alpha + 255 / self.t
+                --[[]]
+                self.wait = self.t
+                if tonumber(string.sub(self.text3_kt[5], 1, 3)) ~= aic.sys.GetVersionNumber() then --检查大版本是否一致，不一致时发出警告
+                    if not self.warn then
+                        self.warn = true
+                    else
+                        PlaySound('ok00', 0.3)
+                        self.changelevel()
                     end
-                end)
-                ]]
+                else
+                    PlaySound('ok00', 0.3)
+                    self.changelevel()
+                end
+                --]]
             end
             if KeyIsDown('up') then
-                self.wait = 8
+                self.wait = self.t
                 PlaySound('select00', 0.5)
                 if self.pos1 > 1 + self.l * (self.page - 1) then
                     self.pos1 = self.pos1 - 1
@@ -168,7 +172,7 @@ function lib.replay:frame()
                     self.pos1 = 0
                 end
             elseif KeyIsDown('down') then
-                self.wait = 8
+                self.wait = self.t
                 PlaySound('select00', 0.5)
                 if self.pos1 < self.l * self.page then
                     if self.pos1 == 0 then
@@ -178,7 +182,7 @@ function lib.replay:frame()
                     end
                 end
             elseif KeyIsDown('left') then
-                self.wait = 8
+                self.wait = self.t
                 PlaySound('select00', 0.5)
                 if self.page > 1 then
                     self.page = self.page - 1
@@ -190,7 +194,7 @@ function lib.replay:frame()
                     self.pos1 = self.pos1 + self.l * (self.lpage - 1)
                 end
             elseif KeyIsDown('right') then
-                self.wait = 8
+                self.wait = self.t
                 PlaySound('select00', 0.5)
                 if self.page < self.lpage then
                     self.page = self.page + 1
@@ -214,7 +218,7 @@ function lib.replay:frame()
                     self.y = self.default_y
                     lib.Fly(self, 1, "left")
                 end)
-            elseif KeyIsPressed('shoot') and slot ~= nil then
+            elseif KeyIsPressed('shoot') then
                 PlaySound('ok00', 0.3)
                 self.wait = 114514
                 if setting.newopening then
@@ -222,10 +226,10 @@ function lib.replay:frame()
                 else
                     PlaySound('aic_opening', 0.5)
                 end
-                self.quit(slot.path, slot.stages[self.pos2].stageName)
+                self.quit(self.slot.path, self.slot.stages[self.pos2].stageName)
             end
             if KeyIsDown('up') then
-                self.wait = 8
+                self.wait = self.t
                 PlaySound('select00', 0.5)
                 if self.pos2 > 1 then
                     self.pos2 = self.pos2 - 1
@@ -233,7 +237,7 @@ function lib.replay:frame()
                     self.pos = #slot.stages
                 end
             elseif KeyIsDown('down') then
-                self.wait = 8
+                self.wait = self.t
                 PlaySound('select00', 0.5)
                 if self.pos2 < #slot.stages then
                     self.pos2 = self.pos2 + 1
@@ -252,7 +256,7 @@ function lib.replay:render()
     if self.level == 1 then
         local x, y, text, pos, timer = self.x, self.y, sp.copy(self.text1), self.pos1, self.timer
         local lineh = 15
-        local xos = { -300, -240, -120, 20, 130, 240 }
+        local xos = { -300, -240, -180, -80, -20, 40, 80 }
         local yos = (self.l + 1) * lineh * 0.5 + 30
 
         --自动保存位
@@ -260,39 +264,54 @@ function lib.replay:render()
         for i = 1 + self.l * (self.page - 1), self.l * self.page do
             self.DrawRepInfo(i, xos, yos, lineh, x, y, text, pos, timer)
         end
+
+        --普莉姆拉老师！
+        SetImageState('Muki_AiC_menu_replay_Primula', '', color(COLOR_WHITE, self.alpha))
+        Render('Muki_AiC_menu_replay_Primula', x + 150, y, 0, -0.5, 0.5)
+
+        lib.DrawTips(self, { '播放Replay', '返回上一级菜单' })
         
-        --额外信息渲染
         local text3, y = self.text3_kt, y - self.l * lineh * 0.5 + 20
-        if text3 then
-            local len = text3('len')
-            for i = 1, len - 1 do
-                DrawText("main_font_zh2", text3('get', i) .. ": " .. text3[i], x + xos[1], y - i * lineh * 1.25, 0.75,
+        if self.warn then
+            DrawText("main_font_zh2", '该Replay游戏版本与当前版本相差较大，播放可能导致错误。是否继续播放？\n若要播放，请再次按下确认键。',
+                x + xos[1], y - 1 * lineh * 1.25, 0.75, _color(COLOR_RED, self.alpha))
+        else
+            --额外信息渲染
+            if text3 then
+                local len = text3('len')
+                --通过键表实现对值表的散列部分进行有序读取（即有序字典）
+                for i = 1, len - 1 do
+                    DrawText("main_font_zh2", text3('get', i) .. ": " .. text3[i], x + xos[1], y - i * lineh * 1.25, 0.75,
+                        _color(COLOR_WHITE, self.alpha))
+                end
+                --对携带插件特化处理，给予足够空间渲染插件图标
+                DrawText("main_font_zh2", text3('get', len) .. ": ", x + xos[1], y - len * lineh * 1.25 - 10, 0.75,
                     _color(COLOR_WHITE, self.alpha))
-            end
-            DrawText("main_font_zh2", text3('get', len) .. ": ", x + xos[1], y - len * lineh * 1.25 - 10, 0.75,
-                _color(COLOR_WHITE, self.alpha))
-            for k, v in ipairs(text3[len]) do
-                local s = 0.35
-                if v >= 12 and v ~= 16 then s = s * 2 end
-                Render('Muki_AiC_menu_enhancer_select' .. v, x + xos[1] + 40 + k * 28, y - len * lineh * 1.25 - 10, 0, s)
+                for k, v in ipairs(text3[len]) do
+                    local s = 0.35
+                    if v >= 12 and v ~= 16 then s = s * 2 end
+                    Render('Muki_AiC_menu_enhancer_select' .. v, x + xos[1] + 40 + k * 28, y - len * lineh * 1.25 - 10, 0, s)
+                end
             end
         end
     else
-        local x, y, text, pos, alpha = self.x, self.y, self.text2, self.pos2, self.alpha
-        local xos = { -80, 120 }
-        local yos = (#text + 1) * ui.menu.sc_pr_line_height * 0.5
+        lib.DrawTips(self, { '播放Replay', '返回' }, { '选择关卡' })
+        local x, y, text, pos, alpha = self.x, self.y + 80, self.text2, self.pos2, self.alpha
+        local lineh = 22
+        local xos = { -60, 20 }
+        local yos = (#text + 1) * lineh * 0.5
+        local color = { { 255, 255, 48 }, { 128, 128, 128 } }
         for i = 1, #text do
             if i == pos then
-                local color = { { 255, 255, 48 }, { 128, 128, 128 } }
                 --local xos=ui.menu.shake_range*sin(ui.menu.shake_speed*shake)
-                DrawText('main_font_zh2', text[i][1], x + xos[1], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                DrawText('main_font_zh2', text[i][1], x + xos[1], y - i * lineh + yos, 0.75,
                     Color(alpha, unpack(color[1])), nil, "vcenter", "noclip")
-                DrawText('main_font_zh2', text[i][2], x + xos[2], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                DrawText('main_font_zh2', text[i][2], x + xos[2], y - i * lineh + yos, 0.75,
                     Color(alpha, unpack(color[1])), nil, "vcenter", "noclip")
             else
-                DrawText('main_font_zh2', text[i][1], x + xos[1], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                DrawText('main_font_zh2', text[i][1], x + xos[1], y - i * lineh + yos, 0.75,
                     Color(alpha, unpack(color[2])), nil, "vcenter", "noclip")
-                DrawText('main_font_zh2', text[i][2], x + xos[2], y - i * ui.menu.sc_pr_line_height + yos, 1,
+                DrawText('main_font_zh2', text[i][2], x + xos[2], y - i * lineh + yos, 0.75,
                     Color(alpha, unpack(color[2])), nil, "vcenter", "noclip")
             end
         end

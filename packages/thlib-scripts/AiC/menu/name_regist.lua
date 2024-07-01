@@ -34,6 +34,7 @@ function lib.name_regist:init()
     ---获得分数数据，由FetchReplaySlots修改而来
     ---@return table @分数数据表
     function self.GetScore()
+        ext.replay.RefreshReplay() --这个不能忘，否则读到的就是上次的rep了
         local slot = ext.replay.GetSlot(0)
         -- 使用第一关的时间作为录像时间
         local date = '----/--/-- --:--:--'
@@ -59,12 +60,14 @@ function lib.name_regist:init()
         if slot.group_finish == 1 then
             stage_num = 'Clear'
         end
-        local delay = int(((1 - lib.last_replay_frame * 60 / lib.last_replay_time) * 1000) / 10) .. '%'
-        return { '', totalScore, date, stage_num, delay }
+        local delay = lib.GetReplayDelay()
+        return { '', totalScore, date, stage_num, delay }, slot --保存rep时会用到的当前rep
         --{ '--------', 1000000, '----/--/-- --:--:--', 'Stage -', '---%' }
     end
-    local score = self.GetScore()
+    local score
+    score, self.slot = self.GetScore()
     self.data, self.score_pos = lib.SavePlayerData(score)
+    if self.score_pos == 'XX' then self.data.XX = score end
 
     ---更新名称
     function self.UpdateName()
@@ -114,14 +117,7 @@ function lib.name_regist:frame()
     self.posY = (self.posY + 7) % 7
     if self.wait < 1 then
         --local lastkey = GetLastKey()
-        if aic.input.CheckLastKey('menu') then
-            PlaySound('cancel00', 0.5)
-            self.wait = 114514
-            lib.last_replay = nil
-            lib.ClearMenuStack()
-            lib.PopMenuStack()
-            lib.PushMenuStack(lib.title)
-        elseif KeyIsDown('up') then
+        if KeyIsDown('up') then
             self.wait = self.t
             self.posY = self.posY - 1
             PlaySound('select00', 0.3)
@@ -143,9 +139,9 @@ function lib.name_regist:frame()
                 --由OLC添加，保存rep时菜单用来记录名称的参数
                 scoredata.repsaver = self.name
                 -- 跳转至保存录像菜单
-                lib.PushMenuStack(lib.save_replay, self.score_pos, self.data)
+                lib.PushMenuStack(lib.save_replay, self.slot)
+                PlaySound('ok00', 0.3)
             end
-
             if #self.name == self.lname then
                 self.posX = 12
                 self.posY = 6
@@ -166,13 +162,12 @@ function lib.name_regist:frame()
                 self.UpdateName()
                 PlaySound('ok00', 0.3)
             end
-        elseif KeyIsPressed("spell") then
+        elseif KeyIsPressed("spell") or aic.input.CheckLastKey('menu') then
             if #self.name == 0 then
-                self.wait = 114514
-                lib.last_replay = nil
-                lib.ClearMenuStack()
-                lib.PopMenuStack()
-                lib.PushMenuStack(lib.title)
+                --由OLC添加，保存rep时菜单用来记录名称的参数
+                scoredata.repsaver = self.name
+                -- 跳转至保存录像菜单
+                lib.PushMenuStack(lib.save_replay, self.slot)
             else
                 self.wait = self.t
                 self.name = string.sub(self.name, 1, -2)
@@ -186,6 +181,7 @@ end
 function lib.name_regist:render()
     SetViewMode('ui')
     lib.DrawSubTitle(self)
+    lib.DrawTips(self, { '输入字符', '删除字符' })
 
     -- 绘制键盘
     -- 未选中按键
@@ -223,7 +219,7 @@ function lib.name_regist:render()
         end
     end
     
-    local x, y = self.x, self.y + 95
+    local x, y = self.x, self.y + 90
     local lineh = 20
     local yos = (self.l + 1) * lineh * 0.5
     local co1, co2 = { 247, 225, 158 }, { 166, 129, 193 }
@@ -239,8 +235,9 @@ function lib.name_regist:render()
         Color(self.alpha, unpack(player_co[self._posX])), nil, 'center')
     
     local diff = { "EASY", "NORMAL", "HARD", "LUNATIC", "EXTRA" }
-    DrawText('main_font_zh2', diff[self._posY], x, y + 160, 1.25,
+    DrawText('main_font_zh2', diff[self._posY], x, y + 165, 1.25,
         color(COLOR_WHITE, self.alpha), nil, 'center')
+    y = y + 25
     if data then
         local xos = { -275, -250, -80, -30, 130, 220 }
         --高级循环，小子
@@ -287,6 +284,31 @@ function lib.name_regist:render()
             g = g + _d_g
             b = b + _d_b
         end
+        if self.score_pos == 'XX' then
+            local i = 'XX'
+            if not data[i] then return end
+            for j = 0, 5 do
+                local align = 'left'
+                local text = data[i][j] or 'nil'
+                if j == 0 then
+                    text = i
+                    align = 'right'
+                elseif j == 1 then
+                    if tonumber(text) then
+                        text = string.format("%2d", tonumber(text))
+                    end
+                    text = text .. '_'
+                elseif j == 2 then
+                    if tonumber(text) and tonumber(text) < 10000000000 then
+                        text = string.format("%9d", tonumber(text))
+                    end
+                    align = 'right'
+                end
+                DrawText("main_font_zh2", text, x + xos[j + 1],
+                    y - 11 * lineh + yos + 25, 0.9, Color(self.alpha, r, g, b), nil, align)
+            end
+        end
     end
+
     SetViewMode('world')
 end

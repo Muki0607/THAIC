@@ -1,3 +1,4 @@
+---THAIC Arranged
 ---======================================
 ---luastg replay
 ---======================================
@@ -70,6 +71,7 @@ function ext.replay.SaveReplay(stageNames, slot, playerName, finish)
     plus.ReplayManager.SaveReplayInfo(replayManager:MakeReplayFilename(slot), {
         gameName = setting.mod,
         gameVersion = 1,
+        gameExtendInfo = aic.menu.GetReplayDelay(), --使用rep预留的额外信息位存储处理落率
         userName = playerName,
         group_finish = finish,
         stages = stages,

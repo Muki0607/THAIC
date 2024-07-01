@@ -149,6 +149,7 @@ function lib.manual:render()
     SetViewMode('ui')
     --副标题
     lib.DrawSubTitle(self)
+    lib.DrawTips(self, { '选择', '返回上一级菜单' })
 
     local d, x, y = 30, self.x, self.y
     if self.level == 1 then

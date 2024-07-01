@@ -390,7 +390,8 @@ function stage.group.ReturnToTitle(save_rep, finish)
         if aic.ext.real_timer then
             m.last_replay_time = aic.ext.StopTimer()
             --累加游玩时间
-            scoredata.player_data[lstg.var.player_name].played_time = scoredata.player_data[lstg.var.player_name].played_time + m.last_replay_time
+            local pt = scoredata.player_data[lstg.var.player_name].played_time
+            pt = pt + m.last_replay_time
         end
         --自动保存
         if not gamecontinueflag then

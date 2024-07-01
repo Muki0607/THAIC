@@ -22,6 +22,7 @@ local lib = aic.l10n.ui
 ---Music room text
 lib.music_room = {
     title = {
+        [0] = '遥远彼方的记忆',
         "梦境彼方 摇篮仙境",
         "Wonderland of 0 & 1",
         "Star Chaser",
@@ -56,8 +57,16 @@ lib.music_room = {
         
     },
     comment = {
+        [0] = [[
+            出处：LuaSTG标题画面主题曲
+
+            　LuaSTG默认的标题画面的主题曲。
+
+            　虽然不知从何而来，但这段旋律早已深入每一位LuaSTGer的心中。
+            　继续以弹幕为笔，描绘这美妙的幻想世界吧。
+        ]],
         [[
-            原曲：An-fillnote - タイトル
+            原曲：An-fillnote - Title
             出处：ひなゆあ/桥野水叶 - 《AliceInCradle》
 
             　标题画面的主题曲。
@@ -92,7 +101,7 @@ lib.music_room = {
             　仿佛飞到群星之上俯瞰银河的感觉。
         ]],
         [[
-            原曲：ginkiha - 通常ボス
+            原曲：ginkiha - 通常Boss
             出处：くろば·U - 《Star Shooter!》
             
             　SNS部的少女们的主题曲。
@@ -102,7 +111,7 @@ lib.music_room = {
             　但是四个人凑到一起就变成这样，究竟是什么原因呢。
         ]],
         [[
-            原曲：上海爱丽丝幻乐团 - 真夜中のフェアリ一ダンス
+            原曲：上海爱丽丝幻乐团 - 午夜的妖精舞会
             出处：上海爱丽丝幻乐团 - 《妖精大战争 　～ 东方三月精》
             
             　一面道中的主题曲。
@@ -112,7 +121,7 @@ lib.music_room = {
             　带着前往宴会的心情全速前进吧。
         ]],
         [[
-            原曲：AliceSoft - 濡羽色GUSTYWIND
+            原曲：AliceSoft - 湿羽色的疾风
             出处：AliceSoft - 《多娜多娜 一起来干坏事吧》
             
             　爱丽丝的主题曲。
@@ -140,7 +149,7 @@ lib.music_room = {
             　理所当然地用了幻想乡的曲子。
         ]],
         [[
-            原曲：ginkiha - 纺ぐ者の森(Battle)
+            原曲：ginkiha - 编织者之森(Battle)
             出处：ひなゆあ/桥野水叶 - 《AliceInCradle》
             
             　诺艾儿·柯涅尔的一阶段主题曲。
@@ -150,7 +159,7 @@ lib.music_room = {
             　闻起来像散落的魔力。
         ]],
         [[
-            原曲：ginkiha - イクシャ·ポリスタキア
+            原曲：ginkiha - 伊夏·波利斯塔切尔
             出处：ひなゆあ/桥野水叶 - 《AliceInCradle》
             
             　伊夏·波利斯塔切尔的主题曲。
@@ -160,7 +169,7 @@ lib.music_room = {
             　即便如此，她也想为诺艾儿争取一点时间。
         ]],
         [[
-            原曲：Feryquitous - は一ちゃん
+            原曲：Feryquitous - Ha-chan
             出处：くろば·U - 《Star Shooter!》
             
             　普莉姆拉的主题曲。
@@ -291,7 +300,7 @@ lib.music_room = {
         ]],
         [[
             25.ALTERNATIVE
-            原曲：上海爱丽丝幻乐团 - 二つの世界
+            原曲：上海爱丽丝幻乐团 - 两方世界
             出处：上海爱丽丝幻乐团 - 《东方三月精 　～ Strange and Bright Nature Deity.》附属CD
 
             　八云 紫的一阶段主题曲。

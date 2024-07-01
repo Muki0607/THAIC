@@ -68,7 +68,6 @@ end
 ---启动高精度计时器
 function lib.StartTimer()
     lib.real_timer = StopWatch()
-    lib.frame_counter = 0
 end
 
 ---暂停高精度计时器

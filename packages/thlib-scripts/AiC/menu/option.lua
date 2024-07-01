@@ -365,6 +365,7 @@ function lib.option:render()
     local x1, x2 = x - screen.width * 0.4, x + screen.width * 0.1
 
     if self.level == 1 then
+        lib.DrawTips(self, { '确认', '返回上一级菜单' }, { '选择设置项', '更改设置项' })
         --设置名称与值
         for i = 1, self.l1 do
             local text = self.text1[i]
@@ -482,6 +483,7 @@ function lib.option:render()
             end
         end
     else
+        lib.DrawTips(self, { '更改键位', '返回上一级菜单' }, { '选择键位' })
         --键位名称与当前键位
         --在这里学到的教训：如果你打算写一个三层以上的嵌套，不要嫌麻烦，每一层的索引都应该单独写出来，否则出现nil时都不知道是哪一层的问题
         local keyname, key = aic.input.KeyNameList()
@@ -549,8 +551,6 @@ function lib.option:render()
         end
 
     end
-
-    lib.DrawTips(self, { '选择', '返回上一级菜单' })
 
     SetViewMode('world')
 end

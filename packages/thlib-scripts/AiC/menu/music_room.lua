@@ -1,5 +1,41 @@
 local lib = aic.menu
 
+---音乐相关的函数，因为经常暴毙所以套一层TryExcept
+
+--- 获取全局音乐音量
+---@return number
+function lib.GetBGMVolume()
+end
+
+--- 设置全局音乐音量
+--- 当参数为 2 个时，设置指定音乐的音量
+---@param volume number
+---@overload fun(bgmname:string, volume:number)
+function lib.SetBGMVolume()
+end
+
+---@param bgmname string
+function lib.PauseMusic()
+end
+
+---@param bgmname string
+function lib.ResumeMusic()
+end
+
+---@param bgmname string
+---@return lstg.AudioStatus
+function lib.GetMusicState()
+end
+
+for _, v in ipairs({ 'GetBGMVolume', 'SetBGMVolume', 'PauseMusic', 'ResumeMusic', 'GetMusicState' }) do
+    lib[v] = function(bgmname, volume)
+        TryExcept(function()
+                lstg[v](bgmname, volume)
+            end,
+            { [''] = pass })
+    end
+end
+
 ------------------------------------------------------------
 ---音乐室
 
@@ -51,17 +87,17 @@ end
 
 function lib.music_room:frame()
     task.Do(self)
-    if not self.init_sign then self.Initialize()
-    end
+    if not self.init_sign then self.Initialize() end
+    self.vol = lib.GetBGMVolume() or setting.bgmvolume
     self.wait = max(self.wait - 1, 0)
     if self.wait < 1 then
         --local lastkey = GetLastKey()
         if KeyIsPressed('spell') or aic.input.CheckLastKey('menu') then
             self.wait = 114514
+            lib.SetBGMVolume(setting.bgmvolume)
             PlaySound('cancel00', 0.3)
             lib.PopMenuStack()
-        end
-        if KeyIsPressed('shoot') then
+        elseif KeyIsPressed('shoot') then
             self.wait = self.t
             if self.pos ~= self.textpos then self.warn1 = false end
             self.textpos = self.pos
@@ -71,6 +107,7 @@ function lib.music_room:frame()
                     if self.warn2 then
                         self.warn2 = false
                         task.New(self, function()
+                            lib.SetBGMVolume(setting.bgmvolume)
                             TryExcept(function()
                                     _play_music('aic_bgm' .. self.pos, nil, false)
                                 end,
@@ -84,6 +121,7 @@ function lib.music_room:frame()
                     end
                 else
                     task.New(self, function()
+                        lib.SetBGMVolume(setting.bgmvolume)
                         TryExcept(function()
                                 _play_music('aic_bgm' .. self.pos, nil, false)
                             end,
@@ -96,11 +134,10 @@ function lib.music_room:frame()
             else
                 self.warn1 = true
             end
-        end
-        if KeyIsDown('up') then
+        elseif KeyIsDown('up') then
             self.wait = self.t
             PlaySound('select00', 0.3)
-            if self.pos > 1 then
+            if self.pos > 0 then
                 self.prepos2 = self.prepos1
                 self.prepos1 = self.pos
                 self.pos = self.pos - 1
@@ -126,6 +163,16 @@ function lib.music_room:frame()
                     self.truepos = self.truepos + 1
                 end
             end
+        elseif KeyIsDown('special') then
+            self.wait = self.t
+            if lib.GetMusicState('aic_bgm' .. self.pos) == 'paused' then
+                lib.ResumeMusic('aic_bgm' .. self.pos)
+            elseif lib.GetMusicState('aic_bgm' .. self.pos) == 'playing' then
+                lib.PauseMusic('aic_bgm' .. self.pos)
+            end
+        end
+        if KeyIsDown('slow') then
+            lib.SetBGMVolume(max(0, self.vol - setting.bgmvolume / 180))
         end
     end
 end
@@ -133,6 +180,7 @@ end
 function lib.music_room:render()
     SetViewMode('ui')
     lib.DrawSubTitle(self)
+    lib.DrawTips(self, { '播放音乐', '返回上一级菜单', '暂停/继续音乐', '淡出音乐' }, { '选择音乐' })
     local d, x, y, text1 = 20, self.x - 260, self.y + 110, self.text1
     for i = 1, self.l do
         local pos, text = i + self.headpos - 1

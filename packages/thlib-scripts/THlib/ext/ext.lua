@@ -112,7 +112,7 @@ end
 ---设置标题
 function ChangeGameTitle()
     --local mod = setting.mod and #setting.mod > 0 and setting.mod
-    local game = "东方梦摇篮 ~ Alice In Cradle v" .. aic.version
+    local game = "东方梦摇篮　~ Alice In Cradle v" .. aic.version
     local ext =
         table.concat(
             {
