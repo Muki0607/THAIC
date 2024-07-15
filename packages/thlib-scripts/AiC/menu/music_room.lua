@@ -180,7 +180,7 @@ end
 function lib.music_room:render()
     SetViewMode('ui')
     lib.DrawSubTitle(self)
-    lib.DrawTips(self, { '播放音乐', '返回上一级菜单', '暂停/继续音乐', '淡出音乐' }, { '选择音乐' })
+    lib.DrawTips(self, { '播放音乐', '返回上一级菜单', --[['暂停/继续音乐', '淡出音乐']] }, { '选择音乐' })
     local d, x, y, text1 = 20, self.x - 260, self.y + 110, self.text1
     for i = 1, self.l do
         local pos, text = i + self.headpos - 1

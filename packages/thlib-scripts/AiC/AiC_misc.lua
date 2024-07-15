@@ -51,13 +51,12 @@ end
 ---@param A number @振幅
 ---@param λ number @波长
 ---@param t number @间隔
-function lib:SineMove(x, y, v, θ, A, λ, n, t)
+function lib:SineMove(x, y, v, θ, A, λ, t)
     t = t or 1
     λ = λ or 75
-    n = n or _infinite
     task.New(self, function()
         self.navi = true
-        for i = 1, n do
+        for i = 1, _infinite do
             self.x = x + v * cos(θ) * i - A * sin(θ) * sin(360 * v * i / λ)
             self.y = y + v * sin(θ) * i + A * cos(θ) * sin(360 * v * i / λ)
             task.Wait(t)

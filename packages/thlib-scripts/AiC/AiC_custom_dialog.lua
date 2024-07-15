@@ -106,13 +106,33 @@ sp.string = sp.string or lib.spstring --在无法调用sp.string时启用备用s
 ---@param end_pos number @对话结束位置
 function lib:AiCDialog(num, start_pos, end_pos)
     local d = aic.l10n.dialog["dialog" .. num]
-    d.name = lib.MakeParamList(d.name)
+    start_pos = start_pos or 1
+    end_pos = end_pos or #d.text
+    d.name = lib.MakeParamList(d.name, end_pos - start_pos + 1, '')
     lib.sp.SetDisplayer(self, true, 'image:Muki_AiC_dialog_frame', 0.7, 0.25, 0, 20, '', nil, Color(150, 255, 255, 255), nil, Color(255, 85, 76, 74))
-    local dialog_name = New(lib.dialog_name, d.name[1])
+    local dialog_name = New(lib.dialog_name, d.name[start_pos])
     for i = start_pos, end_pos do
         dialog_name.name = d.name[i]
         lib.sp.multi_sentence_ex(self, d.img, d.pos, d.text, d.canskip, d.t, d.hscale, d.vscale, d.num, nil, nil, 1, d.snd, d.vol, nil, i, i)
     end
+end
+
+lib.dialog_name = Class(object)
+
+function lib.dialog_name:init(name)
+    self.x, self.y = -175, -50
+    self.layer = LAYER_TOP + 10
+    self.name = name
+end
+
+function lib.dialog_name:frame()
+    if not player.dialog then
+        _del(self, false)
+    end    
+end
+
+function lib.dialog_name:render()
+    RenderTTF('dialog', self.name, self.x, self.x, self.y, self.y, Color(255, 230, 227, 219), 'vcenter')
 end
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------

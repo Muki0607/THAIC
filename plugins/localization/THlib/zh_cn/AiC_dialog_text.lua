@@ -14,6 +14,11 @@ The code in `<>` is text effect. To change text effect, see `AiC_text_effect.lua
 `<>`中的代码是文字效果。要更改文字效果，参见`AiC_text_effect.lua`。
 --]]
 
+---There may be 'a little' error in multi-text-effect,
+---but I believe that you can solve it(Please try to change range and extend for serveral times,you can do it lol).
+---多文字效果的范围可能有一点“小”错误，
+---不过我相信你们可以解决的www（多调几次范围和extend，总能试出来的）
+
 local lib = aic.l10n.dialog
 
 ---战斗前对话
@@ -75,7 +80,7 @@ lib.dialog2 = {
         '<shake 3>诺艾儿·柯涅尔！</shake>总算找到你了！\n真是担心死……',
         '不，我才没有<Color {255,255,0,0}>很担心你！</Color>',
         '……谢谢你，伊夏同学。',
-        '不过，\n你还没从那次<Color {255,255,0,0}></Color 4><uppertext 森林领主>大型魔物</uppertext>的袭击中恢复过来吧……',
+        '不过，\n你还没从那次<Color {255,255,0,0}></Color 3><uppertext 森林领主>大</uppertext>型魔物的袭击中恢复过来吧……',
         '绝对没问题！就让我来帮你解决它吧！',
         '就是你这家伙一直在欺负诺艾儿吧？\n<shake 3>我绝对不会放过你的！ </shake>'
     },
@@ -119,10 +124,10 @@ lib.dialog3 = {
         "image:Muki_AiC_Noel_face_thinking",
     },
     text = {
-        '诺艾儿！\n怎么可以独自一人来挑战这种<Color {255,255,0,0}></Color 4><uppertext 厨圣>大型魔物</uppertext>呢！',
+        '诺艾儿！\n怎么可以独自一人来挑战这种<Color {255,255,0,0}></Color 3><uppertext 厨圣>大</uppertext>型魔物呢！',
         '还有伊夏！\n你们先撤退，这里老师来想办法！',
         '可是老师……\n您不是不能战斗吗？',
-        '「只要能打中它就行了！」\n<Color {255,255,0,0}>那位女士</Color>是这么说的……',
+        '「只要能打中它就行了！」\n<Color {255,255,0,255}>那位女士</Color>是这么说的……',
         '如果是这样的话，\n老师对自己的准头还是有信心的！',
         '<scale 0.75>诺艾儿……就这样丢下老师也不好……\n我们先躲起来观察情况吧。</scale>',
         '<scale 0.75>嗯。</scale>',
@@ -130,25 +135,21 @@ lib.dialog3 = {
     num = { 1, 1, 2, 1, 1, 3, 2 }
 }
 
----获取魔法前后对话
----Dialog before and after getting magic
+---获取魔法前对话
+---Dialog before getting magic
 lib.dialog4 = {
     pos = 'right',
     canskip = false,
     t = 120,
-    hscale = { 0.6, 0.5, 0.6, 0.5, 0.6, 0.6, 0.6, 0.6, 0.5, 0.5 },
-    vscale = { 0.6, 0.5, 0.6, 0.5, 0.6, 0.6, 0.6, 0.6, 0.5, 0.5 },
+    hscale = { 0.6, 0.5, 0.6, 0.5, 0.6 },
+    vscale = { 0.6, 0.5, 0.6, 0.5, 0.6 },
     vol = 1,
     name = {
         '普莉姆拉',
         '伊夏·波利斯塔切尔',
         '普莉姆拉',
         '诺艾儿·柯涅尔',
-        '普莉姆拉',
-        '普莉姆拉',
-        '普莉姆拉',
-        '普莉姆拉',
-        '诺艾儿·柯涅尔',
+        '普莉姆拉'
     },
     snd = {
         "se:Muki_AiC_dialog_Primula",
@@ -170,11 +171,9 @@ lib.dialog4 = {
         "image:Muki_AiC_Primula_face_teach",
         "image:Muki_AiC_Primula_face_teach2",
         "image:Muki_AiC_Primula_face_memory",
-        "image:Muki_AiC_Noel_face_lose",
-        "image:Muki_AiC_Noel_face_lose2",
     },
     text = {
-        '不行……\n这个区域的空气中的<Color {255,170,160,247}></Color 2><uppertext MP>魔力</uppertext>基本消耗完了……',
+        '不行……\n这个区域的空气中的<uppertext MP></uppertext 1><Color {255,170,160,247}>魔</Color>力基本消耗完了……',
         '老师！您还好吗？',
         '<shake 3>诺艾儿和伊夏？</shake>\n我不是叫你们赶紧走吗？',
         '我们没法把您丢在这里不管……',
@@ -182,16 +181,35 @@ lib.dialog4 = {
         '刚才路上有一位女士给了我这个……\n似乎是<Color {255,255,0,0}>非官方魔法认证装置。</Color>',
         '它的认证手续没有那么复杂，\n但同时也只能提供<Color {255,255,0,0}>临时认证</Color>。',
         '不过用来完成这场战斗应该是足够了……\n诺艾儿同学，现在只能靠你了。\n我先带伊夏同学到安全的地方。',
-        ---魔法获取动画
-        ---Magic getting animation
-        '好奇怪……\n感觉被灌输了很多<Color {255,255,0,0}></Color 2><uppertext 符卡>记忆</uppertext>。',
+    }
+}
+
+---获取魔法后对话
+---Dialog after getting magic
+lib.dialog5 = {
+    pos = 'right',
+    canskip = false,
+    t = 120,
+    hscale = 0.5,
+    vscale = 0.5,
+    vol = 1,
+    name = '诺艾儿·柯涅尔',
+    snd = "se:Muki_AiC_dialog_Noel",
+    img = {
+        "image:Muki_AiC_Noel_face_embarassed",
+        "image:Muki_AiC_Noel_face_lose",
+        "image:Muki_AiC_Noel_face_lose2",
+    },
+    text = {
+        '这……这是什么东西？\n好……好厉害……',
+        '感觉被灌输了很多<uppertext 符卡></uppertext 1><Color {255,255,0,0}>记</Color>忆……',
         '不过没时间犹豫了……\n我必须要保护老师和伊夏同学！'
     }
 }
 
 ---圣光爆发前对话
 ---Dialog before burst
-lib.dialog5 = {
+lib.dialog6 = {
     pos = 'right',
     canskip = false,
     t = 120,
@@ -214,7 +232,7 @@ lib.dialog5 = {
 
 ---最终阶段前对话
 ---Dialog before last phase
-lib.dialog6 = {
+lib.dialog7 = {
     pos = 'right',
     canskip = false,
     t = 120,
@@ -269,7 +287,7 @@ lib.dialog6 = {
 
 ---LSC对话
 ---Dialog of Last spellcard
-lib.dialog7 = {
+lib.dialog8 = {
     pos = 'right',
     canskip = false,
     t = 120,
@@ -305,7 +323,7 @@ lib.dialog7 = {
 
 ---战斗结束后对话（仅在非LSC线出现）
 ---Dialog after battle (Only appear in non-LSC line)
-lib.dialog8 = {
+lib.dialog9 = {
     pos = 'right',
     canskip = false,
     t = 120,

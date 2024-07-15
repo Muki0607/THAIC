@@ -205,6 +205,120 @@ function lib.RenderStroke(func, co, ...)
     end
 end
 
+---渲染椭圆环
+---花了大半天总算保证部分渲染输入任意角都不会有问题了
+---@param img string @渲染图像
+---@param x number @中心x坐标
+---@param y number @中心y坐标
+---@param ra1 number @内径a
+---@param ra2 number @外径a
+---@param n number @分割数
+---@param rot number @倾斜角度
+---@param rb1 number @内径b
+---@param rb2 number @外径b
+---@param rot1 number @部分渲染起始角度
+---@param rot2 number @部分渲染结束角度
+---@param z number @基本用不到的z坐标
+---@return number, number, number, number @端点坐标
+---| 渲染圆环
+---@overload fun(img:string, x:number, y:number, r1:number, r2:number, n:number):number, number, number, number
+function lib.RenderEclipseRing(img, x, y, ra1, ra2, n, rot, rb1, rb2, rot1, rot2, z)
+    n = n or 90
+    local da = 360 / n
+    rot = rot or 0
+    rb1 = rb1 or ra1
+    rb2 = rb2 or ra2
+    rot1 = rot1 or 0
+    rot2 = rot2 or 360 - da
+    rot1 = aic.math.AngleFormat(rot1)
+    rot2 = aic.math.AngleFormat(rot2)
+    if rot1 == rot2 then
+        rot1, rot2 = 0, 360 - da --渲染整圆时从哪开始都没区别
+    elseif rot1 > rot2 then
+        rot1, rot2 = rot2, rot1
+    end
+    local n1 = int(n * rot1 / 360)
+    local n2 = int(n * rot2 / 360)
+    z = z or 0.5
+    local a = rot1
+    local startx, starty, endx, endy
+    for i = n1, n2 do
+        local x1, y1 = rotate(x + ra2 * cos(a + da), y + rb2 * sin(a + da), rot, x, y)
+        local x2, y2 = rotate(x + ra2 * cos(a), y + rb2 * sin(a), rot, x, y)
+        local x3, y3 = rotate(x + ra1 * cos(a), y + rb1 * sin(a), rot, x, y)
+        local x4, y4 = rotate(x + ra1 * cos(a + da), y + rb1 * sin(a + da), rot, x, y)
+        Render4V(
+            img,
+            x1, y1, z,
+            x2, y2, z,
+            x3, y3, z,
+            x4, y4, z
+        )
+        if i == n1 then
+            local ra = (ra1 + ra2) / 2
+            local rb = (rb1 + rb2) / 2
+            startx, starty = rotate(x + ra * cos(a + da / 2), y + rb * sin(a + da / 2), rot, x, y)
+        end
+        local ra = (ra1 + ra2) / 2
+        local rb = (rb1 + rb2) / 2
+        endx, endy = rotate(x + ra * cos(a + da / 2), y + rb * sin(a + da / 2), rot, x, y)
+        a = a + da
+    end
+    return startx, starty, endx, endy
+end
+
+---渲染实心椭圆
+---@param img string @渲染图像
+---@param x number @中心x坐标
+---@param y number @中心y坐标
+---@param ra number @半长轴
+---@param rb number @半短轴
+---@param n number @分割数
+---@param rot number @倾斜角度
+---@param rot1 number @部分渲染起始角度
+---@param rot2 number @部分渲染结束角度
+---@param z number @基本用不到的z坐标
+---@return number, number, number, number @端点坐标
+---| 渲染实心圆
+---@overload fun(img:string, x:number, y:number, r:number):number, number, number, number
+function lib.RenderEclipse(img, x, y, ra, rb, n, rot, rot1, rot2, z)
+    n = n or 90
+    local da = 360 / n
+    rot = rot or 0
+    rb = rb or ra
+    rot1 = rot1 or 0
+    rot2 = rot2 or 360 - da
+    rot1 = aic.math.AngleFormat(rot1)
+    rot2 = aic.math.AngleFormat(rot2)
+    if rot1 == rot2 then
+        rot1, rot2 = 0, 360 - da --渲染整圆时从哪开始都没区别
+    elseif rot1 > rot2 then
+        rot1, rot2 = rot2, rot1
+    end
+    local n1 = int(n * rot1 / 360)
+    local n2 = int(n * rot2 / 360)
+    z = z or 0.5
+    local a = rot1
+    local startx, starty, endx, endy
+    for i = n1, n2 do
+        local x1, y1 = rotate(x + ra * cos(a + da), y + rb * sin(a + da), rot, x, y)
+        local x2, y2 = rotate(x + ra * cos(a), y + rb * sin(a), rot, x, y)
+        Render4V(
+            img,
+            x1, y1, z,
+            x2, y2, z,
+            x, y, z,
+            x, y, z
+        )
+        if i == n1 then
+            startx, starty = rotate(x + ra * cos(a + da / 2), y + rb * sin(a + da / 2), rot, x, y)
+        end
+        endx, endy = rotate(x + ra * cos(a + da / 2), y + rb * sin(a + da / 2), rot, x, y)
+        a = a + da
+    end
+    return startx, starty, endx, endy
+end
+
 ---player 下标
 lib.player_pointer = Class(object)
 

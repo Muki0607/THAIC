@@ -641,9 +641,9 @@ function system:render()
     --实在相式无敌时间提醒
     if player.protect > 0 and player.death <= 50 and not player.dodge then
         SetImageState('white', 'mul+add', color(COLOR_WHITE))
-        aic.math.RenderEclipse('white', player.x, player.y, player.protect / 2, player.protect / 2 + 5)
+        aic.ui.RenderEclipseRing('white', player.x, player.y, player.protect / 2, player.protect / 2 + 5)
         SetImageState('white', 'mul+add', color(COLOR_WHITE, 100))
-        aic.math.RenderEclipse('white', player.x, player.y, 0, player.protect / 2)
+        aic.ui.RenderEclipseRing('white', player.x, player.y, 0, player.protect / 2)
     end
     -----------------------------------------------
     local p = self.player

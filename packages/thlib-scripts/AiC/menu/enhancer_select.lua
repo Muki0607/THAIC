@@ -623,9 +623,9 @@ function lib.enhancer_select:render()
     local key1 = { '卸下插件', '返回上一级菜单', '开始游戏' }
     local key2 = { '携带插件', '返回上一级菜单', '开始游戏' }
     if CheckEnhancer(pos) then
-        lib.DrawTips(self, key1, 'up', 'down', 'left', 'right')
+        lib.DrawTips(self, key1)
     else
-        lib.DrawTips(self, key2, 'up', 'down', 'left', 'right')
+        lib.DrawTips(self, key2)
     end
 
     SetViewMode('world')

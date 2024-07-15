@@ -205,7 +205,7 @@ end
 
 function lib.Tamaki_weapon:frame()
     if self.timer <= 60 and self.timer % 4 == 0 then
-        --New(lib.Tamaki_weapon_ef, self)
+        New(lib.Tamaki_weapon_ef, self)
     end
     if self.timer < 60 then
         self.vy = self.vy - self.v / 60
@@ -273,10 +273,10 @@ end
 lib.Tamaki_weapon_ef = Class(object)
 
 function lib.Tamaki_weapon_ef:init(master)
-    LoadPS('Muki_AiC_Tamaki_weapon_ef', 'THlib/misc/Muki_AiC_Tamaki_weapon_ef.psi', 'parimg6')
     self.img = 'Muki_AiC_Tamaki_weapon_ef'
     self.group = GROUP_GHOST
     self.layer = LAYER_PLAYER_BULLET + 50
+    self.rot = 270
     self.master = master
 end
 
@@ -294,5 +294,6 @@ end
 LoadImageFromFile('Muki_AiC_Tamaki_weapon', 'THlib/misc/Muki_AiC_Tamaki_weapon.png')
 LoadTexture('particles', 'THlib/misc/particles.png')
 LoadImageGroup('parimg', 'particles', 0, 0, 32, 32, 4, 4)
+LoadPS('Muki_AiC_Tamaki_weapon_ef', 'THlib/misc/Muki_AiC_Tamaki_weapon_ef.psi', 'parimg6')
 
 

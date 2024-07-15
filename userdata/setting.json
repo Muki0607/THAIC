@@ -1,20 +1,15 @@
 {
+	"autofire": false,
+	"autoslow": false,
 	"autododge": false,
 	"newopening": false,
 	"newbgm": true,
-	"keys": {
-		"up": 38,
-		"down": 40,
-		"left": 37,
-		"right": 39,
-		"slow": 16,
-		"shoot": 90,
-		"spell": 88,
-		"special": 67,
-		"skill": 32
-	},
-	"last_mod": "Untitled",
-	"mod": "Untitled",
+	"windowed": true,
+	"resx": 1280,
+	"resy": 960,
+	"vsync": false,
+	"sevolume": 100,
+	"bgmvolume": 100,
 	"nosplash": true,
 	"keys2": {
 		"up": 101,
@@ -28,24 +23,12 @@
 		"skill": 32
 	},
 	"keysys": {
+		"repfast": 17,
 		"repslow": 16,
 		"menu": 27,
 		"snapshot": 36,
-		"retry": 82,
-		"repfast": 17
+		"retry": 82
 	},
-	"windowed": true,
-	"resx": 1280,
-	"resy": 960,
-	"vsync": false,
-	"sevolume": 100,
-	"joysticksys": {
-		"retry": 12,
-		"menu": 10,
-		"snapshot": 13,
-		"repfast": 11
-	},
-	"bgmvolume": 100,
 	"joysticks": {
 		"up": -1,
 		"down": -3,
@@ -57,11 +40,28 @@
 		"special": 2,
 		"skill": 2
 	},
+	"joysticksys": {
+		"snapshot": 13,
+		"retry": 12,
+		"repfast": 11,
+		"menu": 10
+	},
+	"keys": {
+		"up": 38,
+		"down": 40,
+		"left": 37,
+		"right": 39,
+		"slow": 16,
+		"shoot": 90,
+		"spell": 88,
+		"special": 67,
+		"skill": 32
+	},
+	"last_mod": "Muki_AliceInCradle",
+	"mod": "Muki_AliceInCradle",
 	"username": "Muki",
 	"joyblindarea": 0.2,
 	"locale": "zh_cn",
 	"safemode": true,
-	"timezone": 8,
-	"autofire": false,
-	"autoslow": false
+	"timezone": 8
 }

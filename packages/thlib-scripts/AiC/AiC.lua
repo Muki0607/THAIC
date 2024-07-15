@@ -25,7 +25,7 @@
 ---v1.11a
 ---添加输入aic.input、string扩展库aic.string
 ---v1.11b
----添加DirectInput扩展aic.input.dinput、本地化aic.l10n
+---添加DirectInput扩展aic.input.dinput、本地化aic.l10n、rpg支持库aic.rpg
 
 --THAIC待完成事项
 --完成剩余弹幕
@@ -66,6 +66,7 @@ DoFile("AiC/AiC_custom_dialog.lua")--AiC自定义对话库
 DoFile("AiC/AiC_l10n.lua")--AiC本地化
 DoFile("AiC/AiC_menu.lua")--AiC菜单
 DoFile("AiC/AiC_ui.lua")--AiC UI
+DoFile("AiC/AiC_rpg.lua")--AiC RPG支持库
 
 ---系统相关
 DoFile("AiC/AiC_ext.lua")--AiC ext扩展库

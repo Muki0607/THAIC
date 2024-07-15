@@ -364,8 +364,10 @@ function lstg.lstg_ui_object:frame()
 end
 
 function lstg.lstg_ui_object:render()
-    self.ui:drawFrame()
-    self.ui:drawScore()
+    if not CloseUI then
+        self.ui:drawFrame()
+        self.ui:drawScore()
+    end
 end
 
 ---@class lstg.lstg_ui
