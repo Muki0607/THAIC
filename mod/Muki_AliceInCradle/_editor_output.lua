@@ -8,6 +8,7 @@ _allow_sc_practice =true
 ]]
 --[[ 使用了一些aic库中的代码，请自行查询data
 ]]
+Include'ParamLab.lua'
 _LoadImageFromFile('image:'..'Muki_AiC_Alice_face_default','Muki_AiC_Alice_face_default.png',true,0,0,false,0)
 _LoadImageFromFile('image:'..'Muki_AiC_Alice_face_fight','Muki_AiC_Alice_face_fight.png',true,0,0,false,0)
 _LoadImageFromFile('image:'..'Muki_AiC_Noel_face_assured','Muki_AiC_Noel_face_assured.png',true,0,0,false,0)
@@ -58,7 +59,7 @@ _LoadImageFromFile('image:'..'Muki_AiC_spell3','Muki_AiC_spell3.png',true,0,0,fa
 _LoadImageFromFile('image:'..'Muki_AiC_spell4','Muki_AiC_spell4.png',true,0,0,false,0)
 _LoadImageFromFile('image:'..'Muki_AiC_spell5','Muki_AiC_spell5.png',true,0,0,false,0)
 _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_down','Muki_AiC_Noel_down.png',true,1,5,16,16,false)
-_LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_burst','Muki_AiC_Noel_burst.png',true,3,1,16,16,false)
+_LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_burst','Muki_AiC_Noel_burst.png',true,15,1,16,16,false)
 _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_misogi','Muki_AiC_Noel_misogi.png',true,21,1,16,16,false)
 _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_air_attack','Muki_AiC_Noel_air_attack.png',true,21,1,16,16,false)
 _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_air_attack_loop','Muki_AiC_Noel_air_attack_loop.png',true,8,1,16,16,false)
@@ -68,6 +69,11 @@ _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_get_magic2_','Muki_AiC_Noel_get
 _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_get_magic3_','Muki_AiC_Noel_get_magic3.png',true,14,1,0,0,false)
 _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_get_magic4_','Muki_AiC_Noel_get_magic4.png',true,14,1,0,0,false)
 _LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_get_magic5_','Muki_AiC_Noel_get_magic5.png',true,15,1,0,0,false)
+_LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_burst_stunned','Muki_AiC_Noel_burst_stunned.png',true,8,1,0,0,false)
+_LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_guard_bush','Muki_AiC_Noel_guard_bush.png',true,13,1,0,0,false)
+_LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_guard_slash_start','Muki_AiC_Noel_guard_slash_start.png',true,17,1,0,0,false)
+_LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_guard_slash_loop','Muki_AiC_Noel_guard_slash_loop.png',true,7,1,0,0,false)
+_LoadImageGroupFromFile('image:'..'Muki_AiC_Noel_guard_slash_end','Muki_AiC_Noel_guard_slash_end.png',true,12,1,0,0,false)
 _LoadImageFromFile('image:'..'Muki_AiC_dialog_frame','Muki_AiC_dialog_frame.png',true,0,0,false,0)
 _LoadImageFromFile('image:'..'Muki_AiC_animation1','Muki_AiC_animation1.png',true,0,0,false,0)
 _LoadImageFromFile('image:'..'Muki_AiC_animation2','Muki_AiC_animation2.png',true,0,0,false,0)
@@ -98,6 +104,8 @@ _LoadImageFromFile('image:'..'Muki_AiC_cane_bg','Muki_AiC_cane_bg.png',true,0,0,
 _LoadImageFromFile('image:'..'Muki_AiC_cast_ef1','Muki_AiC_cast_ef1.png',true,0,0,false,0)
 _LoadImageFromFile('image:'..'Muki_AiC_cast_ef2','Muki_AiC_cast_ef2.png',true,0,0,false,0)
 _LoadImageFromFile('image:'..'Muki_AiC_fox_bullet1','Muki_AiC_fox_bullet1.png',true,0,0,false,0)
+_LoadImageFromFile('image:'..'Muki_AiC_key_bg','Muki_AiC_key_bg.png',true,0,0,false,0)
+_LoadImageFromFile('image:'..'Muki_AiC_key_bg_avaliable','Muki_AiC_key_bg_avaliable.png',true,0,0,false,0)
 _LoadImageGroupFromFile('image:'..'Muki_AiC_square','Muki_AiC_square.png',true,3,1,0,0,false)
 LoadPS('particle:'..'Muki_AiC_cane_bg2','Muki_AiC_cane_bg2.psi',"parimg8",0,0,false)
 LoadSound('se:'..'Muki_AiC_dialog_Noel','Muki_AiC_dialog_Noel.ogg')
@@ -118,6 +126,8 @@ LoadSound('se:'..'Muki_AiC_misogi_start','Muki_AiC_misogi_start.ogg')
 LoadSound('se:'..'Muki_AiC_misogi_end','Muki_AiC_misogi_end.ogg')
 LoadSound('se:'..'Muki_AiC_air_attack_start','Muki_AiC_air_attack_start.ogg')
 LoadSound('se:'..'Muki_AiC_air_attack_end','Muki_AiC_air_attack_end.ogg')
+LoadSound('se:'..'Muki_AiC_guard_bush','Muki_AiC_guard_bush.ogg')
+LoadSound('se:'..'Muki_AiC_guard_slash','Muki_AiC_guard_slash.ogg')
 LoadSound('se:'..'Muki_AiC_primula_cast1','Muki_AiC_primula_cast1.ogg')
 LoadSound('se:'..'Muki_AiC_primula_cast2','Muki_AiC_primula_cast2.ogg')
 LoadSound('se:'..'Muki_AiC_primula_charge1','Muki_AiC_primula_charge1.ogg')
@@ -253,7 +263,7 @@ _editor_class["Muki_AiC_cdbg"].init=function(self)
     )
 end
 function Muki_fadein(bgm,t)
-    local t = t or 60
+    local t = t or 30
     New(tasker, function()
         task._Wait(t)
         LoadMusicRecord(bgm)
@@ -294,7 +304,7 @@ function Muki_stroke(font,text,x,y,co,...)
     	...)
     end
 end
-function Muki_cast(self,choice,t,rot,r,slow,newskill)
+function Muki_cast(self,choice,t,rot,newskill,r,slow)
     choice = choice or 1
     t = t or 60
     rot = rot or -90
@@ -424,6 +434,7 @@ _editor_tasks["Muki_smear"]=function(self,t1,t2,ghost)
         ]]
         for _=1,_infinite do
             last=New(_straight,self.imgclass,self._index,self.x,self.y,0,self.rot,false,0,true,true,0,false,0,0,0,false)
+            last.timer=11
             last.class=last.logclass
             if ghost then
                 last.group=GROUP_GHOST
@@ -674,10 +685,6 @@ _editor_class["Muki_AiC_shield"].init=function(self,_x,_y,r,h,o,state,master,t)
     self.bound=false
     self.t=t
     _connect(master,self,0,true)
-    --[[ 使用斜二测画法算出来的奇怪答案
-    ]]
-    --[[ 浅薄的高中数学知识终究是败给了调参
-    ]]
     local a=(sqrt((5+2*sqrt(2))/4))
     local b=(0.1)
     if state==1 then
@@ -1186,6 +1193,7 @@ _editor_class["Muki_AiC_spell_ui"].render=function(self)
     Render('image:Muki_AiC_spell2',self.x,self.y-self.r,0,self.scale[2])
     Render('image:Muki_AiC_spell3',self.x+self.r*self.dir,self.y,0,self.scale[3])
     if self.newskill then
+        SetImageState('image:Muki_AiC_spell5','',Color(255,255,255,255))
     	Render('image:Muki_AiC_spell5',self.x,self.y+self.r,0,self.scale[4])
     end
 end
@@ -1219,11 +1227,19 @@ _editor_class["Muki_AiC_boss_image"].init=function(self,_x,_y,img,master,n,t,int
     self._hide=master.hide
 end
 _editor_class["Muki_AiC_boss_image"].frame=function(self)
+    if self.del then
+        self.master.hide=self._hide
+        _del(self,false)
+    else
+    end
     if self.timer>=self.t then
         self.master.hide=self._hide
         _del(self,false)
     else
-        self.master.hide=true
+        if not (self.timer<=1) then
+            self.master.hide=true
+        else
+        end
     end
     self.x=self.master.x
     self.y=self.master.y
@@ -1269,11 +1285,19 @@ _editor_class["Muki_AiC_boss_image_ex"].init=function(self,_x,_y,img,master,n,t,
     self._hide=master.hide
 end
 _editor_class["Muki_AiC_boss_image_ex"].frame=function(self)
+    if self.del then
+        self.master.hide=self._hide
+        _del(self,false)
+    else
+    end
     if self.timer>=self.t then
         self.master.hide=self._hide
         _del(self,false)
     else
-        self.master.hide=true
+        if not (self.timer<=1) then
+            self.master.hide=true
+        else
+        end
     end
     self.x=self.master.x
     self.y=self.master.y
@@ -1328,6 +1352,98 @@ _editor_class["Muki_AiC_warning_line"].init=function(self,_x,_y,a1,a2,t)
                 _w_a=_w_a+_d_w_a a=(_beg_a-_end_a)*(_w_a-1)^2+_end_a
             end
         end
+        _del(self,true)
+    end)
+end
+_editor_class["Muki_AiC_border_tips"]=Class(_object)
+_editor_class["Muki_AiC_border_tips"].init=function(self,_x,_y,_)
+    self.x,self.y=_x,_y
+    self.img="img_void"
+    self.layer=LAYER_TOP+5
+    self.group=GROUP_GHOST
+    self.hide=false
+    self.bound=true
+    self.navi=false
+    self.hp=10
+    self.maxhp=10
+    self.colli=true
+    self._servants={}
+    self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    self.alpha=0
+    self.x=0
+    self.y=100
+    PlaySound("se:Muki_AiC_skill_got",0.8,self.x/256,true)
+    lasttask=task.New(self,function()
+        do
+            local _beg_al=0 local al=_beg_al local _end_al=200 local _d_al=(_end_al-_beg_al)/(30-1)
+            local _beg_y=100 local y=_beg_y local _end_y=150 local _d_y=(_end_y-_beg_y)/(30-1)
+            for _=1,30 do
+                self.alpha=al
+                self.y=y
+                task._Wait(1)
+                lasttask=task.New(self,function()
+                    for _=1,_infinite do
+                        if self.timer>=120 and KeyIsPressed('shoot') then break end
+                        task._Wait(1)
+                    end
+                    PlaySound("se:Muki_AiC_magic_got_closed",0.8,self.x/256,true)
+                    do
+                        local _beg_al=200 local al=_beg_al local _end_al=0 local _d_al=(_end_al-_beg_al)/(30-1)
+                        local _beg_y=150 local y=_beg_y local _end_y=100 local _d_y=(_end_y-_beg_y)/(30-1)
+                        for _=1,30 do
+                            self.alpha=al
+                            self.y=y
+                            task._Wait(1)
+                            al=al+_d_al
+                            y=y+_d_y
+                        end
+                    end
+                    _del(self,false)
+                end)
+                al=al+_d_al
+                y=y+_d_y
+            end
+        end
+    end)
+end
+_editor_class["Muki_AiC_border_tips"].frame=function(self)
+    self.class.base.frame(self)
+end
+_editor_class["Muki_AiC_border_tips"].render=function(self)
+    SetImageState('white','',Color(self.alpha,0,0,0))
+    RenderRect('white',-192,192,-224,224)
+    
+    local x,y=self.x,self.y-50
+    
+    SetImageState('Muki_AiC_border', '', Color(self.alpha*255/200,255,255,255))
+    Render('Muki_AiC_border',x,y,0,1)
+    
+    y=y-150
+    RenderTTF2('main_font_zh2','已解锁',x,x,y,y,1.5,
+        Color(self.alpha*255/200,255,255,255),'centerpoint')
+        
+    y=y-50
+    RenderTTF2('main_font_zh2','秘仪结界',x,x,y,y,2,
+        Color(self.alpha*255/200,255,255,255),'centerpoint')
+        
+    y=y-75
+    local key=aic.input.KeyNameList()[setting.keys.spell] or '符卡'
+    RenderTTF2('main_font_zh2','按下'..key..
+        '键使用秘仪结界，在一定时间内抵消下一次Miss。\nMiss时和结界关闭时进行全屏消弹。\n可再次按下'..
+        key..'键以提前关闭结界。',x,x,y,y,1,
+        Color(self.alpha*255/200,255,255,255),'centerpoint')
+    self.class.base.render(self)
+end
+_editor_class["Muki_AiC_warning_line2"]=Class(laser)
+_editor_class["Muki_AiC_warning_line2"].init=function(self,_x,_y,rot,w,t1,t2,co)
+    laser.init(self,co or COLOR_RED,_x,_y,0,0,114514,0,w or 4,0,0)
+    laser.ChangeImage(self,4)
+    lasttask=task.New(self,function()
+        self.rot=rot
+        self.bound=false
+        laser._TurnHalfOn(self,1,false)
+        laser.grow(self,t1 or 30,false,false)
+        task._Wait(t2 or 60)
         _del(self,true)
     end)
 end
@@ -3034,6 +3150,7 @@ _editor_class["Muki_AiC_slave2"].init=function(self,_x,_y,_)
     self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
     _object.set_color(self,"mul+add",255,100,255,230)
     self.omiga=3
+    _connect(Noel,self,0,true)
     lasttask=task.New(self,function()
         do local a,_d_a=(0),(1) for _=1,60 do
             SetV2(self,5,0,false,true)
@@ -3530,7 +3647,7 @@ _editor_class["Muki_AiC_slave3"].kill=function(self)
     self.class.base.kill(self)
 end
 _editor_class["Muki_AiC_burst"]=Class(_object)
-_editor_class["Muki_AiC_burst"].init=function(self,_x,_y,red)
+_editor_class["Muki_AiC_burst"].init=function(self,_x,_y,master,red,stun)
     self.x,self.y=_x,_y
     self.img="image:Muki_AiC_spell4"
     self.layer=LAYER_TOP+5
@@ -3545,43 +3662,41 @@ _editor_class["Muki_AiC_burst"].init=function(self,_x,_y,red)
     self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
     self.vscale=0.75
     self.hscale=0.75
-    self.t=42
+    self.t=20
     self.nopause=true
     self.red=red
     self.alpha=255
-    PlaySound("se:Muki_AiC_burst",8,self.x/256,true)
-    lstg.var.timeslow=3
-    player.nopause=true
-    player.grazer.nopause=true
-    if player.player_aura then
-        player.player_aura[1].nopause=true
-        player.player_aura[2].nopause=true
-    end
-    player.nextshoot=114514
-    AddSuperPause(self.t*2)
+    self.stun=stun
     lasttask=task.New(self,function()
-        task._Wait(self.t)
-        last=New(_editor_class["Muki_AiC_burst_ef"],_boss.x,_boss.y,_)
-        for _,unit in ObjList(GROUP_ENEMY_BULLET) do
-            SetV2(unit,4,Angle(_boss,unit),false,false)
+        local intv=({2,3,46,5,5,5,5,6,6,7,7,7,8,8,8})
+        last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_burst',master,15,aic.table.Sum(intv),intv,nil,nil,0.65)
+        last.nopause=true
+        PlaySound("se:Muki_AiC_burst",5,self.x/256,true)
+        lstg.var.timeslow=3
+        player.nopause=true
+        player.grazer.nopause=true
+        if player.player_aura then
+            player.player_aura[1].nopause=true
+            player.player_aura[2].nopause=true
         end
+        player.nextshoot=114514
+        player.slowlock=true
+        AddSuperPause(self.t*2)
+        task._Wait(self.t)
+        last=New(_editor_class["Muki_AiC_burst_ef"],master.x,master.y,red)
         lstg.var.timeslow=1
         misc.ShakeScreen(120,3)
         task._Wait(15)
         player.nextshoot=0
-        _del(self,true)
-    end)
-end
-_editor_class["Muki_AiC_burst"].frame=function(self)
-    if GetSuperPause()==0 then
         player.nopause=false
         player.grazer.nopause=false
         if player.player_aura then
             player.player_aura[1].nopause=false
             player.player_aura[2].nopause=false
         end
-    end
-    self.class.base.frame(self)
+        player.slowlock=false
+        _del(self,true)
+    end)
 end
 _editor_class["Muki_AiC_burst"].render=function(self)
     SetImageState('white','',Color(min(min(150,self.timer*10),self.alpha),0,0,0))
@@ -3592,12 +3707,23 @@ _editor_class["Muki_AiC_burst"].render=function(self)
     	-192,-224,0.5
     )
     if self.red then
-        SetImageState('image:Muki_AiC_square4','mul+add',Color(self.alpha,255,255*(1-self.red),255*(1-self.red)))
+        SetImageState('image:Muki_AiC_square4','mul+add',Color(self.alpha,255,255*self.stun/100,255*self.stun/100))
+        SetImageState(self.img,'mul+add',Color(self.alpha,255,255*self.stun/100,255*self.stun/100))
     else
         SetImageState('image:Muki_AiC_square4','mul+add',Color(self.alpha,255,255,255))
+        SetImageState(self.img,'mul+add',Color(self.alpha,255,255,255))
     end
     Render('image:Muki_AiC_square4',self.x,self.y,45,5)
     Render('image:Muki_AiC_square4',self.x,self.y,45,max(5,6-self.timer/self.t))
+    if self.stun and self.timer<self.t then
+        if self.red then
+            DrawText('main_font_zh1','晕厥概率：'..self.stun..'%',self.x,self.y-self.timer-50,1,
+                color(COLOR_RED,self.alpha),color(COLOR_BLACK,self.alpha),'centerpoint')
+        else
+            DrawText('main_font_zh1','晕厥概率：'..self.stun..'%',self.x,self.y-self.timer-50,1,
+                color(COLOR_WHITE,self.alpha),color(COLOR_BLACK,self.alpha),'centerpoint')
+        end
+    end
     self.class.base.render(self)
 end
 _editor_class["Muki_AiC_burst"].frame=function(self)
@@ -3623,7 +3749,7 @@ _editor_class["Muki_AiC_burst"].del=function(self)
     end)
 end
 _editor_class["Muki_AiC_burst_ef"]=Class(_object)
-_editor_class["Muki_AiC_burst_ef"].init=function(self,_x,_y,_)
+_editor_class["Muki_AiC_burst_ef"].init=function(self,_x,_y,red)
     self.x,self.y=_x,_y
     self.img="white"
     self.layer=LAYER_TOP+5
@@ -3636,6 +3762,7 @@ _editor_class["Muki_AiC_burst_ef"].init=function(self,_x,_y,_)
     self.colli=true
     self._servants={}
     self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    self.red=red
     lasttask=task.New(self,function()
         do
             local _beg_s=0 local s=_beg_s local _end_s=7 local _d_s=(_end_s-_beg_s)/(30)
@@ -3650,8 +3777,683 @@ _editor_class["Muki_AiC_burst_ef"].init=function(self,_x,_y,_)
     end)
 end
 _editor_class["Muki_AiC_burst_ef"].render=function(self)
-    SetImageState(self.img,'mul+add',Color(255,255,255,255))
-    aic.ui.RenderEclipseRing(self.img,self.x,self.y,self.vscale*95,self.vscale*100)
+    if self.red then
+        SetImageState('white','mul+add',Color(255,255,0,0))
+    else
+        SetImageState('white','mul+add',Color(255,255,255,255))
+    end
+    aic.ui.RenderEclipseRing('white',self.x,self.y,self.vscale*95,self.vscale*100)
+end
+_editor_class["Muki_AiC_burst_laser"]=Class(laser_bent)
+_editor_class["Muki_AiC_burst_laser"].init=function(self,_x,_y,v,a,s)
+    laser_bent.init(self,COLOR_RED,_x,_y,32,8,4,0)
+    self.navi=true
+    --[[ 斐波那契，但折线
+    ]]
+    local g=(_GOLD)
+    local x1=(self.x+100*g)
+    local y1=(self.y-100*g)
+    local x2=(self.x+100)
+    local y2=(self.y-100*(1-g))
+    local x3=(self.x+100*g+100*(1-g)^2)
+    local y3=(self.y-100*g*(1-g))
+    local x3=(100*g+100*(1-g)^2)
+    local y3=(self.y)
+    local x4=(self.x+100*g)
+    local y4=(self.y-100*g^2*(1-g))
+    x1,y1=rotate(x1,y1,a,self.x,self.y)
+    x2,y2=rotate(x2,y2,a,self.x,self.y)
+    x3,y3=rotate(x3,y3,a,self.x,self.y)
+    x4,y4=rotate(x4,y4,a,self.x,self.y)
+    lasttask=task.New(self,function()
+        task.MoveTo(x1,y1,int(Dist(self.x,self.y,x1,y1)/v),MOVE_NORMAL)
+        task.MoveTo(x2,y2,int(Dist(self.x,self.y,x2,y2)/v),MOVE_NORMAL)
+        task.MoveTo(x3,y3,int(Dist(self.x,self.y,x3,y3)/v),MOVE_NORMAL)
+        task.MoveTo(x4,y4,int(Dist(self.x,self.y,x4,y4)/v),MOVE_NORMAL)
+        SetV2(self,v/2,self.rot,true,false)
+        _set_a(self,0.2,self.rot+90*s,false)
+    end)
+end
+_editor_class["Muki_AiC_slave4"]=Class(_object)
+_editor_class["Muki_AiC_slave4"].init=function(self,_x,_y,rot,omiga,islight)
+    self.x,self.y=_x,_y
+    self.img="img_void"
+    self.layer=LAYER_TOP
+    self.group=GROUP_GHOST
+    self.hide=false
+    self.bound=true
+    self.navi=false
+    self.hp=10
+    self.maxhp=10
+    self.colli=true
+    self._servants={}
+    self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    self.rot=rot
+    self.omiga=omiga
+    self.bound=false
+    self.islight=islight
+    _connect(Noel,self,0,true)
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            last=New(_editor_class["Muki_AiC_square"],self.x,self.y,1,self.rot,self.islight)
+            task._Wait(5)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(5)
+        for _=1,_infinite do
+            _set_rel_pos(self,(75+25*sin(3*self.timer)*sin(self.rot))*cos(self.rot),(75+25*sin(3*self.timer)*sin(self.rot))*sin(self.rot),self.rot,false)
+            task._Wait(1)
+        end
+    end)
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            self.islight = not self.islight
+            task._Wait(300)
+        end
+    end)
+end
+_editor_class["Muki_AiC_pendulum"]=Class(laser)
+_editor_class["Muki_AiC_pendulum"].init=function(self,_x,_y,_)
+    laser.init(self,COLOR_RED,_x,_y,0,0,64,0,2,0,0)
+    
+    self.rot=-120
+    self._da=30
+    self.t=0
+    self.layer=114513
+    self.group=GROUP_GHOST
+    lasttask=task.New(self,function()
+        laser._TurnHalfOn(self,1,false)
+        do
+            local _h_a=(-90+75-(-90-75))/2 local _t_a=(-90+75+(-90-75))/2 local a=_h_a*sin(-90)+_t_a local _w_a=-90 local _d_w_a=1.5
+            for _=1,_infinite do
+                self.rot=a
+                local x=self.x+self.l2*cos(self.rot)
+                local y=self.y+self.l2*sin(self.rot)
+                last=New(_straight,ball_big,COLOR_GRAY,x,y,0,0,false,0,true,true,0,false,0,0,0,false)
+                last.timer=11
+                last.layer=114514
+                last.render=nil
+                lasttask=task.New(last,function()
+                    local self=task.GetSelf()
+                    self.colli=false
+                    task._Wait(1)
+                    _del(self,false)
+                end)
+                last=New(_straight,star_big,COLOR_GRAY,x,y,0,a+40,false,0,true,true,0,false,0,0,0,false)
+                last.timer=11
+                last.hscale=0.9
+                last.vscale=0.9
+                last.layer=114514
+                lasttask=task.New(last,function()
+                    local self=task.GetSelf()
+                    self.colli=false
+                    task._Wait(1)
+                    _del(self,false)
+                end)
+                task._Wait(1)
+                _w_a=_w_a+_d_w_a a=_h_a*sin(_w_a)+_t_a
+            end
+        end
+    end)
+end
+_editor_class["Muki_AiC_pendulum"].frame=function(self)
+    self.class.base.frame(self)
+    if self.del then
+        _del(self,false)
+    else
+    end
+    if abs(aic.math.AngleFormat(self.rot)-270)<=self._da and KeyIsPressed('shoot') and self.timer-self.t>=60 then
+        light_flag=not light_flag
+        self.t=self.timer
+    end
+end
+_editor_class["Muki_AiC_pendulum"].render=function(self)
+    self.class.base.render(self)
+    local key=aic.input.KeyNameList()[setting.keys.shoot] or ''
+    if abs(aic.math.AngleFormat(self.rot)-270)<=self._da then
+        RenderRect('image:Muki_AiC_key_bg_avaliable', self.x-10,self.x+10,self.y+10,self.y+30)
+        DrawText('main_font_zh2',key,self.x,self.y+20,1,Color(255,255,255,255),Color(255,0,0,0),'centerpoint')
+    else
+        RenderRect('image:Muki_AiC_key_bg', self.x-10,self.x+10,self.y+10,self.y+30)
+        DrawText('main_font_zh2',key,self.x,self.y+20,1,Color(255,160,160,160),Color(255,0,0,0),'centerpoint')
+    end
+    do
+        local _beg_al=150 local al=_beg_al local _end_al=50 local _d_al=(_end_al-_beg_al)/(5-1)
+        local _beg_a=-90-15 local a=_beg_a local _end_a=-90 local _d_a=(_end_a-_beg_a)/(5-1)
+        for _=1,5 do
+            SetImageState('white','',Color(al,255,255,255))
+            aic.ui.RenderEclipse('white',self.x+self.l2*cos(a),self.y+self.l2*sin(a),16)
+            al=al+_d_al
+            a=a+_d_a
+        end
+    end
+    do
+        local _beg_al=50 local al=_beg_al local _end_al=150 local _d_al=(_end_al-_beg_al)/(5-1)
+        local _beg_a=-90 local a=_beg_a local _end_a=-90+15 local _d_a=(_end_a-_beg_a)/(5-1)
+        for _=1,5 do
+            SetImageState('white','',Color(al,255,255,255))
+            aic.ui.RenderEclipse('white',self.x+self.l2*cos(a),self.y+self.l2*sin(a),16)
+            al=al+_d_al
+            a=a+_d_a
+        end
+    end
+end
+_editor_class["Muki_AiC_laser_restrict"]=Class(laser)
+_editor_class["Muki_AiC_laser_restrict"].init=function(self,_x,_y,a,islight,text)
+    laser.init(self,COLOR_DEEP_GRAY,_x,_y,0,0,45,0,6,0,0)
+    laser.ChangeImage(self,4)
+    self.rot=a
+    self._inf_graze=false
+    self.text=text
+    lasttask=task.New(self,function()
+        if islight then
+            laser.ChangeImage(self,4,COLOR_CYAN)
+        end
+        self.islight=islight
+        if (light_flag and self.islight) or ((not light_flag) and (not self.islight)) then
+            laser._TurnOn(self,1,false,false)
+        else
+            laser._TurnHalfOn(self,1,false)
+        end
+        task._Wait(450)
+        laser._TurnOff(self,30,true)
+        _del(self,false)
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(30)
+        for _=1,_infinite do
+            if (light_flag and self.islight) or ((not light_flag) and (not self.islight)) then
+                laser._TurnOn(self,1,false,false)
+            else
+                laser._TurnHalfOn(self,1,false)
+            end
+            task._Wait(1)
+        end
+    end)
+end
+_editor_class["Muki_AiC_laser_restrict"].render=function(self)
+    if self.text then DrawText('main_font_zh2',self.text,0,0) end
+    self.class.base.render(self)
+end
+_editor_class["Muki_AiC_square"]=Class(bullet)
+_editor_class["Muki_AiC_square"].init=function(self,_x,_y,v,a,islight)
+bullet.init(self,square,COLOR_DEEP_GRAY,true,true)
+self.x,self.y=_x,_y
+    self.islight=islight
+    SetV2(self,v,a,true,false)
+    if islight then
+        ChangeBulletImage(self,square,COLOR_CYAN)
+    end
+end
+_editor_class["Muki_AiC_square"].frame=function(self)
+    if (self.islight and light_flag) or (not self.islight and not light_flag) then
+        _object.set_color(self,"",255,255,255,255)
+        self.colli=true
+    else
+        _object.set_color(self,"",150,255,255,255)
+        self.colli=false
+    end
+    self.class.base.frame(self)
+end
+_editor_class["Muki_AiC_shield_warning"]=Class(_object)
+_editor_class["Muki_AiC_shield_warning"].init=function(self,_x,_y,_)
+    self.x,self.y=_x,_y
+    self.img="img_void"
+    self.layer=LAYER_ENEMY_BULLET
+    self.group=GROUP_GHOST
+    self.hide=false
+    self.bound=true
+    self.navi=false
+    self.hp=10
+    self.maxhp=10
+    self.colli=true
+    self._servants={}
+    self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    self.alpha=0
+    lasttask=task.New(self,function()
+        do
+            local _beg_al=0 local al=_beg_al local _end_al=150 local _d_al=(_end_al-_beg_al)/(30-1)
+            for _=1,30 do
+                self.alpha=al
+                task._Wait(1)
+                al=al+_d_al
+            end
+        end
+        do
+            local _beg_al=150 local al=_beg_al local _end_al=0 local _d_al=(_end_al-_beg_al)/(30-1)
+            for _=1,30 do
+                self.alpha=al
+                task._Wait(1)
+                al=al+_d_al
+            end
+        end
+        _del(self,false)
+    end)
+end
+_editor_class["Muki_AiC_shield_warning"].render=function(self)
+    SetImageState('white','',Color(self.alpha,255,0,0))
+    Render4V("white",0,-224,0.5
+                    ,192,0,0.5
+                    ,192,-224,0.5
+                    ,192,-224,0.5)
+    Render4V("white",192,0,0.5
+                    ,0,224,0.5
+                    ,192,224,0.5
+                    ,192,224,0.5)
+    Render4V("white",0,224,0.5
+                    ,-192,0,0.5
+                    ,-192,224,0.5
+                    ,-192,224,0.5)
+    Render4V("white",-192,0,0.5
+                    ,0,-224,0.5
+                    ,-192,-224,0.5
+                    ,-192,-224,0.5)
+end
+_editor_class["Muki_AiC_shield2"]=Class(_object)
+_editor_class["Muki_AiC_shield2"].init=function(self,_x,_y,r,h,o,state,master,t)
+    self.x,self.y=_x,_y
+    self.img="img_void"
+    self.layer=LAYER_ENEMY_BULLET
+    self.group=GROUP_GHOST
+    self.hide=false
+    self.bound=true
+    self.navi=false
+    self.hp=10
+    self.maxhp=10
+    self.colli=true
+    self._servants={}
+    self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    self.r=0
+    self.h=0
+    self.state=state
+    self.omiga=o
+    self.bound=false
+    self.t=t
+    self.p=0
+    self.plist={}
+    _connect(master,self,0,true)
+    local a=(sqrt((5+2*sqrt(2))/4))
+    local b=(0.1)
+    if state==1 then
+lasttask=task.New(self,function () ex.SmoothSetValueTo("r",r,30,MOVE_NORMAL,nil,0,MODE_SET) end )
+lasttask=task.New(self,function () ex.SmoothSetValueTo("h",h,30,MOVE_NORMAL,nil,0,MODE_SET) end )
+    else
+        self.r=r
+        self.h=h
+    end
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if self.state==5 then break end
+            self.plist={}
+            do local rot,_d_rot=(0),(90) for _=1,4 do
+                do local y,_d_y=(-self.h),(2*self.h) for _=1,2 do
+                    local x1, y1, x2, y2 =
+                    	self.x,
+                    	self.y+y,
+                    	self.x + self.r * a * cos(rot + self.rot),
+                    	self.y + self.r * b * sin(rot + self.rot)
+                    if self.state==3 then
+                        x1, y1 = rotate(x1, y1, 5*sin(10*self.timer), self.x, self.y)
+                        x2, y2 = rotate(x2, y2, 5*sin(10*self.timer), self.x, self.y)
+                    elseif self.state==4 then
+                        x1, y1 = rotate(x1, y1, 15*sin(10*self.timer), self.x, self.y)
+                        x2, y2 = rotate(x2, y2, 15*sin(10*self.timer), self.x, self.y)
+                    end
+                    last=New(_editor_class["Muki_AiC_line2"],x1,y1,x1,y1,x2,y2,12,true,self.state>=5)
+                    if (self.state >=4 and self.timer % 10 <= 5) or self.state>=5 then laser.ChangeImage(last, 4, COLOR_RED) end
+                    last.colli=false
+                    table.insert(self.plist,{x1,y1,x2,y2})
+                y=y+_d_y end end
+                local x1, y1, x2, y2 =
+                	self.x + self.r * a * cos(rot + self.rot),
+                	self.y + self.r * b * sin(rot + self.rot),
+                	self.x + self.r * a * cos(rot + self.rot + 90),
+                	self.y + self.r * b * sin(rot + self.rot + 90)
+                if self.state==3 then
+                    x1, y1 = rotate(x1, y1, 5*sin(10*self.timer), self.x, self.y)
+                    x2, y2 = rotate(x2, y2, 5*sin(10*self.timer), self.x, self.y)
+                elseif self.state==4 then
+                    x1, y1 = rotate(x1, y1, 15*sin(10*self.timer), self.x, self.y)
+                    x2, y2 = rotate(x2, y2, 15*sin(10*self.timer), self.x, self.y)
+                end
+                last=New(_editor_class["Muki_AiC_line2"],x1,y1,x1,y1,x2,y2,12,true,self.state,self.state>=5)
+                if (self.state >=4 and self.timer % 10 <= 5) or self.state>=5 then laser.ChangeImage(last, 4, COLOR_RED) end
+                last.colli=false
+                table.insert(self.plist,{x1,y1,x2,y2})
+            rot=rot+_d_rot end end
+            if self.state<5 then for _,v in ipairs(self.plist) do
+                local n=(5)
+                do local p,_d_p=(self.p),(1/n) for _=1,n do
+                    last=New(_straight,ball_mid_c,COLOR_CYAN,v[1]+(v[3]-v[1])*(p%1),v[2]+(v[4]-v[2])*(p%1),0,0,false,0,true,true,0,false,0,0,0,false)
+                    if self.state >=4 and self.timer % 10 <= 5 then
+                        ChangeBulletImage(last,ball_mid_c,COLOR_RED)
+                    end
+                    last.timer=11
+                    if self.timer<=90 then
+                        self.colli=false
+                        _object.set_color(last,"",min(255,self.timer*255/90),255,255,255)
+                    end
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        task._Wait(1)
+                        _del(self,false)
+                    end)
+                p=p+_d_p end end
+            end end
+            task._Wait(1)
+        end
+        for _,v in ipairs(self.plist) do
+            last=New(_editor_class["Muki_AiC_line3"],v[1],v[2],v[1],v[2],(v[1]+v[3])/4,(v[2]+v[4])/4,12)
+            lasttask=task.New(last,function()
+                local self=task.GetSelf()
+                local r=(50)
+                local a=(Angle(self,Noel))
+                lasttask=task.New(self,function()
+                    do
+                        local _beg_a=self.rot local a=_beg_a local _end_a=self.rot+ran:Float(360,720) local _w_a=0 local _d_w_a=1/(60-1)
+                        for _=1,60 do
+                            self.rot=a
+                            task._Wait(1)
+                            _w_a=_w_a+_d_w_a a=(_beg_a-_end_a)*(_w_a-1)^2+_end_a
+                        end
+                    end
+                end)
+                task.MoveToEx(r*cos(a),r*sin(a),60,MOVE_DECEL)
+                _del(self,true)
+            end)
+            last=New(_editor_class["Muki_AiC_line3"],(v[1]+v[3])/4,(v[2]+v[4])/4,(v[1]+v[3])/4,(v[2]+v[4])/4,(v[1]+v[3])/2,(v[2]+v[4])/2,12)
+            lasttask=task.New(last,function()
+                local self=task.GetSelf()
+                local r=(50)
+                local a=(Angle(self,Noel))
+                lasttask=task.New(self,function()
+                    do
+                        local _beg_a=self.rot local a=_beg_a local _end_a=self.rot+ran:Float(360,720) local _w_a=0 local _d_w_a=1/(60-1)
+                        for _=1,60 do
+                            self.rot=a
+                            task._Wait(1)
+                            _w_a=_w_a+_d_w_a a=(_beg_a-_end_a)*(_w_a-1)^2+_end_a
+                        end
+                    end
+                end)
+                task.MoveToEx(r*cos(a),r*sin(a),60,MOVE_DECEL)
+                _del(self,true)
+            end)
+            last=New(_editor_class["Muki_AiC_line3"],(v[1]+v[3])/2,(v[2]+v[4])/2,(v[1]+v[3])/2,(v[2]+v[4])/2,(v[1]+v[3])*3/4,(v[2]+v[4])*3/4,12)
+            lasttask=task.New(last,function()
+                local self=task.GetSelf()
+                local r=(50)
+                local a=(Angle(self,Noel))
+                lasttask=task.New(self,function()
+                    do
+                        local _beg_a=self.rot local a=_beg_a local _end_a=self.rot+ran:Float(360,720) local _w_a=0 local _d_w_a=1/(60-1)
+                        for _=1,60 do
+                            self.rot=a
+                            task._Wait(1)
+                            _w_a=_w_a+_d_w_a a=(_beg_a-_end_a)*(_w_a-1)^2+_end_a
+                        end
+                    end
+                end)
+                task.MoveToEx(r*cos(a),r*sin(a),60,MOVE_DECEL)
+                _del(self,true)
+            end)
+            last=New(_editor_class["Muki_AiC_line3"],(v[1]+v[3])*3/4,(v[2]+v[4])*3/4,(v[1]+v[3])*3/4,(v[2]+v[4])*3/4,v[3],v[4],12)
+            lasttask=task.New(last,function()
+                local self=task.GetSelf()
+                local r=(50)
+                local a=(Angle(self,Noel))
+                lasttask=task.New(self,function()
+                    do
+                        local _beg_a=self.rot local a=_beg_a local _end_a=self.rot+ran:Float(360,720) local _w_a=0 local _d_w_a=1/(60-1)
+                        for _=1,60 do
+                            self.rot=a
+                            task._Wait(1)
+                            _w_a=_w_a+_d_w_a a=(_beg_a-_end_a)*(_w_a-1)^2+_end_a
+                        end
+                    end
+                end)
+                task.MoveToEx(r*cos(a),r*sin(a),60,MOVE_DECEL)
+                _del(self,true)
+            end)
+        end
+    end)
+end
+_editor_class["Muki_AiC_shield2"].frame=function(self)
+    self.class.base.frame(self)
+    self.p=(self.p+0.005)%1
+    if self.t and self.timer>=self.t then
+        _del(self,true)
+    end
+end
+_editor_class["Muki_AiC_line2"]=Class(laser)
+_editor_class["Muki_AiC_line2"].init=function(self,_x,_y,x1,y1,x2,y2,w,hide,notraw)
+    laser.init(self,COLOR_CYAN,_x,_y,0,Dist(x1,y1,x2,y2)/6,Dist(x1,y1,x2,y2)/6*4,Dist(x1,y1,x2,y2)/6,w,0,0)
+    laser.ChangeImage(self,4)
+    self.rot=Angle(x1,y1,x2,y2)
+    self.bound=false
+    lasttask=task.New(self,function()
+        if hide then
+            self.layer=LAYER_ENEMY-5
+            laser._TurnHalfOn(self,1,true)
+        else
+            laser._TurnHalfOn(self,1,true)
+        end
+        if notraw then
+            _del(self,true)
+        else
+            _del(self,false)
+        end
+    end)
+end
+_editor_class["Muki_AiC_line3"]=Class(laser)
+_editor_class["Muki_AiC_line3"].init=function(self,_x,_y,x1,y1,x2,y2,w)
+    laser.init(self,COLOR_CYAN,_x,_y,0,Dist(x1,y1,x2,y2)/6,Dist(x1,y1,x2,y2)/6*4,Dist(x1,y1,x2,y2)/6,w,0,0)
+    laser.ChangeImage(self,4)
+    self.rot=Angle(x1,y1,x2,y2)
+    self.bound=false
+    lasttask=task.New(self,function()
+        laser._TurnHalfOn(self,1,false)
+    end)
+end
+--[[ 是的直接抄了一脉相承的弹幕（
+]]
+_editor_class["Muki_AiC_last_slave1"]=Class(_object)
+_editor_class["Muki_AiC_last_slave1"].init=function(self,_x,_y,x,y,a1,a3,co,dv2,a)
+    self.x,self.y=_x,_y
+    self.img="img_void"
+    self.layer=LAYER_ENEMY_BULLET
+    self.group=GROUP_GHOST
+    self.hide=false
+    self.bound=true
+    self.navi=false
+    self.hp=10
+    self.maxhp=10
+    self.colli=true
+    self._servants={}
+    self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    lasttask=task.New(self,function()
+        task.MoveToEx(a,-a,30,MOVE_NORMAL)
+        task.MoveToEx(-a,-a,30,MOVE_NORMAL)
+        task.MoveToEx(-a,a,30,MOVE_NORMAL)
+        task.MoveToEx(a,a,30,MOVE_NORMAL)
+    end)
+    lasttask=task.New(self,function()
+        do local aa,_d_aa=(a3),(dv2) for _=1,120 do
+            PlaySound("tan00",0.02,self.x/256,false)
+            --[[ 这里的重复数是个可以调整难度的点
+            ]]
+            do local v,_d_v=(0.1),(0.2) for _=1,3 do
+                last=New(_editor_class["Muki_AiC_last_11-2"],self.x,self.y,co,aa,v,x,y)
+            v=v+_d_v end end
+            task._Wait(1)
+        aa=aa+_d_aa end end
+        _del(self,true)
+    end)
+end
+_editor_class["Muki_AiC_last_slave2"]=Class(_object)
+_editor_class["Muki_AiC_last_slave2"].init=function(self,_x,_y,x,y,a1,a3,co,dv2,a)
+    self.x,self.y=_x,_y
+    self.img="img_void"
+    self.layer=LAYER_ENEMY_BULLET
+    self.group=GROUP_GHOST
+    self.hide=false
+    self.bound=true
+    self.navi=false
+    self.hp=10
+    self.maxhp=10
+    self.colli=true
+    self._servants={}
+    self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    lasttask=task.New(self,function()
+        task.MoveToEx(a,0,30,MOVE_NORMAL)
+        task.MoveToEx(0,-a,30,MOVE_NORMAL)
+        task.MoveToEx(-a,0,30,MOVE_NORMAL)
+        task.MoveToEx(0,a,30,MOVE_NORMAL)
+    end)
+    lasttask=task.New(self,function()
+        do local aa,_d_aa=(a3),(dv2) for _=1,120 do
+            PlaySound("tan00",0.02,self.x/256,false)
+            do local v,_d_v=(0.1),(0.2) for _=1,3 do
+                last=New(_editor_class["Muki_AiC_last_11-2"],self.x,self.y,co,aa,v,x,y)
+            v=v+_d_v end end
+            task._Wait(1)
+        aa=aa+_d_aa end end
+        _del(self,true)
+    end)
+end
+--[[ 我保留了一点名字，这样你才知道这玩意从哪来的（
+]]
+_editor_class["Muki_AiC_last_11-2"]=Class(bullet)
+_editor_class["Muki_AiC_last_11-2"].init=function(self,_x,_y,color,a2,v,x,y)
+bullet.init(self,star_small,color,true,true)
+self.x,self.y=_x,_y
+    self.rot=Angle(self,Noel)+180
+    --[[ 为了让大家的钻缝体验更好而缩小了判定（
+    ]]
+    self.a=self.a*0.8
+    self.b=self.b*0.8
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if flag then break end
+            task._Wait(1)
+        end
+        self.omiga=({[COLOR_BLUE]=3,[COLOR_CYAN]=-3,[COLOR_GREEN]=3,[COLOR_RED]=3,[COLOR_PURPLE]=-3,})[color]
+        PlaySound("kira00",0.06,self.x/256,false)
+        do local vv,_d_vv=(v),(0.008) for _=1,100 do
+            SetV2(self,vv,a2,true,false)
+            task._Wait(1)
+        vv=vv+_d_vv end end
+    end)
+end
+_editor_class["Muki_AiC_last_slave_wall"]=Class(_object)
+_editor_class["Muki_AiC_last_slave_wall"].init=function(self,_x,_y,_)
+    self.x,self.y=_x,_y
+    self.img="img_void"
+    self.layer=LAYER_ENEMY_BULLET
+    self.group=GROUP_GHOST
+    self.hide=false
+    self.bound=true
+    self.navi=false
+    self.hp=10
+    self.maxhp=10
+    self.colli=true
+    self._servants={}
+    self._blend,self._a,self._r,self._g,self._b='',255,255,255,255
+    _connect(Noel, self, 0, true)
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            do
+                local _beg_x=-192 local x=_beg_x local _end_x=192 local _d_x=(_end_x-_beg_x)/(15)
+                local _beg_y=-224 local y=_beg_y local _end_y=224 local _d_y=(_end_y-_beg_y)/(15)
+                for _=1,15 do
+                    last=New(_straight,star_big,COLOR_DEEP_GRAY,x+10*sin(3*self.timer),250,3,-90,false,3,true,true,0,false,0,0,0,false)
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        _object.set_color(self,"mul+add",200,255,255,255)
+                        local a=(self.a)
+                        local b=(self.b)
+                        do
+                            local _beg_s=0.75 local s=_beg_s local _end_s=0.1 local _d_s=(_end_s-_beg_s)/(20)
+                            for _=1,20 do
+                                self.hscale=s
+                                self.vscale=s
+                                self.a=a*s
+                                self.b=b*s
+                                task._Wait(1)
+                                s=s+_d_s
+                            end
+                        end
+                        _del(self,false)
+                    end)
+                    last=New(_straight,star_big,COLOR_DEEP_GRAY,x+10*sin(3*self.timer),-250,3,90,false,3,true,true,0,false,0,0,0,false)
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        _object.set_color(self,"mul+add",200,255,255,255)
+                        local a=(self.a)
+                        local b=(self.b)
+                        do
+                            local _beg_s=0.75 local s=_beg_s local _end_s=0.1 local _d_s=(_end_s-_beg_s)/(20)
+                            for _=1,20 do
+                                self.hscale=s
+                                self.vscale=s
+                                self.a=a*s
+                                self.b=b*s
+                                task._Wait(1)
+                                s=s+_d_s
+                            end
+                        end
+                        _del(self,false)
+                    end)
+                    last=New(_straight,star_big,COLOR_DEEP_GRAY,-218,y+10*sin(3*self.timer),3,0,false,3,true,true,0,false,0,0,0,false)
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        _object.set_color(self,"mul+add",200,255,255,255)
+                        local a=(self.a)
+                        local b=(self.b)
+                        do
+                            local _beg_s=0.75 local s=_beg_s local _end_s=0.1 local _d_s=(_end_s-_beg_s)/(20)
+                            for _=1,20 do
+                                self.hscale=s
+                                self.vscale=s
+                                self.a=a*s
+                                self.b=b*s
+                                task._Wait(1)
+                                s=s+_d_s
+                            end
+                        end
+                        _del(self,false)
+                    end)
+                    last=New(_straight,star_big,COLOR_DEEP_GRAY,218,y+10*sin(3*self.timer),3,180,false,3,true,true,0,false,0,0,0,false)
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        _object.set_color(self,"mul+add",200,255,255,255)
+                        local a=(self.a)
+                        local b=(self.b)
+                        do
+                            local _beg_s=0.75 local s=_beg_s local _end_s=0.1 local _d_s=(_end_s-_beg_s)/(20)
+                            for _=1,20 do
+                                self.hscale=s
+                                self.vscale=s
+                                self.a=a*s
+                                self.b=b*s
+                                task._Wait(1)
+                                s=s+_d_s
+                            end
+                        end
+                        _del(self,false)
+                    end)
+                    x=x+_d_x
+                    y=y+_d_y
+                end
+            end
+            task._Wait(1)
+        end
+    end)
+end
+_editor_class["Muki_AiC_last_slave_wall"].frame=function(self)
+    self.class.base.frame(self)
+    SetV2(player,1,Angle(player.x,player.y,0,224)+180,false,false)
 end
 _editor_class["Muki_AiC_slave_lsc"]=Class(_object)
 _editor_class["Muki_AiC_slave_lsc"].init=function(self,_x,_y,v,a,o,t,da)
@@ -3730,18 +4532,1779 @@ boss.init(self,-384,256,_editor_class["Muki_AiC_Noel"].name,cards,New(_editor_cl
     self.H=not setting.safemode
     aic.ui.SetCardLeft(4,'time')
     aic.ui.SetCardLeft(8,'great')
-    aic.ui.SetCardLeft(10,'time')
+    aic.ui.SetCardLeft(9,'time')
     aic.ui.SetCardLeft(11,'great')
     self.vscale=0.75
     self.hscale=0.75
     self._wisys = BossWalkImageSystem(self)
-    self._wisys:SetImage("Muki_AiC_Noel.png",4,4,{4,3,3,3},{1,1,1},9,16,16)
+    self._wisys:SetImage("Muki_AiC_Noel.png",4,4,{4,3,3,3},{1,1,1},6,16,16)
     boss.show_aura(self,false)
     boss.SetUIDisplay(self,true,true,true,false,true,true)
     last=New(_editor_class["Muki_AiC_shielder"],self.x,self.y,self)
 end
 table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_ACC_DEC))
-_tmp_sc=boss.card.New("仿赤咒「炎舞神乐」",2,5,60,1000,{15,15,15},true)
+--[[ 本作对符卡的判断中加入了“只要有通常攻击四个字就是非符”的额外判定
+]]
+_tmp_sc=boss.dialog.New(false)
+function _tmp_sc:init()
+    lstg.player.dialog=true
+    _dialog_can_skip=false
+    self.dialog_displayer=New(dialog_displayer)
+    lasttask=task.New(self,function()
+        if not CheckEnhancer(13) then
+            task._Wait(60)
+            lib.AiCDialog(self,1)
+        end
+    end)
+end
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+--[[ phase1
+]]
+_tmp_sc=boss.card.New("「通常攻击1」",2,5,60,1200,{0,10,10},false)
+function _tmp_sc:before()
+    boss.show_aura(self,true)
+    if ext.sc_pr and not lstg.var.bgm_playing then
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        LoadMusicRecord('aic_bgm10')
+        _play_music('aic_bgm10',14)
+        if false then ex.stageframe=int(14/60) end
+        lstg.var.bgm_playing=true
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            do
+                local dir=1 local _n_dir=(1)+(-1)
+                for _=1,7 do
+                    self.hscale=dir*0.75
+                    PlaySound("se:Muki_AiC_hit",3,self.x/256,true)
+                    PlaySound("kira00",0.1,self.x/256,false)
+                    boss.cast(self,30)
+                    last=New(_editor_class["Muki_AiC_melee"],self.x,self.y,dir)
+                    task._Wait(30)
+                    dir=-(dir)+_n_dir
+                end
+            end
+            self.hscale=0.75
+            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+            task._Wait(30)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        do
+            local da=15 local _n_da=(15)+(-15)
+            for _=1,_infinite do
+                local a0=(ran:Float(0,360))
+                do local a1,_d_a1=(0),(da) for _=1,5 do
+                    do
+                        local _beg_a=a0+a1 local a=_beg_a local _end_a=a0+a1+360 local _d_a=(_end_a-_beg_a)/(15)
+                        for _=1,15 do
+                            do
+                                local v=2 local _n_v=(2)+(2.2)
+                                local aa=-5 local _d_aa=(5)
+                                for _=1,3 do
+                                    last=New(_straight,ball_mid_c,COLOR_BLUE,self.x,self.y,v,a+aa,false,0,true,true,0,false,0,0,0,false)
+                                    v=-(v)+_n_v
+                                    aa=aa+_d_aa
+                                end
+                            end
+                            a=a+_d_a
+                        end
+                    end
+                    task._Wait(15)
+                a1=a1+_d_a1 end end
+                task._Wait(30)
+                da=-(da)+_n_da
+            end
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击1」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_ACC_DEC))
+_tmp_sc=boss.card.New("爆咒「地面炸弹」",2,5,60,800,{10,10,10},true)
+function _tmp_sc:before()
+    self.shielder.active=true
+    self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][1])
+    if ext.sc_pr and not lstg.var.bgm_playing then
+        LoadMusicRecord('aic_bgm10')
+        _play_music('aic_bgm10',14)
+        if false then ex.stageframe=int(14/60) end
+        lstg.var.bgm_playing=true
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+    self.spelling=true
+    lasttask=task.New(self,function()
+        self.auralist={}
+        do
+            local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+            local i=1 local _d_i=(1)
+            for _=1,4 do
+                last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                self.auralist[i]=last
+                task._Wait(30)
+                a=a+_d_a
+                i=i+_d_i
+            end
+        end
+        do local i,_d_i=(1),(1) for _=1,4 do
+            lasttask=task.New(self.auralist[i],function()
+                local self=task.GetSelf()
+                do
+                    local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                    local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                    for _=1,_infinite do
+                        self.r=rr
+                        self.vscale=scale
+                        self.hscale=scale
+                        task._Wait(1)
+                        _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                        _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                    end
+                end
+            end)
+        i=i+_d_i end end
+    end)
+    self._wisys = BossWalkImageSystem(self)
+    self._wisys:SetImage("Muki_AiC_Noel_spelling.png",4,4,{4,3,3,3},{1,1,2},9,16,16)
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,_)
+    task._Wait(60)
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            Muki_cast(self,2,90)
+            PlaySound("se:Muki_AiC_bomb",1,self.x/256,true)
+            PlaySound("kira00",0.75,self.x/256,true)
+            local i = ran:Int(0,1)*90
+            last=New(_editor_class["Muki_AiC_bomb"],self.x,self.y,7,-0.05,ran:Float(180+i,270+i),100)
+            last=New(_editor_class["Muki_AiC_bomb"],self.x,self.y,7,-0.05,ran:Float(-30,30)+Angle(self,player),100)
+            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+            task._Wait(30)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            if Dist(self,player)<=200 then
+                PlaySound("tan00",0.1,self.x/256,false)
+                do
+                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
+                    for _=1,16 do
+                        last=New(_straight,ball_big,COLOR_BLUE,self.x+25*cos(a),self.y+25*sin(a),5,a,false,0,true,true,0,false,0,0,0,false)
+                        lasttask=task.New(last,function()
+                            local self=task.GetSelf()
+                            task._Wait(10)
+                            SetV2(self,3,self.rot,true,false)
+                        end)
+                        a=a+_d_a
+                    end
+                end
+            end
+            task._Wait(60)
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","爆咒「地面炸弹」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 爆咒「地面炸弹　速」
+]]
+_tmp_sc=boss.card.New("「通常攻击2」",2,5,60,1200,{0,10,10},false)
+function _tmp_sc:before()
+    if ext.sc_pr and not lstg.var.bgm_playing then
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        LoadMusicRecord('aic_bgm10')
+        _play_music('aic_bgm10',14)
+        if false then ex.stageframe=int(14/60) end
+        lstg.var.bgm_playing=true
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            do
+                local dir=1 local _n_dir=(1)+(-1)
+                for _=1,4 do
+                    self.hscale=dir*0.75
+                    self._wisys = BossWalkImageSystem(self)
+                    self._wisys:SetImage("Muki_AiC_Noel_spelling.png",4,4,{4,3,3,3},{1,1,2},9,16,16)
+                    Muki_cast(self,2,90)
+                    PlaySound("se:Muki_AiC_hit_casted",1,self.x/256,true)
+                    PlaySound("kira00",0.1,self.x/256,false)
+                    self._wisys = BossWalkImageSystem(self)
+                    self._wisys:SetImage("Muki_AiC_Noel.png",4,4,{4,3,3,3},{1,1,1},9,16,16)
+                    boss.cast(self,15)
+                    last=New(_editor_class["Muki_AiC_melee_casting"],self.x,self.y,dir,1)
+                    local a0=(ran:Float(0,360))
+                    do
+                        local _beg_a=a0 local a=_beg_a local _end_a=a0+360 local _d_a=(_end_a-_beg_a)/(12)
+                        for _=1,12 do
+                            do
+                                local aa=0 local _d_aa=(5)
+                                local _beg_v=5 local v=_beg_v local _end_v=3 local _d_v=(_end_v-_beg_v)/(7-1)
+                                for _=1,7 do
+                                    last=New(_straight,ball_mid_c,COLOR_CYAN,self.x,self.y,v,a+aa,false,0,true,true,0,false,0,0,0,false)
+                                    last=New(_straight,ball_mid_c,COLOR_CYAN,self.x,self.y,v,a-aa,false,0,true,true,0,false,0,0,0,false)
+                                    aa=aa+_d_aa
+                                    v=v+_d_v
+                                end
+                            end
+                            a=a+_d_a
+                        end
+                    end
+                    task._Wait(60)
+                    dir=-(dir)+_n_dir
+                end
+            end
+            self.hscale=0.75
+            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+            task._Wait(30)
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击2」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_ACC_DEC))
+_tmp_sc=boss.card.New("箭咒「纯白之弓」",2,5,60,1000,{10,10,10},true)
+function _tmp_sc:before()
+    self.shielder.active=true
+    self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][2])
+    if ext.sc_pr and not lstg.var.bgm_playing then
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        LoadMusicRecord('aic_bgm10')
+        _play_music('aic_bgm10',14)
+        if false then ex.stageframe=int(14/60) end
+        lstg.var.bgm_playing=true
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+    self.spelling=true
+    self._wisys = BossWalkImageSystem(self)
+    self._wisys:SetImage("Muki_AiC_Noel_spelling.png",4,4,{4,3,3,3},{1,1,2},9,16,16)
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,_)
+    task._Wait(60)
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            for _=1,2 do
+                local a=(Angle(self.x,self.y+50,player.x,player.y))
+                Muki_warning(self,a)
+                Muki_cast(self,1,60,a)
+                PlaySound("se:Muki_AiC_arrow",4,self.x/256,true)
+                last=New(_editor_class["Muki_AiC_bow"],self.x,self.y+50,a)
+                task._Wait(30)
+                PlaySound("slash",4,self.x/256,true)
+                task._Wait(60)
+            end
+            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+            task._Wait(30)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            if Dist(self,player)<=200 then
+                PlaySound("tan00",0.1,self.x/256,false)
+                do
+                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
+                    for _=1,16 do
+                        last=New(_straight,ball_big,COLOR_BLUE,self.x+25*cos(a),self.y+25*sin(a),5,a,false,0,true,true,0,false,0,0,0,false)
+                        lasttask=task.New(last,function()
+                            local self=task.GetSelf()
+                            task._Wait(10)
+                            SetV2(self,3,self.rot,true,false)
+                        end)
+                        a=a+_d_a
+                    end
+                end
+            end
+            task._Wait(60)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            PlaySound("kira00",0.75,self.x/256,true)
+            local aa=(ran:Float(0,360))
+            do
+                local _beg_a=aa local a=_beg_a local _end_a=aa+360 local _d_a=(_end_a-_beg_a)/(16)
+                for _=1,16 do
+                    last=New(_straight,star_big,COLOR_CYAN,self.x+25*cos(a),self.y+25*sin(a),5,a,false,3,true,true,0,false,0,0,0,false)
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        task._Wait(10)
+                        SetV2(self,3,self.rot,false,false)
+                    end)
+                    a=a+_d_a
+                end
+            end
+            task._Wait(60)
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","箭咒「纯白之弓」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 散咒「纯白之弓　散」
+]]
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(60,120,60,MOVE_ACC_DEC))
+--[[ phase2
+]]
+_tmp_sc=boss.dialog.New(false)
+function _tmp_sc:init()
+    lstg.player.dialog=true
+    _dialog_can_skip=false
+    self.dialog_displayer=New(dialog_displayer)
+    lasttask=task.New(self,function()
+        self.name='Noel Cornehl & Ixia Polystachya'
+        if not CheckEnhancer(13) then
+            last=New(_editor_class["Muki_AiC_Ixia"],-384,256,1)
+            Muki_fadeout()
+            task._Wait(60)
+            lib.AiCDialog(self,2)
+        else
+            last=New(_editor_class["Muki_AiC_Ixia"],-384,256,2)
+            --[[ 这里不知道为啥move无效
+            ]]
+            New(tasker, function()
+lasttask=task.New(last,function () ex.SmoothSetValueTo("x",-60,60,MOVE_ACC_DEC,nil,0,MODE_SET) end )
+lasttask=task.New(last,function () ex.SmoothSetValueTo("y",120,60,MOVE_ACC_DEC,nil,0,MODE_SET) end )
+            end)
+        end
+        Muki_fadein('aic_bgm11')
+    end)
+end
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+_tmp_sc=boss.card.New("「通常攻击3」",2,5,60,1000,{0,10,10},false)
+function _tmp_sc:before()
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            task.MoveTo(60,120,60,MOVE_NORMAL)
+        end)
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        last=New(_editor_class["Muki_AiC_Ixia"],-384,256,2)
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            do
+                local dir=1 local _n_dir=(1)+(-1)
+                for _=1,4 do
+                    self.hscale=dir*0.75
+                    self._wisys = BossWalkImageSystem(self)
+                    self._wisys:SetImage("Muki_AiC_Noel_spelling.png",4,4,{4,3,3,3},{1,1,2},9,16,16)
+                    Muki_cast(self,1,60)
+                    PlaySound("se:Muki_AiC_hit_casted",1,self.x/256,true)
+                    PlaySound("kira00",0.1,self.x/256,false)
+                    self._wisys = BossWalkImageSystem(self)
+                    self._wisys:SetImage("Muki_AiC_Noel.png",4,4,{4,3,3,3},{1,1,1},9,16,16)
+                    boss.cast(self,15)
+                    last=New(_editor_class["Muki_AiC_melee_casting"],self.x,self.y,dir,2)
+                    do
+                        local _beg_a=-45 local a=_beg_a local _end_a=45 local _d_a=(_end_a-_beg_a)/(5-1)
+                        for _=1,5 do
+                            last=New(_straight,arrow_mid,COLOR_CYAN,self.x+50*cos(a)*dir,self.y+50*sin(a),3,a*dir,true,0,true,true,0,false,0,a+Angle(self,player),0,false)
+                            lasttask=task.New(last,function()
+                                local self=task.GetSelf()
+                                do local t,_d_t=(15),(5) for _=1,_infinite do
+                                    if Dist(self,player)>25 and self.y>-200 then
+                                        PlaySound("kira00",0.1,self.x/256,false)
+                                        do
+                                            local _beg_aa=0 local aa=_beg_aa local _end_aa=360 local _d_aa=(_end_aa-_beg_aa)/(5)
+                                            for _=1,5 do
+                                                local x,y=aic.math.rotate(self.x+100*cos(aa),self.y+50*sin(aa),a+90,self.x,self.y)
+                                                local d=(Dist(x,y,self.x,self.y))
+                                                local rot=(Angle(x,y,self.x,self.y))
+                                                last=New(_straight,star_small,COLOR_CYAN,self.x,self.y,d/120,rot,false,3,true,true,0,false,0,0,0,false)
+                                                lasttask=task.New(last,function()
+                                                    local self=task.GetSelf()
+                                                    do
+                                                        local _beg_v=self._speed local v=_beg_v local _end_v=self._speed/3 local _d_v=(_end_v-_beg_v)/(30-1)
+                                                        for _=1,30 do
+                                                            task._Wait(1)
+                                                            v=v+_d_v
+                                                        end
+                                                    end
+                                                end)
+                                                aa=aa+_d_aa
+                                            end
+                                        end
+                                    else
+                                    end
+                                    task._Wait(t)
+                                t=t+_d_t end end
+                            end)
+                            a=a+_d_a
+                        end
+                    end
+                    task._Wait(60)
+                    dir=-(dir)+_n_dir
+                end
+            end
+            self.hscale=0.75
+            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+            task._Wait(30)
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+    if not CheckEnhancer(13) then
+        safeKill(Ixia)
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击3」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+_tmp_sc=boss.card.New("引咒「聚能火球」",2,5,60,1000,{10,10,10},true)
+function _tmp_sc:before()
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            task.MoveTo(60,120,60,MOVE_NORMAL)
+        end)
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        last=New(_editor_class["Muki_AiC_Ixia"],-384,256,3)
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+    self.spelling=true
+    self._wisys = BossWalkImageSystem(self)
+    self._wisys:SetImage("Muki_AiC_Noel_spelling.png",4,4,{4,3,3,3},{1,1,2},9,16,16)
+    self.shielder.active=true
+    self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][3])
+    Ixia.spellname=aic.ui.NewSpellname(self, aic.l10n.ui.Ixia_scname[diff],2)
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,_)
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],80,0,'image:Muki_AiC_Ixia_face_default',0.5,80)
+    task._Wait(60)
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            local a=(Muki_get8dir(self,player))
+            Muki_cast(self,3,120,a)
+            PlaySound("se:Muki_AiC_lightball",4,self.x/256,true)
+            last=New(_editor_class["Muki_AiC_fireball"],self.x,self.y,4,a)
+            local fireball=(last)
+            for _=1,_infinite do
+                if not IsValid(fireball) then break end
+                task._Wait(1)
+            end
+            task.MoveToPlayer(30,-96+60,96+60,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+            task._Wait(90)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        for _=1,_infinite do
+            if Dist(self,player)<=200 then
+                PlaySound("tan00",0.1,self.x/256,false)
+                do
+                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
+                    for _=1,16 do
+                        last=New(_straight,ball_big,COLOR_BLUE,self.x+25*cos(a),self.y+25*sin(a),5,a,false,0,true,true,0,false,0,0,0,false)
+                        lasttask=task.New(last,function()
+                            local self=task.GetSelf()
+                            task._Wait(10)
+                            SetV2(self,3,self.rot,true,false)
+                        end)
+                        a=a+_d_a
+                    end
+                end
+            end
+            task._Wait(60)
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+    safeKill(Ixia)
+    if IsValid(Ixia.spellname) then
+        _del(Ixia.spellname,true)
+    else
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","引咒「聚能火球」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 引咒「聚能火球　改」
+]]
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(120,120,60,MOVE_ACC_DEC))
+_tmp_sc=boss.dialog.New(false)
+function _tmp_sc:init()
+    lstg.player.dialog=true
+    _dialog_can_skip=false
+    self.dialog_displayer=New(dialog_displayer)
+    last=New(_editor_class["Muki_AiC_Primula"],-384,256,1)
+    self.shielder.boss=last
+    self.name='Primula'
+    self.bonus_x,self.bonus_y=0,120
+    --[[ 护盾暂时转让（
+    ]]
+    lasttask=task.New(self,function()
+        if not CheckEnhancer(13) then
+            Muki_fadeout(60,true)
+            task._Wait(60)
+            lib.AiCDialog(self,3)
+        else
+            safeKill(Ixia)
+        end
+        Muki_fadein('aic_bgm12')
+        safeKill(Ixia)
+    end)
+end
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+--[[ phase Primula
+]]
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(384*2,256*2,120,MOVE_ACC_DEC))
+_tmp_sc=boss.card.New("「通常攻击4」",2,5,60,1200,{0,0,0},false)
+function _tmp_sc:before()
+    if ext.sc_pr then
+        self.hide=true
+        self.x,self.y=-384,256
+        boss.show_aura(self,false)
+        last=New(_editor_class["Muki_AiC_Primula"],-384,256,2)
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+end
+function _tmp_sc:init()
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+    safeKill(Primula)
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击4」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+_tmp_sc=boss.card.New("防咒「魔法障壁」",60,60,60,_infinite,{0,0,0},true)
+function _tmp_sc:before()
+    local t3=60*60
+    AddSPPoint2(0.75,nil,t3)
+    AddSPPoint2(0.5,nil,t3)
+    AddSPPoint2(0.2,nil,t3)
+    if ext.sc_pr then
+        self.hide=true
+        self.x,self.y=-384,256
+        boss.show_aura(self,false)
+        last=New(_editor_class["Muki_AiC_Primula"],-384,256,3)
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+    self.spelling=true
+    self.shielder.active=true
+    Primula.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][4])
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Primula_face_fight')
+end
+function _tmp_sc:init()
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+    _drop_item(item_extend,0,120)
+    safeKill(Primula)
+    if IsValid(Primula.spellname) then
+        _del(Primula.spellname,true)
+    else
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","防咒「魔法障壁」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 护咒「魔法加护」
+]]
+--[[ phase3
+]]
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_ACC_DEC))
+_tmp_sc=boss.dialog.New(false)
+function _tmp_sc:init()
+    lstg.player.dialog=true
+    _dialog_can_skip=false
+    self.dialog_displayer=New(dialog_displayer)
+    lasttask=task.New(self,function()
+        if not CheckEnhancer(13) then
+            last=New(_editor_class["Muki_AiC_Ixia"],384,256,6)
+            Muki_fadeout(60, true)
+            task._Wait(60)
+            lib.AiCDialog(self,4)
+            self.name='Noel Cornehl'
+        end
+        safeKill(Primula)
+        self.bonus_x,self.bonus_y=nil,nil
+    end)
+end
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+_tmp_sc=boss.card.New("「通常攻击-魔法获取」",114514,114514,114514,114514,{0,0,0},false)
+function _tmp_sc:before()
+    boss.SetUIDisplay(self,true,true,false,false,true,true)
+end
+function _tmp_sc:init()
+    Muki_fadeout(60)
+    lasttask=task.New(self,function()
+        task._Wait(60)
+        task.MoveTo(0,0,60,MOVE_ACC_DEC)
+        lasttask=task.New(self,function()
+            local dy=(80)
+            lasttask=task.New(self,function()
+                task._Wait(25)
+                last=New(_editor_class["Muki_AiC_cane"],self.x,self.y+dy,self,0.75)
+            end)
+            self.hide=true
+            PlaySound("se:Muki_AiC_magic_getting",1,self.x/256,true)
+            local s=(0.65)
+            local intv=({5,5,5,5,5,5,5,9,7,7,7,7,7,7,7,9,9,9,9,9,9,9,9,9,9})
+            local t=(aic.table.Sum(intv))
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_get_magic1_',self,25,t,intv,17,25,s)
+            task._Wait(t)
+            local intv=({9,9,9,9,9,9})
+            local t=(aic.table.Sum(intv))
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_get_magic2_',self,6,t+9*3,intv,2,6,s)
+            task._Wait(t+9*3)
+            local intv=({9,9,9,9,9,9,9,9,9,9,9,9,9,9})
+            local t=(aic.table.Sum(intv))
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_get_magic3_',self,14,t,intv,6,14,s)
+            task._Wait(t)
+            local intv=({9,9,9,9,9,9})
+            local t=(aic.table.Sum(intv))
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_get_magic2_',self,6,t,intv,2,6,s)
+            task._Wait(t)
+            local intv=({7,7,7,7,7,7,7,7,7,7,7,7,7,15})
+            local t=(aic.table.Sum(intv))
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_get_magic4_',self,14,t,intv,13,14,s)
+            task._Wait(t)
+            local intv=({15,8,8,8,8,8,8,8,8,8,8,8,8,8,8})
+            local t=(aic.table.Sum(intv))
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_get_magic5_',self,15,_infinite,intv,14,15,0.75)
+            task._Wait(55)
+            for _,unit in ObjList(GROUP_GHOST) do
+                unit.del=true
+            end
+            task._Wait(1)
+            self.hide=false
+            misc.ShakeScreen(60,5)
+            misc.ShakeScreen(60,3)
+            last=New(_editor_class["Muki_AiC_get_magic_ef1"],self.x,self.y+dy,_)
+            for _=1,30 do
+                last=New(_editor_class["Muki_AiC_get_magic_ef2"],self.x,self.y,_)
+            end
+            task._Wait(30)
+            for _=1,30 do
+                last=New(_editor_class["Muki_AiC_get_magic_ef3"],self.x,self.y,_)
+            end
+            task._Wait(t-55-30)
+            task._Wait(60)
+            for _=1,20 do
+                last=New(_editor_class["Muki_AiC_get_magic_ef4"],self.x,self.y,_)
+            end
+            PlaySound("se:Muki_AiC_magic_got",1,self.x/256,true)
+            --self.hide=false
+            last=New(_editor_class["Muki_AiC_get_magic_ui"],self.x,self.y,_)
+            task._Wait(300)
+            PlaySound("se:Muki_AiC_magic_got_closed",1,self.x/256,true)
+            task._Wait(60)
+            self._bosssys:clearBonus()
+            self.noresult=true
+            _kill(self,true)
+            task._Wait(1)
+            StopSound('enep02')
+        end)
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    for _,unit in ObjList(GROUP_GHOST) do
+        unit.del=true
+    end
+    boss.SetUIDisplay(self,true,true,true,false,true,true)
+end
+function _tmp_sc:after()
+    self.noresult=false
+    self.hide=false
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击-魔法获取」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+_tmp_sc=boss.dialog.New(true)
+function _tmp_sc:init()
+    lstg.player.dialog=true
+    _dialog_can_skip=true
+    self.dialog_displayer=New(dialog_displayer)
+    lasttask=task.New(self,function()
+        if not CheckEnhancer(13) then
+            task._Wait(60)
+            lib.AiCDialog(self,5)
+            Muki_fadein('aic_bgm13')
+        end
+    end)
+end
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
+_tmp_sc=boss.card.New("「通常攻击5」",2,5,60,1200,{0,15,15},false)
+function _tmp_sc:before()
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            task.MoveTo(60,120,60,MOVE_NORMAL)
+        end)
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        last=New(_editor_class["Muki_AiC_Ixia"],-384,256,2)
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        do
+            local dir=1 local _n_dir=(1)+(-1)
+            for _=1,_infinite do
+                do
+                    local t=3 local _n_t=(3)+(5)
+                    local o=3 local _n_o=(3)+(1)
+                    for _=1,2 do
+                        self.hscale=dir*0.75
+                        self._wisys = BossWalkImageSystem(self)
+                        self._wisys:SetImage("Muki_AiC_Noel_spelling.png",4,4,{4,3,3,3},{1,1,2},9,16,16)
+                        Muki_cast(self,4,150,nil,true)
+                        PlaySound("se:Muki_AiC_hit_casted",1,self.x/256,true)
+                        PlaySound("kira00",0.1,self.x/256,false)
+                        PlaySound("option",0.8,self.x/256,true)
+                        self._wisys = BossWalkImageSystem(self)
+                        self._wisys:SetImage("Muki_AiC_Noel.png",4,4,{4,3,3,3},{1,1,1},9,16,16)
+                        boss.cast(self,15)
+                        last=New(_editor_class["Muki_AiC_melee_casting"],self.x,self.y,dir,2)
+                        do
+                            local _beg_a=-45 local a=_beg_a local _end_a=-135 local _d_a=(_end_a-_beg_a)/(2-1)
+                            for _=1,2 do
+                                PlaySound("tan00",0.1,self.x/256,false)
+                                last=New(_editor_class["Muki_AiC_slave1"],self.x,self.y,3,a,o,t)
+                                _connect(self,last,0,true)
+                                a=a+_d_a
+                            end
+                        end
+                        task._Wait(360)
+                        task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+                        t=-(t)+_n_t
+                        o=-(o)+_n_o
+                    end
+                end
+                dir=-(dir)+_n_dir
+            end
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击5」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
+_tmp_sc=boss.card.New("唤咒「使魔召唤」",2,5,90,1200,{15,15,15},true)
+function _tmp_sc:before()
+    self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][5])
+    self.shielder.active=true
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+    end
+    self.spelling=true
+    if setting.safemode then
+        last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,_)
+    else
+        last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_lose2')
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(60)
+        do
+            local dir=1 local _n_dir=(1)+(-1)
+            for _=1,_infinite do
+                do
+                    local t=3 local _n_t=(3)+(5)
+                    local o=3 local _n_o=(3)+(1)
+                    for _=1,2 do
+                        self.hscale=dir*0.75
+                        self._wisys = BossWalkImageSystem(self)
+                        self._wisys:SetImage("Muki_AiC_Noel_spelling.png",4,4,{4,3,3,3},{1,1,2},9,16,16)
+                        Muki_cast(self,4,150,nil,true)
+                        PlaySound("option",0.8,self.x/256,true)
+                        PlaySound("kira00",0.6,self.x/256,true)
+                        last=New(_editor_class["Muki_AiC_slave2"],self.x,self.y,_)
+                        task._Wait(180)
+                        task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+                        t=-(t)+_n_t
+                        o=-(o)+_n_o
+                    end
+                end
+                dir=-(dir)+_n_dir
+            end
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","唤咒「使魔召唤」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 唤咒「使魔召唤　御」
+]]
+_tmp_sc=boss.card.New("「通常攻击6」",2,5,60,300,{0,15,15},false)
+function _tmp_sc:before()
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            task.MoveTo(60,120,60,MOVE_NORMAL)
+        end)
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        last=New(_editor_class["Muki_AiC_Ixia"],-384,256,2)
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(60)
+        local y=(self.y)
+        for _=1,_infinite do
+            self.colli=false
+            task.MoveTo(player.x,y,15,MOVE_ACC_DEC)
+            self.colli=true
+            New(boss_cast_ef,self.x,self.y,nil,50,100,255,30)
+            last=New(_editor_class["Muki_AiC_warning"],self.x,self.y,self.x-50,self.x+50,-224,224,'down',15)
+            task._Wait(60)
+            PlaySound("se:Muki_AiC_misogi_start",0.6,self.x/256,true)
+            last=New(_editor_class["Muki_AiC_boss_image"],self.x,self.y,'image:Muki_AiC_Noel_misogi',self,21,65,3,1,21,0.75)
+            last=New(_editor_class["Muki_AiC_ball_big_slave"],self.x,self.y,_)
+            lasttask=task.New(self,function()
+                do
+                    local _beg_aa=0 local aa=_beg_aa local _end_aa=360 local _d_aa=(_end_aa-_beg_aa)/(14)
+                    for _=1,14 do
+                        PlaySound("tan00",0.3,self.x/256,true)
+                        do
+                            local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(12)
+                            for _=1,12 do
+                                last=New(_straight,arrow_big,COLOR_BLUE,self.x+50*cos(a),self.y+50*sin(a),0,a+aa+180,false,0,true,true,0,false,0.05,a+aa+180,5,false)
+                                a=a+_d_a
+                            end
+                        end
+                        task._Wait(3)
+                        aa=aa+_d_aa
+                    end
+                end
+                PlaySound("slash",1,self.x/256,true)
+                for _=1,100 do
+                    local da=({0,180})
+                    last=New(_straight,star_small,COLOR_YELLOW,self.x,self.y,ran:Float(0.5,2),da[ran:Int(1,2)]+ran:Float(-30,30),false,3,true,true,0,false,0.05,90+ran:Float(-10,10),0,false)
+                end
+            end)
+            task.MoveTo(self.x,-210,42,MOVE_NORMAL)
+            PlaySound("se:Muki_AiC_misogi_end",0.1,self.x/256,false)
+            task._Wait(120)
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:del()
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击6」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
+_tmp_sc=boss.card.New("仿魔咒「空中回廊」",2,5,90,1600,{15,15,15},true)
+function _tmp_sc:before()
+    self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][6])
+    self.shielder.active=true
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+    end
+    self.spelling=true
+    if setting.safemode then
+        last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,_)
+    else
+        last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_lose3')
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        task._Wait(60)
+        for _=1,_infinite do
+            local dir=(ran:Int(1,4))
+            PlaySound("kira00",0.3,self.x/256,true)
+            if dir==1 then
+                last=New(_straight,square,COLOR_RED,ran:Float(-192,192),224,3,-90,false,0,true,true,0,false,0,0,0,false)
+                lasttask=task.New(last,function()
+                    local self=task.GetSelf()
+lasttask=task.New(self,function () ex.SmoothSetValueTo("_speed",0,30,MOVE_NORMAL,nil,0,MODE_SET) end )
+                    task._Wait(30)
+                    _set_a(self,0.05,-90,false)
+                end)
+            elseif dir==2 then
+                last=New(_straight,square,COLOR_RED,ran:Float(-192,192),-224,3,90,false,0,true,true,0,false,0,0,0,false)
+                lasttask=task.New(last,function()
+                    local self=task.GetSelf()
+lasttask=task.New(self,function () ex.SmoothSetValueTo("_speed",0,30,MOVE_NORMAL,nil,0,MODE_SET) end )
+                    task._Wait(30)
+                    _set_a(self,0.05,90,false)
+                end)
+            elseif dir==3 then
+                last=New(_straight,square,COLOR_RED,-192,ran:Float(-224,224),3,0,false,0,true,true,0,false,0,0,0,false)
+                lasttask=task.New(last,function()
+                    local self=task.GetSelf()
+lasttask=task.New(self,function () ex.SmoothSetValueTo("_speed",0,30,MOVE_NORMAL,nil,0,MODE_SET) end )
+                    task._Wait(30)
+                    _set_a(self,0.05,0,false)
+                end)
+            else
+                last=New(_straight,square,COLOR_RED,192,ran:Float(-224,224),3,180,false,0,true,true,0,false,0,0,0,false)
+                lasttask=task.New(last,function()
+                    local self=task.GetSelf()
+lasttask=task.New(self,function () ex.SmoothSetValueTo("_speed",0,30,MOVE_NORMAL,nil,0,MODE_SET) end )
+                    task._Wait(30)
+                    _set_a(self,0.05,180,false)
+                end)
+            end
+            task._Wait(5)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(60)
+        do
+            local s=1 local _n_s=(1)+(-1)
+            for _=1,_infinite do
+                do local aa,_d_aa=(0),(s*20) for _=1,18 do
+                    do local a,_d_a=(0),(30) for _=1,12 do
+                        last=New(_straight,square,COLOR_CYAN,self.x,self.y,2,a+aa,false,0,true,true,0,false,0,0,0,false)
+                        lasttask=task.New(last,function()
+                            local self=task.GetSelf()
+                            task._Wait(60)
+                            last=New(_straight,square,COLOR_CYAN,self.x,self.y,2,self.rot+60*s,false,0,true,true,0,false,0,0,0,false)
+                            lasttask=task.New(last,function()
+                                local self=task.GetSelf()
+                                do
+                                    local _beg_aaa=self.rot local aaa=_beg_aaa local _end_aaa=self.rot+780 local _w_aaa=0 local _d_w_aaa=1/(120-1)
+                                    local _beg_v=2 local v=_beg_v local _end_v=3 local _w_v=0 local _d_w_v=1/(120-1)
+                                    for _=1,120 do
+                                        SetV2(self,v,aaa,true,false)
+                                        task._Wait(1)
+                                        _w_aaa=_w_aaa+_d_w_aaa if _w_aaa<0.5 then aaa=2*(_end_aaa-_beg_aaa)*_w_aaa^2+_beg_aaa else aaa=(_end_aaa-_beg_aaa)*(-2*_w_aaa^2+4*_w_aaa-1)+_beg_aaa end
+                                        _w_v=_w_v+_d_w_v if _w_v<0.5 then v=2*(_end_v-_beg_v)*_w_v^2+_beg_v else v=(_end_v-_beg_v)*(-2*_w_v^2+4*_w_v-1)+_beg_v end
+                                    end
+                                end
+                            end)
+                            _del(self,true)
+                        end)
+                    a=a+_d_a end end
+                    task._Wait(5)
+                aa=aa+_d_aa end end
+                task._Wait(180)
+                task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+                s=-(s)+_n_s
+            end
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    _drop_item(item_extend,0,120)
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","仿魔咒「空中回廊」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 仿星咒「银河铁道」/仿月咒「空明流光」
+]]
+_tmp_sc=boss.card.New("「通常攻击7」",2,5,60,1200,{0,15,15},false)
+function _tmp_sc:before()
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            task.MoveTo(60,120,60,MOVE_NORMAL)
+        end)
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+        last=New(_editor_class["Muki_AiC_Ixia"],-384,256,2)
+    end
+    if _debug.pmode and CheckEnhancer(12) and not ext.sc_pr then
+        aic.pmode.Save()
+    end
+end
+function _tmp_sc:init()
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if (self.x>=180 or self.x<=-180) then
+                misc.ShakeScreen(30,3)
+                PlaySound("slash",0.1,self.x/256,false)
+                self.vx,self.vy=-self.vx,self.vy
+                self.ax,self.ay=-self.ax,self.ay
+                do
+                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16-1)
+                    for _=1,16 do
+                        last=New(_straight,ellipse,COLOR_CYAN,self.x,self.y,1,a,false,0,true,true,0,false,0.025,a,5,false)
+                        a=a+_d_a
+                    end
+                end
+            elseif self.y>=210 or self.y<=-210 then
+                misc.ShakeScreen(30,3)
+                PlaySound("slash",0.1,self.x/256,false)
+                self.vx,self.vy=self.vx,-self.vy
+                self.ax,self.ay=self.ax,-self.ay
+            end
+            task._Wait(1)
+        end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(60)
+        for _=1,_infinite do
+            self.colli=false
+            task.MoveTo(player.x,120,15,MOVE_ACC_DEC)
+            self.colli=true
+            New(boss_cast_ef,self.x,self.y,nil,50,100,255,30)
+            task._Wait(60)
+            local intv={6,6,7,8,8,3,3,2,2,2,2,2,2,2,2,2,2,10,10,10,10}
+            local flag1,flag2
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_air_attack',self,21,aic.table.Sum(intv,1,9),intv,nil,nil,0.65)
+            --[[ 起始动画
+            ]]
+            task._Wait(aic.table.Sum(intv,1,9))
+            last=New(_editor_class["Muki_AiC_eclipse_slave"],self.x,self.y,self,1)
+            last=New(_editor_class["Muki_AiC_eclipse_slave"],self.x,self.y,self,-1)
+            SetV2(self,1,-135,false,false)
+            _set_a(self,0.05,-135,false)
+            _forbid_v(self,6,'original','original')
+            for _=1,10 do
+                PlaySound("se:Muki_AiC_air_attack_start",0.6,self.x/256,true)
+                last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_air_attack_loop',self,8,aic.table.Sum(intv,10,17),aic.table.Slice(intv,10,17),nil,nil,0.65)
+                --[[ 循环动画
+                ]]
+                task._Wait(aic.table.Sum(intv,10,17))
+            end
+            _set_a(self,0,0,false)
+lasttask=task.New(self,function () ex.SmoothSetValueTo("_speed",0,aic.table.Sum(intv,18,21),MOVE_NORMAL,nil,0,MODE_SET) end )
+            last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_air_attack_end',self,4,aic.table.Sum(intv,18,21),aic.table.Slice(intv,18,21),nil,nil,0.65)
+            --[[ 结束动画
+            ]]
+            task._Wait(aic.table.Sum(intv,18,21)+1)
+            PlaySound("se:Muki_AiC_air_attack_end",0.1,self.x/256,false)
+            self.hide=false
+            for _,unit in ObjList(GROUP_GHOST) do
+                unit.del=true
+            end
+            task._Wait(120)
+            task.MoveTo(0,120,30,MOVE_ACC_DEC)
+            local flag
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(60)
+                for _=1,60 do
+                    PlaySound("tan00",0.3,self.x/256,true)
+                    last=New(_straight,grain_a,COLOR_BLUE,self.x+50*sin(10*self.timer)*cos(a),self.y+50*sin(10*self.timer)*sin(a),0,a,false,0,true,true,0,false,0,0,0,false)
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        for _=1,_infinite do
+                            if flag then break end
+                            task._Wait(1)
+                        end
+                        PlaySound("kira00",0.3,self.x/256,true)
+                        SetV2(self,2,self.rot,true,false)
+                        _set_a(self,0.05,self.rot,false)
+                        _forbid_v(self,6,'original','original')
+                    end)
+                    task._Wait(3)
+                    a=a+_d_a
+                end
+            end
+            flag=true
+            task._Wait(120)
+        end
+    end)
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","「通常攻击7」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
+_tmp_sc=boss.card.New("仿赤咒「炎舞神乐」",2,5,90,1000,{15,15,15},true)
 function _tmp_sc:before()
     self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][7])
     self.shielder.active=true
@@ -3794,7 +6357,7 @@ function _tmp_sc:init()
             do
                 local aa=0 local _n_aa=(0)+(180)
                 for _=1,2 do
-                    Muki_cast(self,4,150,nil,nil,nil,true)
+                    Muki_cast(self,4,150,nil,true)
                     PlaySound("kira00",0.1,self.x/256,false)
                     last=New(_editor_class["Muki_AiC_slave3"],self.x,self.y,self,3,Angle(self,player))
                     task._Wait(60)
@@ -3842,7 +6405,7 @@ lasttask=task.New(self,function () ex.SmoothSetValueTo("_speed",0,30,MOVE_NORMAL
                     aa=-(aa)+_n_aa
                 end
             end
-            Muki_cast(self,4,150,nil,nil,nil,true)
+            Muki_cast(self,4,150,nil,true)
             PlaySound("kira00",0.1,self.x/256,false)
             do local a,_d_a=(-60),(60) for _=1,3 do
                 last=New(_editor_class["Muki_AiC_slave3"],self.x,self.y,self,3,a+Angle(self,player))
@@ -3887,22 +6450,26 @@ end
 _tmp_sc.perform=false
 table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
 table.insert(_sc_table,{"Muki_AiC_Noel","仿赤咒「炎舞神乐」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 仿焱咒「红莲祭仪」/仿彗咒「流星祈愿」
+]]
 _tmp_sc=boss.dialog.New(false)
 function _tmp_sc:init()
     lstg.player.dialog=true
     _dialog_can_skip=false
     self.dialog_displayer=New(dialog_displayer)
     lasttask=task.New(self,function()
-        Muki_fadeout(60, true)
-        task._Wait(60)
-        lib.AiCDialog(self,6)
-        Muki_fadein('aic_bgm14')
+        if not CheckEnhancer(13) then
+            Muki_fadeout(60, true)
+            task._Wait(60)
+            lib.AiCDialog(self,6)
+            Muki_fadein('aic_bgm14')
+        end
     end)
 end
 table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
 --[[ phase burst
 ]]
-_tmp_sc=boss.card.New("「不顾一切的圣光爆发！」",2,5,60,1200,{30,30,30},true)
+_tmp_sc=boss.card.New("「不顾一切的圣光爆发！」",2,5,90,4000,{30,30,30},true)
 function _tmp_sc:before()
     self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][8])
     self.shielder.active=true
@@ -3947,65 +6514,282 @@ function _tmp_sc:before()
     end
 end
 function _tmp_sc:init()
+    AddSPPoint2(0.8,4000,nil)
+    AddSPPoint2(0.55,4000,nil)
+    AddSPPoint2(0.3,4000,nil)
+    local flag1
+    local flag2
+    local flag3
+    local stun=(0)
     lasttask=task.New(self,function()
-        task._Wait(60)
         for _=1,_infinite do
-            for _=1,2 do
-                local a=(Angle(self,player))
-                Muki_cast(self,1,90,a)
-                PlaySound("se:Muki_AiC_arrow",4,self.x/256,true)
-                task._Wait(30)
-                last=New(_editor_class["Muki_AiC_white_arrow"],self.x,self.y,5,a,5)
-                PlaySound("slash",4,self.x/256,true)
-                task._Wait(60)
-            end
-            last=New(_editor_class["Muki_AiC_burst"],0,0,false)
-            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
-            task._Wait(30)
+            if self.hp<self.maxhp*0.75 or self.timer>=45*60 then break end
+            task._Wait(1)
         end
-    end)
-    lasttask=task.New(self,function()
+        _clear_bullet(true,false)
+        flag1=true
+        self.protect=true
+        task._Wait(60)
+        self.protect=false
         for _=1,_infinite do
-            if Dist(self,player)<=200 then
-                PlaySound("tan00",0.1,self.x/256,false)
-                do
-                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
-                    for _=1,16 do
-                        last=New(_straight,ball_big,COLOR_BLUE,self.x+25*cos(a),self.y+25*sin(a),5,a,false,0,true,true,0,false,0,0,0,false)
+            if self.hp<self.maxhp*0.5 or self.timer>=45*60 then break end
+            task._Wait(1)
+        end
+        _clear_bullet(true,false)
+        flag2=true
+        self.protect=true
+        task._Wait(60)
+        self.protect=false
+        for _=1,_infinite do
+            if self.hp<self.maxhp*0.25 or self.timer>=45*60 then break end
+            task._Wait(1)
+        end
+        _clear_bullet(true,false)
+        flag3=true
+        self.protect=true
+        task._Wait(60)
+        self.protect=false
+    end)
+    --[[ 阶段控制
+    ]]
+    local flag
+    --[[ 圣光爆发时的标志
+    ]]
+    lasttask=task.New(self,function()
+        task._Wait(150)
+        for _=1,_infinite do
+            last=New(_editor_class["Muki_AiC_burst"],0,0,self,stun>=75,stun)
+            for _=1,60 do
+                PlaySound("tan00",0.25,self.x/256,true)
+                for _=1,3 do
+                    local r=(ran:Float(50,300))
+                    local a=(ran:Float(0,360))
+                    local x=(self.x+r*cos(a))
+                    local y=(self.y+r*sin(a))
+                    if Dist(x,y,player.x,player.y)>=20 then
+                        last=New(_straight,ball_light,COLOR_CYAN,x,y,0,0,false,0,true,true,0,false,0,0,0,false)
+                        local s
+                        if flag3 then
+                            ChangeBulletImage(last,ball_light,COLOR_RED)
+                            s=1
+                        elseif flag2 then
+                            ChangeBulletImage(last,ball_light,COLOR_RED)
+                            s=0.8
+                        elseif flag1 then
+                            s=0.6
+                        else
+                            s=0.35
+                        end
+                        last.hscale=s
+                        last.vscale=s
+                        last.a=last.a*s
+                        last.b=last.b*s
                         lasttask=task.New(last,function()
                             local self=task.GetSelf()
-                            task._Wait(10)
-                            SetV2(self,3,self.rot,true,false)
+                            for _=1,_infinite do
+                                if flag then break end
+                                task._Wait(1)
+                            end
+                            PlaySound("kira00",0.4,self.x/256,true)
+                            if flag3 then
+                                _set_a(self,0.025,ran:Float(0,360),false)
+                                _forbid_v(self,1,'original','original')
+                                task._Wait(120)
+                                _del(self,true)
+                            elseif flag2 then
+                                _set_a(self,0.05,ran:Float(0,360),false)
+                                _forbid_v(self,2,'original','original')
+                                task._Wait(180)
+                                _del(self,true)
+                            elseif flag1 then
+                                _set_a(self,0.075,ran:Float(0,360),false)
+                                _forbid_v(self,3,'original','original')
+                            else
+                                _set_a(self,0.1,ran:Float(0,360),false)
+                                _forbid_v(self,4,'original','original')
+                            end
                         end)
+                    end
+                end
+                task._Wait(1)
+            end
+            task._Wait(60)
+            flag=true
+            task._Wait(1)
+            flag=false
+            if ran:Int(0,100)<stun-30 and not flag3 then
+                stun=0
+                last=New(_editor_class["Muki_AiC_boss_image"],self.x,self.y,'image:Muki_AiC_Noel_burst_stunned',self,8,180,10,nil,nil,0.65)
+                for _=1,20 do
+                    PlaySound("lgodsget",0.1,self.x/256,false)
+                    last=New(_straight,square,COLOR_RED,self.x,self.y-30,ran:Float(2,5),ran:Float(0,360),false,0,true,true,0,false,0,0,0,false)
+                    lasttask=task.New(last,function()
+                        local self=task.GetSelf()
+                        task._Wait(30)
+                        SetV2(self,0,self.rot,true,false)
+                        task._Wait(60)
+                        _del(self,true)
+                    end)
+                    task._Wait(6)
+                end
+                task._Wait(60)
+            else
+            end
+            stun=stun+ran:Int(20,40)
+            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+            if flag3 then
+                task._Wait(30)
+            elseif flag2 then
+                task._Wait(60)
+            elseif flag1 then
+                task._Wait(90)
+            else
+                task._Wait(120)
+            end
+        end
+    end)
+    --[[ phase1 0-45s 4000-3200hp
+    ]]
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if flag1 then break end
+            task._Wait(1)
+        end
+        for _=1,_infinite do
+            for _=1,_infinite do
+                if flag then break end
+                task._Wait(1)
+            end
+            lasttask=task.New(self,function()
+                for _=1,60 do
+                    PlaySound("kira00",0.4,self.x/256,true)
+                    local r=(50)
+                    local a=(ran:Float(0,360))
+                    if flag3 then
+                        do
+                            local _beg_aa=-30 local aa=_beg_aa local _end_aa=30 local _d_aa=(_end_aa-_beg_aa)/(3-1)
+                            for _=1,3 do
+                                last=New(_straight,knife,COLOR_RED,self.x+r*cos(a),self.y+r*sin(a),5,a+aa,false,0,true,true,0,false,0,0,0,false)
+                                aa=aa+_d_aa
+                            end
+                        end
+                    elseif flag2 then
+                        do
+                            local _beg_aa=-20 local aa=_beg_aa local _end_aa=20 local _d_aa=(_end_aa-_beg_aa)/(2-1)
+                            for _=1,2 do
+                                last=New(_straight,knife,COLOR_RED,self.x+r*cos(a),self.y+r*sin(a),4,a+aa,false,0,true,true,0,false,0,0,0,false)
+                                aa=aa+_d_aa
+                            end
+                        end
+                    else
+                        last=New(_straight,knife,COLOR_CYAN,self.x+r*cos(a),self.y+r*sin(a),3,a,false,0,true,true,0,false,0,0,0,false)
+                    end
+                    task._Wait(1)
+                end
+            end)
+            task._Wait(1)
+        end
+    end)
+    --[[ phase2 3200-2200hp
+    ]]
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if flag2 then break end
+            task._Wait(1)
+        end
+        for _=1,_infinite do
+            for _=1,_infinite do
+                if flag then break end
+                task._Wait(1)
+            end
+            do
+                local _h_a=(45-(-45))/2 local _t_a=(45+(-45))/2 local a=_h_a*sin(0)+_t_a local _w_a=0 local _d_w_a=3
+                local s=1 local _n_s=(1)+(-1)
+                for _=1,2 do
+                    local ss=(0.5)
+                    if flag3 then
+                        ss=1
+                    end
+                    do
+                        local _beg_aa=Angle(self,player) local aa=_beg_aa local _end_aa=Angle(self,player)+360 local _d_aa=(_end_aa-_beg_aa)/(6)
+                        for _=1,6 do
+                            do
+                                local a,aa,s,ss = a,aa,s,ss
+                                do
+                                    lasttask=task.New(self,function()
+                                        do
+                                            local _h_aaa=(90-(0))/2 local _t_aaa=(90+(0))/2 local aaa=_h_aaa*sin(-90)+_t_aaa local _w_aaa=-90 local _d_w_aaa=3*360/(int(120/8)-1)
+                                            for _=1,int(120/8) do
+                                                last=New(_straight,square,COLOR_RED,self.x,self.y,1*s,a+aa+aaa,false,0,true,true,0,false,0.03,a+aa+aaa+90*s,0,false)
+                                                lasttask=task.New(last,function()
+                                                    local self=task.GetSelf()
+                                                    self.navi=true
+                                                    do
+                                                        local _h_acc=(0.06*ss-(0.03*ss))/2 local _t_acc=(0.06*ss+(0.03*ss))/2 local acc=_h_acc*sin(0)+_t_acc local _w_acc=0 local _d_w_acc=3*ss
+                                                        local _beg_acca=a+aa+aaa+90*s local acca=_beg_acca local _end_acca=a+aa+aaa local _w_acca=0 local _d_w_acca=1/(30-1)
+                                                        for _=1,30 do
+                                                            _set_a(self,acc,acca,false)
+                                                            task._Wait(1)
+                                                            _w_acc=_w_acc+_d_w_acc acc=_h_acc*sin(_w_acc)+_t_acc
+                                                            _w_acca=_w_acca+_d_w_acca acca=(_beg_acca-_end_acca)*(_w_acca-1)^2+_end_acca
+                                                        end
+                                                    end
+                                                end)
+                                                PlaySound("kira00",0.4,self.x/256,true)
+                                                task._Wait(5)
+                                                _w_aaa=_w_aaa+_d_w_aaa aaa=_h_aaa*sin(_w_aaa)+_t_aaa
+                                            end
+                                        end
+                                    end)
+                                end
+                            end
+                            aa=aa+_d_aa
+                        end
+                    end
+                    _w_a=_w_a+_d_w_a a=_h_a*sin(_w_a)+_t_a
+                    s=-(s)+_n_s
+                end
+            end
+            task._Wait(1)
+        end
+    end)
+    --[[ phase3 2200-1200hp
+    ]]
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if flag3 then break end
+            task._Wait(1)
+        end
+        do
+            local s=1 local _n_s=(1)+(-1)
+            for _=1,_infinite do
+                for _=1,_infinite do
+                    if flag then break end
+                    task._Wait(1)
+                end
+                do
+                    local _beg_a=Angle(self,player) local a=_beg_a local _end_a=Angle(self,player)+360 local _d_a=(_end_a-_beg_a)/(24)
+                    for _=1,24 do
+                        last=New(_editor_class["Muki_AiC_burst_laser"],self.x,self.y,5,a*s,s)
                         a=a+_d_a
                     end
                 end
+                task._Wait(1)
+                s=-(s)+_n_s
             end
-            task._Wait(60)
         end
     end)
-    lasttask=task.New(self,function()
-        for _=1,_infinite do
-            PlaySound("kira00",0.75,self.x/256,true)
-            local aa=(ran:Float(0,360))
-            do
-                local _beg_a=aa local a=_beg_a local _end_a=aa+360 local _d_a=(_end_a-_beg_a)/(16)
-                for _=1,16 do
-                    last=New(_straight,star_big,COLOR_CYAN,self.x+25*cos(a),self.y+25*sin(a),5,a,false,3,true,true,0,false,0,0,0,false)
-                    lasttask=task.New(last,function()
-                        local self=task.GetSelf()
-                        task._Wait(10)
-                        SetV2(self,3,self.rot,false,false)
-                    end)
-                    a=a+_d_a
-                end
-            end
-            task._Wait(60)
-        end
-    end)
+    --[[ phase4 45-90s 1200-0hp
+    ]]
 end
 function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
     self.spelling=false
+    self.hscale=0.75
     if IsValid(lstg.tmpvar.aura) then
         lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
     end
@@ -4015,10 +6799,17 @@ function _tmp_sc:beforedel()
         end
     else
     end
-end
-function _tmp_sc:del()
-    for _,unit in ObjList(GROUP_NONTJT) do
-        _kill(unit,true)
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
     end
 end
 function _tmp_sc:after()
@@ -4036,178 +6827,76 @@ function _tmp_sc:init()
     _dialog_can_skip=false
     self.dialog_displayer=New(dialog_displayer)
     lasttask=task.New(self,function()
-        local img = {
-        "image:Muki_AiC_Noel_face_lose",
-        "image:Muki_AiC_Yukari_face_default",
-        "image:Muki_AiC_Yukari_face_fight",
-        "image:Muki_AiC_Yukari_face_smile",
-        "image:Muki_AiC_Noel_face_default",
-        "image:Muki_AiC_Noel_face_default",
-        "image:Muki_AiC_Noel_face_fight",
-        }
-        local pos = 'right'
-        local text = {
-        '……',
-        '真是执着的少女呢\n不过你还没有领悟到弹幕的精髓啊',
-        '就再给你一次机会吧\n用我的力量',
-        '事情变得有趣起来了呢',
-        '诶？\n身上的伤……突然不疼了……',
-        '虽然不知道您是谁，\n但我十分感谢……',
-        '我诺艾儿·柯涅尔，\n发誓将战斗至最后一刻！'
-        }
-        local canskip = false
-        local t = 120
-        local hscale, vscale = 0.5, 0.5
-        local num = {1, 1, 1, 2}
-        local snd = {
-        "se:Muki_AiC_dialog_Noel",
-        'plst00',
-        'plst00',
-        'plst00',
-        "se:Muki_AiC_dialog_Noel"
-        }
-        local vol = 1
-        lib.sp.SetDisplayer(self, true, 'image:Muki_AiC_dialog_frame', 0.7, 0.25, 0, 20, '', nil, Color(150, 255, 255, 255), nil, Color(255, 85, 76, 74))
-        last=New(_editor_class["Muki_AiC_dialog_name"],-175,-50,'诺艾儿·柯涅尔')
-        self.dialog_name=last
-        Muki_fadeout(60, true)
-        lib.sp.multi_sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, num, nil, nil, 1, snd, vol, nil, 1, 1)
-        self.dialog_name.name='???'
-        lib.sp.multi_sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, num, nil, nil, 1, snd, vol, nil, 2, 4)
-        self.dialog_name.name='诺艾儿·柯涅尔'
-        lib.sp.multi_sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, num, nil, nil, 1, snd, vol, nil, 5, 6)
-        Muki_fadein('aic_bgm15')
-        lib.sp.multi_sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, num, nil, nil, 1, snd, vol, nil, 7, 7)
-        _del(self.dialog_name,false)
+        if not CheckEnhancer(13) then
+            task._Wait(60)
+            Muki_fadeout(60, true)
+            task._Wait(60)
+            lib.AiCDialog(self,7)
+        end
     end)
 end
 table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
-_tmp_sc=boss.card.New("结界「八重护盾结界」",2,5,60,1200,{30,30,30},true)
-function _tmp_sc:before()
-    self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][9])
-    self.shielder.active=true
-    if ext.sc_pr then
-        lasttask=task.New(self,function()
-            self.auralist={}
-            do
-                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
-                local i=1 local _d_i=(1)
-                for _=1,4 do
-                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
-                    self.auralist[i]=last
-                    task._Wait(30)
-                    a=a+_d_a
-                    i=i+_d_i
-                end
-            end
-            do local i,_d_i=(1),(1) for _=1,4 do
-                lasttask=task.New(self.auralist[i],function()
-                    local self=task.GetSelf()
-                    do
-                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
-                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
-                        for _=1,_infinite do
-                            self.r=rr
-                            self.vscale=scale
-                            self.hscale=scale
-                            task._Wait(1)
-                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
-                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
-                        end
-                    end
-                end)
-            i=i+_d_i end end
-        end)
-        self.hide=true
-        self.x,self.y=-384,256
-        boss.show_aura(self,false)
-        last=New(_editor_class["Muki_AiC_Primula"],-384,256,2)
-    end
-    self.spelling=true
-    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_final')
-end
+_tmp_sc=boss.dialog.New(false)
 function _tmp_sc:init()
+    lstg.player.dialog=true
+    _dialog_can_skip=false
+    self.dialog_displayer=New(dialog_displayer)
     lasttask=task.New(self,function()
         task._Wait(60)
-        for _=1,_infinite do
-            for _=1,2 do
-                local a=(Angle(self,player))
-                Muki_cast(self,1,90,a)
-                PlaySound("se:Muki_AiC_arrow",4,self.x/256,true)
-                task._Wait(30)
-                last=New(_editor_class["Muki_AiC_white_arrow"],self.x,self.y,5,a,5)
-                PlaySound("slash",4,self.x/256,true)
-                task._Wait(60)
-            end
-            last=New(_editor_class["Muki_AiC_burst"],0,0,false)
-            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
-            task._Wait(30)
-        end
-    end)
-    lasttask=task.New(self,function()
-        for _=1,_infinite do
-            if Dist(self,player)<=200 then
-                PlaySound("tan00",0.1,self.x/256,false)
-                do
-                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
-                    for _=1,16 do
-                        last=New(_straight,ball_big,COLOR_BLUE,self.x+25*cos(a),self.y+25*sin(a),5,a,false,0,true,true,0,false,0,0,0,false)
-                        lasttask=task.New(last,function()
-                            local self=task.GetSelf()
-                            task._Wait(10)
-                            SetV2(self,3,self.rot,true,false)
-                        end)
-                        a=a+_d_a
-                    end
-                end
-            end
-            task._Wait(60)
-        end
-    end)
-    lasttask=task.New(self,function()
-        for _=1,_infinite do
-            PlaySound("kira00",0.75,self.x/256,true)
-            local aa=(ran:Float(0,360))
+        player.lock=true
+        lasttask=task.New(self,function()
             do
-                local _beg_a=aa local a=_beg_a local _end_a=aa+360 local _d_a=(_end_a-_beg_a)/(16)
-                for _=1,16 do
-                    last=New(_straight,star_big,COLOR_CYAN,self.x+25*cos(a),self.y+25*sin(a),5,a,false,3,true,true,0,false,0,0,0,false)
-                    lasttask=task.New(last,function()
-                        local self=task.GetSelf()
-                        task._Wait(10)
-                        SetV2(self,3,self.rot,false,false)
-                    end)
-                    a=a+_d_a
+                local _beg_maxhp=400 local maxhp=_beg_maxhp local _end_maxhp=100 local _d_maxhp=(_end_maxhp-_beg_maxhp)/(120-1)
+                for _=1,120 do
+                    lstg.var.maxhp=int(maxhp)
+                    task._Wait(1)
+                    maxhp=maxhp+_d_maxhp
                 end
             end
-            task._Wait(60)
+        end)
+        New(boss_cast_ef,player.x,player.y,nil,175,0,175)
+        task._Wait(30)
+        New(boss_cast_ef,player.x,player.y,nil,175,0,175)
+        task._Wait(30)
+        New(boss_cast_ef,player.x,player.y,nil,175,0,175)
+        task._Wait(60)
+        lstg.var.maxhp=100
+        lstg.var.hp=100
+        PlaySound("boon01",1,self.x/256,true)
+        task._Wait(60)
+        lasttask=task.New(self,function()
+            do
+                local _beg_mp=0 local mp=_beg_mp local _end_mp=5 local _d_mp=(_end_mp-_beg_mp)/(120-1)
+                for _=1,120 do
+                    lstg.var.mp_active=int(mp)
+                    task._Wait(1)
+                    mp=mp+_d_mp
+                end
+            end
+        end)
+        New(boss_cast_ef,player.x,player.y,nil,255,150,0)
+        task._Wait(30)
+        New(boss_cast_ef,player.x,player.y,nil,255,150,0)
+        task._Wait(30)
+        New(boss_cast_ef,player.x,player.y,nil,255,150,0)
+        task._Wait(60)
+        lstg.var.mp_active=5
+        task._Wait(60)
+        last=New(_editor_class["Muki_AiC_border_tips"],self.x,self.y,_)
+        for _=1,_infinite do
+            if not IsValid(last) then break end
+            task._Wait(1)
         end
+        player.lock=false
+        task._Wait(30)
+        if not CheckEnhancer(13) then
+            lib.AiCDialog(self,7.5)
+        end
+        Muki_fadein('aic_bgm15')
     end)
 end
-function _tmp_sc:beforedel()
-    self.spelling=false
-    if IsValid(lstg.tmpvar.aura) then
-        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
-    end
-    if ext.sc_pr then
-        for _,o in ipairs(self.auralist) do
-            _del(o,true)
-        end
-    else
-    end
-end
-function _tmp_sc:del()
-    for _,unit in ObjList(GROUP_NONTJT) do
-        _kill(unit,true)
-    end
-end
-function _tmp_sc:after()
-end
-_tmp_sc.perform=false
 table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
-table.insert(_sc_table,{"Muki_AiC_Noel","结界「八重护盾结界」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
---[[ 结界「十六重护盾大结界」
-]]
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
 _tmp_sc=boss.card.New("境符「光与影的限间」",2,5,60,1200,{30,30,30},true)
 function _tmp_sc:before()
     self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][10])
@@ -4246,68 +6935,101 @@ function _tmp_sc:before()
         end)
     end
     self.spelling=true
-    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_final')
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_final',0.3)
 end
 function _tmp_sc:init()
+    player.protect=player.protect+90
+    light_flag=true
+    last=New(_editor_class["Muki_AiC_pendulum"],self.x,self.y,_)
     lasttask=task.New(self,function()
-        task._Wait(60)
-        for _=1,_infinite do
-            for _=1,2 do
-                local a=(Angle(self,player))
-                Muki_cast(self,1,90,a)
-                PlaySound("se:Muki_AiC_arrow",4,self.x/256,true)
-                task._Wait(30)
-                last=New(_editor_class["Muki_AiC_white_arrow"],self.x,self.y,5,a,5)
-                PlaySound("slash",4,self.x/256,true)
-                task._Wait(60)
+        task._Wait(120)
+        do local i,_d_i=(0),(1) for _=1,_infinite do
+            local state=({})
+            for _=1,8 do
+                table.insert(state,ran:Int(0,1))
             end
-            last=New(_editor_class["Muki_AiC_burst"],0,0,false)
-            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
-            task._Wait(30)
+            do local x,_d_x,i,_d_i=(-170-45*SQRT2),(45*SQRT2),(1),(1) for _=1,12 do
+                do local y,_d_y,j,_d_j=(-200-45*SQRT2),(45*SQRT2),(1),(1) for _=1,12 do
+                    last=New(_editor_class["Muki_AiC_laser_restrict"],x,y,45,i%2==state[1] and j%2==state[2])
+                    last=New(_editor_class["Muki_AiC_laser_restrict"],x,y,135,i%2==state[3] and j%2==state[4])
+                    last=New(_editor_class["Muki_AiC_laser_restrict"],x,y,-45,i%2==state[5] and j%2==state[6])
+                    last=New(_editor_class["Muki_AiC_laser_restrict"],x,y,-135,i%2==state[7] and j%2==state[8])
+                y=y+_d_y j=j+_d_j end end
+            x=x+_d_x i=i+_d_i end end
+            task._Wait(480)
+        i=i+_d_i end end
+    end)
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        do
+            local a=0 local _d_a=(15)
+            local co=COLOR_RED local _n_co=(COLOR_RED)+(COLOR_BLUE)
+            local _h_r=(100-(50))/2 local _t_r=(100+(50))/2 local r=_h_r*sin(0)+_t_r local _w_r=0 local _d_w_r=1.5
+            for _=1,_infinite do
+                local p=(aic.math.polygon(100,4,r,a,self.x,self.y))
+                local p2=(aic.math.polygon(100,4,r,a+45,self.x,self.y))
+                do
+                    local i=1 local _d_i=(1)
+                    local islight=1 local _n_islight=(1)+(0)
+                    for _=1,#p do
+                        last=New(_editor_class["Muki_AiC_square"],p[i][1],p[i][2],Dist(self.x,self.y,p[i][1],p[i][2])/120,Angle(self.x,self.y,p[i][1],p[i][2])+180,islight==0)
+                        last=New(_editor_class["Muki_AiC_square"],p2[i][1],p2[i][2],Dist(self.x,self.y,p2[i][1],p2[i][2])/120,Angle(self.x,self.y,p2[i][1],p2[i][2])+180,islight==1)
+                        i=i+_d_i
+                        islight=-(islight)+_n_islight
+                    end
+                end
+                task._Wait(120)
+                a=a+_d_a
+                co=-(co)+_n_co
+                _w_r=_w_r+_d_w_r r=_h_r*sin(_w_r)+_t_r
+            end
         end
     end)
     lasttask=task.New(self,function()
-        for _=1,_infinite do
-            if Dist(self,player)<=200 then
-                PlaySound("tan00",0.1,self.x/256,false)
+        task._Wait(120)
+        do
+            local s=1 local _n_s=(1)+(-1)
+            for _=1,_infinite do
                 do
-                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
-                    for _=1,16 do
-                        last=New(_straight,ball_big,COLOR_BLUE,self.x+25*cos(a),self.y+25*sin(a),5,a,false,0,true,true,0,false,0,0,0,false)
-                        lasttask=task.New(last,function()
-                            local self=task.GetSelf()
-                            task._Wait(10)
-                            SetV2(self,3,self.rot,true,false)
-                        end)
+                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(180)
+                    for _=1,180 do
+                        last=New(_editor_class["Muki_AiC_square"],self.x,self.y,1,a,s==1)
                         a=a+_d_a
                     end
                 end
+                task._Wait(300)
+                s=-(s)+_n_s
             end
-            task._Wait(60)
         end
     end)
     lasttask=task.New(self,function()
-        for _=1,_infinite do
-            PlaySound("kira00",0.75,self.x/256,true)
-            local aa=(ran:Float(0,360))
-            do
-                local _beg_a=aa local a=_beg_a local _end_a=aa+360 local _d_a=(_end_a-_beg_a)/(16)
-                for _=1,16 do
-                    last=New(_straight,star_big,COLOR_CYAN,self.x+25*cos(a),self.y+25*sin(a),5,a,false,3,true,true,0,false,0,0,0,false)
-                    lasttask=task.New(last,function()
-                        local self=task.GetSelf()
-                        task._Wait(10)
-                        SetV2(self,3,self.rot,false,false)
-                    end)
-                    a=a+_d_a
-                end
+        task._Wait(120)
+        do
+            local rot1=0 local _n_rot1=(0)+(180)
+            local rot2=180 local _n_rot2=(180)+(0)
+            local o=1 local _n_o=(1)+(-1)
+            for _=1,2 do
+                last=New(_editor_class["Muki_AiC_slave4"],self.x,self.y,rot1,o,true)
+                last=New(_editor_class["Muki_AiC_slave4"],self.x,self.y,rot2,o,false)
+                task._Wait(5)
+                rot1=-(rot1)+_n_rot1
+                rot2=-(rot2)+_n_rot2
+                o=-(o)+_n_o
             end
-            task._Wait(60)
         end
     end)
 end
 function _tmp_sc:beforedel()
+    for _,unit in ObjList(GROUP_GHOST) do
+        unit.del=true
+    end
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
     self.spelling=false
+    self.hscale=0.75
     if IsValid(lstg.tmpvar.aura) then
         lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
     end
@@ -4317,10 +7039,17 @@ function _tmp_sc:beforedel()
         end
     else
     end
-end
-function _tmp_sc:del()
-    for _,unit in ObjList(GROUP_NONTJT) do
-        _kill(unit,true)
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
     end
 end
 function _tmp_sc:after()
@@ -4330,7 +7059,207 @@ table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
 table.insert(_sc_table,{"Muki_AiC_Noel","境符「光与影的限间」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
 --[[ 境界「明与灭的樊笼」
 ]]
-_tmp_sc=boss.card.New("「繁星若梦」",2,5,60,1200,{0,0,50},true)
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
+_tmp_sc=boss.card.New("结界「八重护盾结界」",50,50,50,1200,{30,30,30},true)
+function _tmp_sc:before()
+    self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][9])
+    if ext.sc_pr then
+        lasttask=task.New(self,function()
+            self.auralist={}
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(4)
+                local i=1 local _d_i=(1)
+                for _=1,4 do
+                    last=New(_editor_class["Muki_AiC_aura1"],self.x,self.y,40,a,{155,255,230},1.75)
+                    self.auralist[i]=last
+                    task._Wait(30)
+                    a=a+_d_a
+                    i=i+_d_i
+                end
+            end
+            do local i,_d_i=(1),(1) for _=1,4 do
+                lasttask=task.New(self.auralist[i],function()
+                    local self=task.GetSelf()
+                    do
+                        local _h_rr=(self.r*1.25-(self.r*0.75))/2 local _t_rr=(self.r*1.25+(self.r*0.75))/2 local rr=_h_rr*sin(0)+_t_rr local _w_rr=0 local _d_w_rr=1.5
+                        local _h_scale=(self.vscale*1.25-(self.vscale*0.75))/2 local _t_scale=(self.vscale*1.25+(self.vscale*0.75))/2 local scale=_h_scale*sin(0)+_t_scale local _w_scale=0 local _d_w_scale=1.5
+                        for _=1,_infinite do
+                            self.r=rr
+                            self.vscale=scale
+                            self.hscale=scale
+                            task._Wait(1)
+                            _w_rr=_w_rr+_d_w_rr rr=_h_rr*sin(_w_rr)+_t_rr
+                            _w_scale=_w_scale+_d_w_scale scale=_h_scale*sin(_w_scale)+_t_scale
+                        end
+                    end
+                end)
+            i=i+_d_i end end
+        end)
+    end
+    self.spelling=true
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_final',0.3)
+end
+function _tmp_sc:init()
+    local t3=50*60
+    for i=1,4 do
+        AddSPPoint2(i/5,nil,t3)
+    end
+    lasttask=task.New(self,function()
+        task._Wait(60)
+        last=New(_editor_class["Muki_AiC_shield_warning"],self.x,self.y,_)
+        task._Wait(90)
+        for _=1,_infinite do
+            do
+                local _beg_x=0 local x=_beg_x local _end_x=192 local _d_x=(_end_x-_beg_x)/(15)
+                local _beg_y=0 local y=_beg_y local _end_y=224 local _d_y=(_end_y-_beg_y)/(15)
+                for _=1,15 do
+                    last=New(_straight,arrow_big,COLOR_CYAN,x,-224,5,Angle(0,-224,192,0),false,0,true,true,0,false,0,0,0,false)
+                    last=New(_straight,arrow_big,COLOR_CYAN,192,y,5,Angle(192,0,0,224),false,0,true,true,0,false,0,0,0,false)
+                    last=New(_straight,arrow_big,COLOR_CYAN,-x,224,5,Angle(0,224,-192,0),false,0,true,true,0,false,0,0,0,false)
+                    last=New(_straight,arrow_big,COLOR_CYAN,-192,-y,5,Angle(-192,0,0,-224),false,0,true,true,0,false,0,0,0,false)
+                    x=x+_d_x
+                    y=y+_d_y
+                end
+            end
+            task._Wait(3)
+        end
+    end)
+    --[[ 限位弹
+    ]]
+    lasttask=task.New(self,function()
+        task._Wait(120)
+        task.MoveTo(0,0,60,MOVE_ACC_DEC)
+        player.protect=player.protect+90
+        last=New(_editor_class["Muki_AiC_shield2"],self.x,self.y,144,224,-0.5,1,self,_infinite,2)
+        self.shield2=last
+    end)
+    --[[ phase1 0-10s 护盾展开
+    ]]
+    lasttask=task.New(self,function()
+        task._Wait(600)
+        for _=1,_infinite do
+            if self.timer>=1800 then break end
+            PlaySound("kira00",0.3,self.x/256,true)
+            do
+                local _beg_a=Angle(self,player) local a=_beg_a local _end_a=Angle(self,player)+360 local _d_a=(_end_a-_beg_a)/(8)
+                for _=1,8 do
+                    last=New(_straight,star_big,COLOR_CYAN,self.x+30*cos(a),self.y+30*sin(a),1,a,false,1,true,true,0,false,0,0,0,false)
+                    a=a+_d_a
+                end
+            end
+            task._Wait(60)
+        end
+    end)
+    --[[ phase2 10-20s 追加中心开花弹
+    ]]
+    lasttask=task.New(self,function()
+        task._Wait(1200)
+        do local a,_d_a=(0),(30) for _=1,_infinite do
+            if self.timer>=1800 then break end
+            PlaySound("tan00",0.3,self.x/256,true)
+            do
+                local _beg_aa=0 local aa=_beg_aa local _end_aa=360 local _d_aa=(_end_aa-_beg_aa)/(12)
+                for _=1,12 do
+                    if Dist(self.x+50*cos(a)+30*cos(aa),self.y+50*sin(a)+30*sin(aa),player.x,player.y)>30 then
+                        last=New(_straight,star_small,COLOR_CYAN,self.x+50*cos(a)+30*cos(aa),self.y+50*sin(a)+30*sin(aa),1,aa,false,-3,true,true,0,false,0,0,0,false)
+                    else
+                    end
+                    if Dist(self.x+50*cos(a+180)+30*cos(aa),self.y+50*sin(a+180)+30*sin(aa),player.x,player.y)>30 then
+                        last=New(_straight,star_small,COLOR_CYAN,self.x+50*cos(a+180)+30*cos(aa),self.y+50*sin(a+180)+30*sin(aa),1,aa,false,3,true,true,0,false,0,0,0,false)
+                    else
+                    end
+                    aa=aa+_d_aa
+                end
+            end
+            task._Wait(30)
+        a=a+_d_a end end
+    end)
+    --[[ phase3 20-30s 追加周围开花弹
+    ]]
+    lasttask=task.New(self,function()
+        task._Wait(1800)
+        _clear_bullet(false,false)
+        player.protect=player.protect+70
+        New(boss_cast_ef,self.x,self.y,nil,25,255,255)
+        task._Wait(35*2)
+        PlaySound("se:Muki_AiC_guard_slash",0.8,self.x/256,true)
+        local intv=({5,6,6,7,9,8,6,6,5,5,5,5,5,5,5,5,5})
+        last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_guard_slash_start',self,#intv,aic.table.Sum(intv),intv,nil,nil,0.65)
+        task._Wait(aic.table.Sum(intv))
+        last=New(_editor_class["Muki_AiC_boss_image"],self.x,self.y,'image:Muki_AiC_Noel_guard_slash_loop',self,7,12*7*5,5,nil,nil,0.65)
+        lasttask=task.New(self.shield2,function()
+            local self=task.GetSelf()
+            task.MoveTo(150,0,35,MOVE_DECEL)
+            do
+                local s=-1 local _n_s=(-1)+(1)
+                for _=1,5 do
+                    task.MoveTo(150*s,0,70,MOVE_DECEL)
+                    s=-(s)+_n_s
+                end
+            end
+            task.MoveTo(0,0,35,MOVE_DECEL)
+        end)
+        task._Wait(10*35)
+        intv={5,5,5,8,8,8,8,8,8,8,8,8}
+        last=New(_editor_class["Muki_AiC_boss_image_ex"],self.x,self.y,'image:Muki_AiC_Noel_guard_slash_end',self,#intv,aic.table.Sum(intv),intv,nil,nil,0.65)
+        task._Wait(aic.table.Sum(intv)+1)
+        self.hide=false
+    end)
+    --[[ phase4 30-40s 弹幕停止，使用环轨护盾
+    ]]
+    --[[ 这里本来想加一个护盾冲击的，但是对于怎么流畅地把护盾拆开完全没思路，所以放弃了
+    ]]
+    lasttask=task.New(self,function()
+        task._Wait(2400)
+        task._Wait(60)
+        self.shield2.state=3
+        task._Wait(300)
+        self.shield2.state=4
+        task._Wait(240)
+        self.shield2.state=5
+    end)
+    --[[ phase5 40-50s 护盾摇晃直至破碎
+    ]]
+end
+function _tmp_sc:beforedel()
+end
+function _tmp_sc:del()
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
+    self.spelling=false
+    self.hscale=0.75
+    if IsValid(lstg.tmpvar.aura) then
+        lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
+    end
+    if ext.sc_pr then
+        for _,o in ipairs(self.auralist) do
+            _del(o,true)
+        end
+    else
+    end
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
+    end
+end
+function _tmp_sc:after()
+end
+_tmp_sc.perform=false
+table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
+table.insert(_sc_table,{"Muki_AiC_Noel","结界「八重护盾结界」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
+--[[ 结界「十六重护盾大结界」
+]]
+table.insert(_editor_class["Muki_AiC_Noel"].cards,boss.move.New(0,120,60,MOVE_NORMAL))
+_tmp_sc=boss.card.New("「繁星若梦」",2,5,120,6000,{0,0,50},true)
 function _tmp_sc:before()
     self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][11])
     self.shielder.active=true
@@ -4368,68 +7297,115 @@ function _tmp_sc:before()
         end)
     end
     self.spelling=true
-    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_final')
+    last=New(_editor_class["Muki_AiC_NB_Portrait_AI"],0,0,'image:Muki_AiC_Noel_face_final',0.3)
 end
 function _tmp_sc:init()
+    AddSPPoint2(0.8,6000,nil)
+    AddSPPoint2(0.5,6000,nil)
+    AddSPPoint2(0.2,6000,nil)
     lasttask=task.New(self,function()
-        task._Wait(60)
-        for _=1,_infinite do
-            for _=1,2 do
-                local a=(Angle(self,player))
-                Muki_cast(self,1,90,a)
-                PlaySound("se:Muki_AiC_arrow",4,self.x/256,true)
-                task._Wait(30)
-                last=New(_editor_class["Muki_AiC_white_arrow"],self.x,self.y,5,a,5)
-                PlaySound("slash",4,self.x/256,true)
-                task._Wait(60)
+        do
+            local s=1 local _n_s=(1)+(-1)
+            for _=1,_infinite do
+                local a0=(ran:Float(0,360))
+                last=New(_editor_class["Muki_AiC_last_slave1"],self.x,self.y+50*s,self.x,self.y,90,a0+60*s,COLOR_BLUE,7.2,50*s)
+                last=New(_editor_class["Muki_AiC_last_slave2"],self.x-100/2*s,self.y+100/2*s,self.x,self.y,90,a0+90*s,COLOR_CYAN,7.2,100*s)
+                last=New(_editor_class["Muki_AiC_last_slave1"],self.x,self.y+100*s,self.x,self.y,90,a0+120*s,COLOR_GREEN,7.2,100*s)
+                task._Wait(150)
+                flag=true
+                task._Wait(1)
+                flag=false
+                task._Wait(150)
+                task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+                last=New(_editor_class["Muki_AiC_last_slave1"],self.x,self.y+50*SQRT2*s,self.x,self.y,90,a0+60*s,COLOR_RED,7.2,50*SQRT2*s)
+                last=New(_editor_class["Muki_AiC_last_slave2"],self.x-100*SQRT2/2*s,self.y+100*SQRT2/2*s,self.x,self.y,90,a0+90*s,COLOR_PURPLE,7.2,100*SQRT2*s)
+                task._Wait(150)
+                flag=true
+                task._Wait(1)
+                flag=false
+                task._Wait(150)
+                task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
+                s=-(s)+_n_s
             end
-            last=New(_editor_class["Muki_AiC_burst"],0,0,false)
-            task.MoveToPlayer(30,-96,96,112,144,16,32,8,16,MOVE_NORMAL,MOVE_X_TOWARDS_PLAYER)
-            task._Wait(30)
         end
     end)
+    --[[ phase1 主弹幕
+    ]]
     lasttask=task.New(self,function()
         for _=1,_infinite do
-            if Dist(self,player)<=200 then
-                PlaySound("tan00",0.1,self.x/256,false)
-                do
-                    local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
-                    for _=1,16 do
-                        last=New(_straight,ball_big,COLOR_BLUE,self.x+25*cos(a),self.y+25*sin(a),5,a,false,0,true,true,0,false,0,0,0,false)
-                        lasttask=task.New(last,function()
-                            local self=task.GetSelf()
-                            task._Wait(10)
-                            SetV2(self,3,self.rot,true,false)
-                        end)
-                        a=a+_d_a
-                    end
-                end
-            end
-            task._Wait(60)
+            if self.hp<=self.maxhp*0.8 then break end
+            task._Wait(1)
         end
-    end)
-    lasttask=task.New(self,function()
+        lasttask=task.New(self,function()
+            for _=1,_infinite do
+                PlaySound("kira00",0.6,self.x/256,true)
+                last=New(_straight,star_big,COLOR_YELLOW,ran:Float(-192,192),230,2,-90+ran:Float(-15,15),false,-3,true,true,0,false,0,0,0,false)
+                _object.set_color(last,"mul+add",200,255,255,255)
+                last.a=last.a*0.8
+                last.b=last.b*0.8
+                task._Wait(20)
+            end
+        end)
         for _=1,_infinite do
-            PlaySound("kira00",0.75,self.x/256,true)
-            local aa=(ran:Float(0,360))
+            PlaySound("tan00",0.8,self.x/256,true)
             do
-                local _beg_a=aa local a=_beg_a local _end_a=aa+360 local _d_a=(_end_a-_beg_a)/(16)
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(16)
                 for _=1,16 do
-                    last=New(_straight,star_big,COLOR_CYAN,self.x+25*cos(a),self.y+25*sin(a),5,a,false,3,true,true,0,false,0,0,0,false)
-                    lasttask=task.New(last,function()
-                        local self=task.GetSelf()
-                        task._Wait(10)
-                        SetV2(self,3,self.rot,false,false)
-                    end)
+                    last=New(_straight,star_big,COLOR_BLUE,self.x+50*cos(a),self.y+50*sin(a),2,a,false,3,true,true,0,false,0,0,0,false)
+                    _object.set_color(last,"mul+add",200,255,255,255)
+                    last.a=last.a*0.8
+                    last.b=last.b*0.8
                     a=a+_d_a
                 end
             end
-            task._Wait(60)
+            task._Wait(180)
         end
     end)
+    --[[ phase2 追加开花大星弹，板顶高光大星弹
+    ]]
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if self.hp<=self.maxhp*0.5 then break end
+            task._Wait(1)
+        end
+        local co=({COLOR_RED,COLOR_ORANGE,COLOR_YELLOW,COLOR_GREEN,COLOR_CYAN,COLOR_BLUE,COLOR_PURPLE})
+        do local aa,_d_aa,c,_d_c=(0),(3),(1),(1) for _=1,_infinite do
+            PlaySound("kira00",0.6,self.x/256,true)
+            do
+                local _beg_a=0 local a=_beg_a local _end_a=360 local _d_a=(_end_a-_beg_a)/(5)
+                for _=1,5 do
+                    last=New(_straight,star_big,co[c%7+1],self.x,self.y,3,a+aa,false,3,true,true,0,false,0,0,0,false)
+                    last.a=last.a*0.8
+                    last.b=last.b*0.8
+                    a=a+_d_a
+                end
+            end
+            task._Wait(20)
+        aa=aa+_d_aa c=c+_d_c end end
+    end)
+    --[[ phase3 追加彩色风车星弹
+    ]]
+    lasttask=task.New(self,function()
+        for _=1,_infinite do
+            if self.hp<=self.maxhp*0.2 then break end
+            task._Wait(1)
+        end
+        PlaySound("boon01",1,self.x/256,false)
+        last=New(_editor_class["Muki_AiC_last_slave_wall"],self.x,self.y,_)
+    end)
+    --[[ phase4 追加触手
+    ]]
 end
 function _tmp_sc:beforedel()
+    self.is_final=true
+end
+function _tmp_sc:del()
+    SetV2(player,0,0,false,false)
+    aic.sys.DropPower(10,self.x,self.y)
+    lstg.var.timeslow=1
+    self.shielder.active=false
     self.spelling=false
+    self.hscale=0.75
     if IsValid(lstg.tmpvar.aura) then
         lstg.tmpvar.aura.timer=lstg.tmpvar.aura.t2
     end
@@ -4439,58 +7415,40 @@ function _tmp_sc:beforedel()
         end
     else
     end
-end
-function _tmp_sc:del()
-    for _,unit in ObjList(GROUP_NONTJT) do
-        _kill(unit,true)
+    if IsValid(self.spellname) then
+        _del(self.spellname,true)
+    else
+    end
+    if self.H then
+        local num=(ran:Int(1,5))
+        if num==5 then
+            PlaySound("se:Muki_AiC_dame",0.75,self.x/256,true)
+        else
+            PlaySound("se:Muki_AiC_hited"..num,0.75,self.x/256,true)
+        end
     end
 end
 function _tmp_sc:after()
+    PlaySound("se:Muki_AiC_bgm_end",3,self.x/256,true)
 end
 _tmp_sc.perform=false
 table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
 table.insert(_sc_table,{"Muki_AiC_Noel","「繁星若梦」",_tmp_sc,#_editor_class["Muki_AiC_Noel"].cards,false})
 --[[ 「月华流转」/「幻梦的摇篮」
 ]]
---[[ 这里击破应该有60帧timeslow=4（可以直接用slow_explode），之后wait180帧
-]]
---[[ 下面对话的音效应该挪到这里击破后播放
-]]
 _tmp_sc=boss.dialog.New(false)
 function _tmp_sc:init()
     lstg.player.dialog=true
     _dialog_can_skip=false
     self.dialog_displayer=New(dialog_displayer)
-    PlaySound("se:Muki_AiC_bgm_end",3,self.x/256,true)
     lasttask=task.New(self,function()
-        local img = {
-        "image:Muki_AiC_Mepha_face_smile",
-        "image:Muki_AiC_Mepha_face_smile",
-        "image:Muki_AiC_Mepha_face_default",
-        "image:Muki_AiC_Mepha_face_default",
-        "image:Muki_AiC_Mepha_face_fight"
-        }
-        local pos = 'right'
-        local text = {
-        '刚才不知怎的突然就来到这里了……\n不过看来是来对了呢。',
-        '诺艾儿·柯涅尔，\n贝尔米特国立大学所属，\nⅢ级士官候补生……\n我没记错吧？',
-        '真是相当精彩的战斗……\n你已经做得足够好了。',
-        '我向你保证，\n你和你的朋友一定能安全到家。',
-        '……你是什么魔物呢？\n抱歉，我看不出来。',
-        '不过有一点可以确定……\n我会让你吃到苦头的，你这畜生。'
-        }
-        local canskip = false
-        local t = 120
-        local hscale, vscale = 0.5, 0.5
-        local snd = "se:Muki_AiC_dialog_Mepha"
-        local vol = 1
+        task._Wait(60)
         Muki_fadeout(60, true)
-        lib.sp.SetDisplayer(self, true, 'image:Muki_AiC_dialog_frame', 0.7, 0.25, 0, 20, '', nil, Color(150, 255, 255, 255), nil, Color(255, 85, 76, 74))
-        last=New(_editor_class["Muki_AiC_dialog_name"],-175,-50,'梅法·格里亚德')
-        self.dialog_name=last
-        Muki_fadein('aic_bgm17')
-        lib.sp.multi_sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, nil, nil, nil, 1, snd, vol)
-        _del(self.dialog_name,false)
+        task._Wait(60)
+        if not CheckEnhancer(13) and not LSC_SIGN then
+            Muki_fadein('aic_bgm17')
+            lib.AiCDialog(self,9)
+        end
     end)
 end
 table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)
@@ -4498,9 +7456,6 @@ _tmp_sc=boss.card.New("",0,0,0,0,{0,0,0},false)
 function _tmp_sc:before()
 end
 function _tmp_sc:init()
-    lasttask=task.New(self,function()
-        task.MoveTo(0,120,60,MOVE_NORMAL)
-    end)
 end
 function _tmp_sc:beforedel()
 end
@@ -5625,7 +8580,7 @@ _editor_class["Muki_AiC_Ixia"].frame=function(self)
         ]]
         elseif self.spellnum==2 then
             lasttask=task.New(self,function()
-                task._Wait(60)
+                task._Wait(120)
                 for _=1,_infinite do
                     do
                         local dir=1 local _n_dir=(1)+(-1)
@@ -5654,7 +8609,7 @@ _editor_class["Muki_AiC_Ixia"].frame=function(self)
         ]]
         elseif self.spellnum==3 then
             lasttask=task.New(self,function()
-                task._Wait(60)
+                task._Wait(120)
                 for _=1,_infinite do
                     local a=(Angle(self.x,self.y+50,player.x,player.y))
                     Muki_warning(self,a)
@@ -5687,7 +8642,10 @@ _editor_class["Muki_AiC_Ixia"].frame=function(self)
         --[[ quit
         ]]
         else
-            _del(self,true)
+            lasttask=task.New(self,function()
+                task.MoveTo(384*2,256*2,120,MOVE_ACC_DEC)
+                _del(self,true)
+            end)
         end
     end
 end
@@ -5989,6 +8947,34 @@ stage.group.DefStageFunc('AliceInCradle@Normal','init',function(self)
         last=_ref
         if _boss_wait then while IsValid(_ref) do task.Wait() end end
         task._Wait(180)
+        local dialog_flag
+        if LSC_SIGN then
+            local _boss_wait=true
+            local _ref=New(_editor_class["Muki_AiC_Noel_LSC"],_editor_class["Muki_AiC_Noel_LSC"].cards)
+            last=_ref
+            if _boss_wait then while IsValid(_ref) do task.Wait() end end
+            dialog_flag=true
+        else
+            task._Wait(60)
+            Muki_fadeout(60, true)
+            task._Wait(60)
+            if not CheckEnhancer(13) then
+                Muki_fadein('aic_bgm17')
+                last=New(EnemySimple,1,114514,0,0,{0,0,0},114514,false,false,false,function(self)
+                    task.New(self,function()
+                        self.hide=true
+                        lib.AiCDialog(self,9)
+                        dialog_flag=true
+                    end)
+                end)
+                --[[ 是的AiC的对话其实不需要对话环境也不需要挂在boss上,只要在task里就可以（
+                ]]
+            end
+        end
+        for _=1,_infinite do
+            if dialog_flag then break end
+            task._Wait(1)
+        end
     end)
     task.New(self,function()
         while coroutine.status(self.task[1])~='dead' do task.Wait() end

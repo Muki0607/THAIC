@@ -70,6 +70,10 @@ safeWait = aic.sys.SafeWait
 ---@param func function @要进行的操作
 ---@return any
 safeSave = aic.sys.SafeSave
+---等待到condition为真
+---@task
+---@param condition boolean @用于判断的值
+WaitUntil = aic.sys.WaitUntil
 
 --东方梦摇篮table扩展库
 
@@ -167,6 +171,12 @@ rotate = aic.math.rotate
 ---@param x number
 ---@return number
 round = aic.math.round
+---约等于
+---@param a number @要比较的数
+---@param b number @要比较的数
+---@param accuracy number @精度
+---@return boolean @在误差范围内是否相等
+appr_equal = aic.math.appr_equal
 ---from RT基础教程，坐标系转换
 ---@param x number @原x坐标
 ---@param y number @原y坐标

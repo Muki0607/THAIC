@@ -101,6 +101,11 @@ function lib.GetTime(time)
         t.year, t.month, t.day, t.hour, t.min, t.sec)
 end
 
+function lib.ActivateBorder()
+    New(lib.secret_ceremony_border)
+    PlaySound('border', 2, nil, true)
+end
+
 --灵击的英文全称是Spiritual Hit（来自非想天则英文版）
 ---player灵击
 ---@param player lstg.GameObject @玩家
@@ -164,6 +169,15 @@ function lib.SafeSave(func)
             end
         }
     )
+end
+
+---等待到condition为真
+---@task
+---@param condition boolean @用于判断的值
+function lib.WaitUntil(condition)
+    while not condition do
+        task.Wait()
+    end
 end
 
 ---符卡用伤害限制器
@@ -287,6 +301,45 @@ function lib.Tamaki_weapon_ef:frame()
     if self.timer == 30 then Del(self) end
 end
 
+lib.secret_ceremony_border = Class(object)
+
+function lib.secret_ceremony_border:init()
+    self.img = 'Muki_AiC_border'
+    self.x = player.x
+    self.y = player.y
+    self.layer = LAYER_PLAYER - 5
+    self.bound = false
+    self.omiga = 1
+    self.s = 1
+    self.hscale = self.s
+    self.vscale = self.s
+    self.alpha = 0
+    player.collect_line = player.collect_line - 500
+end
+
+function lib.secret_ceremony_border:frame()
+    if self.timer <= 30 then
+        self.alpha = self.alpha + 100 / 30
+    end
+    self.hscale = self.hscale - self.s / 460
+    self.vscale = self.vscale - self.s / 460
+    SetImageState(self.img, '', Color(self.alpha, 255, 150, 0))
+    self.x = player.x
+    self.y = player.y
+    player.nextspell = 114514
+    if player.death ~= 0 or self.timer >= 420 then
+        player.death = 0
+        player.protect = 40
+        _clear_bullet()
+        PlaySound('bonus', 2, nil, true)
+        New(boss_cast_ef_out, self.x, self.y, nil, 255, 150, 0)
+        player.collect_line = player.collect_line + 500
+        player.protect = 120
+        player.nextspell = 60
+        Del(self)
+    end
+end
+
 ----------------------------------------
 ---资源
 
@@ -295,5 +348,7 @@ LoadImageFromFile('Muki_AiC_Tamaki_weapon', 'THlib/misc/Muki_AiC_Tamaki_weapon.p
 LoadTexture('particles', 'THlib/misc/particles.png')
 LoadImageGroup('parimg', 'particles', 0, 0, 32, 32, 4, 4)
 LoadPS('Muki_AiC_Tamaki_weapon_ef', 'THlib/misc/Muki_AiC_Tamaki_weapon_ef.psi', 'parimg6')
+--秘仪结界
+LoadImageFromFile('Muki_AiC_border', 'THlib/misc/Muki_AiC_border.png')
 
 

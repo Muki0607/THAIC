@@ -132,7 +132,14 @@ local defaultFrameEvent = {
                 if self.__spell_flag and self.nextspell <= 0 and
                     (lstg.var.exmp >= cost or (lstg.var.exmp + lstg.var.power >= cost and CheckEnhancer(4)))
                     and not CheckEnhancer(15) and not lstg.var.block_spell then
-                    system:spell()
+                    if lstg.var.mp_active then
+                        if lstg.var.mp_active > 0 then
+                            lstg.var.mp_active = lstg.var.mp_active - 1
+                            aic.sys.ActivateBorder()
+                        end
+                    else
+                        system:spell()
+                    end
                 end
                 if self.__special_flag and self.nextsp <= 0 and not CheckEnhancer(15) then
                     system:special()

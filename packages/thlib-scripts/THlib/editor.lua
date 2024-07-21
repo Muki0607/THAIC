@@ -607,7 +607,7 @@ function _play_music(name, ptime, bgmname)
     scoredata.music_record[name] = true
     LoadMusicRecord(name)
     PlayMusic(name, 1.0, ptime)
-    local n = tonumber(string.match(name, 'aic_bgm(%d)'))
+    local n = tonumber(string.match(name, 'aic_bgm(%d+)'))
     if n and bgmname then New(aic.misc.bgm_name, n) end
 end
 function _pause_music()

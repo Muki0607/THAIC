@@ -101,6 +101,7 @@ end
 ---@vararg align @对齐方式
 function lib.DrawText(font, text, x, y, s, co1, co2, ...)
     font = font or "main_font_zh2"
+    text = tostring(text)
     s = s or 1
     co1 = co1 or Color(255, 255, 255, 255)
     local alpha = co1:ARGB()

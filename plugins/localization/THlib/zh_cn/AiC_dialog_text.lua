@@ -14,9 +14,9 @@ The code in `<>` is text effect. To change text effect, see `AiC_text_effect.lua
 `<>`中的代码是文字效果。要更改文字效果，参见`AiC_text_effect.lua`。
 --]]
 
----There may be 'a little' error in multi-text-effect,
+---There may be 'a little' error in multi-text-effect(it will sub by 1 in some situation),
 ---but I believe that you can solve it(Please try to change range and extend for serveral times,you can do it lol).
----多文字效果的范围可能有一点“小”错误，
+---多文字效果的范围可能有一点“小”错误(在某些情况下会差一)，
 ---不过我相信你们可以解决的www（多调几次范围和extend，总能试出来的）
 
 local lib = aic.l10n.dialog
@@ -78,7 +78,7 @@ lib.dialog2 = {
     },
     text = {
         '<shake 3>诺艾儿·柯涅尔！</shake>总算找到你了！\n真是担心死……',
-        '不，我才没有<Color {255,255,0,0}>很担心你！</Color>',
+        '不，我才没有<Color {255,255,0,0}>很担心你</Color>！',
         '……谢谢你，伊夏同学。',
         '不过，\n你还没从那次<Color {255,255,0,0}></Color 3><uppertext 森林领主>大</uppertext>型魔物的袭击中恢复过来吧……',
         '绝对没问题！就让我来帮你解决它吧！',
@@ -93,8 +93,8 @@ lib.dialog3 = {
     pos = 'right',
     canskip = false,
     t = 120,
-    hscale = { 0.6, 0.6, 0.6, 0.6, 0.6, 0.5, 0.5 },
-    vscale = { 0.6, 0.6, 0.6, 0.6, 0.6, 0.5, 0.5 },
+    hscale = { 0.6, 0.6, 0.5, 0.6, 0.6, 0.5, 0.5 },
+    vscale = { 0.6, 0.6, 0.5, 0.6, 0.6, 0.5, 0.5 },
     vol = 1,
     name = {
         '普莉姆拉',
@@ -175,7 +175,7 @@ lib.dialog4 = {
     text = {
         '不行……\n这个区域的空气中的<uppertext MP></uppertext 1><Color {255,170,160,247}>魔</Color>力基本消耗完了……',
         '老师！您还好吗？',
-        '<shake 3>诺艾儿和伊夏？</shake>\n我不是叫你们赶紧走吗？',
+        '<shake 3>诺艾儿和伊夏？ </shake>\n我不是叫你们赶紧走吗？',
         '我们没法把您丢在这里不管……',
         '算了……\n我还有最后一招。',
         '刚才路上有一位女士给了我这个……\n似乎是<Color {255,255,0,0}>非官方魔法认证装置。</Color>',
@@ -224,9 +224,9 @@ lib.dialog6 = {
         "image:Muki_AiC_Noel_face_fight"
     },
     text = {
-        '<shake 3>老师……\n伊夏同学……</shake>',
-        '<shake 3>难道……结局已经无法改变了吗……</shake>',
-        '<shake 5>不……\n就算我死了也没关系，\n但我绝对不能让老师和伊夏遭到你的毒手！</shake>'
+        '<shake 3>老师……\n伊夏同学…… </shake>',
+        '<shake 3>难道……结局已经无法改变了吗…… </shake>',
+        '<shake 5>不……\n就算我死了也没关系，\n但我绝对不能让老师和伊夏遭到你的毒手！ </shake>'
     }
 }
 
@@ -260,11 +260,11 @@ lib.dialog7 = {
         'plst00',
     },
     img = {
-        "image:Muki_AiC_Noel_face_lose",
+        "image:Muki_AiC_Noel_face_lose4",
         "image:Muki_AiC_Yukari_face_default",
         "image:Muki_AiC_Yukari_face_fight",
         "image:Muki_AiC_Yukari_face_smile",
-        "image:Muki_AiC_Noel_face_default",
+        "image:Muki_AiC_Noel_face_understand",
         "image:Muki_AiC_Noel_face_default",
         "image:Muki_AiC_Noel_face_fight",
         "image:Muki_AiC_Okina_face_default",
@@ -276,13 +276,28 @@ lib.dialog7 = {
         '<Color {255,255,0,255}>事情变得有趣起来了呢</Color>',
         '诶？\n身上的伤……突然不疼了……',
         '虽然不知道您是谁，\n但我十分感谢……',
-        '我<scale 1.25></scale7><color 0xFFFF0000></color7><Uppertext {学园的才女,0,5}>诺艾儿·柯涅尔</Uppertext>，<wait 30>\n</wait>发誓将战斗至最后一刻！',
-        '<Color {255,255,255,0}>哎呀，这样可就不公平了</Color>',
-        '<Color {255,255,255,0}>屏幕那边那个，\n你就用我的力量吧</Color>',
+        '我<scale 1.25></scale7><color 0xFFFF0000></color7><Uppertext {学园的才女,0,5}>诺艾儿·柯涅尔</Uppertext>，\n</wait>发誓将战斗至最后一刻！',
+        '<Color {255,255,150,0}>哎呀，这样可就不公平了</Color>',
+        '<Color {255,255,150,0}>屏幕那边那个，\n你就用我的力量吧</Color>',
         ---秘仪之力获取动画
         ---Power of Secret Ceremony Getting Animation
     },
-    num = { 1, 2, 2, 2, 1, 1, 1, 3 }
+    --num = { 1, 2, 2, 2, 1, 1, 1, 3 } --这里将三人立绘分开的观感不太好
+}
+
+---最终阶段前对话
+---Dialog before last phase
+lib['dialog7.5'] = {
+    pos = 'right',
+    canskip = false,
+    t = 120,
+    hscale = 0.3,
+    vscale = 0.3,
+    vol = 1,
+    name = '诺艾儿·柯涅尔',
+    snd = "se:Muki_AiC_dialog_Noel",
+    img = "image:Muki_AiC_Noel_face_final",
+    text = { "沉眠于摇篮吧，境界外的魔物！" }, --因为未知的原因text必须放在表里
 }
 
 ---LSC对话

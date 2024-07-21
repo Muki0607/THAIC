@@ -1087,7 +1087,7 @@ function system:popResult(continue)
     if b.is_sc and b.sc_name and not string.match(b.sc_name, '通常攻击') then
         b.sc_left = max(0, b.sc_left - 1)
     end
-    self:endChipBonus(b.x, b.y)
+    self:endChipBonus(b.bonus_x or b.x, b.bonus_y or b.y)
     self:setIsSpellcard(false)
     self:setSCName("")
     self:setIsWaiting(true)
@@ -1161,9 +1161,11 @@ function system:resultSpell(info)
             if info.timeout and not (info.time_sc) then
                 PlaySound('fault', 1.0, 0)
             end
-            New(hinter, 'hint.bonusfail', 0.6, 0, yoffset[1], 15, 120)
-            New(kill_timer, 0, yoffset[2], info.current_timer)
-            New(kill_timer2, 0, yoffset[3], info.real_timer)
+            if not self.boss.noresult then
+                New(hinter, 'hint.bonusfail', 0.6, 0, yoffset[1], 15, 120)
+                New(kill_timer, 0, yoffset[2], info.current_timer)
+                New(kill_timer2, 0, yoffset[3], info.real_timer)
+            end
         end
     end
 end

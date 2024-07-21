@@ -24,11 +24,13 @@ local lib = aic.math
 ---@type number
 INFINITE = math.huge
 
+---常用的黄金比例
+---@type number
+_GOLD = (math.sqrt(5) - 1) / 2
+
 ----------------------------------------
 
 ---各种逻辑关系，目前完全用不到，但先放这里吧
----找通义千问要的，错了也不是我的问题
-
 function lib.xor(a, b)
     return (a and not b) or (not a and b)
 end
@@ -42,40 +44,26 @@ function lib.nor(a, b)
 end
 
 function lib.xnor(a, b)
-    return not xor(a, b)
-end
-
-function lib.band(a, b)
-    --return math.floor(a) & math.floor(b)
-end
-
-function lib.bor(a, b)
-    --return math.floor(a) | math.floor(b)
-end
-
-function lib.bxor(a, b)
-    return (int(a) - int(b)) - (int(a) - int(b)) % 2
-end
-
-function lib.bnot(a)
-    return (-1 - int(a)) % 2 ^ 32 -- 假设我们仅考虑32位整数
-end
-
-function lib.lshift(a, n)
-    return int(a) * 2 ^ n
-end
-
-function lib.rshift(a, n)
-    if a >= 0 then
-        return int(a) / 2 ^ n
-    else
-        -- 符号位扩展的右移操作
-        local mask = 2 ^ (n - 1)
-        return ((a + mask) / 2 ^ n) - mask
-    end
+    return not lib.xor(a, b)
 end
 
 ----------------------------------------
+
+--像是人类使用了十进制（无端
+--当然实际上可以用bit.arshift，但我不想require
+---十进制转二进制
+---@param n number @十进制数
+---@return number @二进制数
+function lib.dectobin(n)
+    if n == 0 then return n end
+    local ret = ''
+    while n > 0 do
+        local r = n % 2
+        n = int(n / 2)
+        ret = tostring(r) .. ret
+    end
+    return ret
+end
 
 ---使一点绕另一点旋转特定角度
 ---@param x number @原x坐标
@@ -101,6 +89,16 @@ function lib.round(x)
     else
         return int(x + 1)
     end
+end
+
+---约等于
+---@param a number @要比较的数
+---@param b number @要比较的数
+---@param accuracy number @精度
+---@return boolean @在误差范围内是否相等
+function lib.appr_equal(a, b, accuracy)
+    accuracy = accuracy or 0.0001
+    return abs(a - b) <= accuracy
 end
 
 ---格式化角度

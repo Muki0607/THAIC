@@ -8,7 +8,7 @@
 ---请不要改动true和false以外的字符，否则可能导致游戏报错
 
 _debug = {
-    _debug = true, --启用debug功能
+    _debug = true, --启用debug功能，该项为false则将下列项全部视为false
     debug_tool = true, --F1键开启修改器
     imgui = true, --F3键开启imgui debug工具
     hana_ai = false, --F7键开启HanaAI
@@ -22,6 +22,6 @@ _debug = {
     old_title = false, --启用lstg旧版title
     new_title = false, --启用lstg新版title（使用菜单栈制作，仍处于调试状态），会覆盖old_title
     full_title = true, --显示完整窗口标题信息（包括FPS，Obj数信息）
-    pmode = false, --将珠辉的笔记本替换为正式版的版本（开启完美无缺模式）
-    exception_handler_off = true --是否关闭异常捕获
+    pmode = false, --将珠辉的笔记本替换为正式版的版本（开启完美无缺模式），此模式稳定性未经检验，极容易出错，请谨慎使用
+    exception_handler_off = true --关闭异常捕获，方便debug
 }
