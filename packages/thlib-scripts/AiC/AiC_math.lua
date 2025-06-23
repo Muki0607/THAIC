@@ -62,7 +62,7 @@ function lib.dectobin(n)
         n = int(n / 2)
         ret = tostring(r) .. ret
     end
-    return ret
+    return tonumber(ret)
 end
 
 ---使一点绕另一点旋转特定角度

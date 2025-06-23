@@ -1,0 +1,98 @@
+{
+  "completion": {
+    "enable": true,
+    "autoRequire": true,
+    "autoRequireFunction": "require",
+    "autoRequireNamingConvention": "keep",
+    "autoRequireSeparator": ".",
+    "callSnippet": false,
+    "postfix": "@"
+  },
+  "diagnostics": {
+    "disable": [
+      "unnecessary-if",
+      "duplicate-type",
+      "missing-return",
+      "missing-parameter",
+      "undefined-global",
+      "need-check-nil",
+      "type-not-found",
+      "access-invisible",
+      "duplicate-set-field",
+      "param-type-not-match",
+      "inject-field",
+      "undefined-field",
+      "assign-type-mismatch",
+      "unbalanced-assignments",
+      "missing-return-value",
+      "return-type-mismatch",
+      "redundant-return-value",
+      "redundant-parameter",
+      "await-in-sync",
+      "unnecessary-assert"
+    ],
+    "enable": true,
+    "globals": [],
+    "globalsRegex": [],
+    "severity": {},
+    "enables": [],
+    "diagnosticInterval": 500
+  },
+  "signature": {
+    "detailSignatureHelper": true
+  },
+  "hint": {
+    "enable": true,
+    "paramHint": true,
+    "indexHint": true,
+    "localHint": true,
+    "overrideHint": true
+  },
+  "runtime": {
+    "version": "LuaLatest",
+    "requireLikeFunction": [],
+    "frameworkVersions": [],
+    "extensions": [],
+    "requirePattern": []
+  },
+  "workspace": {
+    "ignoreDir": [],
+    "ignoreGlobs": [],
+    "library": [],
+    "workspaceRoots": [],
+    "preloadFileSize": 0,
+    "encoding": "utf-8",
+    "moduleMap": [],
+    "reindexDuration": 5000,
+    "enableReindex": false
+  },
+  "resource": {
+    "paths": []
+  },
+  "codeLens": {
+    "enable": true
+  },
+  "strict": {
+    "requirePath": false,
+    "typeCall": false,
+    "arrayIndex": true,
+    "metaOverrideFileDefine": true
+  },
+  "semanticTokens": {
+    "enable": true
+  },
+  "references": {
+    "enable": true,
+    "fuzzySearch": true,
+    "shortStringSearch": false
+  },
+  "hover": {
+    "enable": true
+  },
+  "documentColor": {
+    "enable": true
+  },
+  "codeAction": {
+    "insertSpace": false
+  }
+}

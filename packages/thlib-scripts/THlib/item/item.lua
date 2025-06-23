@@ -123,8 +123,10 @@ function item_power:frame()
             self.is_power = false
             self.is_power_blue = true
         else
+            --[[
             self.is_power = false
             self.is_power_red = true
+            --]]
         end
         if not IsValid(t) then return end
         local a = Angle(self, t)

@@ -81,7 +81,7 @@ function lib.define(id, name, img, nCol, nRow, a, b, intv, imgs, anis, scbg)
             local w, h = bosstexture_n / nCol, bosstexture_m / nRow
             for i = 1, nRow do
                 LoadImageGroup('anonymous:' .. bossimg .. i, 'anonymous:' .. bossimg,
-                        0, h * (i - 1), w, h, number_n[i], 1, a, b)
+                    0, h * (i - 1), w, h, number_n[i], 1, a, b)
             end
             for i = 1, nRow do
                 self['img' .. i] = {}
@@ -168,6 +168,7 @@ function lib.boss_default:init(x, y, slot, scbg)
     self._wisys = BossWalkImageSystem(self)
     _log(string.format("[spboss] Boss(%s) Created", self))
 end
+
 function lib.boss_default:frame()
     if not (self.is_finish) and table_match({ 0, 1, 2 }, self.hpbartype) then
         self.hptimer = self.hptimer + 1
@@ -194,7 +195,8 @@ function lib.boss_default:frame()
     end
     self.card_timer = self.card_timer + 1
     self.hp = max(0, self.hp)
-    SetAttr(self, 'colli', BoxCheck(self, lstg.world.boundl, lstg.world.boundr, lstg.world.boundb, lstg.world.boundt) and self._colli)
+    SetAttr(self, 'colli',
+        BoxCheck(self, lstg.world.boundl, lstg.world.boundr, lstg.world.boundb, lstg.world.boundt) and self._colli)
     if self.hp <= 0 then
         if not (self.killed) then
             Kill(self)
@@ -352,6 +354,7 @@ function lib.boss_default:frame()
         self.dropitem = nil
     end
 end
+
 function lib.boss_default:render()
     if self.ex_card then
         self.ex_card.render(self)
@@ -361,6 +364,7 @@ function lib.boss_default:render()
     end
     self._wisys:render(self.dmgt, self.dmgmaxt)
 end
+
 ---@param dmg number @伤害值
 function lib.boss_default:take_damage(dmg)
     if self.dmgmaxt then
@@ -371,6 +375,7 @@ function lib.boss_default:take_damage(dmg)
     end
     lstg.var.score = lstg.var.score + 10
 end
+
 function lib.boss_default:kill()
     _log(string.format("[spboss] Boss(%s) was killed", self))
     if self.timer > self.t3 and not (self.time_sc) then
@@ -395,7 +400,8 @@ function lib.boss_default:kill()
         lib.PopResult(self, true)
         if self._precards then
             self._predo = self._predo + 1
-            lib.card.do_card(self, self._precards[self._predo], self._prehptype[self._predo], (self._predo == self._last_card))
+            lib.card.do_card(self, self._precards[self._predo], self._prehptype[self._predo],
+                (self._predo == self._last_card))
         end
         if self._ex_cards then
             lib.ex_card.next(self)
@@ -406,6 +412,7 @@ function lib.boss_default:kill()
         _log(string.format("[spboss] Boss(%s) continue", self))
     end
 end
+
 function lib.boss_default:del()
     for k, v in pairs(self.sub_list) do
         if IsValid(v) then
@@ -414,6 +421,7 @@ function lib.boss_default:del()
     end
     _log(string.format("[spboss] Boss(%s) remove", self))
 end
+
 function lib.boss_default:show_aura(show)
     _log(string.format("[spboss] Boss(%s) Aura Show Mode Changed", self))
     if show then
@@ -422,6 +430,7 @@ function lib.boss_default:show_aura(show)
         self.aura_alpha_d = -4
     end
 end
+
 function lib.boss_default:turn_aura(open)
     _log(string.format("[spboss] Boss(%s) Aura Show Mode Changed", self))
     if open then
@@ -434,11 +443,13 @@ function lib.boss_default:turn_aura(open)
         end
     end
 end
+
 ---@param cast_t number @施法动作时长
 function lib.boss_default:cast(cast_t)
     self.cast_t = cast_t + 0.5
     self.cast = 1
 end
+
 ---@param blend string @blend mode
 ---@param a number @alpha
 ---@param r number @red
@@ -702,7 +713,8 @@ function lib.set_init(boss, maxhp, bartype, dropitem, is_extra, is_final, ret, t
     end
     _log(string.format("[spboss] Boss hpbar type set to %s", hpbartype))
     boss.dropitem = dropitem
-    _log(string.format("[spboss] Boss dropitem set to (power:%s;faith:%s;point:%s)", dropitem[1], dropitem[2], dropitem[3]))
+    _log(string.format("[spboss] Boss dropitem set to (power:%s;faith:%s;point:%s)", dropitem[1], dropitem[2],
+        dropitem[3]))
     boss.is_extra = is_extra
     _log(string.format("[spboss] Boss is_extra set to %s", is_extra))
     boss.is_final = is_final
@@ -731,7 +743,7 @@ end
 ---阶段点设置
 ---@param boss lstg.GameObject @boss对象
 ---@param temp_hp table @血量表
----@param teml_t table @时间表
+---@param temp_t table @时间表
 function lib.SetStagePoint(boss, temp_hp, temp_t)
     if not (IsValid(lib.spcheckobj)) then
         New(lib.StagePointCheckobj)
@@ -751,6 +763,7 @@ function lib.SetStagePoint(boss, temp_hp, temp_t)
     lib.StagePointList[boss] = { boss, hp, t }
     _log(string.format('[spboss] Boss(%s) Stage Point changed', boss))
 end
+
 function lib.StagePointCheck()
     local tmp = {}
     local boss
@@ -784,10 +797,12 @@ function lib.StagePointCheck()
     end
     lib.StagePointList = tmp
 end
+
 lib.StagePointCheckobj = Class(object)
 function lib.StagePointCheckobj:init()
     lib.spcheckobj = boss
 end
+
 function lib.StagePointCheckobj:frame()
     lib.StagePointCheck()
 end
@@ -990,7 +1005,7 @@ function lib.ChangeImageGroup(boss, img, nRow, nCol, imgs, anis, a, b)
             local w, h = bosstexture_n / nCol, bosstexture_m / nRow
             for i = 1, nRow do
                 LoadImageGroup('anonymous:' .. bossimg .. i, 'anonymous:' .. bossimg,
-                        0, h * (i - 1), w, h, number_n[i], 1, a, b)
+                    0, h * (i - 1), w, h, number_n[i], 1, a, b)
             end
             for i = 1, nRow do
                 boss['img' .. i] = {}
@@ -1090,6 +1105,7 @@ function lib.aura:init(boss)
     self.show = false
     self.t = 0
 end
+
 function lib.aura:frame()
     if not (IsValid(self.boss)) then
         Del(self)
@@ -1100,13 +1116,15 @@ function lib.aura:frame()
         self.t = max(self.t - 1, 0)
     end
 end
+
 function lib.aura:render()
     if IsValid(self.boss) then
         for i = 1, 25 do
             SetImageState('boss_aura_3D' .. i, 'mul+add', Color(self.boss.aura_alpha, 255, 255, 255))
         end
         local size = sin(self.t * 3) ^ 2
-        Render('boss_aura_3D' .. self.ani % 25 + 1, self.boss.x, self.boss.y, self.ani * 0.75, 0.92 * size, (0.8 + 0.12 * sin(90 + self.ani * 0.75)) * size)
+        Render('boss_aura_3D' .. self.ani % 25 + 1, self.boss.x, self.boss.y, self.ani * 0.75, 0.92 * size,
+            (0.8 + 0.12 * sin(90 + self.ani * 0.75)) * size)
     end
 end
 
@@ -1118,6 +1136,7 @@ function lib.ui:init(boss)
     self.group = GROUP_GHOST
     self.boss = boss
 end
+
 function lib.ui:frame()
     task.Do(self)
     if not (IsValid(self.boss)) then
@@ -1136,6 +1155,7 @@ function lib.ui:frame()
         end
     end
 end
+
 function lib.ui:render()
     if IsValid(self.boss) then
         --hpbar
@@ -1149,37 +1169,45 @@ function lib.ui:render()
         local r3 = 61 * SCREEN_SCALE
         if self.boss.hpbartype == 0 then
             misc.Renderhpbar(self.boss.x, self.boss.y, 90, 360, r1, r2, 360, 1)
-            misc.Renderhp(self.boss.x, self.boss.y, 90, 360, r1, r2, 360, self.boss.hpbarlen * min(1, self.boss.hptimer / 60))
+            misc.Renderhp(self.boss.x, self.boss.y, 90, 360, r1, r2, 360,
+                self.boss.hpbarlen * min(1, self.boss.hptimer / 60))
             Render('base_hp', self.boss.x, self.boss.y, 0, 0.274, 0.274)
             Render('base_hp', self.boss.x, self.boss.y, 0, 0.256, 0.256)
             if self.boss.sp_point and #self.boss.sp_point ~= 0 then
                 for i = 1, #self.boss.sp_point do
-                    Render('life_node', self.boss.x + r3 * cos(self.boss.sp_point[i]), self.boss.y + r3 * sin(self.boss.sp_point[i]), self.boss.sp_point[i] - 90, 0.5)
+                    Render('life_node', self.boss.x + r3 * cos(self.boss.sp_point[i]),
+                        self.boss.y + r3 * sin(self.boss.sp_point[i]), self.boss.sp_point[i] - 90, 0.5)
                 end
             end
         elseif self.boss.hpbartype == 1 then
             misc.Renderhpbar(self.boss.x, self.boss.y, 90, 360, r1, r2, 360, 1)
             if self.boss.hptimer <= 60 then
-                misc.Renderhp(self.boss.x, self.boss.y, 90, 360, r1, r2, 360, self.boss.hpbarlen * min(1, self.boss.hptimer / 60))
+                misc.Renderhp(self.boss.x, self.boss.y, 90, 360, r1, r2, 360,
+                    self.boss.hpbarlen * min(1, self.boss.hptimer / 60))
             else
                 misc.Renderhp(self.boss.x, self.boss.y, 90, self.boss.lifepoint - 90, r1, r2, self.boss.lifepoint - 88, 1)
-                misc.Renderhp(self.boss.x, self.boss.y, self.boss.lifepoint, 450 - self.boss.lifepoint, r1, r2, 450 - self.boss.lifepoint, self.boss.hpbarlen)
+                misc.Renderhp(self.boss.x, self.boss.y, self.boss.lifepoint, 450 - self.boss.lifepoint, r1, r2,
+                    450 - self.boss.lifepoint, self.boss.hpbarlen)
             end
             Render('base_hp', self.boss.x, self.boss.y, 0, 0.274, 0.274)
             Render('base_hp', self.boss.x, self.boss.y, 0, 0.256, 0.256)
-            Render('life_node', self.boss.x + r3 * cos(self.boss.lifepoint), self.boss.y + r3 * sin(self.boss.lifepoint), self.boss.lifepoint - 90, 0.55)
+            Render('life_node', self.boss.x + r3 * cos(self.boss.lifepoint), self.boss.y + r3 * sin(self.boss.lifepoint),
+                self.boss.lifepoint - 90, 0.55)
             SetFontState('bonus', '', Color(255, 255, 255, 255))
         elseif self.boss.hpbartype == 2 then
             misc.Renderhpbar(self.boss.x, self.boss.y, 90, 360, r1, r2, 360, 1)
-            misc.Renderhp(self.boss.x, self.boss.y, 90, self.boss.lifepoint - 90, r1, r2, self.boss.lifepoint - 88, self.boss.hpbarlen)
+            misc.Renderhp(self.boss.x, self.boss.y, 90, self.boss.lifepoint - 90, r1, r2, self.boss.lifepoint - 88,
+                self.boss.hpbarlen)
             Render('base_hp', self.boss.x, self.boss.y, 0, 0.274, 0.274)
             Render('base_hp', self.boss.x, self.boss.y, 0, 0.256, 0.256)
         end
         if self.boss.show_hp then
             SetFontState('bonus', '', Color(255, 0, 0, 0))
-            RenderText('bonus', int(max(0, self.boss.hp)) .. ' / ' .. self.boss.maxhp, self.boss.x - SCREEN_SCALE, self.boss.y - 81 * SCREEN_SCALE, 1.2 * SCREEN_SCALE, 'centerpoint')
+            RenderText('bonus', int(max(0, self.boss.hp)) .. ' / ' .. self.boss.maxhp, self.boss.x - SCREEN_SCALE,
+                self.boss.y - 81 * SCREEN_SCALE, 1.2 * SCREEN_SCALE, 'centerpoint')
             SetFontState('bonus', '', Color(255, 255, 255, 255))
-            RenderText('bonus', int(max(0, self.boss.hp)) .. ' / ' .. self.boss.maxhp, self.boss.x, self.boss.y - 80 * SCREEN_SCALE, 1.2 * SCREEN_SCALE, 'centerpoint')
+            RenderText('bonus', int(max(0, self.boss.hp)) .. ' / ' .. self.boss.maxhp, self.boss.x,
+                self.boss.y - 80 * SCREEN_SCALE, 1.2 * SCREEN_SCALE, 'centerpoint')
         end
         --boss name and sc left star
         local x = -185 * SCREEN_SCALE
@@ -1225,17 +1253,17 @@ function lib.ui:render()
             if countdown >= 10.0 then
                 RenderText('time', string.format('%d',
                         int(countdown)), x1, y1 + yoffset - dy2,
-                        0.5 * SCREEN_SCALE, 'vcenter', 'right')
+                    0.5 * SCREEN_SCALE, 'vcenter', 'right')
                 RenderText('time', '.' .. string.format('%d%d',
                         min(9, cd / 10), min(9, cd % 10)), x2, y2 + yoffset - dy2,
-                        0.3 * SCREEN_SCALE, 'vcenter', 'left')
+                    0.3 * SCREEN_SCALE, 'vcenter', 'left')
             else
                 RenderText('time', string.format('0%d',
                         min(99.99, int(countdown))), x1, y1 + yoffset - dy2,
-                        0.5 * SCREEN_SCALE, 'vcenter', 'right')
+                    0.5 * SCREEN_SCALE, 'vcenter', 'right')
                 RenderText('time', '.' .. string.format('%d%d',
                         min(9, cd / 10), min(9, cd % 10)), x2, y2 + yoffset - dy2,
-                        0.3 * SCREEN_SCALE, 'vcenter', 'left')
+                    0.3 * SCREEN_SCALE, 'vcenter', 'left')
             end
         end
     end
@@ -1260,6 +1288,7 @@ function lib.sc_name:init(boss, name, slot)
     self.bound = false
     self.alpha = 1
 end
+
 function lib.sc_name:frame()
     if self.timer > 90 then
         local axy = 0
@@ -1318,6 +1347,7 @@ function lib.sc_name:frame()
         end
     end
 end
+
 function lib.sc_name:render()
     local alpha = self.alpha
     local xoffset, yoffset = self.x, self.y
@@ -1331,11 +1361,11 @@ function lib.sc_name:render()
     SetImageState('boss_spell_name_bg', '', Color(alpha * 255, 255, 255, 255))
     Render('boss_spell_name_bg', x2 + xoffset, 236 * SCREEN_SCALE - dy1)
     RenderTTF('sc_name', self.name,
-            x1 + xoffset, x1 + xoffset, y1 - dy1, y1 - dy1,
-            Color(alpha * 255, 0, 0, 0), 'right', 'noclip')
+        x1 + xoffset, x1 + xoffset, y1 - dy1, y1 - dy1,
+        Color(alpha * 255, 0, 0, 0), 'right', 'noclip')
     RenderTTF('sc_name', self.name,
-            x2 + xoffset, x2 + xoffset, y2 - dy1, y2 - dy1,
-            Color(alpha * 255, 255, 255, 255), 'right', 'noclip')
+        x2 + xoffset, x2 + xoffset, y2 - dy1, y2 - dy1,
+        Color(alpha * 255, 255, 255, 255), 'right', 'noclip')
     local sc_hist = self.sc_hist
     local score = self.score
     if sc_hist then
@@ -1354,18 +1384,20 @@ function lib.sc_name:render()
         SetFontState('bonus', '', Color(alpha * 255, 0, 0, 0))
         RenderText('bonus', b, x1 + xoffset, y1 - dy2, 0.5 * SCREEN_SCALE, 'right')
         RenderText('bonus', string.format('%d/%d', sc_hist[1], sc_hist[2]),
-                x2 + xoffset, y2 - dy2, 0.5 * SCREEN_SCALE, 'right')
+            x2 + xoffset, y2 - dy2, 0.5 * SCREEN_SCALE, 'right')
         RenderText('bonus', 'HISTORY       BONUS', x3 + xoffset, y3 - dy2, 0.5 * SCREEN_SCALE, 'right')
         SetFontState('bonus', '', Color(alpha * 255, 255, 255, 255))
         RenderText('bonus', b, x4 + xoffset, y4 - dy2, 0.5 * SCREEN_SCALE, 'right')
         RenderText('bonus', string.format('%d/%d', sc_hist[1], sc_hist[2]),
-                x5 + xoffset, y5 - dy2, 0.5 * SCREEN_SCALE, 'right')
+            x5 + xoffset, y5 - dy2, 0.5 * SCREEN_SCALE, 'right')
         RenderText('bonus', 'HISTORY       BONUS', x6 + xoffset, y6 - dy2, 0.5 * SCREEN_SCALE, 'right')
     end
 end
+
 function lib.sc_name:kill()
     self.class.del(self)
 end
+
 function lib.sc_name:del()
     PreserveObject(self)
     if not (self.death) then
@@ -1383,11 +1415,13 @@ function lib.pointer:init(boss)
     self.boss = boss
     self.y = lstg.world.b
 end
+
 function lib.pointer:frame()
     if not (IsValid(self.boss)) then
         Del(self)
     end
 end
+
 function lib.pointer:render()
     if IsValid(self.boss) then
         if self.boss.pointer_x and self.boss.y <= lstg.world.boundt then
@@ -1396,7 +1430,9 @@ function lib.pointer:render()
             local ceny = (w.t + w.b) / 2
             if abs(self.boss.pointer_x - cenx) <= (lstg.world.r - lstg.world.l) / 2 then
                 SetViewMode 'ui'
-                Render('boss_pointer', WorldToScreen(max(min(self.boss.pointer_x, w.r), -w.r) * (w.r - w.l) / (w.scrr - w.scrl), self.y * (w.t - w.b) / (w.scrt - w.scrb) + ceny))
+                Render('boss_pointer',
+                    WorldToScreen(max(min(self.boss.pointer_x, w.r), -w.r) * (w.r - w.l) / (w.scrr - w.scrl),
+                        self.y * (w.t - w.b) / (w.scrt - w.scrb) + ceny))
                 SetViewMode 'world'
             end
         end
@@ -1559,7 +1595,8 @@ function lib.card.prepare(boss, ...)
         end
         boss.sc_left = c
         boss._last_card = last_card
-        lib.card.do_card(boss, boss._precards[boss._predo], boss._prehptype[boss._predo], (boss._predo == boss._last_card))
+        lib.card.do_card(boss, boss._precards[boss._predo], boss._prehptype[boss._predo],
+            (boss._predo == boss._last_card))
     end
 end
 
@@ -1591,6 +1628,7 @@ function lib.card.dialog:sentence(img, pos, text, t, hscale, vscale)
     end
     task.Wait(2)
 end
+
 lib.card.dialog.dialog_displayer = Class(object)
 function lib.card.dialog.dialog_displayer:init()
     self.layer = LAYER_TOP
@@ -1602,6 +1640,7 @@ function lib.card.dialog.dialog_displayer:init()
     self.co = 0
     self.jump_dialog = 0
 end
+
 function lib.card.dialog.dialog_displayer:frame()
     task.Do(self)
     if self.t > 0 then
@@ -1618,18 +1657,23 @@ function lib.card.dialog.dialog_displayer:frame()
         end
     end
 end
+
 function lib.card.dialog.dialog_displayer:render()
     if self.active then
         SetViewMode 'ui'
         if self.char[-self.active] then
-            SetImageState(self.char[-self.active], '', Color(0xFF404040) + (self.t / 16) * Color(0xFFC0C0C0) - (self.death / 30) * Color(0xFF000000))
+            SetImageState(self.char[-self.active], '',
+                Color(0xFF404040) + (self.t / 16) * Color(0xFFC0C0C0) - (self.death / 30) * Color(0xFF000000))
             local t = (1 - self.t / 16) ^ 3
-            Render(self.char[-self.active], 224 + self.active * (-(1 - 2 * t) * 16 + 128) + self.death * self.active * 12, 240 - 65 - t * 16 - 25, 0, self._hscale[-self.active], self._vscale[-self.active])
+            Render(self.char[-self.active], 224 + self.active * (-(1 - 2 * t) * 16 + 128) + self.death * self.active * 12,
+                240 - 65 - t * 16 - 25, 0, self._hscale[-self.active], self._vscale[-self.active])
         end
         if self.char[self.active] then
-            SetImageState(self.char[self.active], '', Color(0xFF404040) + (1 - self.t / 16) * Color(0xFFC0C0C0) - (self.death / 30) * Color(0xFF000000))
+            SetImageState(self.char[self.active], '',
+                Color(0xFF404040) + (1 - self.t / 16) * Color(0xFFC0C0C0) - (self.death / 30) * Color(0xFF000000))
             local t = (self.t / 16) ^ 3
-            Render(self.char[self.active], 224 + self.active * ((1 - 2 * t) * 16 - 128) - self.death * self.active * 12, 240 - 65 - t * 16 - 25, 0, self._hscale[self.active], self._vscale[self.active])
+            Render(self.char[self.active], 224 + self.active * ((1 - 2 * t) * 16 - 128) - self.death * self.active * 12,
+                240 - 65 - t * 16 - 25, 0, self._hscale[self.active], self._vscale[self.active])
         end
         SetViewMode 'world'
     end
@@ -1643,14 +1687,18 @@ function lib.card.dialog.dialog_displayer:render()
         dy2 = -126
         SetImageState('dialog_box', '', Color(225, 195 - self.co, 150, 195 + self.co))
         Render('dialog_box', 0, -144 - self.death * 8)
-        RenderTTF('dialog', self.text, -dx, dx, dy1 - self.death * 8, dy2 - self.death * 8, Color(0xFF000000), 'paragraph')
+        RenderTTF('dialog', self.text, -dx, dx, dy1 - self.death * 8, dy2 - self.death * 8, Color(0xFF000000),
+            'paragraph')
         if self.active > 0 then
-            RenderTTF('dialog', self.text, -dx, dx, dy1 - self.death * 8, dy2 - self.death * 8, Color(255, 255, 200, 200), 'paragraph')
+            RenderTTF('dialog', self.text, -dx, dx, dy1 - self.death * 8, dy2 - self.death * 8, Color(255, 255, 200, 200),
+                'paragraph')
         else
-            RenderTTF('dialog', self.text, -dx, dx, dy1 - self.death * 8, dy2 - self.death * 8, Color(255, 200, 200, 255), 'paragraph')
+            RenderTTF('dialog', self.text, -dx, dx, dy1 - self.death * 8, dy2 - self.death * 8, Color(255, 200, 200, 255),
+                'paragraph')
         end
     end
 end
+
 function lib.card.dialog.dialog_displayer:del()
     PreserveObject(self)
     task.New(self, function()
@@ -1661,39 +1709,40 @@ function lib.card.dialog.dialog_displayer:del()
         RawDel(self)
     end)
 end
+
 lib.card.add('boss_dialog', '', 999999999, 999999999, 999999999, 999999999, { 0, 0, 0 }, true, nil,
-        function()
-            return function()
-                local self = task.GetSelf()
-                local c = lib.card.dialog.list[self.dialog_id]
-                self._flag = nil
-                player.dialog = true
-                self._dialog_can_skip = c.can_skip
-                self.dialog_displayer = New(lib.card.dialog.dialog_displayer)
-                local continue = false
-                if c.func then
-                    task.New(self, function()
-                        c.func()
-                        continue = true
-                    end)
-                else
-                    for i = 1, #c.sentence do
-                        lib.card.dialog.sentence(self, unpack(c.sentence[i]))
-                    end
+    function()
+        return function()
+            local self = task.GetSelf()
+            local c = lib.card.dialog.list[self.dialog_id]
+            self._flag = nil
+            player.dialog = true
+            self._dialog_can_skip = c.can_skip
+            self.dialog_displayer = New(lib.card.dialog.dialog_displayer)
+            local continue = false
+            if c.func then
+                task.New(self, function()
+                    c.func()
                     continue = true
+                end)
+            else
+                for i = 1, #c.sentence do
+                    lib.card.dialog.sentence(self, unpack(c.sentence[i]))
                 end
-                while not (continue) do
-                    task.Wait()
-                end
-                player.dialog = false
-                Del(self.dialog_displayer)
-                self.dialog_displayer = nil
-                self.chip_bonus = { false, false }
-                self.dialog_id = nil
-                self._in_dialog = nil
-                Kill(self)
+                continue = true
             end
-        end, nil, true)
+            while not (continue) do
+                task.Wait()
+            end
+            player.dialog = false
+            Del(self.dialog_displayer)
+            self.dialog_displayer = nil
+            self.chip_bonus = { false, false }
+            self.dialog_id = nil
+            self._in_dialog = nil
+            Kill(self)
+        end
+    end, nil, true)
 
 ---执行对话
 ---@param id string @对话编号
@@ -1748,8 +1797,11 @@ lib.ex_card = {}
 function lib.ex_card.get_init(c)
     local card = {
         name = c.name,
-        t1 = c.t1 / 60, t2 = c.t2 / 60, t3 = c.t3 / 60,
-        hp = c.hp, is_sc = c.is_sc,
+        t1 = c.t1 / 60,
+        t2 = c.t2 / 60,
+        t3 = c.t3 / 60,
+        hp = c.hp,
+        is_sc = c.is_sc,
         dropitem = c.drop,
         is_extra = c.is_extra,
         fake = not (c.is_combat),
@@ -1869,7 +1921,8 @@ end
 function lib.ex_card:next()
     if self._ex_cards then
         self._ex_cards_num = self._ex_cards_num + 1
-        lib.ex_card.do_card_sp(self, self._ex_cards[self._ex_cards_num], self._ex_cards_prehptype[self._ex_cards_num], self._ex_cards_num == self._ex_cards_last_id)
+        lib.ex_card.do_card_sp(self, self._ex_cards[self._ex_cards_num], self._ex_cards_prehptype[self._ex_cards_num],
+            self._ex_cards_num == self._ex_cards_last_id)
     end
 end
 
@@ -1897,6 +1950,7 @@ function CardSystem:init(boss, cards)
         end
     end
 end
+
 ---帧逻辑适配
 ---@param boss lstg.GameObject @要执行符卡组的boss
 function CardSystem:frame(boss)
@@ -1904,6 +1958,7 @@ function CardSystem:frame(boss)
         self.cards[self.num].frame(boss)
     end
 end
+
 ---渲染逻辑适配
 ---@param boss lstg.GameObject @要执行符卡组的boss
 function CardSystem:render(boss)
@@ -1911,6 +1966,7 @@ function CardSystem:render(boss)
         self.cards[self.num].render(boss)
     end
 end
+
 ---结束逻辑适配
 ---@param boss lstg.GameObject @要执行符卡组的boss
 function CardSystem:del(boss)
@@ -1918,6 +1974,7 @@ function CardSystem:del(boss)
         self.cards[self.num].del(boss)
     end
 end
+
 ---执行通常符卡
 ---@param boss lstg.GameObject @要执行符卡组的boss
 ---@param card table @通常boss符卡
@@ -1926,8 +1983,11 @@ end
 function CardSystem:DoCard(boss, card, mode, final)
     local c = {
         name = card.name,
-        t1 = card.t1 / 60, t2 = card.t2 / 60, t3 = card.t3 / 60,
-        hp = card.hp, is_sc = card.is_sc,
+        t1 = card.t1 / 60,
+        t2 = card.t2 / 60,
+        t3 = card.t3 / 60,
+        hp = card.hp,
+        is_sc = card.is_sc,
         dropitem = card.drop,
         is_extra = card.is_extra,
         fake = not (card.is_combat),
@@ -1943,6 +2003,7 @@ function CardSystem:DoCard(boss, card, mode, final)
     lib.card.get_init(self, c, mode, final)
     c.init(self)
 end
+
 ---执行下一张符卡
 ---@param boss lstg.GameObject @要执行符卡组的boss
 function CardSystem:next(boss)

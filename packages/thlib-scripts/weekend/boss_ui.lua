@@ -18,6 +18,7 @@ do
             self._mode = 0
         end
     end
+
     function hpbar:render()
         local _ui = self.ui
         local b = self.system.boss
@@ -108,6 +109,7 @@ do
         self.cd1 = 0
         self.cd2 = 0
     end
+
     function timeCounter:frame()
         local _ui = self.ui
         local b = self.system.boss
@@ -216,6 +218,7 @@ do
             self.EnemyIndicater = self.EnemyIndicater + (max(0, (b.maxhp / 2 - b.hp))) / (b.maxhp / 2) * 90
         end
     end
+
     function pointer:render()
         local _ui = self.ui
         local b = self.system.boss
@@ -226,7 +229,7 @@ do
             local w = lstg.world
             local scale = self.scale
             SetRenderRect(w.l, w.r, w.b - max(16 * scale, 0), w.t,
-                    w.scrl, w.scrr, w.scrb - max(16 * scale, 0), w.scrt)
+                w.scrl, w.scrr, w.scrb - max(16 * scale, 0), w.scrt)
             local x, y = _ui.pointer_x, self.y
             local distsub = 1
             local players
@@ -270,6 +273,7 @@ do
         self.stardx = 12
         self.stardy = 12
     end
+
     function infobar:frame()
         local _ui = self.ui
         local b = self.system.boss
@@ -299,6 +303,7 @@ do
             self.t = self.t - 1
         end
     end
+
     function infobar:render()
         local _ui = self.ui
         local b = self.system.boss
@@ -338,7 +343,7 @@ do
                     x2 = x + (m2 + 1) * sdx + t / 5
                     y2 = y - t / 5
                     SetImageState("_boss_sc_left", "",
-                            Color(255 * (1 - (t / at)), 255, 255, 255))
+                        Color(255 * (1 - (t / at)), 255, 255, 255))
                     Render("_boss_sc_left", x2, y2, 0, 0.5 + (t / at) * 0.5)
                 end
             end
@@ -381,6 +386,7 @@ do
         self.talpha = 0
         self.talpha2 = 0
     end
+
     function sc_name:frame()
         self.y = lstg.world.t - 8
         local b = self.boss
@@ -417,8 +423,8 @@ do
             local y = self.y + self.yoffset + dy
             for _, p in pairs(players) do
                 if IsValid(p) and abs(p.x - x) <= 180
-                        and abs(p.y - y) <= 60
-                        and self.timer > 100 + etc + t1 then
+                    and abs(p.y - y) <= 60
+                    and self.timer > 100 + etc + t1 then
                     _flag = true
                     break
                 end
@@ -475,6 +481,7 @@ do
             end
         end
     end
+
     function sc_name:render()
         local b = self.boss
         local sc_hist = self.sc_hist or { 0, 0 }
@@ -486,7 +493,7 @@ do
         local alpha2 = alpha * self._alpha
         local s = GetImageScale()
         SetImageState("_boss_spell_name_bg", "",
-                Color(alpha * 255 * self.talpha2, 255, 255, 255))
+            Color(alpha * 255 * self.talpha2, 255, 255, 255))
         x = self.x + self.xoffset2
         Render("_boss_spell_name_bg", x, y, 0, 1 + 0.5 * self._scale2)
         x = self.x + self.xoffset2 + self.xp
@@ -499,14 +506,14 @@ do
             _x = x + d * cos(i * 45)
             _y = y + d * sin(i * 45)
             RenderTTF("sc_name", self.name,
-                    _x, _x, _y - 2, _y - 2,
-                    Color(alpha2 * 255, 0, 0, 0),
-                    "right", "noclip")
+                _x, _x, _y - 2, _y - 2,
+                Color(alpha2 * 255, 0, 0, 0),
+                "right", "noclip")
         end
         RenderTTF("sc_name", self.name,
-                x, x, y - 2, y - 2,
-                Color(alpha2 * 255, 255, 255, 255),
-                "right", "noclip")
+            x, x, y - 2, y - 2,
+            Color(alpha2 * 255, 255, 255, 255),
+            "right", "noclip")
         SetImageScale(s)
         local a = alpha * 255 * self.talpha
         if self.score then

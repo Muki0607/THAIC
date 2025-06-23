@@ -72,9 +72,7 @@ lib.last_replay_finish = false
 ---@param flyin number @为1时飞入，否则飞出
 ---@param dir string | "'up'" | "'down'" | "'left'" | "'right'" @移动方向
 ---@param del boolean @为true时在飞入飞出结束后删除菜单
----@param x number @移动目的x坐标
----@param y number @移动目的y坐标
----@overload fun(flyin:number, x:number, y:number)
+---@overload fun(flyin:number, x:number, y:number) @指定移动目的坐标
 function lib:Fly(flyin, dir, del)
     if flyin == 1 then
         task.New(self, function()

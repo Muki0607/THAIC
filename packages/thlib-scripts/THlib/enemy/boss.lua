@@ -20,6 +20,8 @@ end
 function boss:frame()
     self._bosssys:frame() --boss系统帧逻辑
     self._wisys:frame() --行走图系统帧逻辑
+    --发现会有很多问题，还是不加这个细节了
+    --[[
     for _, o in ObjList(GROUP_ITEM) do --拾取道具
         if o.is_power or o.is_power_red then
             if Dist(self, o) < 48 then
@@ -30,6 +32,7 @@ function boss:frame()
             end
         end
     end
+    --]]
     ---THAIC Added
     if not IsValid(self) then return end
     --受击闪烁

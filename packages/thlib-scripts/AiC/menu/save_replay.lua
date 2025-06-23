@@ -5,7 +5,7 @@ lib.save_replay = Class(object)
 
 ---@param data table @分数数据
 ---@param rep_saved boolean @是否已保存录像
-function lib.save_replay:init()
+function lib.save_replay:init(data, rep_saved)
     self.num = 12 --菜单编号
     self.group = GROUP_GHOST
     self.layer = LAYER_TOP

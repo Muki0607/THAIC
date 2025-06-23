@@ -235,7 +235,7 @@ function lib.Define(code)
             return lib.Define {
                 param = data1.param,
                 default = data1.default,
-                func = aic.table.connect(data1.code, data2.code)
+                func = aic.table.Connect(data1.code, data2.code)
             }
         end,
         __call = function(f, ...)
@@ -368,7 +368,7 @@ function fex:save(i, j, sep)
     i, j = getpos(i, j, #data.code)
     if not i then return end
     sep = sep or ";"
-    return table.connect(data.code, sep, i, j)
+    return table.concat(data.code, sep, i, j)
 end
 
 ---返回完整的函数（普通function）

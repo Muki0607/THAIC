@@ -1,3 +1,6 @@
+-----------------------------------------------------------------------
+--以下为暂时弃坑的符卡
+-----------------------------------------------------------------------
 Stage 0
 饭野 水叶
     No.001 夢擊「はーちゃんの夢のダンマク（哈酱的梦之弹幕）」
@@ -31,11 +34,12 @@ Stage 0
     No.027 「ステラのダンマク（斯特拉的弹幕）」
     No.028 「ステラのダンマク（斯特拉的弹幕）」
 Stage 1
-阿尔玛·奥普菲帕姆 
-    No.029 箭咒「纯白之弓　折」
-    No.030 箭咒「纯白之弓　折」
-    No.031 箭咒「纯白之弓　折」
-    No.032 箭咒「纯白之弓　折」
+爱丽丝
+    No.029 Default Attack「Star Ring Shooting（星环射击）」
+    No.030 Default Attack「Star Ring Shooting（星环射击）」
+    No.031 Default Attack「Star Ring Shooting（星环射击）」
+    No.032 Default Attack「Star Ring Shooting（星环射击）」
+
 爱丽丝
     No.033 「Card_Retrospect_ALyCE」
         「不要过来」
@@ -81,12 +85,16 @@ Stage 1
     No.046 「Manxome...」
     No.047 「Manxome...」
     No.048 「Manxome...」
+-----------------------------------------------------------------------
+--以下为正式版符卡
+-----------------------------------------------------------------------
+阿尔玛·奥普菲帕姆 
+    No.049 箭咒「纯白之弓　折」
+    No.050 箭咒「纯白之弓　折」
+    No.051 箭咒「纯白之弓　折」
+    No.052 箭咒「纯白之弓　折」
 Stage EX
-爱丽丝
-    No.049 Default Attack「Star Ring Shooting（星环射击）」
-    No.050 Default Attack「Star Ring Shooting（星环射击）」
-    No.051 Default Attack「Star Ring Shooting（星环射击）」
-    No.052 Default Attack「Star Ring Shooting（星环射击）」
+
 诺艾尔·柯涅尔（一阶段）
     No.053 爆咒「地面炸弹」
     No.054 爆咒「地面炸弹」

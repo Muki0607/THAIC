@@ -33,7 +33,9 @@ function task.Do(target)
                 table.insert(task.co, co)
                 local flag, errmsg = coroutine.resume(co)
                 if errmsg then
-                    error(tostring(errmsg) .. "\n========== coroutine traceback ==========\n" .. debug.traceback(co) .. "\n========== C traceback ==========")
+                    error(tostring(errmsg) ..
+                    "\n========== coroutine traceback ==========\n" ..
+                    debug.traceback(co) .. "\n========== C traceback ==========")
                 end
                 task.stack[#task.stack] = nil
                 task.co[#task.co] = nil
@@ -431,13 +433,13 @@ function task.CRMoveTo(t, mode, ...)
         local s = math.floor(timeMark[i]) + 1
         local j = timeMark[i] % 1
         local _x = x[s] * (-0.5 * j * j * j + j * j - 0.5 * j)
-                + x[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
-                + x[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
-                + x[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
+            + x[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
+            + x[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
+            + x[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
         local _y = y[s] * (-0.5 * j * j * j + j * j - 0.5 * j)
-                + y[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
-                + y[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
-                + y[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
+            + y[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
+            + y[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
+            + y[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
         self.x = _x
         self.y = _y
         coroutine.yield()
@@ -498,13 +500,13 @@ function task.CRMoveToEx(t, mode, ...)
         local s = math.floor(timeMark[i]) + 1
         local j = timeMark[i] % 1
         local _x = x[s] * (-0.5 * j * j * j + j * j - 0.5 * j)
-                + x[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
-                + x[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
-                + x[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
+            + x[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
+            + x[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
+            + x[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
         local _y = y[s] * (-0.5 * j * j * j + j * j - 0.5 * j)
-                + y[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
-                + y[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
-                + y[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
+            + y[s + 1] * (1.5 * j * j * j - 2.5 * j * j + 1.0)
+            + y[s + 2] * (-1.5 * j * j * j + 2.0 * j * j + 0.5 * j)
+            + y[s + 3] * (0.5 * j * j * j - 0.5 * j * j)
         self.x = self.x + _x - last_x
         self.y = self.y + _y - last_y
         last_x = _x
@@ -586,17 +588,17 @@ function task.Basis2MoveTo(t, mode, ...)
     }
     --开始运动
     for i = 1 / t, 1, 1 / t do
-        local j = (count - 1) * mfunc[mode](i)--采样方式
-        local se = math.floor(j) + 1        --3采样选择
-        local ct = j - math.floor(j)        --切换
+        local j = (count - 1) * mfunc[mode](i)                   --采样方式
+        local se = math.floor(j) + 1                             --3采样选择
+        local ct = j - math.floor(j)                             --切换
         local _x = 0
-                + x[se] * (0.5 * (ct - 1) ^ 2) --基函数1
-                + x[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1)) --基函数2
-                + x[se + 2] * (0.5 * ct ^ 2)              --基函数3
+            + x[se] * (0.5 * (ct - 1) ^ 2)                       --基函数1
+            + x[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1))     --基函数2
+            + x[se + 2] * (0.5 * ct ^ 2)                         --基函数3
         local _y = 0
-                + y[se] * (0.5 * (ct - 1) ^ 2) --基函数1
-                + y[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1)) --基函数2
-                + y[se + 2] * (0.5 * ct ^ 2)              --基函数3
+            + y[se] * (0.5 * (ct - 1) ^ 2)                       --基函数1
+            + y[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1))     --基函数2
+            + y[se + 2] * (0.5 * ct ^ 2)                         --基函数3
         self.x, self.y = _x, _y
         coroutine.yield()
     end
@@ -675,17 +677,17 @@ function task.Basis2MoveToEX(t, mode, ...)
     }
     --开始运动
     for i = 1 / t, 1, 1 / t do
-        local j = (count - 1) * mfunc[mode](i)--采样方式
-        local se = math.floor(j) + 1        --3采样选择
-        local ct = j - math.floor(j)        --切换
+        local j = (count - 1) * mfunc[mode](i)                   --采样方式
+        local se = math.floor(j) + 1                             --3采样选择
+        local ct = j - math.floor(j)                             --切换
         local _x = 0
-                + x[se] * (0.5 * (ct - 1) ^ 2) --基函数1
-                + x[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1)) --基函数2
-                + x[se + 2] * (0.5 * ct ^ 2)              --基函数3
+            + x[se] * (0.5 * (ct - 1) ^ 2)                       --基函数1
+            + x[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1))     --基函数2
+            + x[se + 2] * (0.5 * ct ^ 2)                         --基函数3
         local _y = 0
-                + y[se] * (0.5 * (ct - 1) ^ 2) --基函数1
-                + y[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1)) --基函数2
-                + y[se + 2] * (0.5 * ct ^ 2)              --基函数3
+            + y[se] * (0.5 * (ct - 1) ^ 2)                       --基函数1
+            + y[se + 1] * (0.5 * (-2 * ct ^ 2 + 2 * ct + 1))     --基函数2
+            + y[se + 2] * (0.5 * ct ^ 2)                         --基函数3
         self.x = self.x + _x - last_x
         self.y = self.y + _y - last_y
         last_x = _x

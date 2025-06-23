@@ -59,7 +59,7 @@ end
 ---@param t table @要反转的table
 ---@param raw boolean @是否不触发元方法
 ---@return table @反转后的table
-function lib.Reverse(t)
+function lib.Reverse(t, raw)
     local temp = {}
     local len
     if raw then
@@ -80,7 +80,7 @@ end
 ---@param t table @要求长度的table
 ---@param all boolean @是否使用pairs而非ipairs
 ---@param raw boolean @是否不触发元方法
-function lib.Len(t, all)
+function lib.Len(t, all, raw)
     if all then
         local iterator = pairs
         if raw then iterator = lib.rawpairs end
@@ -128,7 +128,7 @@ end
 ---@param t table @要获取最大值的table
 ---@param raw boolean @是否不触发元方法
 ---@return number, number @table的最大值与其索引
-function lib.Max(t)
+function lib.Max(t, raw)
     local iterator = pairs
     if raw then iterator = lib.rawpairs end
     local n = -INFINITE
@@ -485,7 +485,7 @@ end
 ---@param deep boolean @深度解包
 ---@param raw boolean @是否不触发__metatable以外的元方法
 ---@return ...
-function lib.Unpack(t, all, deep)
+function lib.Unpack(t, all, deep, raw)
     local iterator = ipairs
     if all then
         if raw then 

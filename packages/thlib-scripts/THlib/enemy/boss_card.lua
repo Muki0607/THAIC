@@ -6,21 +6,27 @@ local card = {}
 boss.card._default_card = card
 function card:before()
 end
+
 function card:init()
 end
+
 function card:frame()
 end
+
 function card:render()
 end
+
 function card:beforedel()
 end
+
 function card:del()
 end
+
 function card:after()
 end
 
 ---创建一个符卡
----@param name @符卡名
+---@param name string @符卡名
 ---@param t1 number @无敌时间
 ---@param t2 number @防御时间
 ---@param t3 number @总时间
@@ -54,8 +60,8 @@ local extend_rate = 1 + 16 / 60
 function boss.card.drawSpellCircle(self)
     if self.dialog then return end
     local alpha = min(self.sc_ring_alpha or 144, 144)
-    local exr1 = -0.5 --红外环半径偏移
-    local bold = 2 --环粗偏移值，原环粗16
+    local exr1 = -0.5       --红外环半径偏移
+    local bold = 2          --环粗偏移值，原环粗16
     local main_radius = 164 --卡环半径
     local timer, rov, cut, flag = self.timer, 4, 48, 1
     local pause = ext.pause_menu
@@ -84,43 +90,43 @@ function boss.card.drawSpellCircle(self)
                 local of = 1 - timer / 180
                 for i = 1, 16 do
                     SetImageState('bossring2' .. i, 'mul+add',
-                            Color(1.9 * alpha, self.fxr * of, self.fxg * of, self.fxb * of))
+                        Color(1.9 * alpha, self.fxr * of, self.fxg * of, self.fxb * of))
                 end
             else
                 for i = 1, 16 do
                     SetImageState('bossring2' .. i, 'mul+add',
-                            Color(alpha, 255, 255, 255))
+                        Color(alpha, 255, 255, 255))
                 end
             end
             misc.RenderRing('bossring1', ringx, ringy,
-                    timer * (main_radius / 90) + main_radius * 1.5 * sin(timer * 2) + 14 + exr1 + bold,
-                    timer * (main_radius / 90) + main_radius * 1.5 * sin(timer * 2) - 2 + exr1,
-                    -self.ani * rov, cut, 16)
+                timer * (main_radius / 90) + main_radius * 1.5 * sin(timer * 2) + 14 + exr1 + bold,
+                timer * (main_radius / 90) + main_radius * 1.5 * sin(timer * 2) - 2 + exr1,
+                -self.ani * rov, cut, 16)
             misc.RenderRing('bossring2', ringx, ringy,
-                    90 + ((main_radius - 90) / 90) * timer + 4,
-                    -main_radius + (1 - cos(timer) ^ 2) * (main_radius * 2 - 12) - bold,
-                    self.ani * rov, cut, 16)--white
+                90 + ((main_radius - 90) / 90) * timer + 4,
+                -main_radius + (1 - cos(timer) ^ 2) * (main_radius * 2 - 12) - bold,
+                self.ani * rov, cut, 16)     --white
         else
             if self.fxr and self.fxg and self.fxb then
                 for i = 1, 16 do
                     SetImageState('bossring2' .. i, 'mul+add',
-                            Color(1.9 * alpha, self.fxr / 2, self.fxg / 2, self.fxb / 2))
+                        Color(1.9 * alpha, self.fxr / 2, self.fxg / 2, self.fxb / 2))
                 end
             else
                 for i = 1, 16 do
                     SetImageState('bossring2' .. i, 'mul+add',
-                            Color(alpha, 255, 255, 255))
+                        Color(alpha, 255, 255, 255))
                 end
             end
             local t = self.t3 * extend_rate --多给点收缩时间,符卡环最终半径不要为0
             misc.RenderRing('bossring1', ringx, ringy,
-                    (t - timer * 1.08) / (t - 90) * main_radius + 14 + exr1 + bold,
-                    (t - timer * 1.08) / (t - 90) * main_radius - 2 + exr1,
-                    -self.ani * rov, cut, 16)
+                (t - timer * 1.08) / (t - 90) * main_radius + 14 + exr1 + bold,
+                (t - timer * 1.08) / (t - 90) * main_radius - 2 + exr1,
+                -self.ani * rov, cut, 16)
             misc.RenderRing('bossring2', ringx, ringy,
-                    (t - timer) / (t - 90) * main_radius + 4,
-                    (t - timer) / (t - 90) * main_radius - 12 - bold,
-                    self.ani * rov, cut, 16)--white
+                (t - timer) / (t - 90) * main_radius + 4,
+                (t - timer) / (t - 90) * main_radius - 12 - bold,
+                self.ani * rov, cut, 16)     --white
         end
     end
 end
@@ -154,6 +160,7 @@ function boss.move.New(x, y, t, m)
     c.m = m
     return c
 end
+
 function boss.move:init()
     local c = boss.GetCurrentCard(self)
     task.New(self, function()
@@ -161,10 +168,13 @@ function boss.move:init()
         Kill(self)
     end)
 end
+
 function boss.move:frame()
 end
+
 function boss.move:render()
 end
+
 function boss.move:del()
 end
 
@@ -197,10 +207,13 @@ function boss.escape.New(x, y, t, m)
     c.m = m
     return c
 end
+
 function boss.escape:frame()
 end
+
 function boss.escape:render()
 end
+
 function boss.escape:init()
     local c = boss.GetCurrentCard(self)
     task.New(self, function()
@@ -208,5 +221,6 @@ function boss.escape:init()
         Kill(self)
     end)
 end
+
 function boss.escape:del()
 end

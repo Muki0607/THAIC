@@ -9,22 +9,23 @@ end
 
 --- 设置全局音乐音量
 --- 当参数为 2 个时，设置指定音乐的音量
+---@param bgmname string
 ---@param volume number
 ---@overload fun(bgmname:string, volume:number)
-function lib.SetBGMVolume()
+function lib.SetBGMVolume(bgmname, volume)
 end
 
 ---@param bgmname string
-function lib.PauseMusic()
+function lib.PauseMusic(bgmname)
 end
 
 ---@param bgmname string
-function lib.ResumeMusic()
+function lib.ResumeMusic(bgmname)
 end
 
 ---@param bgmname string
 ---@return lstg.AudioStatus
-function lib.GetMusicState()
+function lib.GetMusicState(bgmname)
 end
 
 for _, v in ipairs({ 'GetBGMVolume', 'SetBGMVolume', 'PauseMusic', 'ResumeMusic', 'GetMusicState' }) do

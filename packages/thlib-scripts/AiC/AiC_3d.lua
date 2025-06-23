@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global, missing-return-value
+---@diagnostic disable: undefined-global
 ---=====================================
 ---THAIC 3D v1.00a
 ---东方梦摇篮3D v1.00a
@@ -152,7 +154,8 @@ end
 ---设置游戏对象的速度
 ---@param unit lstg.GameObject|table @要设置的对象
 ---@param v number
----@param a number
+---@param th number
+---@param ph number
 ---@param updaterot boolean @如果该参数为true，则同时设置对象的rot
 function lib.SetV(unit, v, th, ph, updaterot)
     unit.x, unit.y, unit.z = lib.Rec(v, th, ph)

@@ -37,7 +37,9 @@ if false then
     function boss:frame()
         if not IsValid(self) then return end
         self._bosssys:frame() --boss系统帧逻辑
-        self._wisys:frame() --行走图系统帧逻辑
+        self._wisys:frame()   --行走图系统帧逻辑
+        --发现会有很多问题，还是不加这个细节了
+        --[[
         for _, o in ObjList(GROUP_ITEM) do --拾取道具
             if o.is_power or o.is_power_red then
                 if Dist(self, o) < 48 then
@@ -48,6 +50,8 @@ if false then
                 end
             end
         end
+        --]]
+        ---THAIC Added
         if not IsValid(self) then return end
         --受击闪烁
         if self.dmgt then
@@ -102,7 +106,7 @@ function lib.InitFunc()
         lib.ClearTempRep(dir)
     end
     lstg.FileManager.CreateDirectory(dir)
-    
+
     ---修改PlayMusic，使其执行时返回已经历帧数，便于确认音乐播放位置
     --存储旧函数
     local ref = PlayMusic
@@ -132,7 +136,7 @@ end
 ---有时缓时可能会出问题。
 ---@return string, number, number
 function lib.GetCurrentBGM()
-    local time, key = 0 
+    local time, key = 0
     --找到离当前时间最近的记录
     for k, v in pairs(lib.MusicRecord) do
         if v[1] > time then
@@ -331,7 +335,8 @@ function lib.StageFinishSave(path)
     --写入当前关卡全部按键输入
     replayWriter:Write(byte_array)
     --打印当前关卡完成信息
-    Log(2, "[pmode] Temporary replay of stage " .. lib.stage_index .. ": " .. lstg.var.stage_name .. " has been finished.")
+    Log(2,
+        "[pmode] Temporary replay of stage " .. lib.stage_index .. ": " .. lstg.var.stage_name .. " has been finished.")
 end
 
 ---结束全关存档，务必在最后一关所有必要按键输入结束后（比如转场前一帧）再执行。

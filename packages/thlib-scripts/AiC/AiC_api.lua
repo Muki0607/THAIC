@@ -154,11 +154,6 @@ nand = aic.math.nand
 nor = aic.math.nor
 xor = aic.math.xor
 xnor = aic.math.xnor
-band = aic.math.band
-bor = aic.math.bor
-bnot = aic.math.bnot
-shl = aic.math.lshift
-shr = aic.math.rshift
 ---使一点绕另一点旋转特定角度
 ---@param x number @原x坐标
 ---@param y number @原y坐标

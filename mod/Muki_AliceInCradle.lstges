@@ -5645,7 +5645,7 @@
 5,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"StageLoadingSign = true","EditWindow":"code"}],"AttributeCount":1}
 5,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"120","EditWindow":"yield"}],"AttributeCount":1}
 5,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"StageLoadingSign = false","EditWindow":"code"}],"AttributeCount":1}
-5,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"道中","EditWindow":""}],"AttributeCount":1,"IsBanned":true}
+5,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"道中","EditWindow":""}],"AttributeCount":1}
 6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Wave1 2s~10s","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
 7,{"$type":".Advanced.AdvancedRepeat.AdvancedRepeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"16","EditWindow":"yield"}],"AttributeCount":1}
 8,{"$type":".Advanced.AdvancedRepeat.VariableCollection, LuaSTGEditorSharp","Attributes":[]}
@@ -5678,26 +5678,21 @@
 7,{"$type":".General.Repeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"8","EditWindow":"yield"},{"$type":".DependencyAttrItem, ","attrCap":"Number of Var","attrInput":"1","EditWindow":""},{"attrCap":"Var 1 name","attrInput":"","EditWindow":""},{"attrCap":"Var 1 init value","attrInput":"","EditWindow":""},{"attrCap":"Var 1 increment","attrInput":"","EditWindow":""}],"AttributeCount":5}
 8,{"$type":".Enemy.CreateEnemy, ","Attributes":[{"attrCap":"Name","attrInput":"\"Muki_AiC_Wave3_small\"","EditWindow":"enemyDef"},{"attrCap":"Position","attrInput":"256,120","EditWindow":"position"},{"attrCap":"Parameters","attrInput":"{224,120,0,150,-224,200},120","EditWindow":"enemyParam"}],"AttributeCount":3}
 8,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"30","EditWindow":"yield"}],"AttributeCount":1}
-6,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"120","EditWindow":"yield"}],"AttributeCount":1}
-6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"标题动画 34s~40s","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
-7,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"360","EditWindow":"yield"}],"AttributeCount":1}
-6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Wave4 40s~49s","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
+6,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"180","EditWindow":"yield"}],"AttributeCount":1}
+6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Wave4 35s~49s","EditWindow":""}],"AttributeCount":1,"IsSelected":true}
 7,{"$type":".Enemy.CreateEnemy, ","Attributes":[{"attrCap":"Name","attrInput":"\"Muki_AiC_Wave4_big\"","EditWindow":"enemyDef"},{"attrCap":"Position","attrInput":"0,256","EditWindow":"position"},{"attrCap":"Parameters","attrInput":"","EditWindow":"enemyParam"}],"AttributeCount":3}
 7,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"120","EditWindow":"yield"}],"AttributeCount":1}
-7,{"$type":".General.Repeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"7","EditWindow":"yield"},{"$type":".DependencyAttrItem, ","attrCap":"Number of Var","attrInput":"1","EditWindow":""},{"attrCap":"Var 1 name","attrInput":"","EditWindow":""},{"attrCap":"Var 1 init value","attrInput":"","EditWindow":""},{"attrCap":"Var 1 increment","attrInput":"","EditWindow":""}],"AttributeCount":5}
+7,{"$type":".General.Repeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"8","EditWindow":"yield"},{"$type":".DependencyAttrItem, ","attrCap":"Number of Var","attrInput":"1","EditWindow":""},{"attrCap":"Var 1 name","attrInput":"","EditWindow":""},{"attrCap":"Var 1 init value","attrInput":"","EditWindow":""},{"attrCap":"Var 1 increment","attrInput":"","EditWindow":""}],"AttributeCount":5}
 8,{"$type":".Enemy.CreateEnemy, ","Attributes":[{"attrCap":"Name","attrInput":"\"Muki_AiC_Wave4_small\"","EditWindow":"enemyDef"},{"attrCap":"Position","attrInput":"-256,90","EditWindow":"position"},{"attrCap":"Parameters","attrInput":"{-224,120,-192,90,-160,60,-128,90,-96,120,-64,90,-32,60,0,90,32,120,64,90,96,60,128,90,160,120,192,90,224,60,256,90},240","EditWindow":"enemyParam"}],"AttributeCount":3}
-8,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"60","EditWindow":"yield"}],"AttributeCount":1}
+8,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"90","EditWindow":"yield"}],"AttributeCount":1}
 6,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"120","EditWindow":"yield"}],"AttributeCount":1}
-6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Wave5 51s~1m9s","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
-7,{"$type":".General.Repeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"6","EditWindow":"yield"},{"$type":".DependencyAttrItem, ","attrCap":"Number of Var","attrInput":"1","EditWindow":""},{"attrCap":"Var 1 name","attrInput":"","EditWindow":""},{"attrCap":"Var 1 init value","attrInput":"","EditWindow":""},{"attrCap":"Var 1 increment","attrInput":"","EditWindow":""}],"AttributeCount":5}
+6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Wave5 51s~1m1s","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
+7,{"$type":".General.Repeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"5","EditWindow":"yield"},{"$type":".DependencyAttrItem, ","attrCap":"Number of Var","attrInput":"1","EditWindow":""},{"attrCap":"Var 1 name","attrInput":"","EditWindow":""},{"attrCap":"Var 1 init value","attrInput":"","EditWindow":""},{"attrCap":"Var 1 increment","attrInput":"","EditWindow":""}],"AttributeCount":5}
 8,{"$type":".Advanced.AdvancedRepeat.AdvancedRepeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"7","EditWindow":"yield"}],"AttributeCount":1}
 9,{"$type":".Advanced.AdvancedRepeat.VariableCollection, LuaSTGEditorSharp","Attributes":[]}
 10,{"$type":".Advanced.AdvancedRepeat.LinearVariable, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"x","EditWindow":""},{"attrCap":"From","attrInput":"-175","EditWindow":""},{"attrCap":"To","attrInput":"175","EditWindow":""},{"attrCap":"Precisely","attrInput":"true","EditWindow":"bool"},{"attrCap":"Mode","attrInput":"MOVE_NORMAL","EditWindow":"interpolation"}],"AttributeCount":5}
 10,{"$type":".Enemy.CreateEnemy, ","Attributes":[{"attrCap":"Name","attrInput":"\"Muki_AiC_Wave5_small\"","EditWindow":"enemyDef"},{"attrCap":"Position","attrInput":"x,ran:Float(120,180)","EditWindow":"position"},{"attrCap":"Parameters","attrInput":"","EditWindow":"enemyParam"}],"AttributeCount":3}
 8,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"180","EditWindow":"yield"}],"AttributeCount":1}
-6,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"180","EditWindow":"yield"}],"AttributeCount":1}
-5,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Wave6(MidBoss) 1m12s~1m50s","EditWindow":""}],"AttributeCount":1}
-6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"增援","EditWindow":""}],"AttributeCount":1,"IsSelected":true}
 5,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"114514","EditWindow":"yield"}],"AttributeCount":1}
 5,{"$type":".Stage.StageBG, ","Attributes":[{"attrCap":"Background","attrInput":"Muki_AiC_background","EditWindow":"BG"}],"AttributeCount":1}
 5,{"$type":".Audio.PlayBGM, ","Attributes":[{"attrCap":"Name","attrInput":"\"aic_bgm10\"","EditWindow":"BGM"},{"attrCap":"Time","attrInput":"","EditWindow":""},{"attrCap":"Set stage time","attrInput":"false","EditWindow":"bool"}],"AttributeCount":3,"IsExpanded":false}

@@ -214,7 +214,7 @@ local defaultFrameEvent = {
                             flag = true
                         end
                     end
-                    if o.is_power_red then flag = false end
+                    --if o.is_power_red then flag = false end
                     if flag then
                         o.attract = 8
                         o.num = self.item
@@ -690,9 +690,9 @@ function system:render()
             lstg.RenderTTF("debug_tool_font", "[F7]清小怪", -180, -100, 110, 120, 0, Color(0xAACCCCCC))
         end
         if status_list[49] then
-            lstg.RenderTTF("debug_tool_font", "[1]miss后不掉残", -180, -100, 100, 110, 0, Color(0xFF00FFFF))
+            lstg.RenderTTF("debug_tool_font", "[1]miss后不掉HP", -180, -100, 100, 110, 0, Color(0xFF00FFFF))
         else
-            lstg.RenderTTF("debug_tool_font", "[1]miss后不掉残", -180, -100, 100, 110, 0, Color(0xAACCCCCC))
+            lstg.RenderTTF("debug_tool_font", "[1]miss后不掉HP", -180, -100, 100, 110, 0, Color(0xAACCCCCC))
         end
         if status_list[50] then
             lstg.RenderTTF("debug_tool_font", "[2]锁自机HP", -180, -100, 90, 100, 0, Color(0xFF00FFFF))
