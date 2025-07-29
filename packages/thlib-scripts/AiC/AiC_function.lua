@@ -9,7 +9,7 @@
 ---v1.01a
 ---为将分句函数转化为普通函数的函数增加了sep参数，可以在连接函数时添加函数
 
----整个库里充斥着超级奇怪的语法，不用在意，能跑就行
+---整个库里充斥着超级奇怪的写法，不用在意，能跑就行
 
 ---@class aic.table @东方梦摇篮function扩展库
 aic.func = {}
@@ -53,9 +53,9 @@ function lib.execute(code)
     return load(code)()
 end
 
----@alias AdvancedRepeat.vartype VAR_INCREMENT | VAR_LINEAR | VAR_SINUSOIDAL_INTERPOLATION | VAR_SINUSOIDAL_MOVEMENT | VAR_CUSTOM | VAR_REBOUNDING | VAR_SINUSOIDAL_OSCILLATION
+---@alias AdvancedRepeat_vartype VAR_INCREMENT | VAR_LINEAR | VAR_SINUSOIDAL_INTERPOLATION | VAR_SINUSOIDAL_MOVEMENT | VAR_CUSTOM | VAR_REBOUNDING | VAR_SINUSOIDAL_OSCILLATION
 
----@alias AdvancedRepeat.vardef { vartype:number, ...:any }
+---@alias AdvancedRepeat_vardef { vartype:number, ...:any }
 
 VAR_INCREMENT = 1
 VAR_LINEAR = 2
@@ -77,7 +77,7 @@ SINE_ACC_DEC = 3
 ---
 ---函数将返回一个迭代器，按顺序返回定义的参数
 ---@param times number @循环次数
----@vararg AdvancedRepeat.vardef
+---@vararg AdvancedRepeat_vardef
 function lib.AdvancedRepeat(times, ...)
     local arg = { ... }
     local variable = {}

@@ -60,7 +60,7 @@ function sakuya_player:init(slot)
     }
     self.default_dmglist = { 0.15, 0.15, 0.15, 0.15 }
     self.dmglist = { 0.15, 0.15, 0.15, 0.15 }
-    self.spellname = { '幻葬「夜雾幻影杀人鬼」', '幻世「咲夜的世界」' }
+    self.spellname = { '幻葬「夜雾幻影杀人鬼」', '幻世「口关夜的世界」' }
     self.deathtime = 15
     self.default_deathtime = self.deathtime
 end

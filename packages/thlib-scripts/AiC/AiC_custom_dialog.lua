@@ -1315,7 +1315,7 @@ end
 lib.middle.dialog_displayer = Class(object)
 ---@param p_dialog boolean 是否将player.dialog设置为true
 ---@param dialogbox_blend string @对话框渲染模式
----@param dialogbox_co1 lstg.Color @对话框颜色
+---@param dialogbox_co lstg.Color @对话框颜色
 ---@param text_co lstg.Color @对话字体颜色
 ---@param dialogTTF string @对话字体（TTF）
 function lib.middle.dialog_displayer:init(p_dialog, dialogbox_blend, dialogbox_co, text_co, text_scale, dialogTTF)
@@ -1659,7 +1659,6 @@ end
 ---@param dialogbox string @对话框图片
 ---@param dialogbox_hscale number @对话框横向缩放比
 ---@param dialogbox_vscale number @对话框纵向缩放比
----@param dialogbox_yu number @对话框y坐标偏移值
 ---@param text_yu number @对话y坐标偏移值
 ---@param dialogbox_blend string @对话框渲染模式
 ---@param dialogbox_co lstg.Color @对话框颜色

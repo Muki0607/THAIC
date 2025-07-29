@@ -5,29 +5,43 @@ local lib = aic.menu
 --- 获取全局音乐音量
 ---@return number
 function lib.GetBGMVolume()
+    return GetBGMVolume()
 end
 
 --- 设置全局音乐音量
 --- 当参数为 2 个时，设置指定音乐的音量
+--- 不知道为啥有些时候只传一个参数会炸，只能手动模拟了
 ---@param bgmname string
 ---@param volume number
----@overload fun(bgmname:string, volume:number)
+---@overload fun(volume:number)
 function lib.SetBGMVolume(bgmname, volume)
+    if bgmname == 'all' or type(bgmname) == 'number' then
+        local _, bgm = EnumRes('bgm')
+        for _, v in pairs(bgm) do
+            SetBGMVolume(v, volume or bgmname)
+        end
+    else
+        SetBGMVolume(bgmname, volume)
+    end
 end
 
 ---@param bgmname string
 function lib.PauseMusic(bgmname)
+    PauseMusic(bgmname)
 end
 
 ---@param bgmname string
 function lib.ResumeMusic(bgmname)
+    ResumeMusic(bgmname)
 end
 
 ---@param bgmname string
 ---@return lstg.AudioStatus
 function lib.GetMusicState(bgmname)
+    return GetMusicState(bgmname)
 end
 
+--[[
 for _, v in ipairs({ 'GetBGMVolume', 'SetBGMVolume', 'PauseMusic', 'ResumeMusic', 'GetMusicState' }) do
     lib[v] = function(bgmname, volume)
         TryExcept(function()
@@ -36,6 +50,7 @@ for _, v in ipairs({ 'GetBGMVolume', 'SetBGMVolume', 'PauseMusic', 'ResumeMusic'
             { [''] = pass })
     end
 end
+--]]
 
 ------------------------------------------------------------
 ---音乐室
@@ -55,6 +70,9 @@ function lib.music_room:init(pos, l)
     self.warn1 = false --是否触发警告1
     self.warn2 = false --是否触发警告2
     self.random_text = '' --紫的曲子用的随机字符
+    self.music_pos = 0 --音乐当前播放位置，由于没有能直接获取的函数，只能手动计时
+    self.playing = false --当前是否在播放，虽然进入时在播放标题bgm但无法获得当前播放位置所以初始为false
+    self.curr_bgm = 'aic_bgm1'
     self.x = screen.width * 0.5
     self.y = screen.height * 0.5
     self.default_x = screen.width * 0.5
@@ -89,8 +107,11 @@ end
 function lib.music_room:frame()
     task.Do(self)
     if not self.init_sign then self.Initialize() end
-    self.vol = lib.GetBGMVolume() or setting.bgmvolume
     self.wait = max(self.wait - 1, 0)
+    self.curr_bgm = aic.misc.GetCurrentBGM() or self.curr_bgm --当前播放bgm，若暂停则为暂停前播放bgm
+    if self.playing then
+        self.music_pos = self.music_pos + 1
+    end
     if self.wait < 1 then
         --local lastkey = GetLastKey()
         if KeyIsPressed('spell') or aic.input.CheckLastKey('menu') then
@@ -111,6 +132,8 @@ function lib.music_room:frame()
                             lib.SetBGMVolume(setting.bgmvolume)
                             TryExcept(function()
                                     _play_music('aic_bgm' .. self.pos, nil, false)
+                                    self.playing = true
+                                    self.music_pos = 0
                                 end,
                                 { [''] = pass })
                             for t = 1, 30 do
@@ -125,6 +148,8 @@ function lib.music_room:frame()
                         lib.SetBGMVolume(setting.bgmvolume)
                         TryExcept(function()
                                 _play_music('aic_bgm' .. self.pos, nil, false)
+                                self.playing = true
+                                self.music_pos = 0
                             end,
                             { [''] = pass })
                         for t = 1, 30 do
@@ -166,14 +191,13 @@ function lib.music_room:frame()
             end
         elseif KeyIsDown('special') then
             self.wait = self.t
-            if lib.GetMusicState('aic_bgm' .. self.pos) == 'paused' then
-                lib.ResumeMusic('aic_bgm' .. self.pos)
-            elseif lib.GetMusicState('aic_bgm' .. self.pos) == 'playing' then
-                lib.PauseMusic('aic_bgm' .. self.pos)
+            if aic.misc.GetCurrentBGM() then
+                lib.PauseMusic(self.curr_bgm)
+                self.playing = false
+            else
+                lib.ResumeMusic(self.curr_bgm)
+                self.playing = true
             end
-        end
-        if KeyIsDown('slow') then
-            lib.SetBGMVolume(max(0, self.vol - setting.bgmvolume / 180))
         end
     end
 end
@@ -181,7 +205,7 @@ end
 function lib.music_room:render()
     SetViewMode('ui')
     lib.DrawSubTitle(self)
-    lib.DrawTips(self, { '播放音乐', '返回上一级菜单', --[['暂停/继续音乐', '淡出音乐']] }, { '选择音乐' })
+    lib.DrawTips(self, { '播放音乐', '返回上一级菜单', '暂停/继续音乐' }, { '选择音乐' })
     local d, x, y, text1 = 20, self.x - 260, self.y + 110, self.text1
     for i = 1, self.l do
         local pos, text = i + self.headpos - 1
@@ -240,7 +264,10 @@ function lib.music_room:render()
     if self.debug then
         local str = tostring
         DrawText("main_font_zh2", 'warn1=' .. str(self.warn1) .. '\nwarn2=' .. str(self.warn2)
-            .. '\npos=' .. self.pos .. '\ntextpos=' .. self.textpos, 500, 300, 1,
+            .. '\npos=' .. self.pos .. '\ntextpos=' .. self.textpos .. '\ncurr_bgm=' .. self.curr_bgm, 500, 300, 1,
+            color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
+        local music_pos = int(self.music_pos / 60)
+        DrawText("main_font_zh2", '当前播放位置：' .. int(music_pos / 60) .. ':' .. (music_pos % 60), 500, 150, 1,
             color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
     end
     SetViewMode('world')

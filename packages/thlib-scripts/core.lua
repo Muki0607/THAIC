@@ -75,7 +75,7 @@ lstg.DoFile("ColliCheck.lua")--碰撞箱显示，由plugin搬运至pacakages
 lstg.DoFile("lib/debug/_debug.lua")
 if not _debug._debug then _debug = {} end
 
----加载在AiC模块前的外来模块(来自群文件)
+---加载在AiC模块前的外来模块(部分来自群文件)
 lstg.DoFile("extra_lib/Hana_AI_v_1.lua")--HanaAI，用于LSC中自机AI
 lstg.DoFile("extra_lib/RenderTargetExtension.lua")--RT扩展,用于简化RenderTarget渲染
 

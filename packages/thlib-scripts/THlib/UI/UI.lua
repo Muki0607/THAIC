@@ -673,6 +673,7 @@ function lstg_ui:drawInfo1()
     local x = (63 + w.scrr + dx + dx2)
     local dx3 = 15
     local bar_w = bar_w * self.s + dx3
+    --血量槽渲染
     RenderTexture('hint_AiC_bar_empty', '',
         { x + dx3, y1 + bar_h / 2, 0.5, 0, 0, white },
         { x + bar_w + dx3, y1 + bar_h / 2, 0.5, bar_tw, 0, white },
@@ -688,16 +689,19 @@ function lstg_ui:drawInfo1()
         { x + bar_w * (p1 + p6) + dx3, y1 + bar_h / 2, 0.5, bar_tw * (p1 + p6), 0, white },
         { x + bar_w * (p1 + p6) + dx3, y1 - bar_h / 2, 0.5, bar_tw * (p1 + p6), bar_th, white },
         { x + bar_w * p1 + dx3, y1 - bar_h / 2, 0.5, bar_tw * p1, bar_th, white })
+    --被紫bbaqrouozjsbdfweb削掉的血上限
     RenderTexture('hint_AiC_bar_gap', '',
         { x + bar_w * p5 + dx3, y1 + bar_h / 2, 0.5, bar_tw * p5, 0, white },
         { x + bar_w + dx3, y1 + bar_h / 2, 0.5, bar_tw, 0, white },
         { x + bar_w + dx3, y1 - bar_h / 2, 0.5, bar_tw, bar_th, white },
         { x + bar_w * p5 + dx3, y1 - bar_h / 2, 0.5, bar_tw * p5, bar_th, white })
+    --魔力槽渲染
     RenderTexture('hint_AiC_bar_empty', '',
         { x + dx3, y2 + bar_h / 2, 0.5, 0, 0, white },
         { x + bar_w + dx3, y2 + bar_h / 2, 0.5, bar_tw, 0, white },
         { x + bar_w + dx3, y2 - bar_h / 2, 0.5, bar_tw, bar_th, white },
         { x + dx3, y2 - bar_h / 2, 0.5, 0, bar_th, white })
+    --最终阶段的特殊魔力，用于开启秘仪结界
     if lstg.var.mp_active then
         RenderTexture('hint_AiC_bar_mp_active', '',
             { x + dx3, y2 + bar_h / 2, 0.5, 0, 0, white },

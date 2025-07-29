@@ -86,7 +86,7 @@ if _debug.old_title then
             scoredata.enhancer_select = {}
         end
         if not scoredata.enhancer_slot then
-            scoredata.enhancer_slot = 5
+            scoredata.enhancer_slot = 4
         end
         lstg.var.enhancer_select = {}
         --由于scoredata的元表特性table系的函数（insert，remove，unpack）全部不能用，只能点对点赋值

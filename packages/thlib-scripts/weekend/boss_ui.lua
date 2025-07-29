@@ -353,7 +353,7 @@ end
 
 do
     local sc_name = boss.sc_name
-    ---@param boss object @目标对象
+    ---@param b object @目标对象
     ---@param name string @符卡名称
     ---@param slot number @使用槽位
     function sc_name:init(b, name, score)

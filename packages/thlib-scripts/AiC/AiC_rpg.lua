@@ -7,7 +7,7 @@
 ---v1.00a
 ---初始版本
 
----@class aic.res @东方梦摇篮RPG支持库
+---@class aic.rpg @东方梦摇篮RPG支持库
 aic.rpg = {}
 local lib = aic.rpg
 

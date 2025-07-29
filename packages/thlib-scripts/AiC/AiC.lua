@@ -60,6 +60,7 @@ DoFile("AiC/AiC_debug.lua")--AiC Debug
 DoFile("AiC/AiC_misc.lua")--AiC杂项
 DoFile("AiC/AiC_pmode.lua")--AiC 完美无缺模式
 DoFile("AiC/AiC_math.lua")--AiC数学库
+DoFile("AiC/AiC_sdl.lua")--SDL支持
 
 ---游戏内
 DoFile("AiC/AiC_custom_dialog.lua")--AiC自定义对话库

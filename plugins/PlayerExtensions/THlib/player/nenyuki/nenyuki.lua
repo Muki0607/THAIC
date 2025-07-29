@@ -112,7 +112,7 @@ function nenyuki_player:frame()
     for i, o in ipairs(self.targetlist) do
         if IsValid(o) then clear = false end
     end
-    local num = min(5, int(lstg.var.power / 100) + 1)
+    local num = min(int(lstg.var.power / 100) + 1, 5)
     if self.death ~= 0 or clear then
         for i = 1, 4 do
             if i < num and self.sp[i] then
@@ -249,10 +249,8 @@ function nenyuki_player:shoot()
                         local a, r = ran:Float(0, 360), ran:Float(0, 6)
                         New(nenyuki_laser_ef, target.x + r * cos(a), target.y + r * sin(a), self.dmglist[i] * 4, 5, target)
                     end
-                    local dmgfix = 1 --修正低速时过剩伤害
-                    if self.slow == 1 then dmgfix = 0.5 end
                     if target.class.base.take_damage then
-                        target.class.base.take_damage(target, self.dmglist[i] * 5 / 4 * dmgfix * dmgfix2 * dmgfix3)
+                        target.class.base.take_damage(target, self.dmglist[i] * 5 / 4 * dmgfix2 * dmgfix3)
                     end
                     if other then
                         for k, v in ipairs(other) do
@@ -405,7 +403,7 @@ function nenyuki_player:render()
         local num = 30 / (self.support + 1)
         local timer = self.timer * 16
         for i = 1, 4 do
-            local angle = self.anglelist[int(lstg.var.power / 100) + 1][i]
+            local angle = self.anglelist[min(int(lstg.var.power / 100) + 1, 5)][i]
             if self.sp[i] and self.sp[i][3] > 0.5 then
                 local x, y
                 if self.slow == 0 then
@@ -464,7 +462,7 @@ end
 function nenyuki_laser_ef:frame()
     if self.timer == 3 and self.t > 0 then
         local a, r = ran:Float(0, 360), ran:Float(8, 16)
-        New(nenyuki_laser_ef, self.x + r * cos(a), self.y + r * sin(a), self.dmg * 20, self.t - 1)
+        New(nenyuki_laser_ef, self.x + r * cos(a), self.y + r * sin(a), self.dmg * 25, self.t - 1)
     end
     if self.timer == 15 then Del(self) end
 end
@@ -726,7 +724,7 @@ end
 --子机追踪，每个子机目标独立，但效果是经常叠一起
 function nenyuki_findtarget(self)
     local d = { 114514, 114514, 114514, 114514 } --下北泽程序员常用填充数字（雾
-    local num = min(5, int(lstg.var.power / 100) + 1)
+    local num = min(int(lstg.var.power / 100) + 1, 5)
     for i = 1, 4 do
         if i < num then
             local y = self.slist[num][i][2]

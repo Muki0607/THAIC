@@ -1846,7 +1846,7 @@ function lib.ex_card:do_card_sp(card, bartype, is_final)
 end
 
 ---执行通常boss符卡列
----@param carda table @通常boss符卡表
+---@param cards table @通常boss符卡表
 function lib.ex_card:do_card_list(cards)
     _log(string.format("[spboss][card] Boss(%s) set to use a nomal card list", self))
     local curcards = {}

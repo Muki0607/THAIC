@@ -219,17 +219,121 @@ function lib.GetRectPos(a, w, h)
     end
 end
 
----各种形状拟合，返回点列（格式：{{x1,y1},{x2,y2},...}）
----以下函数是在sharp里用高级循环写的，所以不要想着能看懂了
+
+---贝塞尔插值，由task.BezierMoveTo修改而来
+---@param n number @总点数
+---@param mode number @移动模式，参见Ltask.lua
+---@param unpack_all boolean @是否使用坐标列格式的返回值
+---@param x0 number @起始x坐标
+---@param y0 number @起始y坐标
+---@vararg number @控制点坐标
+---@return table　@坐标列
+function lib.BezierInterpolation(n, mode, unpack_all, x0, y0, ...)
+    local arg = { ... }
+    n = int(n)
+    n = max(1, n)
+    local count = (#arg) / 2
+    local x = {}
+    local y = {}
+    local xlist = {}
+    local ylist = {}
+    local p = {}
+    x[1] = x0
+    y[1] = y0
+    xlist[1] = x0
+    ylist[1] = y0
+    for i = 1, count do
+        x[i + 1] = arg[i * 2 - 1]
+        y[i + 1] = arg[i * 2]
+    end
+    local com_num = {}
+    for i = 0, count do
+        com_num[i + 1] = combinNum(i, count)
+    end
+    if mode == 1 then
+        for s = 1 / n, 1 + 0.5 / n, 1 / n do
+            s = s * s
+            local _x, _y = 0, 0
+            for j = 0, count do
+                _x = _x + x[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+                _y = _y + y[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+            end
+            table.insert(xlist, _x)
+            table.insert(ylist, _y)
+        end
+    elseif mode == 2 then
+        for s = 1 / n, 1 + 0.5 / n, 1 / n do
+            s = s * 2 - s * s
+            local _x, _y = 0, 0
+            for j = 0, count do
+                _x = _x + x[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+                _y = _y + y[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+            end
+            table.insert(xlist, _x)
+            table.insert(ylist, _y)
+        end
+    elseif mode == 3 then
+        for s = 1 / n, 1 + 0.5 / n, 1 / n do
+            if s < 0.5 then
+                s = s * s * 2
+            else
+                s = -2 * s * s + 4 * s - 1
+            end
+            local _x, _y = 0, 0
+            for j = 0, count do
+                _x = _x + x[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+                _y = _y + y[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+            end
+            table.insert(xlist, _x)
+            table.insert(ylist, _y)
+        end
+    else
+        for s = 1 / n, 1 + 0.5 / n, 1 / n do
+            local _x, _y = 0, 0
+            for j = 0, count do
+                _x = _x + x[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+                _y = _y + y[j + 1] * com_num[j + 1] * (1 - s) ^ (count - j) * s ^ (j)
+            end
+            table.insert(xlist, _x)
+            table.insert(ylist, _y)
+        end
+    end
+    for i = 1, n do
+        p[2 * i - 1] = xlist[i]
+        p[2 * i] = ylist[i]
+    end
+    if unpack_all then
+        return p
+    else
+        local ret = {}
+        local flag = true
+        local t = {}
+        for _, v in ipairs(p) do
+            if flag then
+                t[1] = v
+            else
+                t[2] = v
+                table.insert(ret, t)
+                t = {}
+            end
+            flag = not flag
+        end
+        return ret
+    end
+end
+
+---各种形状拟合，默认返回点列（格式：{{x1,y1},{x2,y2},...}），如果unpack_all为true则返回坐标列（格式：{x1,y1,x2,y2,...}）
+---以下函数是在sharp里用高级循环写的，所以很难看
 
 ---正多边形拟合
-function lib.polygon(n, side, r, rot0, x0, y0)
+function lib.polygon(n, side, r, rot0, x0, y0, unpack_all)
     local p = ({})
     local rot0 = (rot0 or 0)
     local x0 = (x0 or 0)
     local y0 = (y0 or 0)
     local n = (int(n / side))
     local p0 = ({})
+    local p1, p2
     do
         local i, _d_i = (1), (1)
         for _ = 1, side do
@@ -269,30 +373,63 @@ function lib.polygon(n, side, r, rot0, x0, y0)
             i = i + _d_i
         end
     end
-    return p
+    if unpack_all then
+        local ret = {}
+        for _, v in ipairs(p) do
+            local v1, v2 = unpack(v)
+            table.insert(ret, v1)
+            table.insert(ret, v2)
+        end
+        return ret
+    else
+        return p
+    end
 end
 
 ---正多边形拟合（仅顶点）
-function lib.polygon2(side, r, rot0, x0, y0)
+function lib.polygon2(side, r, rot0, x0, y0, unpack_all)
     local p = ({})
     local rot0 = (rot0 or 0)
     local x0 = (x0 or 0)
     local y0 = (y0 or 0)
-    do
-        local i, _d_i = (1), (1)
-        for _ = 1, side do
-            local rot = (i * 360 / side)
-            local x = (x0 + r * cos(rot + rot0))
-            local y = (y0 + r * sin(rot + rot0))
-            p[i] = { x, y }
-            i = i + _d_i
+    if type(r) == 'table' then
+        do
+            local i, _d_i = (1), (1)
+            for _ = 1, side do
+                local rot = (i * 360 / side)
+                local x = (x0 + r[i] * cos(rot + rot0))
+                local y = (y0 + r[i] * sin(rot + rot0))
+                p[i] = { x, y }
+                i = i + _d_i
+            end
+        end
+    else
+        do
+            local i, _d_i = (1), (1)
+            for _ = 1, side do
+                local rot = (i * 360 / side)
+                local x = (x0 + r * cos(rot + rot0))
+                local y = (y0 + r * sin(rot + rot0))
+                p[i] = { x, y }
+                i = i + _d_i
+            end
         end
     end
-    return p
+    if unpack_all then
+        local ret = {}
+        for _, v in ipairs(p) do
+            local v1, v2 = unpack(v)
+            table.insert(ret, v1)
+            table.insert(ret, v2)
+        end
+        return ret
+    else
+        return p
+    end
 end
 
 ---椭圆拟合
-function lib.eclipse(n, a, b, rot0, x0, y0)
+function lib.eclipse(n, a, b, rot0, x0, y0, unpack_all)
     local p = {}
     local b = (b or a)
     local rot0 = (rot0 or 0)
@@ -398,11 +535,21 @@ function lib.heart(n, a, rot0, x0, y0, k, b)
             i = i + _d_i
         end
     end
-    return p
+    if unpack_all then
+        local ret = {}
+        for _, v in ipairs(p) do
+            local v1, v2 = unpack(v)
+            table.insert(ret, v1)
+            table.insert(ret, v2)
+        end
+        return ret
+    else
+        return p
+    end
 end
 
 ---五角星形拟合
-function lib.star(n, r1, rot0, x0, y0, r2)
+function lib.star(n, r1, rot0, x0, y0, r2, unpack_all)
     local r2 = (r2 or r1 * tan(30) / (tan(36) + tan(30)) / cos(36)) --这里的tan(30)实际上是1/2*cos(60)（恼
     local rot0 = (rot0 or 18)
     local x0 = (x0 or 0)
@@ -476,11 +623,21 @@ function lib.star(n, r1, rot0, x0, y0, r2)
             i = i + _d_i
         end
     end
-    return p
+    if unpack_all then
+        local ret = {}
+        for _, v in ipairs(p) do
+            local v1, v2 = unpack(v)
+            table.insert(ret, v1)
+            table.insert(ret, v2)
+        end
+        return ret
+    else
+        return p
+    end
 end
 
 ---废弃的五角星形拟合，似乎会产生两层叠加效果
-function lib.star2(n, r1, rot0, x0, y0, r2)
+function lib.star2(n, r1, rot0, x0, y0, r2, unpack_all)
     local p = ({})
     local rot0 = (rot0 or 0)
     local x0 = (x0 or 0)
@@ -544,5 +701,15 @@ function lib.star2(n, r1, rot0, x0, y0, r2)
             i = i + _d_i
         end
     end
-    return p
+    if unpack_all then
+        local ret = {}
+        for _, v in ipairs(p) do
+            local v1, v2 = unpack(v)
+            table.insert(ret, v1)
+            table.insert(ret, v2)
+        end
+        return ret
+    else
+        return p
+    end
 end

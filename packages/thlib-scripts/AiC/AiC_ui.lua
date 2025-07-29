@@ -384,7 +384,8 @@ end
 ---@param t number @持续时间（仅玩家符卡名时有效）
 ---@param layer number @图层
 ---@param score number @SCB分数
-function lib.NewSpellname(boss, name, slot, xc, yu, IsPlayer, t, layer, score)
+---@param font string @符卡字体
+function lib.NewSpellname(boss, name, slot, xc, yu, IsPlayer, t, layer, score, font)
     boss = boss or _boss
     if (not boss or not IsValid(boss)) and not IsPlayer then return end
     name = name or ' '
@@ -394,7 +395,7 @@ function lib.NewSpellname(boss, name, slot, xc, yu, IsPlayer, t, layer, score)
     score = score or 200000000
     layer = layer or LAYER_TOP + 446
     if not IsPlayer then t = nil end
-    return New(lib.spellname, boss, name, slot, score, layer, xc, yu, IsPlayer, t)
+    return New(lib.spellname, boss, name, slot, score, layer, xc, yu, IsPlayer, t, font)
 end
 
 
@@ -404,7 +405,7 @@ end
 ---符卡名（玩家符卡名及boss符卡名）
 lib.spellname = Class(object)
 
-function lib.spellname:init(b, name, slot, score, lay, xc, yu, IsPlayer, t)
+function lib.spellname:init(b, name, slot, score, lay, xc, yu, IsPlayer, t, font)
     self.x, self.y = 0, 0
     self.img = "img_void"
     self.layer = lay
@@ -442,6 +443,7 @@ function lib.spellname:init(b, name, slot, score, lay, xc, yu, IsPlayer, t)
     self.default_waitx = self.waitx
     self._dy2 = 0
     self.t = t
+    self.font = font or 'main_font_zh1'
     if self.IsPlayer then
         self.waitx = 1000
         self.default_waitx = self.waitx
@@ -599,24 +601,24 @@ function lib.spellname:render()
         SetImageScale(s * self._scale)
         if self.IsPlayer then
             if self.delsign then
-                Muki_stroke("main_font_zh1", self.name, aicx - 180, aicy - 2, Color(alpha * 255 * self.talpha2, 0, 0, 0), self.align,
+                Muki_stroke(self.font, self.name, aicx - 180, aicy - 2, Color(alpha * 255 * self.talpha2, 0, 0, 0), self.align,
                     "noclip")
-                RenderTTF("main_font_zh1", self.name,
+                RenderTTF(self.font, self.name,
                     aicx - 180, aicx - 180, aicy - 2, aicy - 2,
                     Color(alpha * 255 * self.talpha2, 255, 255, 255),
                     self.align, "noclip")
             else
-                Muki_stroke("main_font_zh1", self.name, aicx - 180, aicy - 2, Color(alpha2 * 255, 0, 0, 0), self.align,
+                Muki_stroke(self.font, self.name, aicx - 180, aicy - 2, Color(alpha2 * 255, 0, 0, 0), self.align,
                     "noclip")
-                RenderTTF("main_font_zh1", self.name,
+                RenderTTF(self.font, self.name,
                     aicx - 180, aicx - 180, aicy - 2, aicy - 2,
                     Color(alpha2 * 255, 255, 255, 255),
                     self.align, "noclip")
             end
         else
-            Muki_stroke("main_font_zh1", self.name, aicx, aicy - 2, Color(alpha2 * 255, 0, 0, 0), self.align,
+            Muki_stroke(self.font, self.name, aicx, aicy - 2, Color(alpha2 * 255, 0, 0, 0), self.align,
                 "noclip")
-            RenderTTF("main_font_zh1", self.name,
+            RenderTTF(self.font, self.name,
                 aicx, aicx, aicy - 2, aicy - 2,
                 Color(alpha2 * 255, 255, 255, 255),
                 self.align, "noclip")

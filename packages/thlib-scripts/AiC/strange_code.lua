@@ -57,8 +57,6 @@ if false then
         global = 1
         --等价于：
         getfenv().global = 1
-        --（不知道为什么EmmyLua把global标成紫色，这明明不是关键字）
-        --（好吧好像是因为EmmyLua的全局变量标识是这个）
     end
 
     ---创造函数/表后立马调用

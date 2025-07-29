@@ -62,7 +62,7 @@ function lib.GetVersionNumber()
     return tonumber(string.sub(aic.version, 1, 3))
 end
 
----掉落Power（仅玩家可捡拾）
+---掉落Power
 ---@param p number p点数
 function lib.DropPower(p, x, y)
     for _ = 1, p do
@@ -70,13 +70,13 @@ function lib.DropPower(p, x, y)
         local r2 = sqrt(ran:Float(1, 4)) * r
         local a = ran:Float(0, 360)
         local p = New(item_power, x + r2 * cos(a), y + r2 * sin(a))
-        p.is_power = false
-        p.is_power_blue = true
+        --p.is_power = false
+        --p.is_power_blue = true
     end
 end
 
 ---设置world系参数
----@param type string|'"THAIC"'|'"LSTG"' @world系类型
+---@param type string|'"THAIC"'|'"FULLSCREEN"'|'"LSTG"' @world系类型
 function aic.sys.SetWorld(type)
     local w = {--原版LuaSTG默认world参数
         l = -192, r = 192, b = -224, t = 224,
@@ -86,6 +86,11 @@ function aic.sys.SetWorld(type)
         world = 15}
     if type == 'THAIC' then
         ResetWorld()
+    elseif type == 'FULLSCREEN' then
+        OriginalSetWorld(w.l - 32, w.r + 224, w.b - 16, w.t + 16, 
+            w.boundl - 32, w.boundr + 224, w.boundb - 16, w.boundt + 16,
+            w.scrl - 32, w.scrr + 224, w.scrb - 16, w.scrt + 16,
+            w.pl - 32 - 96, w.pr + 224 - 96, w.pb - 16, w.pt + 16, w.world)
     else
         OriginalSetWorld(w.l, w.r, w.b, w.t, w.boundl, w.boundr, w.boundb, w.boundt,
             w.scrl, w.scrr, w.scrb, w.scrt, w.pl, w.pr, w.pb, w.pt, w.world)
@@ -101,6 +106,7 @@ function lib.GetTime(time)
         t.year, t.month, t.day, t.hour, t.min, t.sec)
 end
 
+---开启秘仪结界
 function lib.ActivateBorder()
     New(lib.secret_ceremony_border)
     PlaySound('border', 2, nil, true)

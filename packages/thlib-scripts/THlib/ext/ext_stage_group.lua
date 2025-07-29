@@ -371,7 +371,7 @@ function stage.group.ReturnToTitle(save_rep, finish)
         --首次通关增加插件槽数
         local fin = scoredata.player_data[lstg.var.player_name].finished_num
         if fin[1] == 0 and fin[2] == 0 and fin[3] == 0 and fin[4] == 0 then
-            scoredata.enhancer_slot = (scoredata.enhancer_slot or 5) + 1
+            scoredata.enhancer_slot = min((scoredata.enhancer_slot or 4) + 1, 7)
         end
         --累加通关（不算续关）次数
         local diff = GetDiff()
