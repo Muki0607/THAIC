@@ -5666,6 +5666,7 @@ function _tmp_sc:init()
         task._Wait(60)
         lib.AiCDialog(self,4)
         safeKill(Primula)
+        self.name='Noel Cornehl'
     end)
 end
 table.insert(_editor_class["Muki_AiC_Noel"].cards,_tmp_sc)

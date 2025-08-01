@@ -737,25 +737,28 @@ elseif dinput.count() > 0 then --这里还没加载dinput扩展，不能用isCon
     JOY = DJOY
     Log(2, '[input] dinput joystick detected.')
 end
-default_setting.joysticks = {
-    --实际上下左右移动需要靠摇杆
-    up = JOY.Up,
-    down = JOY.Down,
-    left = JOY.Left,
-    right = JOY.Right,
-    slow = JOY.RightShoulder,
-    shoot = JOY.X,
-    spell = JOY.A,
-    special = JOY.Y,
-    skill = JOY.B,
-}
-default_setting.joysticksys = {
-    repfast = JOY.LeftThumb,
-    repslow = JOY.RightThumb,
-    menu = JOY.Start,
-    snapshot = JOY.Back,
-    retry = JOY.LeftShoulder,
-}
+if JOY then
+    default_setting.joysticks = {
+        --实际上下左右移动需要靠摇杆
+        up = JOY.Up,
+        down = JOY.Down,
+        left = JOY.Left,
+        right = JOY.Right,
+        slow = JOY.RightShoulder,
+        shoot = JOY.X,
+        spell = JOY.A,
+        special = JOY.Y,
+        skill = JOY.B,
+    }
+    default_setting.joysticksys = {
+        repfast = JOY.LeftThumb,
+        repslow = JOY.RightThumb,
+        menu = JOY.Start,
+        snapshot = JOY.Back,
+        retry = JOY.LeftShoulder,
+    }
+end
+
 setting.joysticks = setting.joysticks or default_setting.joysticks
 setting.joysticksys = setting.joysticksys or default_setting.joysticksys
 setting.joyblindarea = setting.joyblindarea or 0.2

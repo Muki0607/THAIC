@@ -441,6 +441,7 @@ function lib.spellname:init(b, name, slot, score, lay, xc, yu, IsPlayer, t, font
     self.yoffset = -self.ybot
     self.waitx = 500
     self.default_waitx = self.waitx
+    self._dy = 0
     self._dy2 = 0
     self.t = t
     self.font = font or 'main_font_zh1'
