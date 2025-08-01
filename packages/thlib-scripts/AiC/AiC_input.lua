@@ -249,6 +249,7 @@ function lib.GetJoystickInput()
         lib.JoystickState[v] = M['get' .. v]()
     end
     --支持摇杆
+    setting.joyblindarea = setting.joyblindarea or 0.2
     if abs(M.getLeftThumbX()) > setting.joyblindarea then
         lib.JoystickState.Left = lib.JoystickState.LeftThumbX < 0
         lib.JoystickState.Right = lib.JoystickState.LeftThumbX > 0
@@ -460,6 +461,7 @@ function lib.GetLastJoy()
     end
     if not M then return 0 end
     --支持摇杆
+    setting.joyblindarea = setting.joyblindarea or 0.2
     if abs(M.getLeftThumbX()) > setting.joyblindarea or abs(M.getLeftThumbY()) > setting.joyblindarea then
         if M.getLeftThumbY() > 0 then return M.Up end
         if M.getLeftThumbY() < 0 then return M.Down end
@@ -730,10 +732,12 @@ dinput.refresh()
 local JOY
 if xinput.isConnected(1) then
     JOY = XJOY
+    Log(2, '[input] xinput joystick detected.')
 elseif dinput.count() > 0 then --这里还没加载dinput扩展，不能用isConnected
     JOY = DJOY
+    Log(2, '[input] dinput joystick detected.')
 end
-setting.joysticks = setting.joysticks or {
+default_setting.joysticks = {
     --实际上下左右移动需要靠摇杆
     up = JOY.Up,
     down = JOY.Down,
@@ -745,13 +749,15 @@ setting.joysticks = setting.joysticks or {
     special = JOY.Y,
     skill = JOY.B,
 }
-setting.joysticksys = setting.joysticksys or {
+default_setting.joysticksys = {
     repfast = JOY.LeftThumb,
-    repslow = JOY.RightRightThumb,
+    repslow = JOY.RightThumb,
     menu = JOY.Start,
     snapshot = JOY.Back,
     retry = JOY.LeftShoulder,
 }
+setting.joysticks = setting.joysticks or default_setting.joysticks
+setting.joysticksys = setting.joysticksys or default_setting.joysticksys
 setting.joyblindarea = setting.joyblindarea or 0.2
 saveConfigure()
 

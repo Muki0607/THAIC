@@ -45,11 +45,11 @@ local lib = aic.menu
 
 ---副标题名称
 local subtitle = { 'stage_select', 'spell_select', 'replay', 'library', 'music_room', 'option', 'manual',
-    'rank_select', 'player_select', 'enhancer_select', 'name_regist', 'save_replay', 'player_data', 'achievement', 'omake' }
+    'rank_select', 'player_select', 'enhancer_select', 'name_regist', 'save_replay', 'player_data' }
 
 ---菜单名称
 local menu = { 'title', 'practice', 'spell_practice', 'replay', 'library', 'music_room', 'option', 'manual',
-    'difficulty_select', 'player_select', 'enhancer_select', 'name_regist', 'save_replay', 'player_data', 'achievement', 'omake' }
+    'difficulty_select', 'player_select', 'enhancer_select', 'name_regist', 'save_replay', 'player_data', 'ending' }
 
 ---练习模式标志
 ---@type string

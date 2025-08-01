@@ -166,7 +166,7 @@ function lib.SafeSave(func)
                 lstg.MsgBoxWarn("检测到游戏存档文件被其他进程占用。\n请关闭该进程后关闭本提示框。\n若本提示框持续出现，请重启游戏。")
             end,
             [""] = function()
-                if not _debug.exception_handler_off then
+                if not _debug.exception_handler_disabled then
                     Log(4, aic.py.last_exception)
                     lstg.MsgBoxError("读取游戏存档文件时出现未知错误。\n请尝试重启游戏。\n若重启游戏后仍然出现本提示框，请报告作者。", "游戏出现异常", true)
                 else

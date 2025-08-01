@@ -71,8 +71,12 @@ function lib.title:init(pos, l)
         lstg.tmpvar.submenu_bg.s = -1
     end
 
-    --有rep时先存rep
-    if lib.last_replay then
+    --有结局先放结局
+    if lib.EndingBFlag then
+        lib.PushMenuStack(lib.ending)
+    end
+    --结局放完再存rep
+    if lib.last_replay and not lib.EndingBFlag then
         lib.PushMenuStack(lib.name_regist)
     end
     self.invalid_menu = { 2, 3 }

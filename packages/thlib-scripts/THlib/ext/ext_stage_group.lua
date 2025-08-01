@@ -88,15 +88,20 @@ function stage.group.frame(self)
             ext.rep_over = true
             lstg.tmpvar.pause_menu_text = { 'Replay Again', 'Return to Title', nil }
         else
-            if not CheckRes('bgm', DeathMusic) then
-                LoadMusicRecord(DeathMusic)
+            if EndingBFlag then
+                EndingBFlag = false
+                lstg.tmpvar.pause_menu_text = { 'Watch Ending', 'Return to Title', 'Manual' }
+            else
+                if not CheckRes('bgm', DeathMusic) then
+                    LoadMusicRecord(DeathMusic)
+                end
+                PlayMusic(DeathMusic, 0.8)
+                bgmname = aic.misc.GetCurrentBGM()
+                PauseMusic(bgmname)
+                ext.pop_pause_menu = true
+                lstg.tmpvar.death = true
+                lstg.tmpvar.pause_menu_text = { 'Continue', 'Return to Title', 'Manual', 'Option', 'Quit and Save Replay' }
             end
-            PlayMusic(DeathMusic, 0.8)
-            bgmname = aic.misc.GetCurrentBGM()
-            PauseMusic(bgmname)
-            ext.pop_pause_menu = true
-            lstg.tmpvar.death = true
-            lstg.tmpvar.pause_menu_text = { 'Continue', 'Return to Title', 'Manual', 'Option', 'Quit and Save Replay' }
         end
         lstg.var.hp = 1
     end
@@ -128,6 +133,7 @@ function stage.group.frame(self)
         if not Extramode then
             ResumeMusic(bgmname)
             gamecontinueflag = true
+            aic.menu.EndingBFlag = true
             if lstg.var.block_spell then
                 if lstg.var.is_practice then
                     stage.group.PracticeStart(self.name)
@@ -236,6 +242,12 @@ function stage.group.frame_sc_pr(self)
         stage.Restart()
         lstg.tmpvar.pause_menu_text = nil
         lstg.var.timeslow = nil
+    end
+    if ext.GetPauseMenuOrder() == 'Watch Ending' then
+        aic.menu.EndingBFlag = true
+        stage.group.ReturnToTitle(false, 0)
+        lstg.var.timeslow = nil
+        lstg.var.bgm_playing = false
     end
 end
 

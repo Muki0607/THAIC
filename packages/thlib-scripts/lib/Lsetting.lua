@@ -7,7 +7,7 @@ default_setting = {
     resy = 960,
     windowed = true,
     vsync = false,
-    sevolume = 100,
+    sevolume = 80,
     bgmvolume = 100,
 
     autofire = false,

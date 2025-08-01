@@ -34,15 +34,19 @@ end
 function lib.load_lang()
     for lang, _ in pairs(lib.lang) do
         for _, file in ipairs({ "AiC_dialog_text.lua", "AiC_ui_text.lua" }) do
-            aic.py.TryExcept(function()
-                    DoFile("THlib/" .. lang .. "/" .. file)
-                end,
-                {
-                    [""] = function()
-                        lstg.MsgBoxWarn("加载语言 " .. lib.lang[lang][2] .. " 时发现文件 " .. file
-                            .. " 丢失或出错。\n请检查该文件是否被移动、删除或修改。\n若无法找到文件，请重新下载游戏。\n若文件存在且重启游戏后仍然出现此提示框，请报告作者。")
-                    end
-                })
+            if _debug.l10n_tryexcept_disabled then
+                DoFile("THlib/" .. lang .. "/" .. file)
+            else
+                aic.py.TryExcept(function()
+                        DoFile("THlib/" .. lang .. "/" .. file)
+                    end,
+                    {
+                        [""] = function()
+                            lstg.MsgBoxWarn("加载语言 " .. lib.lang[lang][2] .. " 时发现文件 " .. file
+                                .. " 丢失或出错。\n请检查该文件是否被移动、删除或修改。\n若无法找到文件，请重新下载游戏。\n若文件存在且重启游戏后仍然出现此提示框，请报告作者。")
+                        end
+                    })
+            end
         end
     end
 end

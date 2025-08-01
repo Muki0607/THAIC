@@ -259,6 +259,20 @@ function ext.pausemenu:render()
                     SetImageState('pause_pausemenu', '', Color(pm.mask_alph[1] + 15, 255, 255, 255))
                 end
                 Render('pause_pausemenu', pm.mask_x[1] + dx, -30 + dy, 0, 0.7, 0.7)
+            elseif ext.pmode_flag then
+                if self.choose then
+                    SetImageState('pause_Mission Incomplete', '', Color(pm.mask_alph[1] + 15, 100, 100, 100))
+                else
+                    SetImageState('pause_Mission Incomplete', '', Color(pm.mask_alph[1] + 15, 255, 255, 255))
+                end
+                Render('pause_Mission Incomplete', pm.mask_x[1] + dx, -30 + dy, 0, 0.7, 0.7)
+            elseif EndingBFlag then
+                if self.choose then
+                    SetImageState('pause_EndingB', '', Color(pm.mask_alph[1] + 15, 100, 100, 100))
+                else
+                    SetImageState('pause_EndingB', '', Color(pm.mask_alph[1] + 15, 255, 255, 255))
+                end
+                Render('pause_gameover', pm.mask_x[1] + dx, -30 + dy, 0, 0.7, 0.7)
             elseif not ext.sc_pr then
                 if self.choose then
                     SetImageState('pause_gameover', '', Color(pm.mask_alph[1] + 15, 100, 100, 100))
@@ -710,7 +724,7 @@ ext.option = {
         '设置进入关卡时播放的音效。\n旧版为0.24a之前的音效，\n新版为0.24a之后的音效。',
         '设置标题画面的背景音乐。\n普通版为原作游戏的版本，\n完全版在普通版的基础上\n增加了一段额外旋律。',
         '设置是否显示性方面的描写。\n\n\n当然在这里你是没法关掉它的……',
-        '更改键盘的按键。\n本游戏目前不支持手柄。',
+        '更改键盘或手柄的按键。',
         '将所有设定还原至默认值。',
         '保存设定并退出。\n若不想保存设定，\n请直接按取消键退出。',
     },
@@ -1222,7 +1236,7 @@ LoadImage('pause_eff', 'pause', 408, 320, 104, 384)
 
 local pause = { 'pausemenu', 'gameover', 'replayover', 'Return to Game', 'Return to Title', 'Give up and Retry',
     'yes', 'no', 'Quit and Save Replay', 'really', 'savereplay', --以后谁再把replay写成reply我打死他
-    'Replay Again', 'Continue', 'Manual', 'Option', 'Mission Incomplete', 'Return to Waypoint' }
+    'Replay Again', 'Continue', 'Manual', 'Option', 'Mission Incomplete', 'Return to Waypoint', 'EndingB', 'Watch Ending' }
 
 local center = { { 0, 35 }, { 0, 35 }, { 0, 35 }, { 0, 30 }, { 0, 28 }, { 0, 29 }, { 0, 29 },
     { 0, 30 }, { 0, 30 }, { 0, 29 }, { 0, 30 }, { 0, 30 }, { 0, 28 }, { 0, 29 }, { 0, 28 },

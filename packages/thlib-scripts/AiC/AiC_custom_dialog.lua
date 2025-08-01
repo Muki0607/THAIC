@@ -1747,7 +1747,7 @@ function lib.float.dialog_displayer:frame()
     end
     for _, p in pairs(players) do
         dialog = p.dialog or dialog
-        if p.key then
+        if p and p.key then
             shoot = p.key["shoot"] or shoot
         else
             shoot = KeyIsDown "shoot" or shoot
@@ -2254,7 +2254,6 @@ end
 ---对话角色
 ---改进（不）自EVA（v1.0）
 ---@class lib.character
----@return lib.character
 lib.character = Class(object)
 local character = lib.character
 function character:init(img, pos, x, y, vs, hs, num, layer)

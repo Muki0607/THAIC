@@ -98,6 +98,8 @@ end
 ---'Replay Again'
 ---'Manual'（新增）
 ---'Option'（新增）
+---'Return to Waypoint'（新增）
+---'Watch Ending'（新增）
 ---@param msg string
 function ext.PushPauseMenuOrder(msg)
     ext.pause_menu_order = msg
@@ -413,7 +415,7 @@ function FrameFunc()
         DefaultGameFrameFunc,
         {
             [""] = function()
-                if not _debug.exception_handler_off and ext.error_level <= 5 then
+                if not _debug.exception_handler_disabled and ext.error_level <= 5 then
                     ext.error_level = ext.error_level + 1
                     lstg.Log(4, aic.py.last_exception)
                     lstg.MsgBoxError("游戏运行时出现帧逻辑错误。\n请将游戏日志发送给作者。", "游戏出现异常", true)
@@ -434,7 +436,7 @@ function RenderFunc()
         DefaultGameRenderFunc,
         {
             [""] = function()
-                if not _debug.exception_handler_off and ext.error_level <= 5 then
+                if not _debug.exception_handler_disabled and ext.error_level <= 5 then
                     ext.error_level = ext.error_level + 1
                     lstg.Log(4, aic.py.last_exception)
                     lstg.MsgBoxError("游戏运行时出现渲染逻辑错误。\n请将游戏日志发送给作者。", "游戏出现异常", true)

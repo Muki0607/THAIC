@@ -93,6 +93,7 @@ local defaultFrameEvent = {
                 ext.pop_pause_menu = true
                 --lstg.tmpvar.death = true
                 lstg.tmpvar.pause_menu_text = { 'Return to Waypoint', 'Return to Title', 'Manual' }
+                ext.pmode_flag = true
             end
             self.__death_state = 0
         elseif self.death == 90 then

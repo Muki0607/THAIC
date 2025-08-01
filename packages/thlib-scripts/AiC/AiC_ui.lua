@@ -990,3 +990,5 @@ LoadImageFromFile("Muki_AiC_bossname_Noel Cornehl & Ixia Polystachya", "THlib/UI
 SetImageCenter("Muki_AiC_bossname_Noel Cornehl & Ixia Polystachya", 100, 1280)
 LoadImageFromFile("Muki_AiC_bossname_Primula", "THlib/UI/Muki_AiC_bossname_Primula.png")
 SetImageCenter("Muki_AiC_bossname_Primula", 100, 320)
+LoadImageFromFile("Muki_AiC_bossname_Alma Opfebaum", "THlib/UI/Muki_AiC_bossname_Alma Opfebaum.png")
+SetImageCenter("Muki_AiC_bossname_Alma Opfebaum", 100, 720)

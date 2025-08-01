@@ -37,7 +37,7 @@ aic = {}
 
 ---东方梦摇篮版本号
 ---@type string
-aic.version = '0.14a'
+aic.version = '0.15a'
 
 ---东方梦摇篮DLC标志
 ---@type boolean
@@ -49,18 +49,18 @@ DoFile("AiC/AiC_string.lua")--AiC string扩展库
 DoFile("AiC/AiC_function.lua")--AiC function扩展库
 DoFile("AiC/AiC_table.lua")--AiC table扩展库
 
----输入
-DoFile("AiC/AiC_input.lua")--AiC输入
-DoFile("AiC/AiC_dinput.lua")--AiC DirectInput扩展
-
 ---杂项
+DoFile("AiC/AiC_debug.lua")--AiC Debug
 DoFile("AiC/AiC_py.lua")--AiC Python扩展库
 DoFile("AiC/AiC_3d.lua")--AiC 3d
-DoFile("AiC/AiC_debug.lua")--AiC Debug
 DoFile("AiC/AiC_misc.lua")--AiC杂项
 DoFile("AiC/AiC_pmode.lua")--AiC 完美无缺模式
 DoFile("AiC/AiC_math.lua")--AiC数学库
 DoFile("AiC/AiC_sdl.lua")--SDL支持
+
+---输入
+DoFile("AiC/AiC_input.lua")--AiC输入
+DoFile("AiC/AiC_dinput.lua")--AiC DirectInput扩展
 
 ---游戏内
 DoFile("AiC/AiC_custom_dialog.lua")--AiC自定义对话库

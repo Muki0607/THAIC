@@ -18,8 +18,8 @@ function lib.library:init(pos, l)
     self.t = 30
     self.wait = 30
     self.alpha = 0
-    self.text1 = { "查看得分排行", "查看符卡历史", "已达成的成就", "查看Omake文档" }
-    self.text2 = { "Score Ranking", "Spellcard Record", "Trophy", "Omake" }
+    self.text1 = { "查看得分排行", "查看符卡历史", "查看结局" }
+    self.text2 = { "Score Ranking", "Spellcard Record", "Ending" }
     self.jump =
     {
         { lib.player_data },
@@ -27,12 +27,11 @@ function lib.library:init(pos, l)
             lib.player_data,
             17 --#aic.l10n.ui.sc_list[1]
         },
-        { lib.achievement },
-        { lib.omake },
+        { lib.ending },
         quit = lib.PopMenuStack
     }
     self.l = l or #self.jump
-    self.invalid_menu = { 2, 3, 4 }
+    self.invalid_menu = { 2, }
     self.parrot = {}
     for _, i in ipairs(self.invalid_menu) do
         table.insert(self.parrot,
