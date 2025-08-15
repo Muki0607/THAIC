@@ -438,8 +438,9 @@ function muki_player:render()
     player_class.render(self)
     --判定点渲染
     SetImageState('muki_player_aura', '', Color(self.lh * 255, 255, 255, 255))
-    Render('muki_player_aura', self.x, self.y, self.aura_rot)
-    Render('muki_player_aura', self.x, self.y, -self.aura_rot)
+    local s = Player_scale or 1
+    Render('muki_player_aura', self.x, self.y, self.aura_rot, s)
+    Render('muki_player_aura', self.x, self.y, -self.aura_rot, s)
 end
 
 -------------------------------------------------------
@@ -819,7 +820,7 @@ function muki_shooting_aura:render()
     SetImageState('white', 'mul+add', Color(alpha, 86, 228, 52), Color(alpha, 86, 228, 52), Color(alpha, 30, 243, 160), Color(alpha, 30, 243, 160))
     local d = 25 * min(1, player.lh + 0.5)
     for i = 0, 4 do
-        RenderRect('white', self.x + d * (i - 2), self.x + d * (i - 2) + 2, -224, 224)
+        RenderRect('white', self.x + d * (i - 2), self.x + d * (i - 2) + 2, -256, 256)
     end
 end
 

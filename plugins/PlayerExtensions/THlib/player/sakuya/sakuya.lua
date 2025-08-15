@@ -164,11 +164,12 @@ function sakuya_player:spell()
 end
 
 function sakuya_player:render()
+    local s = Player_scale or 1
     player_class.render(self)
     local t = int((self.timer / 3) % 16) + 1
     for i = 1, 4 do
         if self.sp[i] and self.sp[i][3] > 0.5 then
-            Render('sakuya_support' .. t, self.supportx + self.sp[i][1], self.supporty + self.sp[i][2])
+            Render('sakuya_support' .. t, self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, s)
         end
     end
 end

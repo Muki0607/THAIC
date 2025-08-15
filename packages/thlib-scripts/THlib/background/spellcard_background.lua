@@ -37,6 +37,7 @@ function _spellcard_background:AddLayer(img, tile, x, y, rot, vx, vy, omiga, ble
 end
 
 function _spellcard_background:frame()
+    self.bound = false
     for _, l in ipairs(self.layers) do
         l.x = l.x + l.vx
         l.y = l.y + l.vy
@@ -68,9 +69,17 @@ function _spellcard_background:render()
             local world = lstg.world
             if l.tile then
                 local w, h = GetTextureSize(l.img)
-                for i = -int((world.r + 16 + l.x) / w + 0.5), int((world.r + 16 - l.x) / w + 0.5) do
-                    for j = -int((world.t + 16 + l.y) / h + 0.5), int((world.t + 16 - l.y) / h + 0.5) do
-                        Render(l.img, l.x + i * w, l.y + j * h)
+                if FullScreen_Flag then
+                    for i = -int((world.r + 16 + l.x) / w + 0.5), int((world.r + 16 - l.x) / w + 0.5) do
+                        for j = -int((world.t + 16 + l.y) / h + 0.5), int((world.t + 16 - l.y) / h + 0.5) do
+                            Render(l.img, l.x + i * w, l.y + j * h)
+                        end
+                    end
+                else
+                    for i = -int((world.r + 16 + l.x) / w + 0.5), int((world.r + 16 - l.x) / w + 0.5) do
+                        for j = -int((world.t + 16 + l.y) / h + 0.5), int((world.t + 16 - l.y) / h + 0.5) do
+                            Render(l.img, l.x + i * w, l.y + j * h)
+                        end
                     end
                 end
             else

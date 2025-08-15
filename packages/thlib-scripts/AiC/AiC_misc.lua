@@ -167,28 +167,6 @@ function lib.qte_checker:init(keylist, allow_fault, intv, time, cd)
     end
 end
 
----妖妖梦三面开场延迟效果，使用RenderTarget实现
----
-function lib.a()
-    PushRenderTarget('rt:aic_player_dodge')
-    RenderClear(Color(0, 0, 0, 0))
-    --手动渲染子机和判定点
-    _G[lstg.var.player_name].render(player)
-    object.render(self)
-    grazer.render(player.grazer)
-    PopRenderTarget()
-    PostEffect(
-        'fx:glitch',
-        'rt:aic_player_dodge',
-        6,
-        '',
-        {
-            { ran:Float(0, 100), 0, 0, 0 },
-            { 5,                 0, 0, 0 }
-        }
-    )
-end
-
 ---开场加载界面（事实上加载在这之前的黑屏界面就已经完成了）
 lib.opening_scene = Class(object)
 
@@ -356,6 +334,7 @@ function lib.bgm_name:init(n)
     self.n = n
     self.x = 200
     self.y = -205
+    if FullScreen_Flag then self.x = self.x + 128 self.y = self.y - 16 end
     self.alpha = 255
     self.bound = false
     self.movex = -50 + self.offset[self.n]
@@ -416,7 +395,8 @@ function lib.dodge_player:render()
     RenderClear(Color(0, 0, 0, 0))
     --手动渲染子机和判定点
     _G[lstg.var.player_name].render(player)
-    object.render(self)
+    local s = Player_scale or 1
+    Render(self.img, self.x, self.y, 0, s)
     grazer.render(player.grazer)
     PopRenderTarget()
     PostEffect(

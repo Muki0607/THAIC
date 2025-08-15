@@ -233,19 +233,20 @@ end
 
 function marisa_player:render()
     local sz = 1.2 + 0.1 * sin(self.timer * 0.2)
+    local s = Player_scale or 1
     --support
     SetImageState('marisa_support', '', Color(0xFFFFFFFF))
     for i = 1, 4 do
         if self.sp[i] then
-            Render('marisa_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, self.sp[i][3], 1)
+            Render('marisa_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, self.sp[i][3] * s, s)
         end
     end
     --support deco
     SetImageState('marisa_support', '', Color(0x80FFFFFF))
     for i = 1, 4 do
         if self.sp[i] then
-            Render('marisa_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, self.sp[i][3] * sz,
-                sz)
+            Render('marisa_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, self.sp[i][3] * sz * s,
+                sz * s)
         end
     end
     if self.support > 0 and self.fire == 1 and self.slow == 0 and self.nextshoot <= 0 then

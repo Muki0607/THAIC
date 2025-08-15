@@ -371,6 +371,7 @@ end]]
 function nenyuki_player:render()
     --自机、子机和激光的渲染
     local sz = 1.2 + 0.1 * sin(self.timer * 0.2)
+    local s = Player_scale or 1
     if not self.spark then
         --support
         SetImageState('nenyuki_support', '', Color(0xFFFFFFFF))
@@ -378,10 +379,10 @@ function nenyuki_player:render()
             if self.sp[i] then
                 if self.slow == 1 then
                     Render('nenyuki_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0,
-                        self.sp[i][3], 1)
+                        self.sp[i][3] * s, s)
                 else
-                    Render('nenyuki_support', self.sp[i][1], self.sp[i][2], 0, self.sp[i][3], 1)
-                    Render('nenyuki_support', -self.sp[i][1], self.sp[i][2], 0, self.sp[i][3], 1)
+                    Render('nenyuki_support', self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * s, s)
+                    Render('nenyuki_support', -self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * s, s)
                 end
             end
         end
@@ -391,10 +392,10 @@ function nenyuki_player:render()
             if self.sp[i] then
                 if self.slow == 1 then
                     Render('nenyuki_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0,
-                        self.sp[i][3] * sz, sz)
+                        self.sp[i][3] * sz * s, sz * s)
                 else
-                    Render('nenyuki_support', self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * sz, sz)
-                    Render('nenyuki_support', -self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * sz, sz)
+                    Render('nenyuki_support', self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * sz * s, sz * s)
+                    Render('nenyuki_support', -self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * sz * s, sz * s)
                 end
             end
         end
@@ -435,8 +436,9 @@ function nenyuki_player:render()
     player_class.render(self)
     --判定点渲染
     SetImageState('nenyuki_player_aura', '', Color(self.lh * 255, 255, 255, 255))
-    Render('nenyuki_player_aura', self.x, self.y, self.aura_rot)
-    Render('nenyuki_player_aura', self.x, self.y, -self.aura_rot)
+    local s = Player_scale or 1
+    Render('nenyuki_player_aura', self.x, self.y, self.aura_rot, s)
+    Render('nenyuki_player_aura', self.x, self.y, -self.aura_rot, s)
 end
 
 -------------------------------------------------------

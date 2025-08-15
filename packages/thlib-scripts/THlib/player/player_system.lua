@@ -152,6 +152,7 @@ local defaultFrameEvent = {
         end
     end },
     ["frame.move"] = { 97, function(self)
+        Print(self.hspeed, self.lspeed)
         local dx, dy, v = 0, 0, self.hspeed
         if self.__death_state == 0 then
             if self.death == 0 and not self.lock then
@@ -787,6 +788,71 @@ function system:spell()
     p.nextcollect = 90
 end
 
+---闪避函数
+---@param a number @角度
+---@param d number @距离
+---@param IsSecond boolean @是否为第二次闪避
+local function dodge(a, d, IsSecond)
+    --好高级循环，爱来自sharp
+    --翻译：
+    --[[
+    repeat t times
+    |---variables
+    |   |---x:player.x => player.x + cos(a) * d (Precisely), deaccelerate
+    |   |---y:player.y => player.y + sin(a) * d (Precisely), deaccelerate
+    |---player.x = x
+    |---player.y = y
+    |---Wait 1 frame(s)
+    --]]
+    local t = 15
+    local _beg_x = player.x
+    local x = _beg_x
+    local _end_x = player.x + cos(a) * d
+    local _w_x = 0
+    local _d_w_x = 1 / (t - 1)
+    local _beg_y = player.y
+    local y = _beg_y
+    local _end_y = player.y + sin(a) * d
+    local _w_y = 0
+    local _d_w_y = 1 / (t - 1)
+    player.protect = max(player.protect, t)
+    for _ = 1, t do
+        if CheckEnhancer(5) or not KeyIsDown('special') then break end
+        player.x = max(-192, min(192, x))
+        player.y = max(-224, min(224, y))
+        task.Wait()
+        _w_x = _w_x + _d_w_x
+        --x = (_beg_x - _end_x) * (_w_x - 1) ^ 2 + _end_x
+        x = max(-192, min(192, (_beg_x - _end_x) * (_w_x - 1) ^ 2 + _end_x)) --防止越界
+        _w_y = _w_y + _d_w_y
+        --y = (_beg_y - _end_y) * (_w_y - 1) ^ 2 + _end_y
+        y = max(-224, min(224, (_beg_y - _end_y) * (_w_y - 1) ^ 2 + _end_y)) --防止越界
+    end
+    if lstg.var.dodge >= 75 and CheckEnhancer(3) and KeyIsDown('special') and not IsSecond then
+        lstg.var.dodge = lstg.var.dodge - 75
+        dodge(a, d, true)
+    end
+end
+
+---@return number @八向角度
+---获取闪避方向
+local function get8dir()
+    local u, d, l, r, a = KeyIsDown('up'), KeyIsDown('down'), KeyIsDown('left'), KeyIsDown('right')
+    if u then
+        if r then a = 45
+        elseif l then a = 135
+        else a = 90 end
+    elseif d then
+        if r then a = 315
+        elseif l then a = 225
+        else a = 270
+        end
+    elseif l then a = 180
+    elseif r then a = 0
+    end
+    return a
+end
+
 --又是一堆屎山，插满了各种条件判断
 ---Special事件
 function system:special()
@@ -795,75 +861,11 @@ function system:special()
         p.class.special(p)
     end]]
 
-    ---闪避函数
-    ---@param a number @角度
-    ---@param d number @距离
-    ---@param IsSecond boolean @是否为第二次闪避
-    local function dodge(a, d, IsSecond)
-        --好高级循环，爱来自sharp
-        --翻译：
-        --[[
-        repeat t times
-        |---variables
-        |   |---x:player.x => player.x + cos(a) * d (Precisely), deaccelerate
-        |   |---y:player.y => player.y + sin(a) * d (Precisely), deaccelerate
-        |---player.x = x
-        |---player.y = y
-        |---Wait 1 frame(s)
-        --]]
-        local t = 15
-        local _beg_x = player.x
-        local x = _beg_x
-        local _end_x = player.x + cos(a) * d
-        local _w_x = 0
-        local _d_w_x = 1 / (t - 1)
-        local _beg_y = player.y
-        local y = _beg_y
-        local _end_y = player.y + sin(a) * d
-        local _w_y = 0
-        local _d_w_y = 1 / (t - 1)
-        player.protect = max(player.protect, t)
-        for _ = 1, t do
-            if CheckEnhancer(5) or not KeyIsDown('special') then break end
-            player.x = max(-192, min(192, x))
-            player.y = max(-224, min(224, y))
-            task.Wait()
-            _w_x = _w_x + _d_w_x
-            --x = (_beg_x - _end_x) * (_w_x - 1) ^ 2 + _end_x
-            x = max(-192, min(192, (_beg_x - _end_x) * (_w_x - 1) ^ 2 + _end_x)) --防止越界
-            _w_y = _w_y + _d_w_y
-            --y = (_beg_y - _end_y) * (_w_y - 1) ^ 2 + _end_y
-            y = max(-224, min(224, (_beg_y - _end_y) * (_w_y - 1) ^ 2 + _end_y)) --防止越界
-        end
-        if lstg.var.dodge >= 75 and CheckEnhancer(3) and KeyIsDown('special') and not IsSecond then
-            lstg.var.dodge = lstg.var.dodge - 75
-            dodge(a, d, true)
-        end
-    end
-
-    ---@return number @八向角度
-    ---获取闪避方向
-    local function get8dir()
-        local u, d, l, r, a = KeyIsDown('up'), KeyIsDown('down'), KeyIsDown('left'), KeyIsDown('right')
-        if u then
-            if r then a = 45
-            elseif l then a = 135
-            else a = 90 end
-        elseif d then
-            if r then a = 315
-            elseif l then a = 225
-            else a = 270
-            end
-        elseif l then a = 180
-        elseif r then a = 0
-        end
-        return a
-    end
-
     local cost = 100
     if CheckEnhancer(3) then cost = 75 end
+    if FullScreen_Flag then cost = 0 end --LSC允许无限闪避
 
-    if lstg.var.dodge >= cost and player.nextspell <= 0 and not player.dodge then
+    if lstg.var.dodge >= cost and not player.dodge then
         New(tasker, function()
             --获取方向
             local a = get8dir()
@@ -908,6 +910,7 @@ function system:special()
             else t = 30 end
             player.protect = max(player.protect, t)
             player.nextsp = 90
+            if FullScreen_Flag then player.nextsp = 45 end --LSC闪避cd缩短
             task.Wait(t)
             player.dodge = false
 
@@ -936,6 +939,7 @@ function system:colli(other)
                     return
                 end
                 PlaySound("pldead00", 0.5)
+                if FullScreen_Flag then return end --LSC中自机无敌
                 self.taking_damage = other.damage or 50
                 p.death = 100
                 if p.deathtime then p.death = 90 + p.deathtime end

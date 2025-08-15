@@ -837,7 +837,7 @@ function pointer:render()
     if not (IsValid(b)) then
         return
     end
-    if _ui.pointer_x and _ui.drawpointer then
+    if _ui.pointer_x and _ui.drawpointer and not FullScreen_Flag then
         local w = lstg.world
         local scale = self.scale
         SetRenderRect(w.l, w.r, w.b - max(16 * scale, 0), w.t,
@@ -913,6 +913,7 @@ function infobar:render()
     if _ui.drawname then
         local dy = (b.ui_slot - 1) * 44
         local x, y = self.x, self.y - dy
+        if FullScreen_Flag then x = x - 32 - 96 + 15 y = y + 16 end
         local anisc = int(self.t / self.mt)
         local sc_left = self.sc_left + anisc - 1
         RenderTTF('boss_name', b.name, x, x, y, y, Color(0xFF000000), "noclip")
@@ -923,6 +924,7 @@ function infobar:render()
         local row2 = sc_left - 1 - 8 * row --不完整列的排数
         x = self.x - 9
         y = self.y - 15 - dy
+        if FullScreen_Flag then x = x - 32 - 96 + 15 y = y + 14 end
         if row >= 0 then
             for i = 0, row do
                 --确定排数

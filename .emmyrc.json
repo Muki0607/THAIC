@@ -6,7 +6,8 @@
     "autoRequireNamingConvention": "keep",
     "autoRequireSeparator": ".",
     "callSnippet": false,
-    "postfix": "@"
+    "postfix": "@",
+    "baseFunctionIncludesName": true
   },
   "diagnostics": {
     "disable": [
@@ -29,7 +30,8 @@
       "redundant-return-value",
       "redundant-parameter",
       "await-in-sync",
-      "unnecessary-assert"
+      "unnecessary-assert",
+      "annotation-usage-error"
     ],
     "enable": true,
     "globals": [],
@@ -46,14 +48,21 @@
     "paramHint": true,
     "indexHint": true,
     "localHint": true,
-    "overrideHint": true
+    "overrideHint": true,
+    "metaCallHint": true,
+    "enumParamHint": false
   },
   "runtime": {
     "version": "LuaLatest",
     "requireLikeFunction": [],
     "frameworkVersions": [],
     "extensions": [],
-    "requirePattern": []
+    "requirePattern": [],
+    "classDefaultCall": {
+      "functionName": "",
+      "forceNonColon": false,
+      "forceReturnSelf": false
+    }
   },
   "workspace": {
     "ignoreDir": [],
@@ -76,7 +85,8 @@
     "requirePath": false,
     "typeCall": false,
     "arrayIndex": true,
-    "metaOverrideFileDefine": true
+    "metaOverrideFileDefine": true,
+    "docBaseConstMatchBaseType": false
   },
   "semanticTokens": {
     "enable": true
@@ -94,5 +104,12 @@
   },
   "codeAction": {
     "insertSpace": false
+  },
+  "inlineValues": {
+    "enable": true
+  },
+  "doc": {
+    "privateName": [],
+    "knownTags": []
   }
 }

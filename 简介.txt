@@ -32,6 +32,8 @@ https://airsdk.harman.com/runtime（先安装这个才能运行游戏）
 四阶段BGM：BV1f8411P7fG
 LSCBGM：The Amplifier - Feryquitous
 原作素材：东方凭依华、东方刚欲异闻、东方虹龙洞、Star Chaser!、Star Shooter!、Star Liner!、AliceInCradle
+部分音效：BV15i4y1d72c
+终符符卡背景：东方实在相
 脚本编写：LuaSTG Editor Sharp 0.7.8.1（测试版）/LuaSTG Editor Sharp 0.9.1（正式版）
 游戏本体：LuaSTG aex+ v0.8.21-beta
 ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈

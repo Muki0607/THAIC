@@ -156,9 +156,10 @@ end
 
 -------------------------------------------------------
 function reimu_player:render()
+    local s = Player_scale or 1
     for i = 1, 4 do
         if self.sp[i] and self.sp[i][3] > 0.5 then
-            Render('reimu_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], self.timer * 3)
+            Render('reimu_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], self.timer * 3, s)
         end
     end
     player_class.render(self)

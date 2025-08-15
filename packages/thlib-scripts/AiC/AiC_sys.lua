@@ -76,8 +76,8 @@ function lib.DropPower(p, x, y)
 end
 
 ---设置world系参数
----@param type string|'"THAIC"'|'"FULLSCREEN"'|'"LSTG"' @world系类型
-function aic.sys.SetWorld(type)
+---@param type string|'THAIC'|'FULLSCREEN'|'LSTG' @world系类型
+function lib.SetWorld(type)
     local w = {--原版LuaSTG默认world参数
         l = -192, r = 192, b = -224, t = 224,
         boundl = -224, boundr = 224, boundb = -256, boundt = 256,
@@ -85,16 +85,61 @@ function aic.sys.SetWorld(type)
         pl = -192, pr = 192, pb = -224, pt = 224,
         world = 15}
     if type == 'THAIC' then
+        FullScreen_Flag = false
         ResetWorld()
     elseif type == 'FULLSCREEN' then
+        FullScreen_Flag = true
         OriginalSetWorld(w.l - 32, w.r + 224, w.b - 16, w.t + 16, 
             w.boundl - 32, w.boundr + 224, w.boundb - 16, w.boundt + 16,
             w.scrl - 32, w.scrr + 224, w.scrb - 16, w.scrt + 16,
             w.pl - 32 - 96, w.pr + 224 - 96, w.pb - 16, w.pt + 16, w.world)
-    else
+        SetBound(w.boundl - 32, w.boundr + 224, w.boundb - 16, w.boundt + 16)
+    elseif type == 'LSTG' then
+        FullScreen_Flag = false
         OriginalSetWorld(w.l, w.r, w.b, w.t, w.boundl, w.boundr, w.boundb, w.boundt,
             w.scrl, w.scrr, w.scrb, w.scrt, w.pl, w.pr, w.pb, w.pt, w.world)
+        SetBound(w.boundl, w.boundr, w.boundb, w.boundt)
+    else
+        error('invalid world type.')
     end
+end
+
+---@param fullscreen boolean @是否开启全屏
+---@param s number @player缩放比例
+function lib.SetFullScreen(fullscreen, s)
+    s = s or 0.5
+    if fullscreen then
+        Player_scale = s
+        aic.sys.SetWorld('FULLSCREEN')
+        CloseUI = true
+        player.bound = false
+        player.grazer.bound = false
+        player_hspeed_default = player.hspeed
+        player_lspeed_default = player.lspeed
+        player.hspeed = player.hspeed * s * 1.5
+        player.lspeed = player.lspeed * s * 1.5
+        player.a = player.A * s
+        player.b = player.B * s
+        player.hscale = s
+        player.vscale = s
+        player.grazer.hscale = s
+        player.grazer.vscale = s
+    else
+        Player_scale = 1
+        aic.sys.SetWorld('THAIC')
+        CloseUI = false
+        player.bound = true
+        player.grazer.bound = true
+        player.hspeed = player_hspeed_default or player.hspeed
+        player.lspeed = player_lspeed_default or player.lspeed
+        player.a = player.A
+        player.b = player.B
+        player.hscale = 1
+        player.vscale = 1
+        player.grazer.hscale = 1
+        player.grazer.vscale = 1
+    end
+    
 end
 
 ---以yyyy/mm/dd hh:mm:ss的格式返回时间

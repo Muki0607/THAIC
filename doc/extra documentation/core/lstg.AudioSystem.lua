@@ -55,7 +55,7 @@ end
 function lstg.GetBGMVolume()
 end
 
---- 获取BGM的FFT（快速傅里叶变换），目前调用时返回一个包含256个0的表，用途未知
+--- 获取BGM的FFT，目前调用时返回一个包含256个0的表，用途未知
 ---@param bgmname string
 ---@return number[]
 function lstg.GetMusicFFT(bgmname)

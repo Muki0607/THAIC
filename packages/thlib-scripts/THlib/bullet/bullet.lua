@@ -840,3 +840,5 @@ BULLETSTYLE = {
     water_drop, mildew, ellipse, heart, money, music, silence,
     water_drop_dark, ball_huge_dark, ball_light_dark
 }--30
+--_THAIC Added
+RAINBOW = { COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_CYAN, COLOR_BLUE, COLOR_PURPLE }

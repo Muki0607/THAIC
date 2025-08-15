@@ -108,10 +108,12 @@ function stage.group.frame(self)
     --
     if ext.GetPauseMenuOrder() == 'Return to Title' then
         lstg.var.timeslow = nil
+        aic.sys.SetFullScreen(false)
         stage.group.ReturnToTitle(false, 0)
     end
     if ext.GetPauseMenuOrder() == 'Replay Again' then
         lstg.var.timeslow = nil
+        aic.sys.SetFullScreen(false)
         stage.Restart()
     end
     if ext.GetPauseMenuOrder() == 'Give up and Retry' then
@@ -119,6 +121,7 @@ function stage.group.frame(self)
             StopMusic(DeathMusic)
         end
         lstg.var.timeslow = nil
+        aic.sys.SetFullScreen(false)
         if lstg.var.is_practice then
             stage.group.PracticeStart(self.name)
         else
@@ -171,6 +174,7 @@ function stage.group.frame(self)
         lstg.tmpvar.pause_menu_text = nil
         lstg.tmpvar.death = true
         lstg.var.timeslow = nil
+        aic.sys.SetFullScreen(false)
     end
     if ext.GetPauseMenuOrder() == 'Restart' then
         if CheckRes('bgm', DeathMusic) then
@@ -183,6 +187,7 @@ function stage.group.frame(self)
         end
         lstg.tmpvar.pause_menu_text = nil
         lstg.var.timeslow = nil
+        aic.sys.SetFullScreen(false)
     end
     if ext.GetPauseMenuOrder() == 'Return to Waypoint' then
         aic.pmode.Load()

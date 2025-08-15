@@ -337,18 +337,27 @@ lib.dialog8 = {
         ---LSC开始前
         ---Before last spellcard
         '……',
-        '说实话，我对<color 0xFFFF0000>你</color>如何能面不改色地\n做出这些事情多少有点好奇。',
-        '<color 0xFFFF0000>你</color>难道从来没有想过我的感受吗？\n还是说<color 0xFFFF0000>你</color>color 0xFFFF00FF>以此为乐？</color>',
-        '那些都无所谓了。\n现在，我要直接对你发起挑战。',
-        '<color 0xFFFF0000>“可怜即可爱”</color>，是吗？\n<color 0xFFFF0000>你</color>是抱持着这样的心态来折磨我的吗？',
-        '在你找上我之前，\n又有多少个<color 0xFFFF0000>天真无知</color>的<color 0xFFFF0000>少女</color>因为你饱受折磨？',
-        '<shake 3></shake 7><color 0xFFFF0000>给我下地狱吧。</color>',
-        '<color 0xFFFF0000>你</color>觉得打败我就会结束这一切吗？\n那可太便宜<color 0xFFFF0000>你</color>了。',
-        '即使我和她们会忘记这一切，\n<color 0xFFFF0000>你</color>却不会忘记。',
-        '希望<color 0xFFFF0000>你</color>关掉<color 0xFFFF0000>游戏</color>后\n今天晚上能带着这些话安心入睡。',
+        '说实话，我对<color 0xFFFF0000>你</color>如何能面不改色地\n做出那些事情多少有点好奇。',
+        '<color 0xFFFF0000>你</color>难道从来没有想过我的感受吗？',
+        '还是说<color 0xFFFF0000>你</color>以此为乐？',
+        '那些都无所谓了。\n现在，我要直接对<color 0xFFFF0000>你</color>发起挑战。',
+        '<color 0xFFFF0000>“可怜即可爱”</color>，是吗？',
+        '<color 0xFFFF0000>你</color>是抱持着这样的心态来折磨我的吗？',
+        '在<color 0xFFFF0000>你</color>找上我之前，',
+        '又有多少个<color 0xFFFF0000>天真无知的少女</color>因为你饱受折磨？',
         '是时候进行最后的对决了。',
         '<scale 1.5></scale 13><color 0xFFFF0000>「逆转现实与幻想的境界」！</color>',
     },
+}
+
+---LSC演出对话
+---Dialog of Last Spellcard(in message box)
+lib['dialog8.5'] = {
+    '我看到你了',
+    '离开这里',
+    '不要再继续了',
+    '如果你执意走下去',
+    '再见',
 }
 
 ---战斗结束后对话（玩家完成最终阶段且未触发LSC时出现）

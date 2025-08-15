@@ -880,7 +880,7 @@ function lib.hpbar:render()
     self.timer2 = max(0, self.timer2 - 1)
     if self.timer2 == 0 then self.timer3 = max(0, self.timer3 - 1) end
 
-    if _ui.drawname and boss.name then
+    if _ui.drawname and boss.name and not FullScreen_Flag then
         local name = 'Muki_AiC_bossname_' .. boss.name
         if CheckRes('img', name) then
             if self.timer2 > 0 then

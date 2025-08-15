@@ -131,7 +131,13 @@ function lib.music_room:frame()
                         task.New(self, function()
                             lib.SetBGMVolume(setting.bgmvolume)
                             TryExcept(function()
-                                    _play_music('aic_bgm' .. self.pos, nil, false)
+                                    if self.pos == 16 and KeyIsDown('slow') then
+                                        _play_music('aic_bgm16_full', nil, false)
+                                        self.full_flag = true
+                                    else
+                                        _play_music('aic_bgm' .. self.pos, nil, false)
+                                        self.full_flag = false
+                                    end
                                     self.playing = true
                                     self.music_pos = 0
                                 end,
@@ -147,7 +153,13 @@ function lib.music_room:frame()
                     task.New(self, function()
                         lib.SetBGMVolume(setting.bgmvolume)
                         TryExcept(function()
-                                _play_music('aic_bgm' .. self.pos, nil, false)
+                                if self.pos == 16 and KeyIsDown('slow') then
+                                    _play_music('aic_bgm16_full', nil, false)
+                                    self.full_flag = true
+                                else
+                                    _play_music('aic_bgm' .. self.pos, nil, false)
+                                    self.full_flag = false
+                                end
                                 self.playing = true
                                 self.music_pos = 0
                             end,
@@ -244,7 +256,6 @@ function lib.music_room:render()
                     text = text .. aic.table.Choice(self.text5)
                 end
             end
-            DrawText("main_font_en", '    ♪ ', x - 50, y - 180, 1, color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
             DrawText("main_font_zh2", '            ' .. text1[self.textpos] .. '\n' .. self.text2[self.textpos] .. text,
                 x - 50, y - 180, 1, color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
         else
@@ -254,8 +265,13 @@ function lib.music_room:render()
     else
         if self.CheckRecord(self.textpos) or not self.warn1 then
             DrawText("main_font_en", '    ♪ ', x - 50, y - 180, 1, color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
-            DrawText("main_font_zh2", '            ' .. text1[self.textpos] .. '\n' .. self.text2[self.textpos],
-                x - 50, y - 180, 1, color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
+            if self.full_flag then
+                DrawText("main_font_zh2", '            ' .. text1[self.textpos] .. '(full ver.)\n' .. self.text2[self.textpos],
+                    x - 50, y - 180, 1, color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
+            else
+                DrawText("main_font_zh2", '            ' .. text1[self.textpos] .. '\n' .. self.text2[self.textpos],
+                    x - 50, y - 180, 1, color(COLOR_WHITE, alpha), color(COLOR_BLACK, alpha))
+            end
         else
             DrawText("main_font_zh2", '            ' .. '\n' .. self.text3,
                 x + 50, y - 180, 1, color(COLOR_RED, alpha), color(COLOR_BLACK, alpha))

@@ -131,6 +131,8 @@ function grazer:init(player)
 end
 
 function grazer:frame()
+    self.hscale = Player_scale or 1
+    self.vscale = Player_scale or 1
     local p = self.player
     local alive = (p.death == 0 or p.death > 90)
     if alive then
@@ -169,11 +171,12 @@ end
 function grazer:render()
     ---THAIC Added
     if player.name == 'Muki' or player.name == 'Nenyuki' then return end
+    local s = Player_scale or 1
     object.render(self)
     SetImageState("player_aura", "", Color(0xC0FFFFFF))
-    Render("player_aura", self.x, self.y, -self.aura + self.aura_d, self.player.lh)
+    Render("player_aura", self.x, self.y, -self.aura + self.aura_d, self.player.lh * s)
     SetImageState("player_aura", "", Color(0xC0FFFFFF) * self.player.lh + Color(0x00FFFFFF) * (1 - self.player.lh))
-    Render("player_aura", self.x, self.y, self.aura, 2 - self.player.lh)
+    Render("player_aura", self.x, self.y, self.aura, (2 - self.player.lh) * s)
 end
 
 function grazer:colli(other)
