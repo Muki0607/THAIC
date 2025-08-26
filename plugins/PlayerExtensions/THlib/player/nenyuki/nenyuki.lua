@@ -75,19 +75,7 @@ function nenyuki_player:init(slot)
     self.targetlist = {}
     self.imgs = {}
     for i = 1, 24 do self.imgs[i] = 'nenyuki_player' .. i end
-    self.offset = { 600, 600, 600, 600 }
-    --需要注意，这里的子机位置表中高速为绝对坐标，低速为相对坐标
-    self.slist =
-    {
-        { nil,                    nil,                     nil,                    nil },
-        { { -192, 180, 0, 29 },   nil,                     nil,                    nil },
-        { { -192, 180, -8, 23 },  { -192, 150, 8, 23 },    nil,                    nil },
-        { { -192, 180, -10, 24 }, { -192, 150, 0, 32 },    { -192, 120, 10, 24 },  nil },
-        { { -192, 180, -15, 20 }, { -192, 150, -7.5, 29 }, { -192, 120, 7.5, 29 }, { -192, 90, 15, 20 } },
-        { { -192, 180, -15, 20 }, { -192, 150, -7.5, 29 }, { -192, 120, 7.5, 29 }, { -192, 90, 15, 20 } },
-    }
-    --默认子机位置，由于子机位置表会变更所以有必要存一份
-    self.default_slist = sp.copy(self.slist)
+    self.offset = { 800, 800, 800, 800 }
     self.anglelist = {}
     for i = 1, 5 do self.anglelist[i] = { 0, 0, 0, 0 } end
     self.targetlist = {}
@@ -98,6 +86,22 @@ function nenyuki_player:init(slot)
     self.deathtime = 4 --约等于没有
     self.default_deathtime = self.deathtime
     self.aura_rot = 0
+    function self:UpdateSlist()
+        --需要注意，这里的子机位置表中高速为绝对坐标，低速为相对坐标
+        local l = lstg.world.pl
+        self.slist =
+        {
+            { nil,                    nil,                     nil,                    nil },
+            { { l, 180, 0, 29 },   nil,                     nil,                    nil },
+            { { l, 180, -8, 23 },  { l, 150, 8, 23 },    nil,                    nil },
+            { { l, 180, -10, 24 }, { l, 150, 0, 32 },    { l, 120, 10, 24 },  nil },
+            { { l, 180, -15, 20 }, { l, 150, -7.5, 29 }, { l, 120, 7.5, 29 }, { l, 90, 15, 20 } },
+            { { l, 180, -15, 20 }, { l, 150, -7.5, 29 }, { l, 120, 7.5, 29 }, { l, 90, 15, 20 } },
+        }
+        --默认子机位置，由于子机位置表会变更所以有必要存一份
+        self.default_slist = sp.copy(self.slist)
+    end
+    self:UpdateSlist()
 end
 
 -------------------------------------------------------
@@ -109,7 +113,7 @@ function nenyuki_player:frame()
     -----------------------------------------
     --场上没有敌人或miss时子机自动回归原位
     local clear = true
-    for i, o in ipairs(self.targetlist) do
+    for _, o in ipairs(self.targetlist) do
         if IsValid(o) then clear = false end
     end
     local num = min(int(lstg.var.power / 100) + 1, 5)
@@ -130,7 +134,7 @@ function nenyuki_player:frame()
         self.offset = { 384, 384, 384, 384 }
     else
         for i = 1, 5 do self.anglelist[i] = { 90, 90, 90, 90 } end
-        self.offset = { 600, 600, 600, 600 }
+        self.offset = { 800, 800, 800, 800 }
     end
     -----------------------------------------
     --确保子机不出屏
@@ -166,6 +170,7 @@ end
 
 -------------------------------------------------------
 function nenyuki_player:shoot()
+    local s = Player_scale or 1
     --自机射击
     local nextshoot = 4
     local dmgfix3 = 1 --插件的加伤
@@ -216,7 +221,7 @@ function nenyuki_player:shoot()
                 if self.slow == 0 then
                     x, y = self.sp[i][1], self.sp[i][2]
                 else
-                    x, y = self.supportx + self.sp[i][1], self.supporty + self.sp[i][2]
+                    x, y = self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s
                 end
                 for j, o in ObjList(GROUP_ENEMY) do
                     if o.colli and nenyuki_IsInLaser(x, y, angle, o, 16) then
@@ -369,6 +374,7 @@ end
 end]]
 -------------------------------------------------------
 function nenyuki_player:render()
+    --if not self.aura_rot then self.aura_rot = 0 end
     --自机、子机和激光的渲染
     local sz = 1.2 + 0.1 * sin(self.timer * 0.2)
     local s = Player_scale or 1
@@ -378,7 +384,7 @@ function nenyuki_player:render()
         for i = 1, 4 do
             if self.sp[i] then
                 if self.slow == 1 then
-                    Render('nenyuki_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0,
+                    Render('nenyuki_support', self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s, 0,
                         self.sp[i][3] * s, s)
                 else
                     Render('nenyuki_support', self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * s, s)
@@ -391,7 +397,7 @@ function nenyuki_player:render()
         for i = 1, 4 do
             if self.sp[i] then
                 if self.slow == 1 then
-                    Render('nenyuki_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0,
+                    Render('nenyuki_support', self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s, 0,
                         self.sp[i][3] * sz * s, sz * s)
                 else
                     Render('nenyuki_support', self.sp[i][1], self.sp[i][2], 0, self.sp[i][3] * sz * s, sz * s)
@@ -415,7 +421,7 @@ function nenyuki_player:render()
                         nenyuki_CreateLaser(x + self.offset[i], y, angle, 16, timer, Color(0x80FFFFFF),
                             384 - self.offset[i], 'nenyukiLaser_hited')
                     else
-                        nenyuki_CreateLaser(x, y, angle, 16, timer, Color(0x80FFFFFF), 600)
+                        nenyuki_CreateLaser(x, y, angle, 16, timer, Color(0x80FFFFFF), 800)
                     end
                 else
                     x, y = self.supportx + self.sp[i][1], self.supporty + self.sp[i][2]
@@ -423,7 +429,7 @@ function nenyuki_player:render()
                         nenyuki_CreateLaser(x, y, angle, 16, timer, Color(200, 165, 58, 233), self.offset[i],
                             'nenyukiLaser2')
                     else
-                        nenyuki_CreateLaser(x, y, angle, 16, timer, Color(200, 165, 206, 255), 600, 'nenyukiLaser2')
+                        nenyuki_CreateLaser(x, y, angle, 16, timer, Color(200, 165, 206, 255), 800, 'nenyukiLaser2')
                     end
                 end
                 Render('nenyuki_laser_light', x, y, self.timer * 5, 1 + 0.4 * sin(self.timer * 45 + i * 90))
@@ -436,7 +442,6 @@ function nenyuki_player:render()
     player_class.render(self)
     --判定点渲染
     SetImageState('nenyuki_player_aura', '', Color(self.lh * 255, 255, 255, 255))
-    local s = Player_scale or 1
     Render('nenyuki_player_aura', self.x, self.y, self.aura_rot, s)
     Render('nenyuki_player_aura', self.x, self.y, -self.aura_rot, s)
 end
@@ -724,18 +729,20 @@ end
 
 -------------------------------------------------------
 --子机追踪，每个子机目标独立，但效果是经常叠一起
-function nenyuki_findtarget(self)
+function nenyuki_findtarget(self, group)
     local d = { 114514, 114514, 114514, 114514 } --下北泽程序员常用填充数字（雾
     local num = min(int(lstg.var.power / 100) + 1, 5)
     for i = 1, 4 do
         if i < num then
             local y = self.slist[num][i][2]
             --将两次遍历用for合并，减少代码量
-            for _, g in ipairs({ GROUP_ENEMY, GROUP_NONTJT }) do
+            group = group or { GROUP_ENEMY, GROUP_NONTJT }
+            for _, g in ipairs(group) do
                 for _, o in ObjList(g) do
                     if abs(o.y - y) < d[i] and abs(o.y) < 224 then
                         d[i] = abs(o.y - y)
                         self.targetlist[i] = o
+                        Print(aic.table.ToString(self.targetlist))
                         --本来想让一个目标最多只被两个子机锁定
                         --但是似乎没太大必要
                         --[[local n = 0
@@ -769,3 +776,5 @@ function nenyuki_findtarget(self)
         end
     end
 end
+    
+AddPlayerToPlayerList('Chimabo Nenyuki', 'nenyuki_player', 'Nenyuki')

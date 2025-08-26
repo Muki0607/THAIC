@@ -405,7 +405,7 @@ function lib.CreateWindow(title, w, h)
         if event.type == SDL_QUIT then
             lib.Running_Flag = false
         elseif event.type == SDL_WINDOWEVENT then
-            Print(event.window.event)
+            --Print(event.window.event)
             if event.window.event == SDL_WINDOWEVENT_CLOSE then
                 lib.Running_Flag = false
             end
@@ -425,7 +425,6 @@ function lib.CreateWindow(title, w, h)
                 lib.Running_Flag = false
             end
         end
-        Print(lib.Running_Flag)
         task.Wait()
     end
     return window

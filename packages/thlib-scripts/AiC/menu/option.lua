@@ -175,7 +175,6 @@ function lib.option:frame()
                 if self.pos1 == 1 then
                     PlaySound('ok00', 0.5)
                     self.username_changing = true
-                    Print(1)
                 elseif self.pos1 == 13 then
                     --进入键位设置
                     PlaySound('ok00', 0.5)

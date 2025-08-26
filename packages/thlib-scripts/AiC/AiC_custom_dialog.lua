@@ -594,7 +594,7 @@ function lib.sp.sentence(self, img, pos, text, canskip, t, hscale, vscale, num, 
     t = t or (60 + #text * 5)
     for _ = 1, t do
         if (KeyIsPressed 'shoot' or master.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if master.jump_dialog > 60 then
                 master.jump_dialog = 56
             end
@@ -654,7 +654,7 @@ function lib.sp.sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, nu
     local dt = 0
     for i = 1, l, intv do
         if (KeyIsPressed 'shoot' or self.dialog_displayer.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if self.dialog_displayer.jump_dialog > 60 then
                 self.dialog_displayer.jump_dialog = 56
             end
@@ -687,7 +687,7 @@ function lib.sp.sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, nu
         local text_slice = sp.string(newtext):Sub(1, i)
         lib.sp.sentence(self, img, pos, text_slice, canskip, 1, hscale, vscale, num, px, py, snd, vol, img_upper, text,
             newtext)
-        PlaySound(snd, vol, 0, true)
+        PlaySound(snd, vol)
     end
     lib.sp.sentence(self, img, pos, newtext, canskip, t - dt, hscale, vscale, num, px, py, snd, vol, img_upper, text,
         newtext)
@@ -1034,7 +1034,7 @@ function lib.boss.sentence(self, img, pos, text, canskip, t, hscale, vscale, tpi
     t = t or (60 + #text * 5)
     for _ = 1, t do
         if (KeyIsPressed "shoot" or master.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if master.jump_dialog > 60 then
                 master.jump_dialog = 56
             end
@@ -1117,7 +1117,7 @@ function lib.boss.sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, 
     local dt = 0
     for i = 1, l, intv do
         if (KeyIsPressed 'shoot' or self.dialog_displayer.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if self.dialog_displayer.jump_dialog > 60 then
                 self.dialog_displayer.jump_dialog = 56
             end
@@ -1151,7 +1151,7 @@ function lib.boss.sentence_ex(self, img, pos, text, canskip, t, hscale, vscale, 
         lib.boss.sentence(self, img, pos, text_slice, canskip, 1, hscale, vscale, tpic, num, px, py, tx, ty, tn, stay,
             snd, vol, text,
             newtext, true)
-        PlaySound(snd, vol, 0, true)
+        PlaySound(snd, vol)
     end
     lib.boss.sentence(self, img, pos, newtext, canskip, t - dt, hscale, vscale, tpic, num, px, py, tx, ty, tn, stay, snd,
         vol, text,
@@ -1457,7 +1457,7 @@ function lib.middle.sentence(self, text, canskip, t, tpic, tx, ty, tn, snd, vol,
     t = t or (60 + #text * 5)
     for _ = 1, t do
         if (KeyIsPressed "shoot" or master.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if master.jump_dialog > 60 then
                 master.jump_dialog = 56
             end
@@ -1523,7 +1523,7 @@ function lib.middle.sentence_ex(self, text, canskip, t, tpic, tx, ty, intv, snd,
     local dt = 0
     for i = 1, l, intv do
         if (KeyIsPressed 'shoot' or self.dialog_displayer.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if self.dialog_displayer.jump_dialog > 60 then
                 self.dialog_displayer.jump_dialog = 56
             end
@@ -1550,7 +1550,7 @@ function lib.middle.sentence_ex(self, text, canskip, t, tpic, tx, ty, intv, snd,
         local text_slice = sp.string(newtext):Sub(1, i)
         lib.middle.sentence(self, text_slice, canskip, 1, tpic, tx, ty, tn, snd, vol, text,
             newtext, true)
-        PlaySound(snd, vol, 0, true)
+        PlaySound(snd, vol)
     end
     lib.middle.sentence(self, newtext, canskip, t - dt, tpic, tx, ty, tn, snd,
         vol, text, newtext)
@@ -1850,7 +1850,7 @@ function lib.float.sentence(self, x, y, text, canskip, t, snd, vol, rawtext, ful
     t = t or (60 + #text * 5)
     for _ = 1, t do
         if (KeyIsPressed 'shoot' or master.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if master.jump_dialog > 60 then
                 master.jump_dialog = 56
             end
@@ -1898,7 +1898,7 @@ function lib.float.sentence_ex(self, x, y, text, canskip, t, intv, snd, vol)
     local dt = 0
     for i = 1, l, intv do
         if (KeyIsPressed 'shoot' or self.dialog_displayer.jump_dialog > 60) and canskip then
-            PlaySound(snd, vol, 0, true)
+            PlaySound(snd, vol)
             if self.dialog_displayer.jump_dialog > 60 then
                 self.dialog_displayer.jump_dialog = 56
             end
@@ -1924,7 +1924,7 @@ function lib.float.sentence_ex(self, x, y, text, canskip, t, intv, snd, vol)
         end
         local text_slice = sp.string(newtext):Sub(1, i)
         lib.float.sentence(self, x, y, text_slice, canskip, 1, snd, vol, text, newtext)
-        PlaySound(snd, vol, 0, true)
+        PlaySound(snd, vol)
     end
     lib.float.sentence(self, x, y, newtext, canskip, t - dt, snd, vol, text, newtext)
 end

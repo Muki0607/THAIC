@@ -137,6 +137,16 @@ function lib.save_replay:init(data, rep_saved)
     
     lib.FetchReplaySlots(self)
     lib.Fly(self, 1, 'left')
+    --我完全不知道为什么发生的bug，name_regist在PushMenuStack(save_replay)时在lib.Fly(save_replay)这一句出错了，
+    --做了一个IsValid判断跳过之后发现没飞的不是save_replay而是name_regist
+    --而且这种情况仅在创建过ending之后出现
+    --就见鬼了吧，目前只能用这种暂时性的解决办法
+    for _, o in ObjList(GROUP_GHOST) do
+        if o.num == 11 then
+            RawDel(o)
+        end
+    end
+    
 end
 
 function lib.save_replay:frame()

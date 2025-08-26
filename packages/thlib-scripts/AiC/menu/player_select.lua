@@ -32,6 +32,7 @@ function lib.player_select:init()
     end
     self.scale[self.pos] = self.scale[self.pos] * 1.25
     self.quit = function()
+        if IsValid(self.qte_checker) then Del(self.qte_checker) end
         task.New(self, function()
             for i = 1, self.t do
                 self.text_alpha = (255 - i * 255 / 30)
@@ -79,6 +80,24 @@ function lib.player_select:init()
     task.New(self, function()
         for i = 1, 30 do
             self.text_alpha = i * 255 / 30
+            task.Wait()
+        end
+    end)
+    ---全开档秘籍，0d00的名言
+    ---下个版本它会有用的
+    task.New(self, function()
+        self.qte_checker = New(aic.misc.qte_checker_ex, {
+            KEY.W, KEY.A, KEY.T, KEY.A, KEY.S, KEY.H, KEY.I, KEY.N, KEY.O,
+            KEY.O, KEY.N, KEY.A, KEY.N, KEY.I,
+            KEY.O, KEY.M, KEY.I, KEY.T, KEY.E, KEY.K, KEY.U, KEY.D, KEY.A, KEY.S, KEY.A, KEY.I })
+        for _ = 1, _infinite do
+            if self.qte_checker.finished then
+                self.qte_checker.finished = false
+                self.qte_checker.num = 1
+                if self.pos == 4 then
+                    aic.misc.UnlockAll()
+                end
+            end
             task.Wait()
         end
     end)

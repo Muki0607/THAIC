@@ -72,11 +72,11 @@ function lib.title:init(pos, l)
     end
 
     --有结局先放结局
-    if lib.EndingBFlag then
+    if lib.EndingFlag then
         lib.PushMenuStack(lib.ending)
     end
     --结局放完再存rep
-    if lib.last_replay and not lib.EndingBFlag then
+    if lib.last_replay and not lib.EndingFlag then
         lib.PushMenuStack(lib.name_regist)
     end
     self.invalid_menu = { 2, 3 }

@@ -69,11 +69,12 @@ lib.last_replay_finish = false
 ------------------------------------------------------------
 
 ---菜单飞入飞出，要求单位有t参数（飞入飞出时间）
+---@param self lstg.GameObject @菜单
 ---@param flyin number @为1时飞入，否则飞出
 ---@param dir string | "'up'" | "'down'" | "'left'" | "'right'" @移动方向
 ---@param del boolean @为true时在飞入飞出结束后删除菜单
 ---@overload fun(flyin:number, x:number, y:number) @指定移动目的坐标
-function lib:Fly(flyin, dir, del)
+function lib.Fly(self, flyin, dir, del)
     if flyin == 1 then
         task.New(self, function()
             task.Wait(self.t / 4)
@@ -90,6 +91,7 @@ function lib:Fly(flyin, dir, del)
             end
         end)
     end
+    if not IsValid(self) then return end
     if type(dir) == 'string' then
         local x, y
         if dir == 'up' then
@@ -217,7 +219,9 @@ function lib.GetReplayData(i)
     local tmp
     for i, k in ipairs(slot.stages) do
         totalScore = totalScore + slot.stages[i].score
-        diff = string.match(k.stageName, '^.+@(.+)$')
+        --由于目前没有在stage上做难度差分，不能用这种方法
+        --diff = string.match(k.stageName, '^.+@(.+)$')
+        diff = ({ 'Easy', 'Normal', 'Hard', 'Lunatic' })[scoredata.difficulty_select]
         tmp = string.match(k.stageName, '^(.+)@.+$')
         if string.match(tmp, '%d+') == nil then
             stage_num = tmp

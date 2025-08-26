@@ -1,6 +1,6 @@
 ---=====================================
----THAIC Table v1.10a
----东方梦摇篮 table扩展库 v1.10a
+---THAIC Table v1.12b
+---东方梦摇篮 table扩展库 v1.12b
 ---=====================================
 
 ---版本更新记录
@@ -30,6 +30,8 @@
 ---添加了函数lib.MakeKeyTable，用于简化键表的使用
 ---添加了函数lib.Exchange用于交换表的键与值
 ---添加了函数lib.ToString，用于将表转换为易读的字符串
+---v1.12b
+---修改了lib.ToString，使其可以通过递归读取表中的表
 
 ---本函数库提供了一些关于表的函数。需要注意，其中的一些函数未经测试，因此不保障其可用性。
 
@@ -43,11 +45,15 @@ local lib = aic.table
 function lib.ToString(t)
     local ret = '{ '
     for _, v in ipairs(t) do
-        ret = ret .. tostring(v) .. ', '
+        if type(v) == 'table' then
+            ret = ret .. lib.ToString(v) .. ', '
+        else
+            ret = ret .. tostring(v) .. ', '
+        end
     end
     for k, v in ipairs(t) do
         if not (type(k) == 'number' and k > 0) then
-            ret = ret .. '[' .. tostring .. '] =' .. tostring(v) .. ', '
+            ret = ret .. '[' .. tostring(k) .. '] =' .. tostring(v) .. ', '
         end
     end
     ret = string.sub(ret, 1, -3) .. ' }'
@@ -240,7 +246,7 @@ end
 ---@param t table @要随机抽取的table
 ---@param raw boolean @是否不触发元方法
 ---@return table @返回的table
-function lib.Randomize(t, raw)
+function lib.Shuffle(t, raw)
     local temp = {}
     local len = #t
     for _ = 1, len do

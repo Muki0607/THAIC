@@ -1,18 +1,15 @@
 ---THAIC Arranged
 --From (附带文件)避弹AI设计原理与实现.docx in 群文件
 --听说是把直流群搞炸了的那位的杰作
---整个是个非常谔谔的if堆出来的屎山，但我根本做不出来所以没资格说什么
+--整个是个非常谔谔的if堆出来的屎山，而且我严重怀疑是个半成品，但我根本做不出来所以没资格说什么
 --去除了谔谔的需要GROUP_LASER组（请在看到这东西时对自己进行记忆清除，忘掉有这个东西，因为它根本不存在）的激光检测
 --去除了对scoredata的调用，提高效率（更重要的是这玩意放在和core同级的话不知道为什么没法调用scoredata）
+--去除了大量未使用或无效的方法，而且有一个每帧创建obj偷吃我性能（咬牙切齿
+--现在这个版本应该可以拿到任何私坑里用了
 
 Hana_AI = {} --初始化，放在了初始化函数里面
---High_speed_rad = --[[player.hspeed or]] 4.5 --初始化高速半径
---Low_speed_rad = --[[player.lspeed or]] 2 -- 初始化低速半径
---player.hspeed = 4.5 --初始化高速半径
---player.lspeed = 2 -- 初始化低速半径--]]
 Hana_AI.Return_point_x, Hana_AI.Return_point_y = 0, -160 --返回点初始化
-Hana_AI.Return_point_cd = 0 --鼠标操作CD
-if not _debug.hana_ai then Hana_AI.Return_point_cd = 1 end
+Hana_AI.Return_point_cd = 1 --鼠标操作CD
 Hana_AI.Return_point_open_return = 1 --1表示开启,会在有弹幕的区域进行指向移动
 function Hana_AI_initialization()
     --包括了部分的初始化
@@ -20,67 +17,27 @@ function Hana_AI_initialization()
         --初始化信息
         --scoredata.Hana_AI = {}
         Hana_AI.Archive_initialization = 1
-        Hana_AI.Hide = 0         --数据显示隐藏0显示1隐藏
-        Hana_AI.Start_state = 0  --启动状态,默认不启动 1启动 0 不启动，存档变量
-        Hana_AI.true_player = 0  --选择路径模式
-        Hana_AI.Stren_return = 0 --强化返回模式
+        Hana_AI.Start_state = 0  --启动状态 --F7键
+        Hana_AI.true_player = 0  --选择路径模式 --P键
+        Hana_AI.Stren_return = 0 --强化返回模式 --R键
     end
 end
 
-if not Hana_AI.ver_13 then --版本兼容
-    --scoredata.Hana_AI = {}
-    Hana_AI.Archive_initialization = 1
-    Hana_AI.Hide = 1         --数据显示隐藏0显示1隐藏
-    Hana_AI.Start_state = 0  --启动状态,默认不启动 1启动 0 不启动，存档变量
-    Hana_AI.true_player = 0  --选择路径模式
-    Hana_AI.Stren_return = 0 --强化返回模式
-    Hana_AI.ver_12 = 1
-end
 Hana_AI_initialization() --存档初始化函数
 local abs, max, min = math.abs, math.max, math.min --效率优化
---关于安装 将所需函数放入对应文件:
---[[
-    _editor_output.lua开头写入(editor初始化后)
-    DoFile('THlib\\player\\Hana_AI_v_1.0.lua')--避弹AI
-    在 player_system.lua中
-    ["frame.updateSlow"] 中
-        if self.__slow_flag then
-            self.slow = 1
-        else
-            self.slow = 0
-        end
-    之前
-    写上 Hana_AI.Frame_action()--避弹AI
-    在  ["frame.move"] = { 97, function(self) 末端 写上
-        Hana_AI.Walking_diagram_correction(dx,dy)--避弹AI，在这里
-    新版本增加：
-    function object.LineLaserDo(func)--警告:这里需要一个约定,否则无法运行
-    --[[确保激光和曲线激光中有这个变量
-    self.IsLaser = true--(每个激光都有)
-   self.IsBentLaser = true = true(曲线激光为true,普通激光无)
-    并且确保激光属于GPOUP.LASER组
-    --]]
---]]
---------------------------------------------------------------------迁移需要保留的函数----------------------------------------------------------------------------------------------------
 
-local function GetDist(a, b)
-    if IsValid(a) and IsValid(b) then
-        return Dist(a, b)
-    elseif a.x and b.x then
-        return hypot(a.x - b.x, a.y - b.y)
-    end
+--临时点,用来做连续
+Hana_AI.temp_point = Class(object)
+
+function Hana_AI.temp_point:init(x, y, life)
+    self.x = x
+    self.y = y
+    self.layer = LAYER_ENEMY_BULLET + 1
+    task.New(self, function()
+        task.Wait(life)
+        RawKill(self)
+    end)
 end
-
-
-
-----------------------------------------------------------------------------------------------------------------
---快速的描绘文字（需要占用一个Obj)
---承载文本事件的Obj见 _editor_class.lua 搜索  快捷文字渲染承载Obj
---承载Obj
---承载事件的简单Obj
---local path = "THlib\\UI\\font\\"
---local ntext1 = path .. "text.ttf"
---local ntext2 = path .. "text2.ttf"
 
 function object.BulletIndesEnemyDo(func)
     for _, o in ObjList(GROUP_ENEMY_BULLET) do
@@ -93,303 +50,16 @@ function object.BulletIndesEnemyDo(func)
         func(o)
     end
 end
---[=[
-function object.LineLaserDo(func) --警告:这里需要一个约定,否则无法运行
-    --[[确保激光和曲线激光中有这个变量
-    self.IsLaser = true--(每个激光都有)
-   self.IsBentLaser = true = true(曲线激光为true,普通激光无)
-    并且确保激光属于GPOUP.LASER组
-    --]]
-    for _, o in ObjList(GROUP_LASER) do
-        if o.IsLaser == true then
-            if not o.IsBentLaser then
-                func(o)
-            end
-        end
-    end
-    for _, o in ObjList(GROUP_INDES) do
-        if o.IsLaser == true then
-            if not o.IsBentLaser then
-                func(o)
-            end
-        end
-    end
-    for _, o in ObjList(GROUP_ENEMY_BULLET) do
-        if o.IsLaser == true then
-            if not o.IsBentLaser then
-                func(o)
-            end
-        end
-    end
-end
 
-function object.AI_BentLaserDo(func) --警告:这里需要一个约定,否则无法运行
-    --[[确保激光和曲线激光中有这个变量
-    self.IsLaser = true--(每个激光都有)
-   self.IsBentLaser = true = true(曲线激光为true,普通激光无)
-    并且确保激光属于GPOUP.LASER组
-    --]]
-    for _, o in ObjList(GROUP_LASER) do
-        if o.IsLaser == true then
-            if o.IsBentLaser == true then
-                func(o)
-            end
-        end
-    end
-    for _, o in ObjList(GROUP_INDES) do
-        if o.IsLaser == true then
-            if o.IsBentLaser == true then
-                func(o)
-            end
-        end
-    end
-end
-]=]
-LoadTTF('boss_name', 'assets/font/SourceHanSansCN-Bold.otf', 20)
-
-local function RenderTTF4(ttfname, text, x, y, color, ...)
-    local fmt = 0
-    for _, t in ipairs({ ... }) do
-        fmt = fmt + ENUM_TTF_FMT[t]
-    end
-    lstg.RenderTTF(ttfname, text, x, x, y, y, fmt, color)
-end
-SimpleText = Class(object, {
-    init = function(self, x, y, layer, text, alpha, color, lifetime, f, viewmode, ...)
-        self.x, self.y = x, y
-        self.layer = LAYER_TOP
-        self.group = GROUP_GHOST
-        self.colli = false
-        self.bound = false
-        self.text = text or ""
-        self.alpha = alpha or 0
-        self.color = color or { 255, 255, 255 }
-        self.other = { ... }
-        self.lifetime = lifetime + 1
-        self.viewmode = viewmode or "ui"
-        self.size = 1
-        self.type = 'boss_name'
-        task.New(self, f or function()
-        end)
-    end,
-    frame = function(self)
-        task.Do(self)
-        if self.lifetime then
-            if self.timer >= self.lifetime then
-                RawDel(self)
-            end
-        end
-    end,
-    render = function(self)
-        SetViewMode("ui")
-        local s = GetImageScale()
-        SetImageScale(s * self.size)
-        RenderTTF4(self.type, self.text, self.x + 1, self.y - 1, Color(self.alpha, 0, 0, 0), unpack(self.other))
-        RenderTTF4(self.type, self.text, self.x, self.y, Color(self.alpha, unpack(self.color)), unpack(self.other))
-        SetImageScale(s)
-        SetViewMode("world")
-    end
-})
-
---简化函数：
----@param x string@X坐标
----@param y string@Y坐标
----@param layer number@图层
----@param text string@显示的文本
----@param alpha number@透明度
----@param color table@颜色{R,B,G}
----@param lifetime number@存在事件(帧)
----@param f function @附加的函数
----@param viewmode string @显示模式 有如下 "ui" "world" "3d"等
-function NewText(x, y, layer, text, alpha, color, lifetime, f, viewmode, ...)
-    return New(SimpleText, x, y, layer, text, alpha, color, lifetime, f, viewmode, ...)
-end
-
-----------------------------------------------------------------------------------------------------------------
-
-
---------------------------------------------------------------------迁移需要保留的函数----------------------------------------------------------------------------------------------------
-Hana_AI.temp_point = Class(object, { --临时点,用来做连续
-    init = function(self, x, y, life)
-        object.init(self, x, y, 0, LAYER_ENEMY_BULLET + 1)
-        task.New(self, function()
-            task.Wait(life)
-            RawKill(self)
-        end)
-    end,
-    frame = function(self)
-        --帧动作,就是每帧跑一次
-        task.Do(self)
-    end
-}, true)
-Hana_AI.information_display = Class(object, { --用与于显示系统信息
-    init = function(self, mode, ver_x, ver_y, bullet_num, laser_num, bullet_special_case_num, bent_laser_num)
-        object.init(self, 0, 0, 0, LAYER_TOP)
-        task.New(self, function()
-            if Hana_AI.Hide == 0 then
-                ----------------------------------------------------------------------------------------------
-                NewText(720, 480, nil,
-                    "AI_Open_F7 to Exit",
-                    255, { 252, 242, 240 }, 1, function()
-                        local self = task.GetSelf()
-                        self.size = 1.2
-                        task.Wait(1)
-                    end, "ui", "center")
-                ----------------------------------------------------------------------------------------------
-                if Hana_AI.Slow == 0 then
-                    NewText(720, 460, nil,
-                        "Move:{High}",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                elseif Hana_AI.Slow == 1 then
-                    NewText(720, 460, nil,
-                        "Move:{Slow}",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                end
-                ----------------------------------------------------------------------------------------------
-                if ver_x or ver_y then
-                    ver_x = tonumber(string.format("%.1f", ver_x))
-                    ver_y = tonumber(string.format("%.1f", ver_y))
-                    NewText(720, 440, nil,
-                        "Vector:{" .. ver_x .. "," .. ver_y .. "}",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                else
-                    ver_x = tonumber(string.format("%.1f", ver_x))
-                    ver_y = tonumber(string.format("%.1f", ver_y))
-                    NewText(720, 440, nil,
-                        "Vector:{idle,idle}",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                end
-                ---------------------------------------------------------------------------------------------
-                NewText(720, 420, nil,
-                    "Rally:{" ..
-                    tonumber(string.format("%.1f", Hana_AI.Return_point_x)) ..
-                    "," .. tonumber(string.format("%.1f", Hana_AI.Return_point_y)) .. "}",
-                    255, { 252, 242, 240 }, 1, function()
-                        local self = task.GetSelf()
-                        self.size = 1
-                        task.Wait(1)
-                    end, "ui", "center")
-                ----------------------------------------------------------------------------------------------
-                if Hana_AI.Return_point_open_return == 1 then
-                    NewText(720, 400, nil,
-                        "return:{True }",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                else
-                    NewText(720, 400, nil,
-                        "return:{False}",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                end
-                NewText(720, 360, nil,
-                    "Bullet:{" .. bullet_num .. "}",
-                    255, { 252, 242, 240 }, 1, function()
-                        local self = task.GetSelf()
-                        self.size = 1
-                        task.Wait(1)
-                    end, "ui", "center")
-                NewText(800, 360, nil,
-                    "Special_Bullet:{" .. bullet_special_case_num .. "}",
-                    255, { 252, 242, 240 }, 1, function()
-                        local self = task.GetSelf()
-                        self.size = 1
-                        task.Wait(1)
-                    end, "ui", "center")
-                local laser_num_ai = Hana_AI.ai_c.Get_ai_attribute(4)
-                NewText(720, 340, nil,
-                    "Laser:{" .. laser_num .. "," .. int(laser_num_ai) .. "}",
-                    255, { 252, 242, 240 }, 1, function()
-                        local self = task.GetSelf()
-                        self.size = 1
-                        task.Wait(1)
-                    end, "ui", "center")
-                NewText(720, 320, nil,
-                    "BentLaser:{" .. bent_laser_num .. "}",
-                    255, { 252, 242, 240 }, 1, function()
-                        local self = task.GetSelf()
-                        self.size = 1
-                        task.Wait(1)
-                    end, "ui", "center")
-                ----------------------------------------------------------------------------------------------
-                if Hana_AI.true_player == 0 then
-                    NewText(280, 520, nil,
-                        "Route:{" .. "extra" .. "}-You are now on the expansion path", --切换是219个方向还是8个方向
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                else
-                    NewText(280, 520, nil,
-                        "Route:{" .. "player" .. "}-Warning, you are now on the normal moving path", --切换是219个方向还是8个方向
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                end
-                ----------------------------------------------------------------------------------------------
-                ----------------------------------------------------------------------------------------------
-                if Hana_AI.Stren_return == 1 then --强化返回模式--intensify
-                    NewText(800, 460, nil,
-                        "Intensify_return:{True }",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                else
-                    NewText(800, 460, nil,
-                        "Intensify_return:{False}",
-                        255, { 252, 242, 240 }, 1, function()
-                            local self = task.GetSelf()
-                            self.size = 1
-                            task.Wait(1)
-                        end, "ui", "center")
-                end
-            end
-            ----------------------------------------------------------------------------------------------
-            task.Wait(1)
-            RawKill(self)
-        end)
-    end,
-    frame = function(self)
-        --帧动作,就是每帧跑一次
-        task.Do(self)
-    end
-}, true)
 --这里是设置所需的变量
-local operation_cd = 0 --看得出来您是真喜欢全局变量啊 --operation_cd = 0 --操作cd,整体共用
-if not _debug.hana_ai then
-    operation_cd = 1
-end
+local operation_cd = 0 --看得出来您是真喜欢全局变量啊
+--operation_cd = 0 --操作cd,整体共用
+
 function Hana_AI.Set_switch()
     --检测按键来进行操作
     if operation_cd == 0 then
         local key, KEY = GetLastKey(), KEY --用于获取按键信息
-        if key == KEY.F7 then
+        if key == KEY.F7 and _debug.hana_ai then
             --开机与关闭
             if Hana_AI.Start_state == 0 then
                 Hana_AI.Start_state = 1
@@ -401,20 +71,9 @@ function Hana_AI.Set_switch()
                 operation_cd = 10
             end
         end
+        --[[
         if Hana_AI.Start_state == 1 then
             --检测是否开机，开机则进行检测
-            if key == KEY.H then
-                --隐藏
-                if Hana_AI.Hide == 0 then
-                    Hana_AI.Hide = 1
-                    operation_cd = 10
-                    PlaySound('ok00', 0.3)
-                else
-                    Hana_AI.Hide = 0
-                    PlaySound('cancel00', 0.3)
-                    operation_cd = 10
-                end
-            end
             if key == KEY.P then
                 --隐藏
                 if Hana_AI.true_player == 0 then
@@ -440,10 +99,9 @@ function Hana_AI.Set_switch()
                 end
             end
         end
+        --]]
     else
-        if _debug.hana_ai then
-            operation_cd = operation_cd - 1
-        end
+        operation_cd = operation_cd - 1
     end
 end
 
@@ -456,7 +114,7 @@ function Hana_AI.Walking_diagram_correction(dx, dy)
 end
 
 function Hana_AI.Walking_diagram_ang_conversion(angle)
-    --输入角度,用与修改自机行走图方向
+    --输入角度,用于修改自机行走图方向
     if angle < 0 then
         angle = 360 + angle
     end
@@ -501,14 +159,12 @@ ffi.cdef [[
     double Get_ai_attribute(int num);//使用这个获得数据
 ]]
 local lstg_l, lstg_r, lstg_b, lstg_t = lstg.world.l - 12, lstg.world.r + 12, lstg.world.b - 12, lstg.world.t + 12
-Hana_AI.ai_c.set_world(lstg_l, lstg_r, lstg_b, lstg_t) --目前这个边界是固定的
+Hana_AI.ai_c.set_world(lstg_l, lstg_r, lstg_b, lstg_t) --目前这个边界是固定的 --需要修改
 function Hana_AI.Mouse_control()
     --鼠标控制的部分
-    if _debug.hana_ai then
-        if Hana_AI.Return_point_cd > 0 then
-            Hana_AI.Return_point_cd = Hana_AI.Return_point_cd - 1
-            return
-        end
+    if _debug.hana_ai and Hana_AI.Return_point_cd > 0 then
+        Hana_AI.Return_point_cd = Hana_AI.Return_point_cd - 1
+        return
     end
     local PointLine_toolkit_Now_x, PointLine_toolkit_Now_y = GetMousePosition() --从窗口左下角获得玩家鼠标位置
     local True_Mouse_x = PointLine_toolkit_Now_x --* (screen.width / cur_setting.resx)) - (screen.width / 2)--获得玩家鼠标的 从左下角开始的真实X位置 减去对应方向长度/2转化为弹幕使用的X坐标
@@ -537,18 +193,13 @@ function Hana_AI.Mouse_control()
     end
 end
 
-Moving_track_point = {} --自机移动轨迹
-
-
 function Hana_AI.Frame_action()
     if Hana_AI.Archive_initialization ~= 1 then
         --初始化信息
-        scoredata.Hana_AI = {}
         Hana_AI.Archive_initialization = 1
-        Hana_AI.Hide = 0 --数据显示隐藏0显示1隐藏
-        Hana_AI.Start_state = 0 --启动状态,默认不启动 1启动 0 不启动，存档变量
-        Hana_AI.true_player = 0 --选择路径模式
-        Hana_AI.Stren_return = 0 --强化返回模式
+        Hana_AI.Start_state = 0
+        Hana_AI.true_player = 0
+        Hana_AI.Stren_return = 0
     end
     Hana_AI.Set_switch() --检测按键操作拉更新设置
     if Hana_AI.Start_state == 0 then
@@ -557,8 +208,9 @@ function Hana_AI.Frame_action()
     Hana_AI.Mouse_control() --鼠标控制的部分
     Hana_AI.ai_c.set_state(1, Hana_AI.Stren_return) --设置是否强化返回功能
 
-    --很野蛮的处理方式                               看这里 看这里 这里是追击boss 以及自动B和C的功能 多Boss兼容看Data和模拟操作自行修改
-    lstg.SetSplash(true) --开启鼠标显示
+    --很野蛮的处理方式
+    --看这里 看这里 这里是追击boss 以及自动B和C的功能 多Boss兼容看Data和模拟操作自行修改
+    --lstg.SetSplash(true) --开启鼠标显示
     player.__shoot_flag = true
     if IsValid(_boss) then
         if not (_boss.x <= lstg.world.l or _boss.x >= lstg.world.r) then
@@ -576,7 +228,6 @@ function Hana_AI.Frame_action()
     local bullet_size_num = 0     --记录输入的子弹数,目前上限100个
     local laser_size_num = 0      --记录输入的激光数,目前上限100个
     local bent_laser_size_num = 0 --记录输入的曲线激光的点的个数，目前上限为520个
-    local bullet_special_case_num = 0
     local Return_dist = 6
     local x_1, x_2 = Hana_AI.Return_point_x + Return_dist, Hana_AI.Return_point_x - Return_dist --临时计算
     local y_1, y_2 = Hana_AI.Return_point_y + Return_dist, Hana_AI.Return_point_y - Return_dist --临时计算
@@ -622,26 +273,6 @@ function Hana_AI.Frame_action()
             priority_2 = 0
         end
     end
-    --[[
-    local laser_counter, laser_add, laser_end_x, laser_end_y, laser_w
-    local laser_add_num = 0
-    object.LineLaserDo(function(unit) --读取并且直接写入激光
-        if laser_size_num < 100 then  --为c层做准备
-            if IsValid(unit) then
-                laser_add_num = 0
-                laser_size_num = laser_size_num + 1
-                laser_add = unit.l1 + unit.l2 + unit.l3 --错误的激光获取方式，暂时没修改
-                laser_end_x = unit.x + cos(unit.rot) * laser_add --同样这也是错误的
-                laser_end_y = unit.y + sin(unit.rot) * laser_add
-                laser_w = unit.w0 --要取半宽
-                if laser_w == 0 then
-                    laser_w = 3
-                end
-                Hana_AI.ai_c.Laser_Loading(laser_size_num, laser_end_x, laser_end_y, unit.x, unit.y, laser_w, laser_add)
-            end
-        end
-    end)]]
-
 
     local i = 1        --标记被记录的子弹
     local max_coli = 0 --最大碰撞，方便统一
@@ -655,16 +286,6 @@ function Hana_AI.Frame_action()
     end)
     max_v = max_v * 1.5       --夸大化
     max_coli = max_coli * 1.1 --安全一点
-    if Hana_AI.Hide == 0 then
-        --外置的UI显示
-        NewText(720, 380, nil,
-            "Vect_Coli:{" .. string.format("%.1f", max_v) .. "," .. string.format("%.1f", max_coli) .. "}",
-            255, { 252, 242, 240 }, 1, function()
-                local self = task.GetSelf()
-                self.size = 1
-                task.Wait(1)
-            end, "ui", "center")
-    end
     local Dist_1        --效率提高
     local ex_rad = max_coli + max_v + player.A
     local Dist_rad = 45 --High_speed_rad * 10, High_speed_rad * 1.3
@@ -684,25 +305,6 @@ function Hana_AI.Frame_action()
             end
         end
     end)
-    --[[
-    local bent_laser_table = {}
-    local bent_laser_w, bent_laser_dist --曲线激光这个diaomao的判定
-    local ai_ = Hana_AI.ai_c.Bent_Laser_Point_Loading --效率优化
-    object.AI_BentLaserDo(function(unit) --diaomao优先个锤子，有数字在子弹里面
-        --取w0做全宽，使用半宽
-        bent_laser_w = unit.w0 * 0.5 --如果要监测的话 应该是使用 unit._l 来表示长度
-        bent_laser_table = unit.data:SampleByLength(bent_laser_w) --这里需要while循环
-        for _, point in ipairs(bent_laser_table) do  --遍历组
-            bent_laser_dist = Dist(point.x, point.y, player.x, player.y) --在这里ex_rad表示长度
-            if bent_laser_dist < ex_rad then --进入需要检测的范围
-                if bent_laser_size_num < 520 then --为c层做准备,这里不传入激光，只传入点
-                    bent_laser_size_num = bent_laser_size_num + 1
-                    ai_(bent_laser_size_num, point.x, point.y, bent_laser_w) --定义曲线激光的点
-                end
-            end
-        end
-    end)]]
-
 
     ------------------------------------------------------------------------------------
     local Move_vector = {}
@@ -1274,7 +876,7 @@ function Hana_AI.Frame_action()
         end
     end
     ------------------------------------------------------------------------------------
-    if Move_vector["x"] ~= 0 or Move_vector["y"] ~= 0 --[[or laser_size_num ~= 0 or bent_laser_size_num ~= 0]] then
+    if Move_vector["x"] ~= 0 or Move_vector["y"] ~= 0 then
         --可以行动
         local ai = Hana_AI.ai_c --效率优化
         local ang
@@ -1300,8 +902,10 @@ function Hana_AI.Frame_action()
         end
         ai.execute(ang, player.x, player.y, bullet_size_num, laser_size_num, bent_laser_size_num)
         --不是你这直接写全局变量？
-        local x = ai.Get_ai_attribute(1) --x = ai.Get_ai_attribute(1)
-        local y = ai.Get_ai_attribute(2) --y = ai.Get_ai_attribute(2)
+        --x = ai.Get_ai_attribute(1)
+        --y = ai.Get_ai_attribute(2)
+        local x = ai.Get_ai_attribute(1)
+        local y = ai.Get_ai_attribute(2)
         if ai.Get_ai_attribute(3) > 5 then
             Hana_AI.Slow = 0
             player.__slow_flag = false
@@ -1310,13 +914,12 @@ function Hana_AI.Frame_action()
             player.__slow_flag = true
         end
         local no_danger = ai.Get_ai_attribute(5)
-        --local laser_num_ai = Hana_AI.ai_c.Get_ai_attribute(4)
         if no_danger < 5 then --大于10的话无弹幕，不动
             if Hana_AI.true_player == 1 then --如果是玩家移动模式
                 ang = Angle(0, 0, x, y)
                 Hana_AI.Walking_diagram_ang_conversion(ang)
             else --否，扩展移动模式
-                if --[[laser_num_ai ~= 0 or bent_laser_size_num ~= 0 or]] bullet_size_num ~= 0 then
+                if bullet_size_num ~= 0 then
                     player.x = player.x + x
                     player.y = player.y + y
                     ang = Angle(0, 0, x, y)
@@ -1326,8 +929,8 @@ function Hana_AI.Frame_action()
         else --这段和下面是重复的，我不想移动if，太多了
             if Dist(player.x, player.y, Hana_AI.Return_point_x, Hana_AI.Return_point_y) > Return_dist then
                 local ang = Angle(player.x, player.y, Hana_AI.Return_point_x, Hana_AI.Return_point_y)
-                local x = 4.5 * cos(ang) --High_speed_rad * cos(ang)
-                local y = 4.5 * sin(ang) -- High_speed_rad * sin(ang)
+                local x = player.hspeed * cos(ang)
+                local y = player.hspeed * sin(ang)
                 if Hana_AI.true_player == 1 then
                     Hana_AI.Walking_diagram_ang_conversion(ang)
                     player.__slow_flag = false
@@ -1347,8 +950,8 @@ function Hana_AI.Frame_action()
         --无行动目标,开始返回记录点
         if Dist(player.x, player.y, Hana_AI.Return_point_x, Hana_AI.Return_point_y) > Return_dist then
             local ang = Angle(player.x, player.y, Hana_AI.Return_point_x, Hana_AI.Return_point_y)
-            local x = 4.5 * cos(ang) --High_speed_rad * cos(ang)
-            local y = 4.5 * sin(ang) -- High_speed_rad * sin(ang)
+            local x = player.hspeed * cos(ang)
+            local y = player.hspeed * sin(ang)
             if Hana_AI.true_player == 1 then
                 Hana_AI.Walking_diagram_ang_conversion(ang)
                 player.__slow_flag = false
@@ -1364,6 +967,4 @@ function Hana_AI.Frame_action()
             end
         end
     end
-    New(Hana_AI.information_display, Slow_use, Move_vector["x"], Move_vector["y"], bullet_size_num, laser_size_num,
-        bullet_special_case_num, bent_laser_size_num) --显示信息
 end

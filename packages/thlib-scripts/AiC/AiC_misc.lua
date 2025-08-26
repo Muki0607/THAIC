@@ -95,6 +95,12 @@ function lib.FadeDel(unit)
     end
 end
 
+function lib.UnlockAll()
+    scoredata.enhancer_slot = 7
+    scoredata.Alice_unlocked = true
+    PlaySound('extend', 1)
+end
+
 --QTE检测器，仅支持replay键位（上下左右、Shift、ZXC）
 lib.qte_checker = Class(object)
 
@@ -114,55 +120,122 @@ function lib.qte_checker:init(keylist, allow_fault, intv, time, cd)
     self.num = 1
     self.finished = false
     self.state = {}
-    function self._frame()
-        if self.finished then return 'finished' end
-        if self.timer > self.last_time + self.intv or self.timer > self.time then
+    self.bound = false
+end
+
+function lib.qte_checker:frame()
+    if self.finished then return 'finished' end
+    if self.timer > self.last_time + self.intv or self.timer > self.time then
+        Del(self)
+    end
+    self.cd_timer = max(0, self.cd_timer - 1)
+    if self.cd_timer > 0 then return 'cooldown' end
+    local keys = {
+        "up", "down", "left", "right",
+        "slow", "shoot", "spell", "special",
+    }
+    for _, v in ipairs(keys) do
+        self.state[v] = false
+        if KeyIsPressed(v) then self.state[v] = true end
+    end
+    local keydown, success
+    for k, v in pairs(self.state) do
+        if v then
+            keydown = true
+            if k == self.keylist[self.num] then
+                if self.num >= #self.keylist then
+                    self.finished = true
+                    return
+                end
+                self.num = self.num + 1
+                self.last_time = self.timer
+                success = true
+                break
+            end
+        end
+    end
+    if keydown and not success then
+        if type(self.allow_fault) == 'number' then
+            if sign(self.allow_fault) > 0 then
+                self.num = self.allow_fault
+            else
+                self.num = self.num + self.allow_fault
+            end
+            self.cd_timer = self.cd
+        elseif self.allow_fault then
+            self.cd_timer = self.cd
+        else
             Del(self)
         end
-        self.cd_timer = max(0, self.cd_timer - 1)
-        if self.cd_timer > 0 then return 'cooldown' end
-        local keys = {
-            "up", "down", "left", "right",
-            "slow", "shoot", "spell", "special",
-        }
-        for _, v in ipairs(keys) do
-            self.state[v] = false
-            if KeyIsPressed(v) then self.state[v] = true end
+    end
+end
+
+--QTE检测器加强版，支持所有键位，当然不能用在关卡内
+lib.qte_checker_ex = Class(object)
+
+---@param keylist number[] @键位列表(keycode)
+---@param allow_fault boolean|number @是否允许错误，为number时若为正数按错返回对应位置按键，若为负数按错倒扣对应数量按键
+---@param intv number @相邻按键最大间隔，默认为_infinite
+---@param time number @总限时，默认为_infinite
+---@param cd number @按错时冷却，默认为0
+function lib.qte_checker_ex:init(keylist, snd, allow_fault, intv, time, cd)
+    self.keylist = keylist or {}
+    self.allow_fault = allow_fault or 1
+    self.intv = intv or _infinite
+    self.time = time or _infinite
+    self.snd = snd
+    self.cd = cd or 0
+    self.cd_timer = 0
+    self.last_time = 0
+    self.num = 1
+    self.finished = false
+    self.state = {}
+    self.bound = false
+end
+
+function lib.qte_checker_ex:frame()
+    if self.finished then return end
+    if self.timer > self.last_time + self.intv or self.timer > self.time then
+        Del(self)
+    end
+    self.cd_timer = max(0, self.cd_timer - 1)
+    if self.cd_timer > 0 then return end
+    local keys = KEY
+    for _, v in pairs(keys) do
+        self.state[v] = false
+        if aic.input.KeyIsPressed(v) then
+            self.state[v] = true
+            if self.snd then PlaySound(self.snd, 0.2) end
         end
-        local keydown, success
-        for k, v in pairs(self.state) do
-            if v then
-                keydown = true
-                if k == self.keylist[self.num] then
-                    for _, q in ipairs(lstg.tmpvar.qte_list) do
-                        if k == q.keylist[q.num] and q ~= self then
-                            return
-                        end
-                    end
-                    if self.num >= #self.keylist then
-                        self.finished = true
-                        return
-                    end
-                    self.num = self.num + 1
-                    self.last_time = self.timer
-                    success = true
-                    break
+    end
+    local keydown, success
+    for k, v in pairs(self.state) do
+        if v then
+            keydown = true
+            if k == self.keylist[self.num] then
+                if self.num >= #self.keylist then
+                    self.finished = true
+                    return
                 end
+                self.num = self.num + 1
+                self.last_time = self.timer
+                success = true
+                break
             end
         end
-        if keydown and not success then
-            if type(self.allow_fault) == 'number' then
-                if sign(self.allow_fault) > 0 then
-                    self.num = self.allow_fault
-                else
-                    self.num = self.num + self.allow_fault
-                end
-                self.cd_timer = self.cd
-            elseif self.allow_fault then
-                self.cd_timer = self.cd
+    end
+    if keydown and not success then
+        if type(self.allow_fault) == 'number' then
+            if sign(self.allow_fault) > 0 then
+                self.num = self.allow_fault
             else
-                Del(self)
+                self.num = self.num + self.allow_fault
             end
+            self.cd_timer = self.cd
+        elseif self.allow_fault then
+            self.cd_timer = self.cd
+        else
+            Del(self)
         end
     end
 end
@@ -386,6 +459,7 @@ end
 function lib.dodge_player:frame()
     if not player.dodge then Del(self) end
     self.img = player.img
+    if player.name == 'Noel' then self.img = player._img end
     self.x = player.x
     self.y = player.y
 end
@@ -394,8 +468,13 @@ function lib.dodge_player:render()
     PushRenderTarget('rt:aic_player_dodge')
     RenderClear(Color(0, 0, 0, 0))
     --手动渲染子机和判定点
-    _G[lstg.var.player_name].render(player)
+    local p = lstg.var.player_name
     local s = Player_scale or 1
+    if player.name == 'Noel' then
+        p = 'noel_player'
+        s = player.hscale * s
+    end
+    _G[p].render(player)
     Render(self.img, self.x, self.y, 0, s)
     grazer.render(player.grazer)
     PopRenderTarget()

@@ -7,6 +7,5 @@ lstg.plugin.RegisterEvent("afterTHlib", "Player Extensions", 100, function()
     ---THAIC Added
     lstg.DoFile("THlib/player/muki/muki.lua")
     lstg.DoFile("THlib/player/nenyuki/nenyuki.lua")
-    AddPlayerToPlayerList('Kobayashi Muki', 'muki_player', 'Muki')
-    AddPlayerToPlayerList('Chimabo Nenyuki', 'nenyuki_player', 'Nenyuki')
+    lstg.DoFile("THlib/player/noel/noel.lua")
 end)

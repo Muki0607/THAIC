@@ -76,13 +76,14 @@ function GetPower(v)
     local before = int(lstg.var.power / 100)
     lstg.var.power = min(500, lstg.var.power + v)
     local after = int(lstg.var.power / 100)
-    if after > before then
+    if after > before and lstg.tmpvar.powerup_cd <= 0 then
         PlaySound('powerup1', 0.5)
+        lstg.tmpvar.powerup_cd = 600
     end
-    if lstg.var.power >= 500 and lstg.var.exmp < 500 then
-        lstg.var.exmp = min(500, lstg.var.exmp + v)
+    if lstg.var.power >= 500 and lstg.var.exmp < 800 then
+        lstg.var.exmp = min(800, lstg.var.exmp + v)
         --lstg.var.score = lstg.var.score + v * 100
-    elseif lstg.var.power >= 500 and lstg.var.exmp >= 500 then
+    elseif lstg.var.power >= 500 and lstg.var.exmp >= 800 then
         lstg.var.score = lstg.var.score + v * 100
     end
     --    if lstg.var.power==500 then
@@ -115,13 +116,15 @@ function item_power:frame()
         self.hscale = (self.timer + 25) / 48
         self.vscale = self.hscale
         if self.timer == 22 then
-            self.vy = 0
+            self.vy = min(self.v, 2)
             self.vx = 0
         end
     elseif self.attract > 0 then
         if self.target == player then
+            --[[
             self.is_power = false
             self.is_power_blue = true
+            --]]
         else
             --[[
             self.is_power = false
@@ -133,6 +136,7 @@ function item_power:frame()
         self.vx = self.attract * cos(a) + t.dx * 0.5
         self.vy = self.attract * sin(a) + t.dy * 0.5
     else
+        self.vy = max(self.dy - 0.03, -1.7)
     end
     if self.y < lstg.world.boundb then
         Del(self)
@@ -156,6 +160,7 @@ function item_power:collect()
 end
 --
 function item_power:render()
+    --[[
     if self.is_power then
         SetImageState(self.img, '', Color(255, 255, 255, 255))
     elseif self.is_power_blue then
@@ -163,6 +168,8 @@ function item_power:render()
     else
         SetImageState(self.img, '', Color(255, 255, 0, 0))
     end
+    --]]
+    SetImageState(self.img, '', Color(255, 255, 255, 255))
     if self and self.y > lstg.world.t then
         Render(self.imgup, self.x, lstg.world.t - 8)
     else
@@ -221,7 +228,7 @@ function item_power_full:collect()
     if CheckEnhancer(10) then
         lstg.var.hp = min(lstg.var.maxhp, lstg.var.hp + 1)
     else
-        lstg.var.exmp = min(500, lstg.var.exmp + 5)
+        lstg.var.exmp = min(800, lstg.var.exmp + 5)
     end
 end
 

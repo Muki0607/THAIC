@@ -58,8 +58,8 @@ function sakuya_player:init(slot)
         { { -30, -10, -15, -20 }, { 30, -10, 15, -20 }, { -15, -32, -7.5, -32 }, { 15, -32, 7.5, -32 } },
         { { -30, -10, -15, -20 }, { 30, -10, 15, -20 }, { -15, -32, -7.5, -32 }, { 15, -32, 7.5, -32 } },
     }
-    self.default_dmglist = { 0.15, 0.15, 0.15, 0.15 }
-    self.dmglist = { 0.15, 0.15, 0.15, 0.15 }
+    self.default_dmglist = { 0.2, 0.2, 0.2, 0.2 }
+    self.dmglist = { 0.2, 0.2, 0.2, 0.2 }
     self.spellname = { '幻葬「夜雾幻影杀人鬼」', '幻世「口关夜的世界」' }
     self.deathtime = 15
     self.default_deathtime = self.deathtime
@@ -80,7 +80,7 @@ function sakuya_player:frame()
     else
         self.range = math.min(15, self.range + 1.5)
     end
-    self.dmgbonus = self.range * 0.2 + 0.9
+    self.dmgbonus = self.range * 0.3 + 0.9
     if self.protect > 0 and GetCurrentSuperPause() > 0 then
         CollisionCheck(GROUP_PLAYER, GROUP_ENEMY_BULLET)
         CollisionCheck(GROUP_PLAYER, GROUP_INDES)
@@ -88,6 +88,7 @@ function sakuya_player:frame()
 end
 
 function sakuya_player:shoot()
+    local s = Player_scale or 1
     PlaySound('plst00', 0.3, self.x / 1024)
     self.nextshoot = 4
     local dmgfix3 = 1 --插件的加伤
@@ -102,8 +103,8 @@ function sakuya_player:shoot()
     if self.timer % (self.nextshoot * 2) < 4 then
         for i = 1, 4 do
             if self.sp[i] and self.sp[i][3] > 0.5 then
-                for j = -4, 4 do New(sakuya_knife, 'sakuya_knife_blue', self.supportx + self.sp[i][1],
-                        self.supporty + self.sp[i][2], 24, 90 + j * self.range, self.dmglist[i] * self.dmgbonus * dmgfix3) end
+                for j = -4, 4 do New(sakuya_knife, 'sakuya_knife_blue', self.supportx + self.sp[i][1] * s,
+                        self.supporty + self.sp[i][2] * s, 24, 90 + j * self.range, self.dmglist[i] * self.dmgbonus * dmgfix3) end
             end
         end
     end
@@ -169,7 +170,7 @@ function sakuya_player:render()
     local t = int((self.timer / 3) % 16) + 1
     for i = 1, 4 do
         if self.sp[i] and self.sp[i][3] > 0.5 then
-            Render('sakuya_support' .. t, self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, s)
+            Render('sakuya_support' .. t, self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s, 0, s)
         end
     end
 end

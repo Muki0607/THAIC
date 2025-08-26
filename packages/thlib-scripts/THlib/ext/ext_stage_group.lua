@@ -136,7 +136,7 @@ function stage.group.frame(self)
         if not Extramode then
             ResumeMusic(bgmname)
             gamecontinueflag = true
-            aic.menu.EndingBFlag = true
+            aic.menu.EndingFlag = 'B'
             if lstg.var.block_spell then
                 if lstg.var.is_practice then
                     stage.group.PracticeStart(self.name)
@@ -249,7 +249,7 @@ function stage.group.frame_sc_pr(self)
         lstg.var.timeslow = nil
     end
     if ext.GetPauseMenuOrder() == 'Watch Ending' then
-        aic.menu.EndingBFlag = true
+        aic.menu.EndingFlag = 'B'
         stage.group.ReturnToTitle(false, 0)
         lstg.var.timeslow = nil
         lstg.var.bgm_playing = false
@@ -395,6 +395,9 @@ function stage.group.ReturnToTitle(save_rep, finish)
         fin[diff] = fin[diff] + 1
     end
 
+    --解锁结局
+    scoredata.ending = scoredata.ending or { A = false, B = false, C = false, D = false, E = false }
+    if m.EndingFlag then scoredata.ending[m.EndingFlag] = true end
 
     if m.last_replay then
         --是否通关（不算续关）

@@ -89,11 +89,11 @@ function lib.SetWorld(type)
         ResetWorld()
     elseif type == 'FULLSCREEN' then
         FullScreen_Flag = true
-        OriginalSetWorld(w.l - 32, w.r + 224, w.b - 16, w.t + 16, 
-            w.boundl - 32, w.boundr + 224, w.boundb - 16, w.boundt + 16,
-            w.scrl - 32, w.scrr + 224, w.scrb - 16, w.scrt + 16,
-            w.pl - 32 - 96, w.pr + 224 - 96, w.pb - 16, w.pt + 16, w.world)
-        SetBound(w.boundl - 32, w.boundr + 224, w.boundb - 16, w.boundt + 16)
+        OriginalSetWorld(w.l - 32, w.r + 224, w.b - 36, w.t + 48, 
+            w.boundl - 96, w.boundr + 96, w.boundb - 48, w.boundt + 48,
+            w.scrl - 32, w.scrr + 224, w.scrb - 36, w.scrt + 48,
+            w.pl - 32 - 96, w.pr + 224 - 96, w.pb - 36, w.pt + 40, w.world)
+        SetBound(w.boundl - 96, w.boundr + 96, w.boundb - 16, w.boundt + 48)
     elseif type == 'LSTG' then
         FullScreen_Flag = false
         OriginalSetWorld(w.l, w.r, w.b, w.t, w.boundl, w.boundr, w.boundb, w.boundt,
@@ -101,6 +101,11 @@ function lib.SetWorld(type)
         SetBound(w.boundl, w.boundr, w.boundb, w.boundt)
     else
         error('invalid world type.')
+    end
+    local lstg_l, lstg_r, lstg_b, lstg_t = lstg.world.l - 12, lstg.world.r + 12, lstg.world.b - 12, lstg.world.t + 12
+    Hana_AI.ai_c.set_world(lstg_l, lstg_r, lstg_b, lstg_t)
+    if player.name == 'Nenyuki' then
+        player:UpdateSlist()
     end
 end
 
@@ -120,8 +125,10 @@ function lib.SetFullScreen(fullscreen, s)
         player.lspeed = player.lspeed * s * 1.5
         player.a = player.A * s
         player.b = player.B * s
-        player.hscale = s
-        player.vscale = s
+        player_hscale_default = player.hscale
+        player_vscale_default = player.vscale
+        player.hscale = player.hscale * s
+        player.vscale = player.vscale * s
         player.grazer.hscale = s
         player.grazer.vscale = s
     else
@@ -134,21 +141,30 @@ function lib.SetFullScreen(fullscreen, s)
         player.lspeed = player_lspeed_default or player.lspeed
         player.a = player.A
         player.b = player.B
-        player.hscale = 1
-        player.vscale = 1
+        player.hscale = player_hscale_default or player.hscale
+        player.vscale = player_vscale_default or player.vscale
         player.grazer.hscale = 1
         player.grazer.vscale = 1
     end
-    
 end
 
----以yyyy/mm/dd hh:mm:ss的格式返回时间
+function lib.ChangePlayer(class, x, y)
+    x, y = x or player.x, y or player.y
+    Del(player.grazer)
+    if player.shooting_aura then Del(player.shooting_aura) end
+    Del(player)
+    player = New(class)
+    player.x, player.y = x, y
+end
+
+---以特定格式返回时间（默认为yyyy/mm/dd hh:mm:ss）
 ---@param time number @由os.time得到的时间
+---@param format string @格式串
 ---@return string @格式化时间
-function lib.GetTime(time)
+function lib.GetTime(time, format)
+    format = format or "%d/%02d/%02d %02d:%02d:%02d"
     local t = os.date("!*t", time)
-    return string.format("%d/%02d/%02d %02d:%02d:%02d",
-        t.year, t.month, t.day, t.hour, t.min, t.sec)
+    return string.format(format, t.year, t.month, t.day, t.hour, t.min, t.sec)
 end
 
 ---开启秘仪结界
@@ -208,7 +224,7 @@ function lib.SafeSave(func)
         func,
         {
             [PermissionDenied] = function()
-                lstg.MsgBoxWarn("检测到游戏存档文件被其他进程占用。\n请关闭该进程后关闭本提示框。\n若本提示框持续出现，请重启游戏。")
+                lstg.MsgBoxWarn("检测到游戏存档文件被其他进程占用。\n请结束该进程后点击确定。\n若本提示框持续出现，请重启游戏。")
             end,
             [""] = function()
                 if not _debug.exception_handler_disabled then
@@ -377,7 +393,7 @@ function lib.secret_ceremony_border:frame()
     SetImageState(self.img, '', Color(self.alpha, 255, 150, 0))
     self.x = player.x
     self.y = player.y
-    player.nextspell = 114514
+    player.nextspell = 420
     if player.death ~= 0 or self.timer >= 420 then
         player.death = 0
         player.protect = 40

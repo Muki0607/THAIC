@@ -95,7 +95,7 @@ end
 
 function MixTable(x, t1, t2)
     --子机位置表的线性插值
-    r = {}
+    local r = {}
     local y = 1 - x
     if t2 then
         for i = 1, #t1 do

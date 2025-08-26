@@ -9,9 +9,9 @@
 
 _debug = {
     _debug = true, --启用debug功能，该项为false则将下列项全部视为false
-    debug_tool = true, --F1键开启修改器
-    imgui = true, --F3键开启imgui debug工具
-    hana_ai = false, --F7键开启HanaAI
+    debug_tool = true, --F1键开启修改器，可以修改资源数量、秒杀boss等
+    imgui = true, --F3键开启imgui debug工具，包含多项调试功能
+    hana_ai = true, --F7键开启HanaAI自动避弹（注：此项是否开启不影响LSC最终阶段的自机自动避弹）
     cheat = true, --F12键开启无敌
     collicheck = true, --~键开启判定显示
     skip_opening = true, --跳过开场加载界面（也可按ESC键跳过）
@@ -23,6 +23,6 @@ _debug = {
     --new_title = false, --lstg新版title，已不再适配
     full_title = true, --显示完整窗口标题信息（包括FPS，Obj数信息）
     pmode = false, --将珠辉的笔记本的效果替换为开启完美无缺模式，此模式稳定性未经检验，极容易出错，请谨慎使用
-    exception_handler_disabled = true, --关闭异常捕获，方便debug
+    exception_handler_disabled = true, --关闭全局异常捕获，方便debug
     l10n_tryexcept_disabled = false, --关闭l10n加载文件时的异常捕获
 }

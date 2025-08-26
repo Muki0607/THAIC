@@ -913,7 +913,7 @@ function infobar:render()
     if _ui.drawname then
         local dy = (b.ui_slot - 1) * 44
         local x, y = self.x, self.y - dy
-        if FullScreen_Flag then x = x - 32 - 96 + 15 y = y + 16 end
+        if FullScreen_Flag then x = x - 32 - 96 + 15 y = y + 12 end
         local anisc = int(self.t / self.mt)
         local sc_left = self.sc_left + anisc - 1
         RenderTTF('boss_name', b.name, x, x, y, y, Color(0xFF000000), "noclip")

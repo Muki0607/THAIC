@@ -77,6 +77,7 @@ end
 
 -------------------------------------------------------
 function reimu_player:shoot()
+    local s = Player_scale or 1
     PlaySound('plst00', 0.3, self.x / 1024)
     self.nextshoot = 4
     local dmgfix3 = 1 --插件的加伤
@@ -92,10 +93,10 @@ function reimu_player:shoot()
         if self.slow == 1 then
             for i = 1, 4 do
                 if self.sp[i] and self.sp[i][3] > 0.5 then
-                    New(reimu_bullet_orange, 'reimu_bullet_orange', self.supportx + self.sp[i][1] - 3,
-                        self.supporty + self.sp[i][2], 24, 90, self.dmglist[i] * dmgfix3)
-                    New(reimu_bullet_orange, 'reimu_bullet_orange', self.supportx + self.sp[i][1] + 3,
-                        self.supporty + self.sp[i][2], 24, 90, self.dmglist[i] * dmgfix3)
+                    New(reimu_bullet_orange, 'reimu_bullet_orange', self.supportx + (self.sp[i][1] - 3) * s,
+                        self.supporty + self.sp[i][2] * s, 24, 90, self.dmglist[i] * dmgfix3)
+                    New(reimu_bullet_orange, 'reimu_bullet_orange', self.supportx + (self.sp[i][1] + 3) * s,
+                        self.supporty + self.sp[i][2] * s, 24, 90, self.dmglist[i] * dmgfix3)
                 end
             end
         else
@@ -104,8 +105,8 @@ function reimu_player:shoot()
                 local num = min(int(lstg.var.power / 100) + 1, 5)
                 for i = 1, 4 do
                     if self.sp[i] and self.sp[i][3] > 0.5 then
-                        New(reimu_bullet_blue, 'reimu_bullet_blue', self.supportx + self.sp[i][1],
-                            self.supporty + self.sp[i][2], 8, self.anglelist[num][i], self.target, 900, self.dmglist[i] * 7 / 3 * dmgfix3)
+                        New(reimu_bullet_blue, 'reimu_bullet_blue', self.supportx + self.sp[i][1] * s,
+                            self.supporty + self.sp[i][2] * s, 8, self.anglelist[num][i], self.target, 900, self.dmglist[i] * 10 / 3 * dmgfix3)
                     end
                 end
             end
@@ -147,7 +148,7 @@ function reimu_player:spell()
         New(player_spell_mask, 200, 0, 0, 30, 180, 30)
         local rot = ran:Int(0, 360)
         for i = 1, 8 do
-            New(reimu_sp_ef1, 'reimu_sp_ef', self.x, self.y, 8, rot + i * 45, tar1, 1200, 1, 40 - 10 * i, self)
+            New(reimu_sp_ef1, 'reimu_sp_ef', self.x, self.y, 8, rot + i * 45, nil, 1200, 1, 40 - 10 * i, self)
         end
         self.nextspell = 300
         self.protect = p
@@ -159,7 +160,7 @@ function reimu_player:render()
     local s = Player_scale or 1
     for i = 1, 4 do
         if self.sp[i] and self.sp[i][3] > 0.5 then
-            Render('reimu_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], self.timer * 3, s)
+            Render('reimu_support', self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s, self.timer * 3, s)
         end
     end
     player_class.render(self)

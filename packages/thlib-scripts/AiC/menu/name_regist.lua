@@ -31,6 +31,8 @@ function lib.name_regist:init()
     self.diff_list = { "Easy", "Normal", "Hard", "Lunatic", --[["Extra"]] }
     self.l = 10
 
+    lstg.tmpvar.current_menu = self
+
     ---获得分数数据，由FetchReplaySlots修改而来
     ---@return table @分数数据表
     function self.GetScore()

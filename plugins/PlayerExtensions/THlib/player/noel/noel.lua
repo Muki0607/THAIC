@@ -12,17 +12,15 @@ end
 -------------------------------------------------------
 function noel_player:init(slot)
     LoadTexture('noel_player', 'THlib/player/noel/noel.png')
-    LoadTexture('noel_player2p', 'THlib/player/noel/noel_2p.png')
     -----------------------------------------
-    LoadImageGroup('noel_stargaze', 'noel_player', 0, 0, 32, 48, 3, 1, 0.5, 0.5)
-    LoadImageGroup('noel_stargaze', 'noel_player2p', 0, 0, 32, 48, 3, 1, 0.5, 0.5)
+    LoadImageGroup('noel_player', 'noel_player', 0, 0, 200, 200, 3, 1, 0.5, 0.5)
     -----------------------------------------
     --射击素材，懒得去解包找所以和作为boss的诺艾儿一样用lstg弹型模拟
     CopyImage('noel_arrow', 'arrow_big4')
     CopyImage('noel_arrow_ef', 'arrow_big4')
     CopyImage('noel_fireball', 'ball_light4')
     -----------------------------------------
-
+    LoadImageFromFile('noel_support', 'THlib/player/noel/noel_support.png')
     -----------------------------------------
 
     -----------------------------------------
@@ -35,10 +33,13 @@ function noel_player:init(slot)
     self.imgs = {}
     self.A = 0.5
     self.B = 0.5
+    self.hscale = 0.6
+    self.vscale = 0.6
+    --纯粹占位用的假行走图
     if slot and slot == 2 and jstg.players[1].name == self.name then
-        for i = 1, 24 do self.imgs[i] = 'noel_player2p' .. i end
+        for i = 1, 24 do self.imgs[i] = 'img_void' end
     else
-        for i = 1, 24 do self.imgs[i] = 'noel_player' .. i end
+        for i = 1, 24 do self.imgs[i] = 'img_void' end
     end
     self.slist =
     {
@@ -62,6 +63,7 @@ function noel_player:init(slot)
     self.spellname = { '箭咒「纯白之弓」', '爆咒「地面炸弹」', '引咒「聚能火球」' }
     self.deathtime = 30 --长到令人睡着再醒来的决死时间
     self.default_deathtime = self.deathtime
+    self._img = 'noel_player1' --真正渲染用的行走图
     self.cd = 8 --近战攻击cd
     self.default_cd = self.cd
     self.magic_type = 0 --使用魔法种类
@@ -86,6 +88,8 @@ end
 
 -------------------------------------------------------
 function noel_player:shoot()
+    if self.is_boss then return end
+    local s = Player_scale or 1
     PlaySound('plst00', 0.3, self.x / 1024)
     self.nextshoot = 4
     self.cd = self.cd - 1
@@ -103,9 +107,9 @@ function noel_player:shoot()
             for i = 1, 4 do
                 if self.sp[i] and self.sp[i][3] > 0.5 then
                     New(noel_fireball_small, self.supportx + self.sp[i][1] - 3,
-                        self.supporty + self.sp[i][2], 24, 90, self.dmglist[i] * dmgfix3 * 0.8)
+                        self.supporty + self.sp[i][2] * s, 24, 90, self.dmglist[i] * dmgfix3 * 0.8)
                     New(noel_fireball_small, self.supportx + self.sp[i][1] + 3,
-                        self.supporty + self.sp[i][2], 24, 90, self.dmglist[i] * dmgfix3 * 0.8)
+                        self.supporty + self.sp[i][2] * s, 24, 90, self.dmglist[i] * dmgfix3 * 0.8)
                 end
             end
         else
@@ -118,6 +122,16 @@ function noel_player:shoot()
 end
 -------------------------------------------------------
 function noel_player:frame()
+    player_class.frame(self)
+    local intv = 8
+    local i = int((self.timer % (intv * 3)) / intv) + 1
+    self._img = 'noel_player' .. i
+    if self.is_boss then
+        self.nextshoot = 114514
+        self.nextspell = 114514
+        self.nextsp = 114514
+        return
+    end
     for i = 1, 4 do
         local power = int(lstg.var.power / 100)
         local p
@@ -125,42 +139,39 @@ function noel_player:frame()
         else p = 0.5 + lstg.var.power % 100 / 200 end
         self.dmglist[i] = self.default_dmglist[i] * p
     end
-    if not self.is_boss then
-        if KeyIsDown('spell') then
-            if KeyIsDown('shoot') then
-                self.system:burst()
+    if KeyIsDown('spell') then
+        if KeyIsDown('shoot') then
+            self.system:burst()
+        else
+            if self.watershard then
+                self.watershard:fire()
             else
-                if self.watershard then
-                    self.watershard:fire()
-                else
-                    if self.prechant_point < 30 then
-                        if KeyIsDown('up') then
-                            self.magic_type = 4
-                        elseif KeyIsDown('left') or KeyIsDown('right') then
-                            self.magic_type = 2
-                        elseif KeyIsDown('down') then
-                            self.magic_type = 3
-                        end
-                        if not IsValid(self.spell_ui) then
-                            self.spell_ui = New(noel_spell_ui, self)
-                        end
-                        self.prechant_point = self.prechant_point + 1
-                    else
-                        self.chant_point = min(self.chant_point + 1, self.max_cp[self.magic_type])
-                        self.power = max(0, self.power - 1)
+                if self.prechant_point < 30 then
+                    if KeyIsDown('up') then
+                        self.magic_type = 4
+                    elseif KeyIsDown('left') or KeyIsDown('right') then
+                        self.magic_type = 2
+                    elseif KeyIsDown('down') then
+                        self.magic_type = 3
                     end
+                    if not IsValid(self.spell_ui) then
+                        self.spell_ui = New(noel_spell_ui, self)
+                    end
+                    self.prechant_point = self.prechant_point + 1
+                else
+                    self.chant_point = min(self.chant_point + 1, self.max_cp[self.magic_type])
+                    self.power = max(0, self.power - 1)
                 end
             end
-        else
-            self.prechant_point = 0
         end
-        if self.KeyIsReleased('spell') then
-            if self.chant_point == self.max_cp[self.magic_type] then
-                self.spelling_flag = true
-            end
+    else
+        self.prechant_point = 0
+    end
+    if self.KeyIsReleased('spell') then
+        if self.chant_point == self.max_cp[self.magic_type] then
+            self.spelling_flag = true
         end
     end
-    player_class.frame(self)
 end
 -------------------------------------------------------
 function noel_player:spell()
@@ -191,17 +202,23 @@ function noel_player:spell()
 end
 
 if not noel_player.special then
+    function noel_player:special()
+        
+    end
 end
 
 -------------------------------------------------------
 function noel_player:render()
-    local s = 0.5 + 0.2 * sin(3 * self.timer)
+    local s = Player_scale or 1
+    local s2 = 0.5 + 0.2 * sin(3 * self.timer)
+    SetImageState('noel_support', '', Color(255, 0, 255, 255))
     for i = 1, 4 do
         if self.sp[i] and self.sp[i][3] > 0.5 then
-            Render('noel_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], self.timer * 3, s)
+            Render('noel_support', self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s, self.timer * 3, s * s2)
         end
     end
-    player_class.render(self)
+    --因为行走图数量不足所以选择手动渲染
+    Render(self._img, self.x, self.y, 0, self.hscale * s, self.vscale * s)
     if not self.is_boss then
         SetImageState('white', '', Color(150, 255, 255, 255))
         RenderRect('white', self.x - 20, self.x + 40, self.y - 30, self.y - 20)

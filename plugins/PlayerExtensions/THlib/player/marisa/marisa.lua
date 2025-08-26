@@ -155,7 +155,7 @@ function marisa_player:shoot()
                         if target then
                             self.offset[i] = max(0, self.offset[i] - target.b)
                             New(marisa_laser_hit, x + self.offset[i] * cos(angle), y + self.offset[i] * sin(angle))
-                            if target.class.base.take_damage then target.class.base.take_damage(target, self.dmglist[i] * 1.25 * dmgfix2 * dmgfix3) end
+                            if target.class.base.take_damage then target.class.base.take_damage(target, self.dmglist[i] * 1.75 * dmgfix2 * dmgfix3) end
                             if target.maxhp and target.hp > target.maxhp * 0.1 then
                                 PlaySound('damage00', 0.3, target.x / 1024)
                             else
@@ -238,14 +238,14 @@ function marisa_player:render()
     SetImageState('marisa_support', '', Color(0xFFFFFFFF))
     for i = 1, 4 do
         if self.sp[i] then
-            Render('marisa_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, self.sp[i][3] * s, s)
+            Render('marisa_support', self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s, 0, self.sp[i][3] * s, s)
         end
     end
     --support deco
     SetImageState('marisa_support', '', Color(0x80FFFFFF))
     for i = 1, 4 do
         if self.sp[i] then
-            Render('marisa_support', self.supportx + self.sp[i][1], self.supporty + self.sp[i][2], 0, self.sp[i][3] * sz * s,
+            Render('marisa_support', self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s, 0, self.sp[i][3] * sz * s,
                 sz * s)
         end
     end
@@ -256,7 +256,7 @@ function marisa_player:render()
             --			local angle=105-i*num
             local angle = self.anglelist[min(int(lstg.var.power / 100) + 1, 5)][i]
             if self.sp[i] and self.sp[i][3] > 0.5 then
-                local x, y = self.supportx + self.sp[i][1], self.supporty + self.sp[i][2]
+                local x, y = self.supportx + self.sp[i][1] * s, self.supporty + self.sp[i][2] * s
                 if self.offset[i] < 600 then
                     CreateLaser(x, y, angle, 16, timer, Color(0x804040FF), self.offset[i])
                     --Render('marisa_laser_hit',x+self.offset[i]*cos(angle),y+self.offset[i]*sin(angle),timer,0.5)

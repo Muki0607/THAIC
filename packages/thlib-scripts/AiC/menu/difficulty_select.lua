@@ -138,7 +138,7 @@ function lib.difficulty_select:render()
         Color(min(self.alpha, self.text_alpha), 255, 255, 255), nil, 'centerpoint')
     local dy = 0
     if self.text_pos == 4 then dy = -20 end
-    DrawText('aic_menu', self.text[self.text_pos][3] .. '\n弹幕难度区分尚未实装，\n当前难度仅影响系统。', x, y + 10 + dy, 1,
+    DrawText('aic_menu', self.text[self.text_pos][3] .. '\n弹幕难度区分尚未实装，\n目前难度仅影响系统。', x, y + 10 + dy, 1,
         Color(min(self.alpha, self.text_alpha), 255, 255, 255), nil, 'centerpoint')
 
     SetViewMode('world')

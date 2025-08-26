@@ -205,8 +205,8 @@ function muki_player:spell()
     self.protect = p
     if self.lastspell then
         --最终符卡
-        --板底伤害大概是32768 / 10000 * 1200（原版三十二割伤害）
-        --贴脸极限伤害在八万左右
+        --板底伤害大概是32768（原版三十二割伤害）/ 10000（则机体血量） * 1200（一般符卡血量）
+        --贴脸极限伤害在八万左右，完全溢出
 
         --符卡不足时切换至普通符卡
         if lstg.var.exmp < 200 then
@@ -315,7 +315,9 @@ function muki_player:spell()
             lstg.var.exmp_int = lstg.var.exmp_int - 1
         end
         --伤害限制
-        local dmg_limiter = New(muki_dmg_limiter, _boss, 1200)
+        if IsValid(_boss) then
+            local dmg_limiter = New(muki_dmg_limiter, _boss, 1200)
+        end
         --符卡主体部分
         New(tasker, function()
             New(player_spell_mask, 0, 200, 135, 30, 240, 30)
@@ -593,7 +595,7 @@ end
 muki_dmg_limiter = Class(object)
 
 function muki_dmg_limiter:init(boss, maxdmg)
-    if not IsValid(boss) then RawDel(self) end
+    if not IsValid(boss) then RawDel(self) return end
     self.boss = boss
     self._hp = boss.hp
     self.maxdmg = maxdmg
@@ -969,3 +971,5 @@ function muki_qte_checker:frame()
         end
     end
 end
+
+AddPlayerToPlayerList('Kobayashi Muki', 'muki_player', 'Muki')

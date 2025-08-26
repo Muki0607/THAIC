@@ -338,6 +338,7 @@ function lstg.lstg_ui_object:init()
     self.layer = LAYER_PLAYER - 5
     self.ui.alpha = 255
     self.ui.player_pointer = New(aic.ui.player_pointer)
+    lstg.tmpvar.powerup_cd = 0
 end
 
 function lstg.lstg_ui_object:frame()
@@ -361,6 +362,7 @@ function lstg.lstg_ui_object:frame()
         self.ui.hide_timer = max(0, self.ui.hide_timer - 1)
         self.ui.alpha = 255 - 155 / 15 * self.ui.hide_timer
     end
+    lstg.tmpvar.powerup_cd = max(0, lstg.tmpvar.powerup_cd - 1)
 end
 
 function lstg.lstg_ui_object:render()

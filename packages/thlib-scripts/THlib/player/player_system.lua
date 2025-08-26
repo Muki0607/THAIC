@@ -152,7 +152,6 @@ local defaultFrameEvent = {
         end
     end },
     ["frame.move"] = { 97, function(self)
-        Print(self.hspeed, self.lspeed)
         local dx, dy, v = 0, 0, self.hspeed
         if self.__death_state == 0 then
             if self.death == 0 and not self.lock then
@@ -253,45 +252,44 @@ local defaultFrameEvent = {
             end
             --------------------------------------------------
             --由于决死的存在，hp扣减由colli搬至这里
-            local dmg = self.taking_damage or 50
-            local plist = { 0.8, 1, 1.2, 1.5 }
+            if not (IsValid(Noel) and Noel.phase4_flag) then
+                local dmg = self.taking_damage or 50
+                local plist = { 0.8, 1, 1.2, 1.5 }
+                lstg.tmpvar.hit_count = lstg.tmpvar.hit_count or 0
 
-            if not lstg.tmpvar.hit_count then lstg.tmpvar.hit_count = 0 end
+                local percent = plist[scoredata.difficulty_select]
+                if CheckEnhancer(15) then percent = percent * 0.5 end
+                if lstg.var.enhancer_overload then percent = percent * 2 end
+                dmg = dmg * percent
+                if not CheckDiff(3) then
+                    dmg = dmg * (1 - max(0.25, lstg.tmpvar.hit_count * (3 - scoredata.difficulty_select) * 0.25))
+                end
+                dmg = int(dmg)
 
-            local percent = plist[scoredata.difficulty_select]
-            if CheckEnhancer(15) then percent = percent * 0.5 end
-            if lstg.var.enhancer_overload then percent = percent * 2 end
-            dmg = dmg * percent
-            if not CheckDiff(3) then
-                dmg = dmg * (1 - min(0.75, lstg.tmpvar.hit_count * (3 - scoredata.difficulty_select) * 0.25))
-            end
-            dmg = int(dmg)
-
-            if CheckDiff(3) then
-                lstg.var.hp = max(lstg.var.hp - dmg, 0)
-            elseif lstg.var.hp >= dmg * 0.75 - 1 then
-                lstg.var.hp = max(lstg.var.hp - dmg, 0)
-                lstg.var.temp_hp = lstg.var.temp_hp + dmg * 0.25
-            else
-                local d = dmg * 0.75 - lstg.var.hp + 1
-                if lstg.var.temp_hp >= d then
-                    lstg.var.temp_hp = max(lstg.var.temp_hp - d, 0)
-                    lstg.var.hp = 1
+                if CheckDiff(3) then
+                    lstg.var.hp = max(lstg.var.hp - dmg, 0)
+                elseif lstg.var.hp >= dmg * 0.75 - 1 then
+                    lstg.var.hp = max(lstg.var.hp - dmg, 0)
+                    lstg.var.temp_hp = lstg.var.temp_hp + dmg * 0.25
                 else
-                    lstg.var.temp_hp = 0
+                    local d = dmg * 0.75 - lstg.var.hp + 1
+                    if lstg.var.temp_hp >= d then
+                        lstg.var.temp_hp = max(lstg.var.temp_hp - d, 0)
+                        lstg.var.hp = 1
+                    else
+                        lstg.var.temp_hp = 0
+                        lstg.var.hp = 0
+                    end
+                end
+                if CheckDiff(4) and lstg.var.enhancer_overload then
                     lstg.var.hp = 0
                 end
-            end
-            if CheckDiff(4) and lstg.var.enhancer_overload then
-                lstg.var.hp = 0
+                item.PlayerMiss(self)
             end
 
-            --累计miss数
-            lstg.tmpvar.hit_count = lstg.tmpvar.hit_count + 1
             --重置决死时间
             player.deathtime = player.default_deathtime
             --------------------------------------------------
-            item.PlayerMiss(self)
             New(death_weapon, self.x, self.y)
             self.deathee = {}
             self.deathee[1] = New(deatheff, self.x, self.y, "first")
@@ -318,6 +316,8 @@ local defaultFrameEvent = {
             self.supporty = -236
             self.hide = false
             New(bullet_deleter, self.x, self.y)
+            if not lstg.tmpvar.hit_count then lstg.tmpvar.hit_count = 0 end
+            lstg.tmpvar.hit_count = lstg.tmpvar.hit_count + 1
         end
     end },
     ["frame.death4"] = { 91, function(self)
@@ -939,7 +939,7 @@ function system:colli(other)
                     return
                 end
                 PlaySound("pldead00", 0.5)
-                if FullScreen_Flag then return end --LSC中自机无敌
+                if FullScreen_Flag and not AIAllowedFlag then return end --LSC中自机无敌
                 self.taking_damage = other.damage or 50
                 p.death = 100
                 if p.deathtime then p.death = 90 + p.deathtime end
