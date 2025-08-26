@@ -9223,13 +9223,13 @@ function _tmp_sc:init()
                 end)
                 PlaySound("enep01",0.1,self.x/256,false)
                 lstg.var.timeslow = 3
-                task._Wait(90)
+                task._Wait(30)
                 lstg.var.timeslow = 2
-                task._Wait(60)
+                task._Wait(30)
                 lstg.var.timeslow = 1
                 PlaySound("aic_game_finished",3,self.x/256,true)
                 StageFinishFlag=true
-                aio.menu.EndingFlag='C'
+                aic.menu.EndingFlag='C'
             end)
         end)
         --[[ 根据选择的自机确定boss化自机逻辑

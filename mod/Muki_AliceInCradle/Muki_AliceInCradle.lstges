@@ -1,4 +1,4 @@
-﻿0,{"$type":".RootFolder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"File","EditWindow":""}],"AttributeCount":1,"IsSelected":true}
+﻿0,{"$type":".RootFolder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"File","EditWindow":""}],"AttributeCount":1}
 1,{"$type":".ProjSettings, LuaSTGEditorSharp","Attributes":[{"attrCap":"Output Name","attrInput":"","EditWindow":""},{"attrCap":"Author","attrInput":"Muki","EditWindow":""},{"attrCap":"Allow practice","attrInput":"true","EditWindow":"bool"},{"attrCap":"Allow sc practice","attrInput":"true","EditWindow":"bool"}],"AttributeCount":4}
 1,{"$type":".EditorVersion, LuaSTGEditorSharp","Attributes":[{"attrCap":"Editor version","attrInput":"0.0.7.7","EditWindow":""}],"AttributeCount":1}
 1,{"$type":".General.Comment, LuaSTGEditorSharp","Attributes":[{"attrCap":"Comment","attrInput":"这里是梦摇篮的工程","EditWindow":""},{"attrCap":"Comment on child","attrInput":"true","EditWindow":"bool"}],"AttributeCount":2}
@@ -2927,11 +2927,11 @@
 6,{"$type":".Object.DefaultAction, ","Attributes":[]}
 3,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Nenyuki","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
 4,{"$type":".General.Comment, LuaSTGEditorSharp","Attributes":[{"attrCap":"Comment","attrInput":"复用了上面的类所以不重复define了","EditWindow":""},{"attrCap":"Comment on child","attrInput":"true","EditWindow":"bool"}],"AttributeCount":2}
-1,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Classes","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
+1,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Classes","EditWindow":""}],"AttributeCount":1,"IsExpanded":false,"IsSelected":true}
 2,{"$type":".General.Comment, LuaSTGEditorSharp","Attributes":[{"attrCap":"Comment","attrInput":"对话库，为方便调用先改个名","EditWindow":""},{"attrCap":"Comment on child","attrInput":"true","EditWindow":"bool"}],"AttributeCount":2}
 2,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"local lib = aic.custom_dialog\r\nlocal sc_list = aic.l10n.ui.sc_list\r\nlocal dialog = aic.l10n.dialog","EditWindow":"code"}],"AttributeCount":1}
-2,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Boss","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
-3,{"$type":".Boss.BossDefine, ","Attributes":[{"attrCap":"Name","attrInput":"Muki_AiC_Noel","EditWindow":""},{"attrCap":"Difficulty","attrInput":"All","EditWindow":"objDifficulty"},{"attrCap":"Displayed name","attrInput":"Noel Cornehl","EditWindow":""},{"attrCap":"Background","attrInput":"Muki_AiC_background","EditWindow":"BG"},{"attrCap":"Background Music","attrInput":"\"aic_bgm3\"","EditWindow":"BGM"}],"AttributeCount":5}
+2,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Boss","EditWindow":""}],"AttributeCount":1}
+3,{"$type":".Boss.BossDefine, ","Attributes":[{"attrCap":"Name","attrInput":"Muki_AiC_Noel","EditWindow":""},{"attrCap":"Difficulty","attrInput":"All","EditWindow":"objDifficulty"},{"attrCap":"Displayed name","attrInput":"Noel Cornehl","EditWindow":""},{"attrCap":"Background","attrInput":"Muki_AiC_background","EditWindow":"BG"},{"attrCap":"Background Music","attrInput":"\"aic_bgm3\"","EditWindow":"BGM"}],"AttributeCount":5,"IsExpanded":false}
 4,{"$type":".Boss.BossInit, ","Attributes":[{"attrCap":"Position","attrInput":"-384,256","EditWindow":"position"},{"attrCap":"Spell Card Background","attrInput":"\"Muki_AiC_cdbg\"","EditWindow":"bossBG"}],"AttributeCount":2}
 5,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"Noel=self","EditWindow":"code"}],"AttributeCount":1}
 5,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"self.H=not setting.safemode","EditWindow":"code"}],"AttributeCount":1}
@@ -5186,7 +5186,7 @@
 5,{"$type":".Boss.BossSCFinish, ","Attributes":[]}
 5,{"$type":".Boss.BossSCAfter, ","Attributes":[]}
 4,{"$type":".General.Comment, LuaSTGEditorSharp","Attributes":[{"attrCap":"Comment","attrInput":"注意：LSC无法收取","EditWindow":""},{"attrCap":"Comment on child","attrInput":"true","EditWindow":"bool"}],"AttributeCount":2}
-4,{"$type":".Boss.BossSpellCard, ","Attributes":[{"attrCap":"Name","attrInput":"Reality Reverse","EditWindow":"SCName"},{"attrCap":"Protect time (sec)","attrInput":"180","EditWindow":""},{"attrCap":"DMG redu. time (sec)","attrInput":"180","EditWindow":""},{"attrCap":"Total time (sec)","attrInput":"180","EditWindow":""},{"attrCap":"Hit point","attrInput":"114514","EditWindow":""},{"attrCap":"Drop power","attrInput":"0","EditWindow":""},{"attrCap":"Drop faith","attrInput":"0","EditWindow":""},{"attrCap":"Drop point","attrInput":"0","EditWindow":""},{"attrCap":"Immune to bomb","attrInput":"true","EditWindow":"bool"},{"attrCap":"Performing action","attrInput":"false","EditWindow":"bool"},{"attrCap":"Optional ID","attrInput":"","EditWindow":""}],"AttributeCount":11}
+4,{"$type":".Boss.BossSpellCard, ","Attributes":[{"attrCap":"Name","attrInput":"Reality Reverse","EditWindow":"SCName"},{"attrCap":"Protect time (sec)","attrInput":"180","EditWindow":""},{"attrCap":"DMG redu. time (sec)","attrInput":"180","EditWindow":""},{"attrCap":"Total time (sec)","attrInput":"180","EditWindow":""},{"attrCap":"Hit point","attrInput":"114514","EditWindow":""},{"attrCap":"Drop power","attrInput":"0","EditWindow":""},{"attrCap":"Drop faith","attrInput":"0","EditWindow":""},{"attrCap":"Drop point","attrInput":"0","EditWindow":""},{"attrCap":"Immune to bomb","attrInput":"true","EditWindow":"bool"},{"attrCap":"Performing action","attrInput":"false","EditWindow":"bool"},{"attrCap":"Optional ID","attrInput":"","EditWindow":""}],"AttributeCount":11,"IsExpanded":false}
 5,{"$type":".Boss.BossSCBeforeStart, ","Attributes":[]}
 6,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"self.spellname=aic.ui.NewSpellname(self, sc_list[diff][3][12],nil,128,16,nil,nil,nil,nil,'magic')","EditWindow":"code"}],"AttributeCount":1}
 6,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"self.spelling=true","EditWindow":"code"}],"AttributeCount":1}
@@ -5428,7 +5428,7 @@
 9,{"$type":".Object.CreateObject, ","Attributes":[{"attrCap":"Name","attrInput":"\"Muki_AiC_phase4_preparation_top\"","EditWindow":"objectDef"},{"attrCap":"Position","attrInput":"0,0","EditWindow":"position"},{"attrCap":"Parameters","attrInput":"last","EditWindow":"objectParam"}],"AttributeCount":3}
 9,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"30","EditWindow":"yield"}],"AttributeCount":1}
 9,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"self.phase4_flag=true","EditWindow":"code"}],"AttributeCount":1}
-6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Phase4 1m55s~2m41s+ 自机boss对换 弹出窗口","EditWindow":""}],"AttributeCount":1}
+6,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"Phase4 1m55s~2m41s+ 自机boss对换 弹出窗口","EditWindow":""}],"AttributeCount":1,"IsExpanded":false}
 7,{"$type":".Task.TaskNode, ","Attributes":[]}
 8,{"$type":".General.Repeat, LuaSTGEditorSharp","Attributes":[{"attrCap":"Times","attrInput":"_infinite","EditWindow":"yield"},{"$type":".DependencyAttrItem, ","attrCap":"Number of Var","attrInput":"1","EditWindow":""},{"attrCap":"Var 1 name","attrInput":"","EditWindow":""},{"attrCap":"Var 1 init value","attrInput":"","EditWindow":""},{"attrCap":"Var 1 increment","attrInput":"","EditWindow":""}],"AttributeCount":5}
 9,{"$type":".General.Break, LuaSTGEditorSharp","Attributes":[{"attrCap":"Condition","attrInput":"self.phase4_flag","EditWindow":""}],"AttributeCount":1}
@@ -5537,12 +5537,12 @@
 12,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"1","EditWindow":"yield"}],"AttributeCount":1}
 10,{"$type":".Audio.PlaySE, ","Attributes":[{"attrCap":"Name","attrInput":"\"enep01\"","EditWindow":"se"},{"attrCap":"Volume","attrInput":"0.1","EditWindow":""},{"attrCap":"Pan","attrInput":"self.x/256","EditWindow":""},{"attrCap":"Ignore default volume","attrInput":"false","EditWindow":"bool"}],"AttributeCount":4}
 10,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"lstg.var.timeslow = 3","EditWindow":"code"}],"AttributeCount":1}
-10,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"90","EditWindow":"yield"}],"AttributeCount":1}
+10,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"30","EditWindow":"yield"}],"AttributeCount":1}
 10,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"lstg.var.timeslow = 2","EditWindow":"code"}],"AttributeCount":1}
-10,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"60","EditWindow":"yield"}],"AttributeCount":1}
+10,{"$type":".Task.TaskWait, ","Attributes":[{"attrCap":"Time","attrInput":"30","EditWindow":"yield"}],"AttributeCount":1}
 10,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"lstg.var.timeslow = 1","EditWindow":"code"}],"AttributeCount":1}
 10,{"$type":".Audio.PlaySE, ","Attributes":[{"attrCap":"Name","attrInput":"\"aic_game_finished\"","EditWindow":"se"},{"attrCap":"Volume","attrInput":"3","EditWindow":""},{"attrCap":"Pan","attrInput":"self.x/256","EditWindow":""},{"attrCap":"Ignore default volume","attrInput":"true","EditWindow":"bool"}],"AttributeCount":4}
-10,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"StageFinishFlag=true\r\naio.menu.EndingFlag='C'","EditWindow":"code"}],"AttributeCount":1}
+10,{"$type":".General.Code, LuaSTGEditorSharp","Attributes":[{"attrCap":"Code","attrInput":"StageFinishFlag=true\r\naic.menu.EndingFlag='C'","EditWindow":"code"}],"AttributeCount":1}
 8,{"$type":".General.Comment, LuaSTGEditorSharp","Attributes":[{"attrCap":"Comment","attrInput":"根据选择的自机确定boss化自机逻辑","EditWindow":""},{"attrCap":"Comment on child","attrInput":"true","EditWindow":"bool"}],"AttributeCount":2,"IsExpanded":false}
 8,{"$type":".General.Folder, LuaSTGEditorSharp","Attributes":[{"attrCap":"Name","attrInput":"自机逻辑","EditWindow":""}],"AttributeCount":1}
 9,{"$type":".General.Comment, LuaSTGEditorSharp","Attributes":[{"attrCap":"Comment","attrInput":"为了平衡，部分机体射击间隔和弹速可能改变，同时激光改为高速弹+低频频闪激光","EditWindow":""},{"attrCap":"Comment on child","attrInput":"true","EditWindow":"bool"}],"AttributeCount":2}
