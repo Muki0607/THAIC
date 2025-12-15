@@ -9,32 +9,30 @@ AliceInCradle是一部ACT游戏，类似于空洞骑士，有能力收集要素�
 原作为四格漫画，想看的可以前往百合会搜索（记得先注册！）
 下面的三款游戏均是以斯特拉的魔法中角色为主角的官方游戏：
 Star Chaser!：一部休闲类小游戏，使用Unity制作
-下载地址：http://www.dokidokivisual.com/magic_of_stella/starchaser201908.php
 Star Shooter!：一部横版STG游戏，游戏流程为主线4面+EX面，难度对车万厨们应该不成问题
 Star Liner!：一部解谜类游戏，BGM非常好听，但难度较高，卡关的话b站上有全流程教程，AiC挪箱子谜题的原型就出自此处
-以上两部游戏与其运行环境的下载地址：
-http://www.dokidokivisual.com/magic_of_stella/ss_sn_revival.php（可以同时下载两部游戏）
-https://airsdk.harman.com/runtime（先安装这个才能运行游戏）
+这三个游戏均可以在以下地址下载：
+https://zenpo-huchui.com/magic_of_stella_game/index.php
 ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 如果你对弹幕制作有兴趣，可以加入LuaSTG交流群（QQ）：230927410
 如果你是一位LuaSTGer且对游戏中的一些功能感兴趣，可以自行在data中查看AiC额外函数库
 本作所有代码完全开源，使用时请标明出处
-遇到任何问题或报错请加入本人私坑交流群（QQ）：465518695进行反馈
+遇到任何问题或报错请加入梦摇篮交流群（QQ）：724149199进行反馈
 ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 如果你还未接触东方PROJECT……请自行b站搜索了解。
 想要接触原作游戏/漫画/小说的话，可以前往东方PROJECT中文维基：https://thwiki.cc/
 ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 借物表：
 标题背景：https://www.pixiv.net/artworks/98549765
-副标题框：
+副标题框：Star Chaser!
 魔杖文字体（获取魔法的演出中的背景文字/logo中最下方文字）：https://tieba.baidu.com/p/8148945104?cid=0&pid=146145730130#146145730130
 中文字体：问藏书房、方正清刻本悦宋简体、方正中倩简体、方正准圆简体、Aa方块黑
 四阶段BGM：BV1f8411P7fG
-LSCBGM：The Amplifier - Feryquitous
+LSC阶段BGM：The Amplifier - Feryquitous
 原作素材：东方凭依华、东方刚欲异闻、东方虹龙洞、Star Chaser!、Star Shooter!、Star Liner!、AliceInCradle
 部分音效：BV15i4y1d72c
-终符符卡背景：东方实在相
-脚本编写：LuaSTG Editor Sharp 0.7.8.1（测试版）/LuaSTG Editor Sharp 0.9.1（正式版）
+LSC符卡背景：东方实在相
+脚本编写：LuaSTG Editor Sharp 0.9.1
 游戏本体：LuaSTG aex+ v0.8.21-beta
 ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 原作作者：

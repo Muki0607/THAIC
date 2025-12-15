@@ -25,7 +25,6 @@ default_setting = {
         shoot = KEY.Z,
         spell = KEY.X,
         special = KEY.C,
-        skill = KEY.SPACE,
     },
     keys2 = {
         up = KEY.NUMPAD5,
@@ -36,7 +35,6 @@ default_setting = {
         shoot = KEY.S,
         spell = KEY.D,
         special = KEY.F,
-        skill = KEY.SPACE,
     },
     keysys = {
         repfast = KEY.CTRL,
@@ -51,11 +49,10 @@ default_setting = {
         down = XJOY.Down,
         left = XJOY.Left,
         right = XJOY.Right,
-        slow = XJOY.RightShoulder,
+        slow = XJOY.B,
         shoot = XJOY.X,
         spell = XJOY.A,
         special = XJOY.Y,
-        skill = XJOY.B,
     },
     joysticksys = {
         repfast = XJOY.LeftThumb,

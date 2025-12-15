@@ -106,7 +106,7 @@ function lib.ending:frame()
                 lib.PopMenuStack()
             end
             if KeyIsPressed('shoot') then
-                if self.ending[self.text1[self.pos]] then
+                if self.ending[self.text1[self.pos]] or true then
                     lib.EndingFlag = self.text1[self.pos]
                     PlaySound('ok00', 0.3)
                 else

@@ -1,6 +1,6 @@
 ---THAIC Changed
-local KEY_BIT = { 256, 128, 64, 32, 16, 8, 4, 2, 1 }
-local KEY_NAME = { "skill", "up", "down", "left", "right", "slow", "shoot", "spell", "special" }
+local KEY_BIT = { 128, 64, 32, 16, 8, 4, 2, 1 }
+local KEY_NAME = { "up", "down", "left", "right", "slow", "shoot", "spell", "special" }
 
 --! @brief 将按键状态转换为二进制数值
 --! @return 返回二进制按键数值

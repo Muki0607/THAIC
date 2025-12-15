@@ -742,7 +742,6 @@ function nenyuki_findtarget(self, group)
                     if abs(o.y - y) < d[i] and abs(o.y) < 224 then
                         d[i] = abs(o.y - y)
                         self.targetlist[i] = o
-                        Print(aic.table.ToString(self.targetlist))
                         --本来想让一个目标最多只被两个子机锁定
                         --但是似乎没太大必要
                         --[[local n = 0
