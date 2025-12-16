@@ -71,7 +71,7 @@ This project is still in progress, and is planned to continue to add new content
 
 ### Maintainer Status
 
-There is only one maintainer ot THAIC at present, and he has few time due to academic reason.
+There is only one maintainer of THAIC at present, and he has few time due to academic reason.
 If you also want to participate in the development of THAIC, feel free to reach out to me.
 
 * 苍木羽Muki
